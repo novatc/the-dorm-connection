@@ -7,7 +7,7 @@
     android:background="#92009688"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".IntroActivity">
+    tools:context=".activities.IntroActivity">
 
 
     <TextView

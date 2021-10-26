@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "532127793312",
+    "project_id": "ap-app-2fef7",
+    "storage_bucket": "ap-app-2fef7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532127793312:android:97b752859d3237b89309c5",
+        "android_client_info": {
+          "package_name": "com.novatc.ap_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532127793312-tsvljsqq6hk40oha7fuqh1scuvfna5nb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhuWWiBGAEUYuj0-WAvq8JtVuUhdHKJAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532127793312-tsvljsqq6hk40oha7fuqh1scuvfna5nb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

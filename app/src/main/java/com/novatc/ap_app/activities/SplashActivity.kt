@@ -1,4 +1,4 @@
-package com.novatc.ap_app
+package com.novatc.ap_app.activities
 
 import android.content.Intent
 import android.os.Build
@@ -9,6 +9,7 @@ import android.os.Looper
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import com.novatc.ap_app.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

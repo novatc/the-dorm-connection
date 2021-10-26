@@ -1,11 +1,12 @@
-package com.novatc.ap_app
+package com.novatc.ap_app.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.novatc.ap_app.R
 
-class LogInActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_log_in)
+        setContentView(R.layout.activity_main)
     }
 }
