@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ap-app</string>
+    <string name="sign_in">Einloggen</string>
+    <string name="sign_up">Registrieren</string>
+    <string name="sign_up_text">Bitte gib dein Namen, deine Mail und dein Passwort ein!</string>
+    <string name="sign_in_text">Bitte gib deine Mail und dein Passwort ein um dich anzumelden!</string>
+    <string name="sign_up_name">Name</string>
+    <string name="sign_up_password">Passwort</string>
+    <string name="sign_up_mail">Mail</string>
 </resources>
