@@ -18,7 +18,7 @@ class SplashActivity : BaseActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@SplashActivity, SignInActicity::class.java))
             finish()
-        }, 2500)
+        }, 1500)
 
     }
 

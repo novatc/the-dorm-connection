@@ -23,12 +23,17 @@
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/imageView"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/rounded_corners_background_transparent"
-        app:srcCompat="@drawable/ic_banner_foreground" />
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/authentication_screen_marginStartEnd"
+        android:layout_marginEnd="@dimen/authentication_screen_marginStartEnd"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="@string/app_name"
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold"
+        android:textSize="@dimen/authentication_description_text_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,7 +84,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/sign_up_name"
                         android:inputType="textEmailAddress"
-                        android:textColorHint="@color/black"
+                        android:background="@color/eggshell"
+                        android:textColorHint="@android:color/darker_gray"
                         android:textSize="@dimen/et_text_size" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +102,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/sign_up_mail"
                         android:inputType="textEmailAddress"
-                        android:textColorHint="@color/black"
+                        android:textColorHint="@android:color/darker_gray"
+                        android:background="@color/eggshell"
                         android:textSize="@dimen/et_text_size" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,8 +119,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/sign_up_password"
+                        android:background="@color/eggshell"
                         android:inputType="textPassword"
-                        android:textColorHint="@color/black"
+                        android:textColorHint="@android:color/darker_gray"
                         android:textSize="@dimen/et_text_size" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,6 +132,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/sign_up_screen_btn_marginTop"
                     android:foreground="?attr/selectableItemBackground"
+                    android:backgroundTint="@color/patriarch"
                     android:gravity="center"
                     android:text="@string/sign_up"
                     android:textColor="@android:color/white">
@@ -141,6 +150,7 @@
             android:layout_marginStart="@dimen/authentication_screen_marginStartEnd"
             android:layout_marginEnd="@dimen/authentication_screen_marginStartEnd"
             android:gravity="center"
+            android:textColor="@color/black"
             android:layout_marginTop="@dimen/question_for_member_text_margin_top"
             android:text="@string/already_a_member_question" />
         <Button
