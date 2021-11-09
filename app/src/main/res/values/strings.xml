@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">THE DORM CONNECTION</string>
-    <string name="sign_in">Einloggen</string>
-    <string name="sign_up">Registrieren</string>
-    <string name="sign_up_text">Bitte gib dein Namen, deine Mail und dein Passwort ein!</string>
-    <string name="sign_in_text">Bitte gib deine Mail und dein Passwort ein um dich anzumelden!</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="sign_up_text">Welcome to THE DORM CONNECTION Sign up here</string>
+    <string name="sign_in_text">Welcome to THE DORM CONNECTION Sign in to your account here</string>
     <string name="sign_up_name">Name</string>
-    <string name="sign_up_password">Passwort</string>
+    <string name="sign_up_password">Password</string>
     <string name="sign_up_mail">Mail</string>
+    <string name="new_to_the_dorm_connection">New to THE DORM CONNECTION?</string>
+    <string name="already_a_member_question">Already a member?</string>
+    <string name="btn_sing_up">Sign Up</string>
 </resources>

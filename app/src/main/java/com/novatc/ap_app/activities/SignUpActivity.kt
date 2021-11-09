@@ -21,13 +21,13 @@ class SignUpActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-
-        hideStatusBar()
-
+        super.hideStatusBar()
         FirebaseApp.initializeApp(this)
-
         btn_sign_up_sign_up.setOnClickListener {
             registerUser()
+        }
+        btn_sign_in_question.setOnClickListener{
+            startActivity(Intent(this@SignUpActivity, SignInActicity::class.java))
         }
 
     }
@@ -49,7 +49,7 @@ class SignUpActivity : BaseActivity() {
                                     "der $registeredMail registriert.", Toast.LENGTH_LONG
                         ).show()
                         FirebaseAuth.getInstance().signOut()
-                        startActivity(Intent(this, IntroActivity::class.java))
+                        startActivity(Intent(this, SignInActicity::class.java))
 
                     } else {
                         // If sign in fails, display a message to the user.
@@ -86,18 +86,5 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
-    fun hideStatusBar() {
-        //if Andorid version is too old, use deprecated features to get the same result as with a
-        //modern skd
-        if (Build.VERSION.SDK_INT < 30) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        } else {
-            window.setDecorFitsSystemWindows(false)
-            val controler = window.insetsController
-            if (controler != null) {
-                controler.hide(WindowInsets.Type.statusBars())
-                controler.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_SWIPE
-            }
-        }
-    }
+
 }

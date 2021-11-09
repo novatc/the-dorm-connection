@@ -5,7 +5,7 @@
     <dimen name="sign_up_screen_btn_marginTop">30dp</dimen>
     <dimen name="toolbar_title_text_size">18sp</dimen>
     <dimen name="authentication_screen_content_marginTop">40dp</dimen>
-    <dimen name="authentication_description_text_size">16sp</dimen>
+    <dimen name="authentication_description_text_size">20sp</dimen>
     <dimen name="authentication_screen_marginStartEnd">25dp</dimen>
     <dimen name="authentication_screen_card_view_marginTop">60dp</dimen>
     <dimen name="card_view_elevation">10dp</dimen>
@@ -14,5 +14,8 @@
     <dimen name="authentication_screen_til_marginStartEnd">16dp</dimen>
     <dimen name="et_text_size">16sp</dimen>
     <dimen name="authentication_screen_til_marginTop">20dp</dimen>
+    <dimen name="radius_small">5</dimen>
+    <dimen name="question_for_member_text_margin_top">50dp</dimen>
+    <dimen name="btn_sign_up_question_width">120dp</dimen>
 
 </resources>

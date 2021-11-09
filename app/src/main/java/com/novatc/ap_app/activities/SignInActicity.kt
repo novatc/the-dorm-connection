@@ -1,13 +1,8 @@
 package com.novatc.ap_app.activities
 
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowInsetsController
 import android.widget.Toast
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -16,13 +11,16 @@ import kotlinx.android.synthetic.main.activity_log_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import model.BaseActivity
 
-class LogInActivity : BaseActivity() {
+class SignInActicity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
-        hideStatusBar()
+        super.hideStatusBar()
         FirebaseApp.initializeApp(this)
         btn_sign_in.setOnClickListener { signInValidUser() }
+        btn_sign_up_question.setOnClickListener{
+            startActivity(Intent(this@SignInActicity, SignUpActivity::class.java))
+        }
 
     }
     private fun signInValidUser(){
@@ -33,14 +31,14 @@ class LogInActivity : BaseActivity() {
                 task ->
                 if(task.isSuccessful){
                     Toast.makeText(
-                        this@LogInActivity,
+                        this@SignInActicity,
                         "Erfolgreich angemeldet",
                         Toast.LENGTH_LONG
                     ).show()
-                    startActivity(Intent(this@LogInActivity, MainActivity::class.java))
+                    startActivity(Intent(this@SignInActicity, MainActivity::class.java))
                 }else{
                     Toast.makeText(
-                        this@LogInActivity,
+                        this@SignInActicity,
                         "${task.exception?.message}",
                         Toast.LENGTH_LONG
                     ).show()
@@ -65,18 +63,4 @@ class LogInActivity : BaseActivity() {
         }
     }
 
-    fun hideStatusBar() {
-        //if Andorid version is too old, use deprecated features to get the same result as with a
-        //modern skd
-        if (Build.VERSION.SDK_INT < 30) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        } else {
-            window.setDecorFitsSystemWindows(false)
-            val controler = window.insetsController
-            if (controler != null) {
-                controler.hide(WindowInsets.Type.statusBars())
-                controler.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_SWIPE
-            }
-        }
-    }
 }

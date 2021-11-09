@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_home"
+        android:title="Rooms"
+        android:icon="@drawable/ic_baseline_home_24"
+
+        />
+
+    <item android:id="@+id/menu_notification"
+        android:title="Events"
+        android:icon="@drawable/baseline_celebration_20"
+        />
+
+    <item android:id="@+id/menu_search"
+        android:title="Pinboard"
+        android:icon="@drawable/baseline_dashboard_24"
+        />
+
+    <item android:id="@+id/menu_profile"
+        android:title="You"
+        android:icon="@drawable/ic_baseline_face_24"
+        />
+
+</menu>

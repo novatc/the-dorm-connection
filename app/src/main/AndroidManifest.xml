@@ -10,17 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Apapp">
         <activity
-            android:name=".activities.LogInActivity"
+            android:name=".activities.SignInActicity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" />
         <activity
             android:name=".activities.SignUpActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Apapp.NoActionBar" />
-        <activity
-            android:name=".activities.IntroActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" />
