@@ -1,4 +1,4 @@
-package com.novatc.ap_app.activities
+package com.novatc.ap_app.activities.adapter
 
 import android.view.LayoutInflater
 import android.view.View

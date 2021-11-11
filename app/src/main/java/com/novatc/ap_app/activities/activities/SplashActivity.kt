@@ -1,4 +1,4 @@
-package com.novatc.ap_app.activities
+package com.novatc.ap_app.activities.activities
 
 import android.content.Intent
 import android.os.Bundle

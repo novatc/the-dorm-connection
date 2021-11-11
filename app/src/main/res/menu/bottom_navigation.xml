@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/menu_home"
+    <item android:id="@+id/menu_rooms"
         android:title="Rooms"
         android:icon="@drawable/ic_baseline_home_24"
 
         />
 
-    <item android:id="@+id/menu_notification"
+    <item android:id="@+id/menu_events"
         android:title="Events"
         android:icon="@drawable/baseline_celebration_20"
         />
 
-    <item android:id="@+id/menu_search"
+    <item android:id="@+id/menu_pinboard"
         android:title="Pinboard"
         android:icon="@drawable/baseline_dashboard_24"
         />

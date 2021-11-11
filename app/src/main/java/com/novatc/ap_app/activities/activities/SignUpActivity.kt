@@ -1,13 +1,8 @@
-package com.novatc.ap_app.activities
+package com.novatc.ap_app.activities.activities
 
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowInsetsController
 import android.widget.Toast
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -15,7 +10,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import model.BaseActivity
-import org.w3c.dom.Text
 
 class SignUpActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

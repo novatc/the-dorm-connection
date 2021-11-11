@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:background="@color/shadow_blue"
     android:gravity="center"
-    tools:context=".activities.SplashActivity">
+    tools:context=".activities.activities.SplashActivity">
 
 
     <TextView
