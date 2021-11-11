@@ -11,4 +11,7 @@
     <string name="already_a_member_question">Already a member?</string>
     <string name="btn_sing_up">Sign Up</string>
     <string name="logo_description">Logo The Dorm Connection</string>
+    <string name="events_tagline">Upcoming Event</string>
+    <string name="events_header">Events</string>
+    <string name="events_add_event_button">Add new event</string>
 </resources>

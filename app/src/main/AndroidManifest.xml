@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Apapp">
         <activity
-            android:name=".activities.EventsOverview"
+            android:name=".activities.EventsOverviewActivity"
             android:exported="true"
             android:theme="@style/Theme.Apapp.NoActionBar"
             android:screenOrientation="portrait">
@@ -39,6 +39,10 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="true" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
