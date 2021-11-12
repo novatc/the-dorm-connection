@@ -27,6 +27,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" />
         <activity
+            android:name=".activities.activities.RoomsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Apapp.NoActionBar" />
+        <activity
             android:name=".activities.activities.SignInActicity"
             android:exported="true"
             android:screenOrientation="portrait"
