@@ -1,16 +1,22 @@
 package com.novatc.ap_app.activities.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
+import com.novatc.ap_app.activities.adapter.EventsAdapter
+import model.EventListItem
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+val eventListItems: ArrayList<EventListItem> =  ArrayList()
+val exampleEventAuthor = "Pinte 42"
+val exampleEventName = "Pintenmittwoch "
+val exampleEventText = "Join us every Wednesday with your study budies to grab a couple of beers for cheap :)"
+val exampleEventDate = "Heute 20:00"
 
 /**
  * A simple [Fragment] subclass.
@@ -20,14 +26,28 @@ private const val ARG_PARAM2 = "param2"
 class EventFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
-    private var param2: String? = null
+    var layoutManager: LinearLayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+        if (eventListItems.isEmpty()) {
+            for (i in 0..5) {
+                eventListItems.add(EventListItem(
+                    exampleEventAuthor,
+                    exampleEventName + i,
+                    exampleEventText,
+                    exampleEventDate
+                ))
+            }
         }
+
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        layoutManager = LinearLayoutManager(context)
+
     }
 
     override fun onCreateView(
@@ -38,23 +58,14 @@ class EventFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_event, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EventFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EventFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val view =  getView() as View
+        val recyclerView: RecyclerView = view.findViewById((R.id.upcoming_events))
+        recyclerView.setHasFixedSize(true)
+        val adapter = EventsAdapter(eventListItems)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
     }
+
 }
