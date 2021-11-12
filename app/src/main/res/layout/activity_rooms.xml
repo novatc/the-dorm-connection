@@ -18,11 +18,11 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="109dp"
-            android:layout_height="wrap_content"
+            android:layout_width="136dp"
+            android:layout_height="20dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/events_tagline"
+            android:text="@string/rooms_tagline"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,14 +34,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_bold"
-            android:text="@string/events_header"
+            android:text="@string/rooms_header"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/addRoomsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -59,7 +59,7 @@
             tools:ignore="ImageContrastCheck" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/upcoming_events"
+            android:id="@+id/available_rooms"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -87,7 +87,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/transfer_512px"
         tools:ignore="ImageContrastCheck" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

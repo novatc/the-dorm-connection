@@ -14,6 +14,9 @@
     <string name="events_tagline">Upcoming Event</string>
     <string name="events_header">Events</string>
     <string name="events_add_event_button">Add new event</string>
+    <string name="rooms_tagline">Rooms for all to rent</string>
+    <string name="rooms_header">Rooms</string>
+    <string name="rooms_add_room_button">Add new room (admin only)</string>
     <string name="btn_edit_profile">EDIT PROFILE</string>
     <string name="btn_edit_wg">EDIT WG</string>
     <string name="btn_edit_profile_logout">Logout</string>
