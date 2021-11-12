@@ -16,8 +16,8 @@ import model.RoomsListItem
 
 val roomsListItems: ArrayList<RoomsListItem> =  ArrayList()
 val exampleroomName = "Pinte 42"
-val exampleRoomTagline = "Pintenmittwoch "
-val exampleRoomDescription = "Join us every Wednesday with your study budies to grab a couple of beers for cheap :)"
+val exampleRoomTagline = "Bar and party room"
+val exampleRoomDescription = "Have parties or social gatherings" + System.getProperty ("line.separator") + "in the Pinte 42!"
 /**
  * A simple [Fragment] subclass.
  * Use the [RoomFragment.newInstance] factory method to
@@ -32,7 +32,7 @@ class RoomFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         if (roomsListItems.isEmpty()) {
-            for (i in 0..5) {
+            for (i in 0..0) {
                 roomsListItems.add(
                     RoomsListItem(
                     exampleroomName,
@@ -56,13 +56,13 @@ class RoomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false)
+        return inflater.inflate(R.layout.fragment_room, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val view =  getView() as View
-        val recyclerView: RecyclerView = view.findViewById((R.id.upcoming_events))
+        val recyclerView: RecyclerView = view.findViewById((R.id.available_rooms))
         recyclerView.setHasFixedSize(true)
         val adapter = RoomsAdapter(roomsListItems)
         recyclerView.layoutManager = layoutManager

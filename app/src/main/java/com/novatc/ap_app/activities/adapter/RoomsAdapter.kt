@@ -11,13 +11,13 @@ import model.RoomsListItem
 class RoomsAdapter(private val roomsListItem: ArrayList<RoomsListItem>): RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 
     class RoomsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val roomName: TextView = itemView.findViewById(R.id.eventName)
-        val roomTagline: TextView = itemView.findViewById(R.id.eventName)
-        val roomDescription: TextView = itemView.findViewById(R.id.eventText)
+        val roomName: TextView = itemView.findViewById(R.id.roomName)
+        val roomTagline: TextView = itemView.findViewById(R.id.roomUsage)
+        val roomDescription: TextView = itemView.findViewById(R.id.roomDescription)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsViewHolder {
-        val view  = LayoutInflater.from(parent.context).inflate(R.layout.event_list_item, parent, false)
+        val view  = LayoutInflater.from(parent.context).inflate(R.layout.room_list_item, parent, false)
         return RoomsViewHolder(view)
     }
 

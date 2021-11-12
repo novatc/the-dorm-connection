@@ -13,8 +13,8 @@ import model.RoomsListItem
 class RoomsActivity : BaseActivity() {
     val roomsListItems: ArrayList<RoomsListItem> =  ArrayList()
     val exampleRoomName = "Pinte 42"
-    val exampleRoomTagline = "Pintenmittwoch "
-    val exampleRoomDescription = "Join us every Wednesday with your study budies to grab a couple of beers for cheap :)"
+    val exampleRoomTagline = "Bar and party room"
+    val exampleRoomDescription = "Have parties or social gatherings in the Pinte 42!"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rooms)
@@ -29,7 +29,7 @@ class RoomsActivity : BaseActivity() {
             )
         }
 
-        val recyclerView: RecyclerView = findViewById((R.id.upcoming_events))
+        val recyclerView: RecyclerView = findViewById((R.id.available_rooms))
         recyclerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
         val adapter = RoomsAdapter(roomsListItems)
@@ -50,7 +50,7 @@ class RoomsActivity : BaseActivity() {
             )
         }
 
-        val recyclerView: RecyclerView = findViewById((R.id.upcoming_events))
+        val recyclerView: RecyclerView = findViewById((R.id.available_rooms))
         recyclerView.setHasFixedSize(true)
         val layoutManager = LinearLayoutManager(this)
         val adapter = RoomsAdapter(roomsListItems)
