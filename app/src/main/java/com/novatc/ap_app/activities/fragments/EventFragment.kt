@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
 import model.EventListItem
@@ -66,6 +68,11 @@ class EventFragment : Fragment() {
         val adapter = EventsAdapter(eventListItems)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+
+        val addEventButton: FloatingActionButton = view.findViewById(R.id.createEventButton)
+        addEventButton.setOnClickListener {
+            val eventCreateFragment: Fragment = EventCreateFragment()
+        }
     }
 
 }

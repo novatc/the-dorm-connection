@@ -11,9 +11,10 @@
     <string name="already_a_member_question">Already a member?</string>
     <string name="btn_sing_up">Sign Up</string>
     <string name="logo_description">Logo The Dorm Connection</string>
-    <string name="events_tagline">Upcoming Event</string>
+    <string name="events_tagline">Upcoming Events</string>
     <string name="events_header">Events</string>
     <string name="events_add_event_button">Add new event</string>
+    <string name="events_add_tagline">Create an Event</string>
     <string name="rooms_tagline">Rooms for all to rent</string>
     <string name="rooms_header">Rooms</string>
     <string name="rooms_add_room_button">Add new room (admin only)</string>
@@ -28,6 +29,7 @@
     <string name="btn_safe">Save</string>
     <string name="WG">WG</string>
     <string name="WG_invitation_code">Your WG invitation QR-Code</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pinboard">Pinboard</string>
+    <string name="rooms">Rooms</string>
+    <string name="events">Events</string>
 </resources>
