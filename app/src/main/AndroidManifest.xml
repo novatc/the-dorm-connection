@@ -36,7 +36,6 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar">
-
         </activity>
         <activity
             android:name=".activities.activities.SignUpActivity"
@@ -47,16 +46,16 @@
             android:name=".activities.activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:theme="@style/Theme.Apapp.NoActionBar"
             android:name=".activities.activities.MainActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

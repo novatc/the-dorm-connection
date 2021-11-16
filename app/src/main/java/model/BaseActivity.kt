@@ -5,6 +5,7 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -25,5 +26,7 @@ open class BaseActivity: AppCompatActivity() {
             }
         }
     }
+
+
 
 }

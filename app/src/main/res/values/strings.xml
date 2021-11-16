@@ -32,4 +32,7 @@
     <string name="pinboard">Pinboard</string>
     <string name="rooms">Rooms</string>
     <string name="events">Events</string>
+    <string name="delete_account">Delet your account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

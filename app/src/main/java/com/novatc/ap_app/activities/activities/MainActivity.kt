@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.novatc.ap_app.R
@@ -13,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import model.BaseActivity
 
 class MainActivity : BaseActivity() {
-    private val userProfile = ProfileFragment()
+    private val userProfile = ProfileOptionsFragment()
     private val events = EventFragment()
     private val pinBoard = PinnboardFragment()
     private val rooms = RoomFragment()
@@ -22,40 +23,38 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         super.hideStatusBar()
-        replaceFragments(pinBoard)
-
-
-        bottomNav.setOnNavigationItemSelectedListener{
-            when(it.itemId){
-                R.id.menu_rooms ->{
+        if (savedInstanceState == null) {
+            replaceFragments(pinBoard)
+        }
+        bottomNav.menu.getItem(2).isCheckable = true
+        bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_rooms -> {
                     replaceFragments(rooms)
                     true
                 }
-                R.id.menu_events ->{
+                R.id.menu_events -> {
                     replaceFragments(events)
                     true
                 }
-                R.id.menu_pinboard ->{
+                R.id.menu_pinboard -> {
                     replaceFragments(pinBoard)
                     true
                 }
-                R.id.menu_profile ->{
+                R.id.menu_profile -> {
                     replaceFragments(userProfile)
                     true
                 }
-
-
                 else -> true
             }
-
         }
-
     }
 
-    private fun replaceFragments(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.commit()
+    fun replaceFragments(fragment: Fragment) {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace(R.id.fragment_container, fragment)
+        }
     }
 
 
