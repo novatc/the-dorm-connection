@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
 import com.novatc.ap_app.activities.adapter.RoomsAdapter
+import kotlinx.android.synthetic.main.fragment_room.*
 import model.EventListItem
 import model.RoomsListItem
 
@@ -24,6 +26,7 @@ val exampleRoomDescription = "Have parties or social gatherings" + System.getPro
  * create an instance of this fragment.
  */
 class RoomFragment : Fragment() {
+    private val createRoom = RoomCreateFragment()
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     var layoutManager: LinearLayoutManager? = null
@@ -67,6 +70,13 @@ class RoomFragment : Fragment() {
         val adapter = RoomsAdapter(roomsListItems)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+        btn_addRoomsButton.setOnClickListener {
+            parentFragmentManager.commit {
+                isAddToBackStackAllowed
+                setReorderingAllowed(true)
+                replace(R.id.fragment_container, createRoom)
+            }
+        }
     }
 
 }

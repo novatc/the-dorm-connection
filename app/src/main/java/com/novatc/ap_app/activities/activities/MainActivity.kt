@@ -24,25 +24,25 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         super.hideStatusBar()
         if (savedInstanceState == null) {
-            replaceFragments(pinBoard)
+            super.replaceFragments(pinBoard)
         }
-        bottomNav.menu.getItem(2).isCheckable = true
+        bottomNav.menu.getItem(0).isCheckable = true
         bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_rooms -> {
-                    replaceFragments(rooms)
+                    super.replaceFragments(rooms)
                     true
                 }
                 R.id.menu_events -> {
-                    replaceFragments(events)
+                    super.replaceFragments(events)
                     true
                 }
                 R.id.menu_pinboard -> {
-                    replaceFragments(pinBoard)
+                    super.replaceFragments(pinBoard)
                     true
                 }
                 R.id.menu_profile -> {
-                    replaceFragments(userProfile)
+                    super.replaceFragments(userProfile)
                     true
                 }
                 else -> true
@@ -50,12 +50,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun replaceFragments(fragment: Fragment) {
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace(R.id.fragment_container, fragment)
-        }
-    }
+
 
 
 }

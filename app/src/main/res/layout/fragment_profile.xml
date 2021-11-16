@@ -4,100 +4,126 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     android:background="@color/shadow_blue">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/rounded_corners_background"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="187dp"
+            android:text="@string/setting"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/setting"
-                android:textAlignment="center"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/you"
+            android:textAlignment="center"
+            android:textColor="@android:color/darker_gray"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:text="@string/you"
-                android:textAlignment="center"
-                android:textColor="@android:color/darker_gray"
-                android:textStyle="bold" />
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginRight="55dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/sign_up_name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="@dimen/et_edit_profile"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/edit_profile_edit_text"
-                android:background="@color/white"
-                android:ems="10"
-                android:hint="@string/sign_up_name"
-                android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginRight="55dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/current_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName2"
-                android:layout_width="@dimen/et_edit_profile"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edit_profile_edit_text"
-                android:layout_marginBottom="@dimen/edit_profile_edit_text"
-                android:background="@color/white"
-                android:ems="10"
-                android:hint="@string/current_password"
-                android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/editTextTextPersonName3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="30dp"
 
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
-                android:layout_width="@dimen/et_edit_profile"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edit_profile_edit_text"
-                android:layout_marginBottom="@dimen/edit_profile_edit_text"
-                android:background="@color/white"
-                android:ems="10"
-                android:hint="@string/new_password"
+            android:layout_marginEnd="55dp"
+            android:layout_marginRight="55dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/new_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
-                android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/editTextTextPersonName4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="30dp"
 
-            <EditText
-                android:id="@+id/editTextTextPersonName4"
-                android:layout_width="@dimen/et_edit_profile"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/edit_profile_edit_text"
-                android:layout_marginBottom="@dimen/edit_profile_edit_text"
-                android:background="@color/white"
-                android:ems="10"
-                android:hint="@string/repeat_new_password"
+            android:layout_marginEnd="55dp"
+            android:layout_marginRight="55dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="@string/repeat_new_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
-                android:inputType="textPassword" />
-
-            <Button
-                android:id="@+id/edit_profile_safe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/patriarch"
-                android:text="@string/btn_safe" />
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/edit_profile_safe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/patriarch"
+            android:text="@string/btn_safe"
+            app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName4"
+            app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

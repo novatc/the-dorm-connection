@@ -15,6 +15,7 @@
     <string name="events_header">Events</string>
     <string name="events_add_event_button">Neues Event</string>
     <string name="events_add_tagline">Neues Event anlegen</string>
+    <string name="rooms_add_tagline">Lege ein Raum an</string>
     <string name="rooms_tagline">Räume für alle zum mieten</string>
     <string name="rooms_header">Räume</string>
     <string name="rooms_add_room_button">Neuen Raum hinzufügen (admin only)</string>
@@ -33,4 +34,5 @@
     <string name="rooms">Räume</string>
     <string name="events">Events</string>
     <string name="delete_account">Account löschen</string>
+    <string name="room_address">Adresse</string>
 </resources>

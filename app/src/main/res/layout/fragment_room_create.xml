@@ -18,12 +18,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="136dp"
-            android:layout_height="20dp"
+            android:id="@+id/tv_create_room"
+            android:layout_width="109dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/rooms_tagline"
+            android:text="@string/rooms_add_tagline"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,49 +31,54 @@
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_rooms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_bold"
-            android:text="@string/rooms_header"
+            android:text="@string/rooms"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_addRoomsButton"
+        <EditText
+            android:id="@+id/editTextTextPersonName5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/radical_red"
-            android:clickable="true"
-            android:contentDescription="@string/events_add_event_button"
-            android:focusable="true"
-            app:backgroundTint="@color/radical_red"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:maxImageSize="30dp"
-            app:rippleColor="@color/radical_red"
-            app:srcCompat="@drawable/ic_baseline_add_24"
-            tools:ignore="ImageContrastCheck" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/available_rooms"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
+
+        <EditText
+            android:id="@+id/editTextTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/room_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+
+        <Button
+            android:id="@+id/btn_safe_new_room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/patriarch"
+            android:text="@string/btn_safe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

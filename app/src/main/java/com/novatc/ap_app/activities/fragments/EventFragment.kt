@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -26,6 +27,7 @@ val exampleEventDate = "Heute 20:00"
  * create an instance of this fragment.
  */
 class EventFragment : Fragment() {
+    private val eventCreateFragment = EventCreateFragment()
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     var layoutManager: LinearLayoutManager? = null
@@ -72,6 +74,11 @@ class EventFragment : Fragment() {
         val addEventButton: FloatingActionButton = view.findViewById(R.id.createEventButton)
         addEventButton.setOnClickListener {
             val eventCreateFragment: Fragment = EventCreateFragment()
+            parentFragmentManager.commit {
+                isAddToBackStackAllowed
+                setReorderingAllowed(true)
+                replace(R.id.fragment_container, eventCreateFragment)
+            }
         }
     }
 

@@ -1,11 +1,16 @@
 package com.novatc.ap_app.activities.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.commit
 import com.novatc.ap_app.R
+import com.novatc.ap_app.activities.activities.SignUpActivity
+import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +23,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileOptionsFragment : Fragment() {
+    private val profile = ProfileFragment()
+    private val wg = EditWgFragment()
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +43,28 @@ class ProfileOptionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_options, container, false)
+        val view = inflater.inflate(R.layout.fragment_profile_options, container, false)
+
+        view.btn_edit_profile.setOnClickListener {
+            parentFragmentManager.commit {
+                isAddToBackStackAllowed
+                setReorderingAllowed(true)
+                replace(R.id.fragment_container, profile)
+            }
+        }
+        view.btn_edit_wg.setOnClickListener {
+            parentFragmentManager.commit {
+                isAddToBackStackAllowed
+                setReorderingAllowed(true)
+                replace(R.id.fragment_container, wg)
+            }
+        }
+        view.btn_delet_profile.setOnClickListener {
+            startActivity(Intent(requireActivity(), SignUpActivity::class.java))
+            Toast.makeText(requireActivity(), "Your account hast been deleted.", Toast.LENGTH_SHORT)
+                .show()
+        }
+        return view
     }
 
     companion object {
