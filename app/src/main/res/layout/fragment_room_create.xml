@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName5"
+            android:id="@+id/et_room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -54,21 +54,23 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
 
         <EditText
-            android:id="@+id/editTextTime"
+            android:id="@+id/et_room_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:ems="10"
-            android:inputType="text"
             android:hint="@string/room_address"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+            app:layout_constraintTop_toBottomOf="@+id/et_room_name" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_place_image"
             android:layout_width="@dimen/add_screen_room_image_size"
             android:layout_height="@dimen/add_screen_room_image_size"
+            android:layout_marginBottom="88dp"
             android:padding="@dimen/add_screen_room_image_padding"
             android:scaleType="centerCrop"
             android:src="@drawable/add_screen_image_placeholder"
@@ -83,6 +85,7 @@
             android:id="@+id/tv_add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="104dp"
             android:background="@drawable/shape_button_rounded"
             android:gravity="center"
             android:padding="@dimen/add_screen_text_add_image_padding"
@@ -100,13 +103,13 @@
             android:id="@+id/btn_safe_new_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="324dp"
+            android:layout_marginTop="384dp"
             android:backgroundTint="@color/patriarch"
             android:text="@string/btn_safe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+            app:layout_constraintTop_toTopOf="@+id/et_room_address" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

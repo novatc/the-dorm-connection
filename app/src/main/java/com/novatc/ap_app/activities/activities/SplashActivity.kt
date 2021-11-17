@@ -21,7 +21,7 @@ class SplashActivity : BaseActivity() {
             if (currentUserID.isNotEmpty()) {
                 startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             } else {
-                startActivity(Intent(this@SplashActivity, SignInActicity::class.java))
+                startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
             }
 
             finish()

@@ -1,5 +1,6 @@
 package com.novatc.ap_app.activities.fragments
 
+import Firestore.Fireclass
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ class ProfileOptionsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile_options, container, false)
+        view.tv_user_name.setText(Fireclass().getCurrentUserID())
 
         view.btn_edit_profile.setOnClickListener {
             parentFragmentManager.commit {

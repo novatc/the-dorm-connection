@@ -3,7 +3,6 @@ package com.novatc.ap_app.activities.activities
 import Firestore.Fireclass
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -23,7 +22,7 @@ class SignUpActivity : BaseActivity() {
             registerUser()
         }
         btn_sign_in_question.setOnClickListener {
-            startActivity(Intent(this@SignUpActivity, SignInActicity::class.java))
+            startActivity(Intent(this@SignUpActivity, SignInActivity::class.java))
         }
 
     }
