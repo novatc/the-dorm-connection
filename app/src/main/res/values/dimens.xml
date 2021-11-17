@@ -21,5 +21,11 @@
     <dimen name="btn_delete_profile_margin_top">100dp</dimen>
     <dimen name="et_edit_profile">300dp</dimen>
     <dimen name="edit_profile_edit_text">15dp</dimen>
+    <dimen name="add_screen_room_image_size">200dp</dimen>
+    <dimen name="add_screen_room_image_marginTop">200dp</dimen>
+    <dimen name="add_screen_room_image_padding">2dp</dimen>
+    <dimen name="add_screen_text_add_image_marginTop">96dp</dimen>
+    <dimen name="button_radius">10dp</dimen>
+    <dimen name="add_screen_text_add_image_padding">10dp</dimen>
 
 </resources>

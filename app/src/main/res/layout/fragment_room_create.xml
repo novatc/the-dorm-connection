@@ -48,7 +48,7 @@
             android:layout_marginTop="40dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name"
+            android:hint="@string/rooms"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
@@ -65,14 +65,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
 
-        <Button
-            android:id="@+id/btn_safe_new_room"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_place_image"
+            android:layout_width="@dimen/add_screen_room_image_size"
+            android:layout_height="@dimen/add_screen_room_image_size"
+            android:padding="@dimen/add_screen_room_image_padding"
+            android:scaleType="centerCrop"
+            android:src="@drawable/add_screen_image_placeholder"
+            app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.284"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTime"
+            app:layout_constraintVertical_bias="0.195" />
+
+        <TextView
+            android:id="@+id/tv_add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
+            android:background="@drawable/shape_button_rounded"
+            android:gravity="center"
+            android:padding="@dimen/add_screen_text_add_image_padding"
+            android:text="@string/text_add_image"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.904"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTime"
+            app:layout_constraintVertical_bias="0.39" />
+
+        <Button
+            android:id="@+id/btn_safe_new_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="324dp"
             android:backgroundTint="@color/patriarch"
             android:text="@string/btn_safe"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
 
