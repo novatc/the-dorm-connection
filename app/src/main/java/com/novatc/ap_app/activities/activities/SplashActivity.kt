@@ -1,5 +1,6 @@
 package com.novatc.ap_app.activities.activities
 
+import Firestore.Fireclass
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -16,7 +17,13 @@ class SplashActivity : BaseActivity() {
 
         // Changes the activity to the intro activity after 2.5 seconds
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this@SplashActivity, SignInActicity::class.java))
+            val currentUserID = Fireclass().getCurrentUserID()
+            if (currentUserID.isNotEmpty()) {
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            } else {
+                startActivity(Intent(this@SplashActivity, SignInActicity::class.java))
+            }
+
             finish()
         }, 1500)
 

@@ -9,28 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Apapp">
-        <activity
-            android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name=".activities.activities.EditWGActivity"
-            android:exported="false" />
-        <activity
-            android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name=".activities.activities.EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name=".activities.activities.UserProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.activities.EventsOverviewActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Apapp.NoActionBar" />
-        <activity
-            android:name=".activities.activities.RoomsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Apapp.NoActionBar" />
+
         <activity
             android:name=".activities.activities.SignInActicity"
             android:exported="true"
@@ -46,16 +25,15 @@
             android:name=".activities.activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:theme="@style/Theme.Apapp.NoActionBar"
             android:name=".activities.activities.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
