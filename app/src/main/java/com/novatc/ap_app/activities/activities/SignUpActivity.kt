@@ -44,7 +44,6 @@ class SignUpActivity : BaseActivity() {
                     if (task.isSuccessful) {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
                         val registeredMail = firebaseUser.email!!
-
                         val user = User(firebaseUser.uid, name, registeredMail)
                         Fireclass().registerUser(this@SignUpActivity, user)
 

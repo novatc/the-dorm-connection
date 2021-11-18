@@ -40,6 +40,4 @@ class EventCreateFragment : Fragment() {
 
         return view
     }
-
-
 }
