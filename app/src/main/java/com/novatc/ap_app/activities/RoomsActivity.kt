@@ -1,4 +1,4 @@
-package com.novatc.ap_app.activities.activities
+package com.novatc.ap_app.activities
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager

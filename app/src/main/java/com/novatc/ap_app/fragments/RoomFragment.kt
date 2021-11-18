@@ -1,4 +1,4 @@
-package com.novatc.ap_app.activities.fragments
+package com.novatc.ap_app.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -6,26 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
+import com.novatc.ap_app.activities.adapter.RoomsAdapter
 import model.EventListItem
+import model.RoomsListItem
 
-val eventListItems: ArrayList<EventListItem> =  ArrayList()
-val exampleEventAuthor = "Pinte 42"
-val exampleEventName = "Pintenmittwoch "
-val exampleEventText = "Join us every Wednesday with your study budies to grab a couple of beers for cheap :)"
-val exampleEventDate = "Heute 20:00"
-
+val roomsListItems: ArrayList<RoomsListItem> =  ArrayList()
+val exampleroomName = "Pinte 42"
+val exampleRoomTagline = "Bar and party room"
+val exampleRoomDescription = "Have parties or social gatherings" + System.getProperty ("line.separator") + "in the Pinte 42!"
 /**
  * A simple [Fragment] subclass.
- * Use the [EventFragment.newInstance] factory method to
+ * Use the [RoomFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class EventFragment : Fragment() {
+class RoomFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     var layoutManager: LinearLayoutManager? = null
@@ -33,14 +31,15 @@ class EventFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (eventListItems.isEmpty()) {
-            for (i in 0..5) {
-                eventListItems.add(EventListItem(
-                    exampleEventAuthor,
-                    exampleEventName + i,
-                    exampleEventText,
-                    exampleEventDate
-                ))
+        if (roomsListItems.isEmpty()) {
+            for (i in 0..0) {
+                roomsListItems.add(
+                    RoomsListItem(
+                    exampleroomName,
+                    exampleRoomTagline + i,
+                    exampleRoomDescription,
+                )
+                )
             }
         }
 
@@ -57,22 +56,17 @@ class EventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event, container, false)
+        return inflater.inflate(R.layout.fragment_room, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val view =  getView() as View
-        val recyclerView: RecyclerView = view.findViewById((R.id.upcoming_events))
+        val recyclerView: RecyclerView = view.findViewById((R.id.available_rooms))
         recyclerView.setHasFixedSize(true)
-        val adapter = EventsAdapter(eventListItems)
+        val adapter = RoomsAdapter(roomsListItems)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-
-        val addEventButton: FloatingActionButton = view.findViewById(R.id.createEventButton)
-        addEventButton.setOnClickListener {
-            val eventCreateFragment: Fragment = EventCreateFragment()
-        }
     }
 
 }

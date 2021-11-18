@@ -11,52 +11,52 @@
         android:theme="@style/Theme.Apapp">
         <activity
             android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name=".activities.activities.EditWGActivity"
+            android:name="com.novatc.ap_app.activities.EditWGActivity"
             android:exported="false" />
         <activity
             android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name=".activities.activities.EditProfileActivity"
+            android:name="com.novatc.ap_app.activities.EditProfileActivity"
             android:exported="false" />
         <activity
             android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name=".activities.activities.UserProfileActivity"
+            android:name="com.novatc.ap_app.activities.UserProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.activities.EventsOverviewActivity"
+            android:name="com.novatc.ap_app.activities.EventsOverviewActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" />
         <activity
-            android:name=".activities.activities.RoomsActivity"
+            android:name="com.novatc.ap_app.activities.RoomsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" />
         <activity
-            android:name=".activities.activities.SignInActicity"
+            android:name="com.novatc.ap_app.activities.SignInActicity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar">
 
         </activity>
         <activity
-            android:name=".activities.activities.SignUpActivity"
+            android:name="com.novatc.ap_app.activities.SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" />
         <activity
-            android:name=".activities.activities.SplashActivity"
+            android:name="com.novatc.ap_app.activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" >
+        </activity>
+        <activity
+            android:theme="@style/Theme.Apapp.NoActionBar"
+            android:name="com.novatc.ap_app.activities.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name=".activities.activities.MainActivity"
-            android:exported="true">
         </activity>
 
         <meta-data

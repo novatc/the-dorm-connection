@@ -1,4 +1,4 @@
-package com.novatc.ap_app.activities.activities
+package com.novatc.ap_app.activities
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +17,6 @@ class EventsOverviewActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_event)
-
 
 
         for (i in 0..5) {

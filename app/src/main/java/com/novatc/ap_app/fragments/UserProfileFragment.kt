@@ -1,4 +1,4 @@
-package com.novatc.ap_app.activities.fragments
+package com.novatc.ap_app.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.novatc.ap_app.R
-import com.novatc.ap_app.activities.activities.EditProfileActivity
-import com.novatc.ap_app.activities.activities.EditWGActivity
-import com.novatc.ap_app.activities.activities.SignUpActivity
+import com.novatc.ap_app.activities.EditProfileActivity
+import com.novatc.ap_app.activities.EditWGActivity
+import com.novatc.ap_app.activities.SignUpActivity
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import kotlinx.android.synthetic.main.fragment_user_profile.view.*
 
