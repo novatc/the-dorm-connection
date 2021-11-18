@@ -5,6 +5,7 @@
     <string name="text_add_image">Bild hinzufügen</string>
     <string name="edit_text_hint_date">Datum</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_safe">Speichern</string>
 
     #sign in and sign up
     <string name="sign_in">Anmelden</string>
@@ -43,7 +44,6 @@
     <string name="repeat_new_password">Neues Passwort wiederholen</string>
     <string name="new_password">Neues Passwort</string>
     <string name="current_password">Aktuelles Passwort</string>
-    <string name="btn_safe">Speichern</string>
     <string name="WG">WG</string>
     <string name="WG_invitation_code">Dein WG Einladungs QR-Code</string>
     <string name="delete_account">Account löschen</string>
@@ -52,5 +52,11 @@
     <string name="pinboard">Pinnwand</string>
     <string name="rooms">Räume</string>
     <string name="pinboard_tagline">News from your dorm</string>
+    <string name="create_a_post">Verfasse einen Eintrag</string>
+    <string name="post">Eintrag</string>
+    <string name="post_header">Eintragsüberschrift</string>
+    <string name="post_text">Text</string>
+    <string name="post_keywords">Schlagwörter</string>
+    <string name="minimum_booking_time">Bestimme den Mindestbuchzeitraum</string>
 
 </resources>
