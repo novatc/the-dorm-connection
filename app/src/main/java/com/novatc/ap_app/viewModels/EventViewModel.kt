@@ -7,17 +7,17 @@ import com.novatc.ap_app.fragments.*
 import model.EventListItem
 
 class EventViewModel: ViewModel() {
-    private val events: MutableLiveData<List<EventListItem>> by lazy {
-        MutableLiveData<List<EventListItem>>().also {
-            loadEvents()
-        }
+    private val events by lazy {
+        val liveData = MutableLiveData<List<EventListItem>>()
+        liveData.value = loadEvents()
+        return@lazy liveData
     }
 
-    fun getEvents(): LiveData<List<EventListItem>> {
+    fun events(): LiveData<List<EventListItem>> {
         return events
     }
 
-    private fun loadEvents() {
+    private fun loadEvents(): List<EventListItem> {
         val exampleEventAuthor = "Pinte 42"
         val exampleEventName = "Pintenmittwoch "
         val exampleEventText = "Join us every Wednesday with your study budies to grab a couple of beers for cheap :)"
@@ -32,6 +32,7 @@ class EventViewModel: ViewModel() {
                     exampleEventDate
                 ))
             }
+        return eventListItems
 
     }
 }

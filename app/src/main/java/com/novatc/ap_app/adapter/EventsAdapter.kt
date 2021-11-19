@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import model.EventListItem
 
-class EventsAdapter(private val eventListItems: ArrayList<EventListItem>): RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
+class EventsAdapter(val eventListItems: List<EventListItem>): RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     class EventsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val eventAuthor: TextView = itemView.findViewById(R.id.eventName)
