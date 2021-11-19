@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -55,15 +56,19 @@ class EventFragment : Fragment() {
         val recyclerView: RecyclerView = view.findViewById((R.id.upcoming_events))
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+
+
+        val addEventButton: FloatingActionButton = view.findViewById(R.id.createEventButton)
+        addEventButton.setOnClickListener {
+            val eventCreateFragment: Fragment = EventCreateFragment()
+            parentFragmentManager.commit {
+                isAddToBackStackAllowed
+                setReorderingAllowed(true)
+                replace(R.id.fragment_container, eventCreateFragment)
+            }
+        }
         return view
     }
-
-
-//    val addEventButton: FloatingActionButton = view.findViewById(R.id.createEventButton)
-//    addEventButton.setOnClickListener
-//    {
-//        val eventCreateFragment: Fragment = EventCreateFragment()
-//    }
 
 }
 

@@ -13,16 +13,17 @@
         android:background="@drawable/rounded_corners_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="136dp"
-            android:layout_height="20dp"
+            android:layout_width="193dp"
+            android:layout_height="22dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/rooms_tagline"
+            android:text="@string/pinboard_tagline"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,14 +35,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_bold"
-            android:text="@string/rooms_header"
+            android:text="@string/pinboard"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addRoomsButton"
+            android:id="@+id/createEventButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -59,7 +60,7 @@
             tools:ignore="ImageContrastCheck" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/available_rooms"
+            android:id="@+id/upcoming_events"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -68,24 +69,11 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/logo_description"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/transfer_512px"
-        tools:ignore="ImageContrastCheck" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,14 @@
 package model
 
 import android.os.Build
+import android.text.TextUtils
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -25,5 +29,50 @@ open class BaseActivity: AppCompatActivity() {
             }
         }
     }
+
+    fun replaceFragments(fragment: Fragment) {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace(R.id.fragment_container, fragment)
+        }
+    }
+
+    fun validateForm(name:String, mail: String, password: String): Boolean {
+        return when {
+            TextUtils.isEmpty(mail) -> {
+                Toast.makeText(this, "Bitte Mail angeben", Toast.LENGTH_LONG)
+                false
+            }
+            TextUtils.isEmpty(mail) -> {
+                Toast.makeText(this, "Bitte Passwort angeben", Toast.LENGTH_LONG)
+                false
+            }
+            TextUtils.isEmpty(password) -> {
+                Toast.makeText(this, "Bitte Mail angeben", Toast.LENGTH_LONG)
+                false
+            }
+            else -> {
+                true
+            }
+        }
+    }
+
+    fun validateForm(name: String, mail: String): Boolean {
+        return when {
+            TextUtils.isEmpty(mail) -> {
+                Toast.makeText(this, "Bitte Mail angeben", Toast.LENGTH_LONG)
+                false
+            }
+            TextUtils.isEmpty(mail) -> {
+                Toast.makeText(this, "Bitte Passwort angeben", Toast.LENGTH_LONG)
+                false
+            }
+            else -> {
+                true
+            }
+        }
+
+    }
+
 
 }

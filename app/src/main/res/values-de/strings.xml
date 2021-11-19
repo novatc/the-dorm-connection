@@ -1,5 +1,13 @@
 <resources>
+    #general
     <string name="app_name">THE DORM CONNECTION</string>
+    <string name="logo_description">Logo The Dorm Connection</string>
+    <string name="text_add_image">Bild hinzufügen</string>
+    <string name="edit_text_hint_date">Datum</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_safe">Speichern</string>
+
+    #sign in and sign up
     <string name="sign_in">Anmelden</string>
     <string name="sign_up">Registrieren</string>
     <string name="sign_up_text">Willkommen zu THE DORM CONNECTION hier registrieren</string>
@@ -10,14 +18,24 @@
     <string name="new_to_the_dorm_connection">Neu bei THE DORM CONNECTION?</string>
     <string name="already_a_member_question">Schon ein Mitglied?</string>
     <string name="btn_sing_up">Registrieren</string>
-    <string name="logo_description">Logo The Dorm Connection</string>
+
+    #events
+    <string name="events">Events</string>
     <string name="events_tagline">Anstehende Events</string>
     <string name="events_header">Events</string>
     <string name="events_add_event_button">Neues Event</string>
     <string name="events_add_tagline">Neues Event anlegen</string>
+
+    #rooms
+    <string name="rooms_add_tagline">Lege ein Raum an</string>
     <string name="rooms_tagline">Räume für alle zum mieten</string>
     <string name="rooms_header">Räume</string>
     <string name="rooms_add_room_button">Neuen Raum hinzufügen (admin only)</string>
+    <string name="room_hint">Raumname</string>
+    <string name="room_description">Description</string>
+    <string name="room_address">Adresse</string>
+
+    #you
     <string name="btn_edit_profile">Profil bearbeiten</string>
     <string name="btn_edit_wg">WG bearbeiten</string>
     <string name="btn_edit_profile_logout">Abmelden</string>
@@ -26,10 +44,19 @@
     <string name="repeat_new_password">Neues Passwort wiederholen</string>
     <string name="new_password">Neues Passwort</string>
     <string name="current_password">Aktuelles Passwort</string>
-    <string name="btn_safe">Speichern</string>
     <string name="WG">WG</string>
     <string name="WG_invitation_code">Dein WG Einladungs QR-Code</string>
+    <string name="delete_account">Account löschen</string>
+
+    #pinboard
     <string name="pinboard">Pinnwand</string>
     <string name="rooms">Räume</string>
-    <string name="events">Events</string>
+    <string name="pinboard_tagline">News from your dorm</string>
+    <string name="create_a_post">Verfasse einen Eintrag</string>
+    <string name="post">Eintrag</string>
+    <string name="post_header">Eintragsüberschrift</string>
+    <string name="post_text">Text</string>
+    <string name="post_keywords">Schlagwörter</string>
+    <string name="minimum_booking_time">Bestimme den Mindestbuchzeitraum</string>
+
 </resources>

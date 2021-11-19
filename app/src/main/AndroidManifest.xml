@@ -9,54 +9,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Apapp">
+
         <activity
-            android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name="com.novatc.ap_app.activities.EditWGActivity"
-            android:exported="false" />
-        <activity
-            android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name="com.novatc.ap_app.activities.EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name="com.novatc.ap_app.activities.UserProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.novatc.ap_app.activities.EventsOverviewActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Apapp.NoActionBar" />
-        <activity
-            android:name="com.novatc.ap_app.activities.RoomsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Apapp.NoActionBar" />
-        <activity
-            android:name="com.novatc.ap_app.activities.SignInActicity"
+            android:name=".activities.SignInActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar">
-
         </activity>
         <activity
-            android:name="com.novatc.ap_app.activities.SignUpActivity"
+            android:name=".activities.SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar" />
         <activity
-            android:name="com.novatc.ap_app.activities.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Apapp.NoActionBar" >
-        </activity>
-        <activity
             android:theme="@style/Theme.Apapp.NoActionBar"
-            android:name="com.novatc.ap_app.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:theme="@style/Theme.Apapp.NoActionBar"
+            android:name=".activities.MainActivity"
+            android:exported="true">
         </activity>
 
         <meta-data

@@ -9,35 +9,35 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.commit
 import com.novatc.ap_app.R
-import kotlinx.android.synthetic.main.fragment_event_create.view.*
-import kotlinx.android.synthetic.main.fragment_event_create.view.btn_safe_new_event
+import com.novatc.ap_app.fragments.RoomListFragment
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
-import model.Event
 import model.Room
 
 
-class EventCreateFragment : Fragment() {
+class RoomCreateFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_event_create, container, false)
+        val view = inflater.inflate(R.layout.fragment_room_create, container, false)
         view.btn_safe_new_event.setOnClickListener {
-            val eventList = EventFragment()
-            val event = Event(
-                view.et_name_of_event.text.toString(),
-                view.et_date_of_event.text.toString(),
+            val room = Room(
+                view.et_room_name.text.toString(),
+                view.et_room_address.text.toString(),
                 Fireclass().getCurrentUserID()
             )
-            Fireclass().addEventToDD(event)
-            Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
+            Fireclass().addRoomToDD(room)
+            Toast.makeText(requireActivity(), "Room created", Toast.LENGTH_SHORT).show()
+            val roomList = RoomListFragment()
             parentFragmentManager.commit {
-                replace(R.id.fragment_container, eventList)
+                replace(R.id.fragment_container, roomList)
             }
         }
 
         return view
     }
 }
+
