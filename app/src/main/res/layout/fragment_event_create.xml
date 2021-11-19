@@ -13,9 +13,10 @@
         android:background="@drawable/rounded_corners_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/textView2"
@@ -42,78 +43,79 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <EditText
-            android:id="@+id/et_name_of_event"
+            android:id="@+id/eventName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name of event"
+            android:text="Name"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <EditText
-            android:id="@+id/et_date_of_event"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:ems="10"
-            android:inputType="date"
-            android:hint="Date of event"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_name_of_event" />
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_place_image"
-            android:layout_width="@dimen/add_screen_room_image_size"
-            android:layout_height="@dimen/add_screen_room_image_size"
-            android:layout_marginBottom="76dp"
+            android:layout_width="102dp"
+            android:layout_height="118dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="152dp"
             android:padding="@dimen/add_screen_room_image_padding"
             android:scaleType="centerCrop"
             android:src="@drawable/add_screen_image_placeholder"
             app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.232"
+            app:layout_constraintHorizontal_bias="0.158"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_Date"
+            app:layout_constraintTop_toBottomOf="@+id/datePickerButton"
             app:layout_constraintVertical_bias="0.24" />
 
         <TextView
             android:id="@+id/tv_add_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="188dp"
             android:background="@drawable/shape_button_rounded"
             android:gravity="center"
             android:padding="@dimen/add_screen_text_add_image_padding"
             android:text="@string/text_add_image"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.86"
+            app:layout_constraintHorizontal_bias="0.699"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_date_of_event"
-            app:layout_constraintVertical_bias="0.464" />
+            app:layout_constraintTop_toBottomOf="@+id/datePickerButton" />
 
         <Button
             android:id="@+id/btn_safe_new_event"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="304dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="32dp"
             android:backgroundTint="@color/patriarch"
             android:text="@string/btn_safe"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/datePickerButton"
+            style="?android:spinnerStyle"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="01-01-2021"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_date_of_event" />
+            app:layout_constraintTop_toBottomOf="@+id/eventName" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
