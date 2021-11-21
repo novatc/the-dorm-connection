@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
-import model.EventListItem
+import model.Event
 
-class EventsAdapter(val eventListItems: List<EventListItem>): RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
+class EventsAdapter(private val eventListItems: ArrayList<Event>): RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     class EventsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val eventAuthor: TextView = itemView.findViewById(R.id.eventName)
@@ -25,10 +25,10 @@ class EventsAdapter(val eventListItems: List<EventListItem>): RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
         val eventListItem = eventListItems[position]
-        holder.eventAuthor.text = eventListItem.eventAuthor
-        holder.eventName.text = eventListItem.eventName
-        holder.eventText.text = eventListItem.eventText
-        holder.eventDate.text = eventListItem.eventDate
+        holder.eventAuthor.text = eventListItem.author
+        holder.eventName.text = eventListItem.name
+        holder.eventText.text = eventListItem.text
+        holder.eventDate.text = eventListItem.date
     }
 
     override fun getItemCount() = eventListItems.size

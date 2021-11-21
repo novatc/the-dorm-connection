@@ -1,38 +1,48 @@
 package com.novatc.ap_app.viewModels
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 import com.novatc.ap_app.fragments.*
-import model.EventListItem
+import model.Event
 
-class EventViewModel: ViewModel() {
-    private val events by lazy {
-        val liveData = MutableLiveData<List<EventListItem>>()
-        liveData.value = loadEvents()
-        return@lazy liveData
+class EventViewModel : ViewModel() {
+
+    private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val TAG = "EventViewModel"
+    private var _events: MutableLiveData<ArrayList<Event>> = MutableLiveData()
+
+    init {
+        loadEvents()
     }
 
-    fun events(): LiveData<List<EventListItem>> {
-        return events
-    }
+    internal var events: MutableLiveData<ArrayList<Event>>
+        get() {
+            return _events
+        }
+        set(value) {
+            _events = value
+        }
 
-    private fun loadEvents(): List<EventListItem> {
-        val exampleEventAuthor = "Pinte 42"
-        val exampleEventName = "Pintenmittwoch "
-        val exampleEventText = "Join us every Wednesday with your study budies to grab a couple of beers for cheap :)"
-        val exampleEventDate = "Heute 20:00"
-
-        val eventListItems: ArrayList<EventListItem> =  ArrayList()
-            for (i in 0..5) {
-                eventListItems.add(EventListItem(
-                    exampleEventAuthor,
-                    exampleEventName + i,
-                    exampleEventText,
-                    exampleEventDate
-                ))
+    private fun loadEvents() {
+        fireStore.collection("events").addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w(TAG, "Listen for events failed", e)
+                return@addSnapshotListener
             }
-        return eventListItems
+            if (snapshot != null) {
+                val allEvents = ArrayList<Event>()
+                val documents = snapshot.documents
+                documents.forEach {
+                    val event = it.toObject(Event::class.java)
+                    if (event != null) {
+                        allEvents.add(event)
+                    }
+                }
+                _events.value = allEvents
+            }
+        }
 
     }
 }

@@ -42,7 +42,9 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             val eventList = EventFragment()
             val event = Event(
                 view.eventName.text.toString(),
-                Fireclass().getCurrentUserID()
+                "18.02.2021",
+                Fireclass().getCurrentUserID(),
+                "Drink beer"
             )
             Fireclass().addEventToDD(event)
             Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
