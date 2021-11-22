@@ -15,6 +15,7 @@ import model.Room
 import model.User
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
+import model.Post
 
 
 class Fireclass {
@@ -72,24 +73,33 @@ class Fireclass {
             }
     }
 
-    fun updateUserName(name: String) {
-        val user = Firebase.auth.currentUser
-        val updates = userProfileChangeRequest {
-            displayName = name
-        }
-        user!!.updateProfile(updates).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.d("PROFILE", "User profile updated.")
+    suspend fun getPosts(): ArrayList<Post> {
+        val posts = ArrayList<Post>()
+        val snapshot= mFirestore.collection(Constants.POST).get().await()
+        for (post in snapshot){
+            post.toObject(Post::class.java).let {
+                posts.add(it)
             }
-
         }
+        Log.e("POST", "POSTLIST: ${posts.size}")
+        return posts
+
+    }
+
+    fun addPost(post: Post) {
+        mFirestore.collection(Constants.POST).document().set(post, SetOptions.merge())
+            .addOnSuccessListener { document ->
+                Log.e("POST", "Post saved to DB")
+            }.addOnFailureListener { e ->
+                Log.e("POST", "Error while saving: $e")
+            }
     }
 
     suspend fun getUserData(uid: String): User? {
         val snapshot = mFirestore.collection(Constants.USER).document(uid).get().await()
         val user = snapshot.toObject<User>()
         Log.e("FIRE", user!!.username)
-        return  user
+        return user
     }
 
     fun addEvent(event: Event) {
@@ -97,8 +107,8 @@ class Fireclass {
             .addOnSuccessListener { document ->
                 Log.e("EVENT", "Event saved to DB")
             }.addOnFailureListener { e ->
-            Log.e("EVENT", "Error while saving: $e")
-        }
+                Log.e("EVENT", "Error while saving: $e")
+            }
     }
 
     fun addRoomToDD(room: Room) {
@@ -106,7 +116,7 @@ class Fireclass {
             .addOnSuccessListener { document ->
                 Log.e("EVENT", "Event saved to DB")
             }.addOnFailureListener { e ->
-            Log.e("EVENT", "Error while saving: $e")
-        }
+                Log.e("EVENT", "Error while saving: $e")
+            }
     }
 }

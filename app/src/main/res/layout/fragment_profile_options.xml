@@ -42,7 +42,20 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/darker_gray"
                 android:textStyle="bold" />
-
+            <Button
+                android:id="@+id/btn_select_dorm"
+                android:layout_width="@dimen/btn_edit_profile_width"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/patriarch"
+                android:text="@string/btn_select_dorm"
+                android:textColor="@color/white" />
+            <Button
+                android:id="@+id/btn_my_posts"
+                android:layout_width="@dimen/btn_edit_profile_width"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/patriarch"
+                android:text="@string/btn_my_posts"
+                android:textColor="@color/white" />
             <Button
                 android:id="@+id/btn_edit_profile"
                 android:layout_width="@dimen/btn_edit_profile_width"

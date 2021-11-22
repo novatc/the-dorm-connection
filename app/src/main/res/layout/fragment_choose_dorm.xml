@@ -27,54 +27,45 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/setting"
+                android:text="@string/dorm"
                 android:textAlignment="center"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="30sp"
-                android:textStyle="bold"></TextView>
+                android:textSize="30dp"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
-                android:text="@string/WG"
+                android:text="@string/btn_select_dorm"
                 android:textAlignment="center"
                 android:textColor="@android:color/darker_gray"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="@dimen/et_edit_profile"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/edit_profile_edit_text"
-                android:background="@color/white"
-                android:ems="10"
-                android:hint="@string/sign_up_name"
-                android:inputType="textPersonName" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/available_dorms"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
-            <ImageView
-                android:id="@+id/img_wg_invitation_code"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@drawable/baseline_qr_code_2_24"></ImageView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
-                android:text="@string/WG_invitation_code"
-                android:textAlignment="center"
-                android:textColor="@android:color/darker_gray"
-                android:textStyle="bold"></TextView>
 
             <Button
-                android:id="@+id/edit_wg_safe"
-                android:layout_width="wrap_content"
+                android:id="@+id/btn_safe_dorm"
+                android:layout_width="@dimen/btn_edit_profile_width"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/patriarch"
-                android:text="@string/btn_safe"></Button>
-        </LinearLayout>
+                android:text="@string/btn_safe"
+                android:textColor="@color/white" />
 
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

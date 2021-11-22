@@ -10,8 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.commit
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.SignUpActivity
+import com.novatc.ap_app.viewModels.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
 class ProfileOptionsFragment : Fragment() {
@@ -24,10 +27,20 @@ class ProfileOptionsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile_options, container, false)
-        view.tv_user_name.setText(Fireclass().getCurrentUserID())
+        val viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
+        viewModel.userProfile.observe(viewLifecycleOwner, Observer {
+            view.tv_user_name.setText(it.username)
+        })
 
-
+        view.btn_my_posts.setOnClickListener {
+            val myPosts = MyPostsFragment()
+            parentFragmentManager.commit {
+                isAddToBackStackAllowed
+                setReorderingAllowed(true)
+                replace(R.id.fragment_container, myPosts)
+            }
+        }
 
         view.btn_edit_profile.setOnClickListener {
             parentFragmentManager.commit {
@@ -51,6 +64,15 @@ class ProfileOptionsFragment : Fragment() {
         }
         view.btn_profile_logout.setOnClickListener {
             Fireclass().logout()
+            startActivity(Intent(requireActivity(), SignUpActivity::class.java))
+        }
+        view.btn_select_dorm.setOnClickListener {
+            val dorm = ChooseDormFragment()
+            parentFragmentManager.commit {
+                isAddToBackStackAllowed
+                setReorderingAllowed(true)
+                replace(R.id.fragment_container, dorm)
+            }
         }
         return view
     }

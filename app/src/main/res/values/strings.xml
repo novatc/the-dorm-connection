@@ -51,6 +51,11 @@
     <string name="WG">WG</string>
     <string name="WG_invitation_code">Your WG invitation QR-Code</string>
     <string name="delete_account">Delete your account</string>
+    <string name="btn_select_dorm">Choose your dorm</string>
+    <string name="dorm">Dorm</string>
+    <string name="btn_my_posts">My posts</string>
+    <string name="edit_my_posts">Edit your posts</string>
+
 
     #pinboard
     <string name="pinboard">Pinboard</string>
@@ -61,5 +66,6 @@
     <string name="post_text">Text</string>
     <string name="post_keywords">Keywords</string>
     <string name="minimum_booking_time">Set the minimum booking time</string>
+
 
 </resources>

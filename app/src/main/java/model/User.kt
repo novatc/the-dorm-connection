@@ -3,12 +3,13 @@ package model
 import android.os.Parcel
 import android.os.Parcelable
 
-class User (
+class User(
     val id: String = "",
     val username: String = "",
     val mail: String = "",
+    val userDormId: String = "",
     val fcmToken: String = "",
-        ): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
