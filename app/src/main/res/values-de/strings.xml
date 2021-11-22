@@ -25,6 +25,8 @@
     <string name="events_header">Events</string>
     <string name="events_add_event_button">Neues Event</string>
     <string name="events_add_tagline">Neues Event anlegen</string>
+    <string name="event_description">Eventbeschreibung</string>
+    <string name="event_name">Name</string>
 
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>

@@ -14,21 +14,18 @@ import android.widget.Toast
 import androidx.fragment.app.commit
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
-import kotlinx.android.synthetic.main.fragment_event_create.view.btn_safe_new_event
-import kotlinx.android.synthetic.main.fragment_room_create.view.*
+import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
+import kotlinx.android.synthetic.main.fragment_event_create.view.createEventName
 import model.Event
-import model.Room
-import java.time.Year
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.ZoneId
 import java.util.*
 
 
 class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
-    lateinit var dateButton: Button
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var dateButton: Button
+    private var eventDate = "01-01-2021"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,32 +34,47 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_event_create, container, false)
         initDatePicker(view)
-        dateButton = view.datePickerButton
-            view.btn_safe_new_event.setOnClickListener {
-            val eventList = EventFragment()
-            val event = Event(
-                view.eventName.text.toString(),
-                "18.02.2021",
-                Fireclass().getCurrentUserID(),
-                "Drink beer"
-            )
-            Fireclass().addEventToDD(event)
-            Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
-            parentFragmentManager.commit {
-                replace(R.id.fragment_container, eventList)
-            }
-        }
-
-
+        dateButton = view.createEventDate
+        view.createEvent.setOnClickListener { onCreateEvent(view) }
         return view
     }
 
-    fun initDatePicker(view: View) {
+    private fun onCreateEvent(view: View) {
+        val eventName = view.createEventName.text.toString().trim()
+        val eventText = view.createEventText.text.toString().trim()
+
+        if (eventName.isBlank() || eventText.isBlank() || eventDate.isBlank()) {
+            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (dateIsInPast(eventDate)) {
+            Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val event = Event(
+            eventName,
+            eventDate,
+            Fireclass().getCurrentUserID(),
+            eventText
+        )
+        Fireclass().addEvent(event)
+        Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
+        parentFragmentManager.commit {
+            replace(R.id.fragment_container, EventFragment())
+        }
+    }
+
+    private fun dateIsInPast(date: String): Boolean {
+        val localDate = LocalDate.parse(date)
+        return localDate!!.isBefore(LocalDate.now(ZoneId.systemDefault()))
+    }
+
+    private fun initDatePicker(view: View) {
         val cal = Calendar.getInstance()
         val day = cal.get(Calendar.DAY_OF_MONTH)
         val month = cal.get(Calendar.MONTH)
         val year = cal.get(Calendar.YEAR)
-        view.datePickerButton.setOnClickListener {
+        view.createEventDate.setOnClickListener {
             DatePickerDialog(context!!, this, year, month, day).show()
         }
 
@@ -70,14 +82,17 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         Log.d("Datepicker", "Jahr: $year Monat: $month Tag: $dayOfMonth")
-        var monthString = month.toString()
+        var monthString = (month + 1).toString()
         var dayOfMonthString = dayOfMonth.toString()
-        if(month < 10)  {
+        if (month < 10) {
             monthString = "0$month"
         }
         if (dayOfMonth < 10) {
             dayOfMonthString = "0$dayOfMonth"
         }
-        dateButton.text = "$dayOfMonthString-$monthString-$year"
+        val displayDateString = "$dayOfMonthString-$monthString-$year"
+        val internalDateString = "$year-$monthString-$dayOfMonthString"
+        dateButton.text = displayDateString
+        eventDate = internalDateString
     }
 }

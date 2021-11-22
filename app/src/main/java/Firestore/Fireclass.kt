@@ -92,7 +92,7 @@ class Fireclass {
         return  user
     }
 
-    fun addEventToDD(event: Event) {
+    fun addEvent(event: Event) {
         mFirestore.collection(Constants.EVENTS).document().set(event, SetOptions.merge())
             .addOnSuccessListener { document ->
                 Log.e("EVENT", "Event saved to DB")

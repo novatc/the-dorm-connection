@@ -43,59 +43,25 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <EditText
-            android:id="@+id/eventName"
+            android:id="@+id/createEventName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:ems="10"
+            android:hint="@string/event_name"
             android:inputType="textPersonName"
-            android:text="Name"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_place_image"
-            android:layout_width="102dp"
-            android:layout_height="118dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="152dp"
-            android:padding="@dimen/add_screen_room_image_padding"
-            android:scaleType="centerCrop"
-            android:src="@drawable/add_screen_image_placeholder"
-            app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.158"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/datePickerButton"
-            app:layout_constraintVertical_bias="0.24" />
-
-        <TextView
-            android:id="@+id/tv_add_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="188dp"
-            android:background="@drawable/shape_button_rounded"
-            android:gravity="center"
-            android:padding="@dimen/add_screen_text_add_image_padding"
-            android:text="@string/text_add_image"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.699"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/datePickerButton" />
-
         <Button
-            android:id="@+id/btn_safe_new_event"
+            android:id="@+id/createEvent"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginBottom="32dp"
             android:backgroundTint="@color/patriarch"
-            android:text="@string/btn_safe"
+            android:text="@string/events_add_event_button"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -103,16 +69,31 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/datePickerButton"
+            android:id="@+id/createEventDate"
             style="?android:spinnerStyle"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:text="01-01-2021"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventName" />
+            app:layout_constraintTop_toBottomOf="@+id/createEventText" />
+
+        <EditText
+            android:id="@+id/createEventText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/event_description"
+            android:inputType="textMultiLine"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createEventName" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -87,7 +87,7 @@
             android:padding="@dimen/add_screen_room_image_padding"
             android:scaleType="centerCrop"
             android:src="@drawable/add_screen_image_placeholder"
-            app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
+            app:layout_constraintBottom_toTopOf="@+id/createEvent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.284"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +105,7 @@
             android:text="@string/text_add_image"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
+            app:layout_constraintBottom_toTopOf="@+id/createEvent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.904"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +123,7 @@
             android:text="Set the minimum booking time"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_event"
+            app:layout_constraintBottom_toTopOf="@+id/createEvent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +131,7 @@
             app:layout_constraintVertical_bias="0.39" />
 
         <Button
-            android:id="@+id/btn_safe_new_event"
+            android:id="@+id/createEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="488dp"

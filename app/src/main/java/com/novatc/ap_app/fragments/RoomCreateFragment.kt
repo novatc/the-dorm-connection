@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.commit
 import com.novatc.ap_app.R
-import com.novatc.ap_app.fragments.RoomListFragment
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import model.Room
 
@@ -23,7 +22,7 @@ class RoomCreateFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_room_create, container, false)
-        view.btn_safe_new_event.setOnClickListener {
+        view.createEvent.setOnClickListener {
             val room = Room(
                 view.et_room_name.text.toString(),
                 view.et_room_address.text.toString(),
