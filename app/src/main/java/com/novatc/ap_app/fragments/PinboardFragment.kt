@@ -50,7 +50,7 @@ class PinnboardFragment : Fragment() {
         val recyclerView: RecyclerView = view.rv_posts
         val model = ViewModelProvider(this)[PinboardViewModel::class.java]
         model.posts.observe(this, {posts ->
-            posts.sortedBy { it.date }
+            posts.sortedByDescending {  it.date }
             recyclerView.adapter = PostAdapter(posts as ArrayList<Post>)
         })
         recyclerView.layoutManager = layoutManager

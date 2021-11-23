@@ -5,5 +5,6 @@ data class Post(
     val text: String = "",
     val keyword: String = "",
     val creator: String = "",
-    val date: String = ""
+    val date: String = "",
+    val creatorID: String = ""
 )

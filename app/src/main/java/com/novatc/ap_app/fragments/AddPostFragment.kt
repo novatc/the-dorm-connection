@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import model.Post
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.*
 
 class AddPostFragment : Fragment() {
@@ -52,7 +53,8 @@ class AddPostFragment : Fragment() {
                     text = view.et_post_text.text.toString(),
                     keyword = view.et_post_keywords.text.toString(),
                     creator = user!!.username,
-                    date = getCurrentDate()
+                    date = getCurrentDate(),
+                    creatorID = Fireclass().getCurrentUserID()
                 )
                 Fireclass().addPost(post)
                 Toast.makeText(requireContext(), "Post created", Toast.LENGTH_SHORT).show()
@@ -68,10 +70,10 @@ class AddPostFragment : Fragment() {
 
     }
     fun getCurrentDate():String{
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-        val formatted = current.format(formatter)
-        return formatted
+        var current = LocalDateTime.now()
+        var fullLocaleFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
+        var fullLocaleTime = current.format(fullLocaleFormat)
+        return fullLocaleTime
     }
 
 }
