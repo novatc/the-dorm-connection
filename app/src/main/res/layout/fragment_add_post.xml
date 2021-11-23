@@ -56,77 +56,42 @@
 
         <EditText
             android:id="@+id/et_post_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="207dp"
+            android:layout_height="105dp"
             android:layout_marginTop="32dp"
             android:ems="10"
             android:hint="@string/post_text"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_post_headline" />
+
 
         <EditText
             android:id="@+id/et_post_keywords"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="192dp"
             android:ems="10"
             android:hint="@string/post_keywords"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_post_headline" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_place_image"
-            android:layout_width="@dimen/add_screen_room_image_size"
-            android:layout_height="@dimen/add_screen_room_image_size"
-            android:layout_marginBottom="112dp"
-            android:padding="@dimen/add_screen_room_image_padding"
-            android:scaleType="centerCrop"
-            android:src="@drawable/add_screen_image_placeholder"
-            app:layout_constraintBottom_toTopOf="@+id/createEvent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.232"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_post_keywords"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/tv_add_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="116dp"
-            android:background="@drawable/shape_button_rounded"
-            android:gravity="center"
-            android:padding="@dimen/add_screen_text_add_image_padding"
-            android:text="@string/text_add_image"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btn_safe_new_post"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.91"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_post_keywords"
-            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/btn_safe_new_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="488dp"
             android:backgroundTint="@color/patriarch"
             android:text="@string/btn_safe"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/et_post_text"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/et_post_keywords" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

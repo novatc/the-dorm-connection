@@ -59,7 +59,7 @@
             tools:ignore="ImageContrastCheck" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/upcoming_events"
+            android:id="@+id/rv_posts"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
