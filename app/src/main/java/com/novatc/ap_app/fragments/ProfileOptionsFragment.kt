@@ -38,7 +38,7 @@ class ProfileOptionsFragment : Fragment() {
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
                 setReorderingAllowed(true)
-                replace(R.id.fragment_container, myPosts)
+                replace(R.id.nav_host_fragment, myPosts)
             }
         }
 
@@ -46,14 +46,14 @@ class ProfileOptionsFragment : Fragment() {
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
                 setReorderingAllowed(true)
-                replace(R.id.fragment_container, profile)
+                replace(R.id.nav_host_fragment, profile)
             }
         }
         view.btn_edit_wg.setOnClickListener {
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
                 setReorderingAllowed(true)
-                replace(R.id.fragment_container, wg)
+                replace(R.id.nav_host_fragment, wg)
             }
         }
         view.btn_delet_profile.setOnClickListener {
@@ -71,7 +71,7 @@ class ProfileOptionsFragment : Fragment() {
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
                 setReorderingAllowed(true)
-                replace(R.id.fragment_container, dorm)
+                replace(R.id.nav_host_fragment, dorm)
             }
         }
         return view

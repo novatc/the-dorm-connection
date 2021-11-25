@@ -32,7 +32,7 @@ class RoomCreateFragment : Fragment() {
             Toast.makeText(requireActivity(), "Room created", Toast.LENGTH_SHORT).show()
             val roomList = RoomListFragment()
             parentFragmentManager.commit {
-                replace(R.id.fragment_container, roomList)
+                replace(R.id.nav_host_fragment, roomList)
             }
         }
 

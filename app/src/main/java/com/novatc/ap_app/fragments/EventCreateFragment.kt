@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEventName
 import model.Event
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
@@ -25,7 +24,7 @@ import java.util.*
 
 class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private lateinit var dateButton: Button
-    private var eventDate = "01-01-2021"
+    private var eventDate = "2021-01-01"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +59,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         Fireclass().addEvent(event)
         Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
         parentFragmentManager.commit {
-            replace(R.id.fragment_container, EventFragment())
+            replace(R.id.nav_host_fragment, EventFragment())
         }
     }
 

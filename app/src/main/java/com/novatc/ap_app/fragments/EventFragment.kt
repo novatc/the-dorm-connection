@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -16,12 +17,6 @@ import com.novatc.ap_app.activities.adapter.EventsAdapter
 import com.novatc.ap_app.viewModels.EventViewModel
 
 class EventFragment : Fragment() {
-    private lateinit var layoutManager: LinearLayoutManager
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        layoutManager = LinearLayoutManager(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +26,8 @@ class EventFragment : Fragment() {
         fillEventsList(view)
         val addEventButton: FloatingActionButton = view.findViewById(R.id.createEventButton)
         addEventButton.setOnClickListener {
-            val eventCreateFragment: Fragment = EventCreateFragment()
-            parentFragmentManager.commit {
-                isAddToBackStackAllowed
-                setReorderingAllowed(true)
-                replace(R.id.fragment_container, eventCreateFragment)
-            }
+            val action = EventFragmentDirections.actionEventFragmentToEventCreateFragment()
+            view.findNavController().navigate(action)
         }
         return view
     }
@@ -47,7 +38,7 @@ class EventFragment : Fragment() {
         model.events.observe(this, { events ->
             recyclerView.adapter = EventsAdapter(events)
         })
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(activity)
     }
 
 }

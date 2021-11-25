@@ -1,6 +1,5 @@
 package com.novatc.ap_app.fragments
 
-import Firestore.Fireclass
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,7 +22,7 @@ class ProfileFragment : Fragment() {
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
                 setReorderingAllowed(true)
-                replace(R.id.fragment_container, profileOptions)
+                replace(R.id.nav_host_fragment, profileOptions)
             }
         }
         return view

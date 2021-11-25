@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import com.novatc.ap_app.R
-import com.novatc.ap_app.fragments.RoomCreateFragment
 import kotlinx.android.synthetic.main.fragment_room_list.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,7 +43,7 @@ class RoomListFragment : Fragment() {
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
                 setReorderingAllowed(true)
-                replace(R.id.fragment_container, room)
+                replace(R.id.nav_host_fragment, room)
             }
         }
         return view

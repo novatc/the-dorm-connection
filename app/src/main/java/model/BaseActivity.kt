@@ -9,9 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.novatc.ap_app.R
 
 open class BaseActivity: AppCompatActivity() {
@@ -25,15 +22,8 @@ open class BaseActivity: AppCompatActivity() {
             val controler = window.insetsController
             if(controler != null){
                 controler.hide(WindowInsets.Type.statusBars())
-                controler.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_SWIPE
+                controler.systemBarsBehavior = WindowInsetsController.BEHAVIOR_DEFAULT
             }
-        }
-    }
-
-    fun replaceFragments(fragment: Fragment) {
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace(R.id.fragment_container, fragment)
         }
     }
 
