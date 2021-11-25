@@ -23,7 +23,7 @@ class ProfileFragment : Fragment() {
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
                 setReorderingAllowed(true)
-                replace(R.id.fragment_container, profileOptions)
+                replace(R.id.nav_host_fragment, profileOptions)
             }
         }
         return view

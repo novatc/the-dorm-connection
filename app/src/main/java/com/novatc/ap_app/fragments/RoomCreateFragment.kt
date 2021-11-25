@@ -36,10 +36,14 @@ class RoomCreateFragment : Fragment() {
         val roomName = view.created_room_name.text.toString().trim()
         val roomAddress = view.created_room_address.text.toString().trim()
         val roomDescription = view.created_room_description.text.toString().trim()
+        var minimumBookingTime = view.created_room_booking_time.text.toString().trim()
 
         if (roomName.isBlank() || roomDescription.isBlank() || roomBookingTime.isBlank()) {
             Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
             return
+        }
+        if (minimumBookingTime.isBlank()){
+            minimumBookingTime = "01:00"
         }
         //if (dateIsInPast(eventDate)) {
         //    Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
@@ -49,12 +53,13 @@ class RoomCreateFragment : Fragment() {
             roomName,
             roomAddress,
             Fireclass().getCurrentUserID(),
-            roomDescription
+            roomDescription,
+            minimumBookingTime
         )
         Fireclass().addRoomToDD(room)
         Toast.makeText(requireActivity(), "Room created", Toast.LENGTH_SHORT).show()
         parentFragmentManager.commit {
-            replace(R.id.fragment_container, RoomFragment())
+            replace(R.id.nav_host_fragment, RoomFragment())
         }
     }
 

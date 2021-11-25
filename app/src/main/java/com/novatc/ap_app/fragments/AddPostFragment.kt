@@ -12,7 +12,6 @@ import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import com.novatc.ap_app.R
 import com.novatc.ap_app.viewModels.AddPostViewModel
-import com.novatc.ap_app.viewModels.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_add_post.view.created_room_address
 import kotlinx.android.synthetic.main.fragment_add_post.view.created_room_description
@@ -20,7 +19,6 @@ import com.novatc.ap_app.model.Post
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
-import java.util.*
 
 class AddPostFragment : Fragment() {
 
@@ -60,7 +58,7 @@ class AddPostFragment : Fragment() {
                 parentFragmentManager.commit {
                     isAddToBackStackAllowed
                     setReorderingAllowed(true)
-                    replace(R.id.fragment_container, pinBoard)
+                    replace(R.id.nav_host_fragment, pinBoard)
                 }
             }
 

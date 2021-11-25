@@ -38,6 +38,7 @@
     <string name="room_description">Description</string>
     <string name="rooms">Rooms</string>
     <string name="room_address">Address</string>
+    <string name="minimum_booking_time_pre">Min. booking time:</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>
