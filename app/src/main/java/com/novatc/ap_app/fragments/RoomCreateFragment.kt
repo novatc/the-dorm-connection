@@ -6,15 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.commit
+import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
-import kotlinx.android.synthetic.main.fragment_room_create.view.createRoom
+import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_room
 import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Room
+import kotlinx.android.synthetic.main.fragment_profile_options.view.*
+import kotlinx.android.synthetic.main.fragment_room_list.view.*
 
 
 class RoomCreateFragment : Fragment() {
@@ -27,7 +32,7 @@ class RoomCreateFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_room_create, container, false)
-        view.createRoom.setOnClickListener {
+        view.btn_save_room.setOnClickListener {
             onCreateRoom(view)
         }
         return view
@@ -45,10 +50,7 @@ class RoomCreateFragment : Fragment() {
         if (minimumBookingTime.isBlank()){
             minimumBookingTime = "01:00"
         }
-        //if (dateIsInPast(eventDate)) {
-        //    Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
-        //    return
-        //}
+
         val room = Room(
             roomName,
             roomAddress,
@@ -58,13 +60,18 @@ class RoomCreateFragment : Fragment() {
         )
         Fireclass().addRoomToDD(room)
         Toast.makeText(requireActivity(), "Room created", Toast.LENGTH_SHORT).show()
-        parentFragmentManager.commit {
-            replace(R.id.nav_host_fragment, RoomFragment())
-        }
+        setSaveRoomButtonListener(view)
     }
 
     private fun minimumBookingTime(bookingTime: String){
 
+    }
+    private fun setSaveRoomButtonListener(view: View) {
+        val myPostButton: Button? = view.btn_save_room
+        myPostButton?.setOnClickListener {
+            val action = RoomCreateFragmentDirections.actionRoomCreateFragmentToFragmentRooms()
+            view.findNavController().navigate(action)
+        }
     }
 }
 
