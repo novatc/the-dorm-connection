@@ -8,7 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
-import model.BaseActivity
+import com.novatc.ap_app.model.BaseActivity
 
 class MainActivity : BaseActivity() {
 

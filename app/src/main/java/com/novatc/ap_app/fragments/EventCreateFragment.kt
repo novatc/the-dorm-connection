@@ -1,6 +1,6 @@
 package com.novatc.ap_app.fragments
 
-import Firestore.Fireclass
+import com.novatc.ap_app.Firestore.Fireclass
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +16,8 @@ import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEventName
-import model.Event
+import com.novatc.ap_app.model.Event
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*

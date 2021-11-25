@@ -1,4 +1,4 @@
-package model
+package com.novatc.ap_app.model
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -1,4 +1,4 @@
-package com.novatc.ap_app.activities.adapter
+package com.novatc.ap_app.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
-import model.RoomsListItem
+import com.novatc.ap_app.model.RoomWithUser
 
-class RoomsAdapter(private val roomsListItem: ArrayList<RoomsListItem>): RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
+class RoomsAdapter(private val roomsListItem: ArrayList<RoomWithUser>): RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 
     class RoomsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val roomName: TextView = itemView.findViewById(R.id.roomName)
-        val roomTagline: TextView = itemView.findViewById(R.id.roomUsage)
+        val roomAddress: TextView = itemView.findViewById(R.id.roomUsage)
         val roomDescription: TextView = itemView.findViewById(R.id.roomDescription)
     }
 
@@ -23,9 +23,9 @@ class RoomsAdapter(private val roomsListItem: ArrayList<RoomsListItem>): Recycle
 
     override fun onBindViewHolder(holder: RoomsViewHolder, position: Int) {
         val roomsListItem = roomsListItem[position]
-        holder.roomName.text = roomsListItem.roomName
-        holder.roomTagline.text = roomsListItem.roomTagline
-        holder.roomDescription.text = roomsListItem.roomDescription
+        holder.roomName.text = roomsListItem.name
+        holder.roomAddress.text = roomsListItem.address
+        holder.roomDescription.text = roomsListItem.text
     }
 
     override fun getItemCount() = roomsListItem.size

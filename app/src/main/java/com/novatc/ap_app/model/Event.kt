@@ -1,4 +1,4 @@
-package model
+package com.novatc.ap_app.model
 
 data class Event(
     val name: String = "",

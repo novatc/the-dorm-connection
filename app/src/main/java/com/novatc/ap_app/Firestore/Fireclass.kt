@@ -1,6 +1,6 @@
-package Firestore
+package com.novatc.ap_app.Firestore
 
-import Constants.Constants
+import com.novatc.ap_app.Constants.Constants
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -10,12 +10,12 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.novatc.ap_app.activities.SignInActivity
 import com.novatc.ap_app.activities.SignUpActivity
-import model.Event
-import model.Room
-import model.User
+import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.model.User
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
-import model.Post
+import com.novatc.ap_app.model.Post
 
 
 class Fireclass {
@@ -114,9 +114,9 @@ class Fireclass {
     fun addRoomToDD(room: Room) {
         mFirestore.collection(Constants.ROOMS).document().set(room, SetOptions.merge())
             .addOnSuccessListener { document ->
-                Log.e("EVENT", "Event saved to DB")
+                Log.e("ROOM", "Room saved to DB")
             }.addOnFailureListener { e ->
-                Log.e("EVENT", "Error while saving: $e")
+                Log.e("ROOM", "Error while saving: $e")
             }
     }
 }

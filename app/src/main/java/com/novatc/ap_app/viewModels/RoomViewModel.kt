@@ -3,63 +3,63 @@ package com.novatc.ap_app.viewModels
 import com.novatc.ap_app.Constants.Constants
 import com.novatc.ap_app.Firestore.Fireclass
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.novatc.ap_app.fragments.*
+import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.model.RoomWithUser
+import com.novatc.ap_app.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import com.novatc.ap_app.model.Event
-import com.novatc.ap_app.model.EventWithUser
-import com.novatc.ap_app.model.User
 
-class EventViewModel : ViewModel() {
+class RoomViewModel : ViewModel() {
 
     private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val TAG = "EventViewModel"
-    private var _events: MutableLiveData<ArrayList<EventWithUser>> = MutableLiveData()
+    private val TAG = "RoomViewModel"
+    private var _rooms: MutableLiveData<ArrayList<RoomWithUser>> = MutableLiveData()
 
     init {
-        loadEvents()
+        loadRooms()
     }
 
-    internal var events: MutableLiveData<ArrayList<EventWithUser>>
+    internal var rooms: MutableLiveData<ArrayList<RoomWithUser>>
         get() {
-            return _events
+            return _rooms
         }
         set(value) {
-            _events = value
+            _rooms = value
         }
 
-    private fun loadEvents() {
-        fireStore.collection(Constants.EVENTS).addSnapshotListener { snapshot, e ->
+    private fun loadRooms() {
+        fireStore.collection(Constants.ROOMS).addSnapshotListener { snapshot, e ->
             if (e != null) {
-                Log.w(TAG, "Listen for events failed", e)
+                Log.w(TAG, "Listen for rooms failed", e)
                 return@addSnapshotListener
             }
             if (snapshot != null) {
                 val documents = snapshot.documents
-                viewModelScope.launch(Dispatchers.IO) {
-                    val allEvents = ArrayList<EventWithUser>()
+                GlobalScope.launch(Dispatchers.IO) {
+                    val allRooms = ArrayList<RoomWithUser>()
                     documents.forEach {
-                        val event = it.toObject(Event::class.java)
-                        if (event != null) {
+                        val room = it.toObject(Room::class.java)
+                        if (room != null) {
                             val user = fireStore.collection(Constants.USER)
-                                .document(event.userId)
+                                .document(room.userId)
                                 .get()
                                 .await()
                                 .toObject(User::class.java)
-                            val eventWithUser =
-                                EventWithUser(event.name, event.date, event.text, user)
-                                allEvents.add(eventWithUser)
+                            val roomWithUser =
+                                RoomWithUser(room.name, room.address, room.text, user)
+                                allRooms.add(roomWithUser)
                         }
                     }
                     withContext(Dispatchers.Main) {
-                        _events.value = allEvents
+                        _rooms.value = allRooms
                     }
                 }
 
