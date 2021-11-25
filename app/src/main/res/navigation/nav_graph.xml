@@ -33,15 +33,6 @@
             app:destination="@id/fragment_events" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_rooms"
-        android:name="com.novatc.ap_app.fragments.RoomListFragment"
-        android:label="RoomListFragment"
-        tools:layout="@layout/fragment_room_list">
-        <action
-            android:id="@+id/action_fragment_rooms_to_roomCreateFragment"
-            app:destination="@id/roomCreateFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/fragment_profile"
         android:name="com.novatc.ap_app.fragments.ProfileOptionsFragment"
         android:label="ProfileOptionsFragment"
@@ -81,8 +72,8 @@
         android:name="com.novatc.ap_app.fragments.RoomCreateFragment"
         android:label="RoomCreateFragment" >
         <action
-            android:id="@+id/action_roomCreateFragment_to_fragment_rooms"
-            app:destination="@id/fragment_rooms" />
+            android:id="@+id/action_roomCreateFragment_to_roomFragment"
+            app:destination="@id/roomFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPostsFragment"
@@ -113,4 +104,12 @@
         android:id="@+id/signInActivity"
         android:name="com.novatc.ap_app.activities.SignInActivity"
         android:label="SignInActivity" />
+    <fragment
+        android:id="@+id/roomFragment"
+        android:name="com.novatc.ap_app.fragments.RoomFragment"
+        android:label="RoomFragment" >
+        <action
+            android:id="@+id/action_roomFragment_to_roomCreateFragment"
+            app:destination="@id/roomCreateFragment" />
+    </fragment>
 </navigation>
