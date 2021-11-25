@@ -59,7 +59,7 @@ class RoomCreateFragment : Fragment() {
         Fireclass().addRoomToDD(room)
         Toast.makeText(requireActivity(), "Room created", Toast.LENGTH_SHORT).show()
         parentFragmentManager.commit {
-            replace(R.id.fragment_container, RoomFragment())
+            replace(R.id.nav_host_fragment, RoomFragment())
         }
     }
 

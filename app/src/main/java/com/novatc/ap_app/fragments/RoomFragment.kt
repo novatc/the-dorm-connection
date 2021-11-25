@@ -16,12 +16,6 @@ import com.novatc.ap_app.adapter.RoomsAdapter
 import com.novatc.ap_app.viewModels.RoomViewModel
 
 class RoomFragment : Fragment() {
-    private lateinit var layoutManager: LinearLayoutManager
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        layoutManager = LinearLayoutManager(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +29,7 @@ class RoomFragment : Fragment() {
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
                 setReorderingAllowed(true)
-                replace(R.id.fragment_container, roomCreateFragment)
+                replace(R.id.nav_host_fragment, roomCreateFragment)
             }
         }
         return view
@@ -47,7 +41,7 @@ class RoomFragment : Fragment() {
         model.rooms.observe(this, { rooms ->
             recyclerView.adapter = RoomsAdapter(rooms)
         })
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(activity)
     }
 
 }

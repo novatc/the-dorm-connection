@@ -18,12 +18,6 @@ import com.novatc.ap_app.model.Post
 
 
 class PinnboardFragment : Fragment() {
-    private lateinit var layoutManager: LinearLayoutManager
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        layoutManager = LinearLayoutManager(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +45,7 @@ class PinnboardFragment : Fragment() {
             posts.sortedByDescending {  it.date }
             recyclerView.adapter = PostAdapter(posts as ArrayList<Post>)
         })
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(activity)
     }
 
 
