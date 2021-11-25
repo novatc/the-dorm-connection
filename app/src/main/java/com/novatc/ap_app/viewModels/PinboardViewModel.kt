@@ -10,8 +10,8 @@ import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.model.User
 
 class PinboardViewModel: ViewModel() {
-    private val _posts = MutableLiveData<List<Post>>()
-    val posts: LiveData<List<Post>> = _posts
+    private val _posts = MutableLiveData<ArrayList<Post>>()
+    val posts: MutableLiveData<ArrayList<Post>> = _posts
 
     init {
         viewModelScope.launch {
