@@ -25,7 +25,7 @@ class RoomCreateFragment : Fragment() {
         view.createEvent.setOnClickListener {
             val room = Room(
                 view.et_room_name.text.toString(),
-                view.et_room_address.text.toString(),
+                view.et_post_text.text.toString(),
                 Fireclass().getCurrentUserID()
             )
             Fireclass().addRoomToDD(room)

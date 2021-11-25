@@ -54,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
 
         <EditText
-            android:id="@+id/et_room_address"
+            android:id="@+id/et_post_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -67,7 +67,7 @@
             app:layout_constraintTop_toBottomOf="@+id/et_room_name" />
 
         <EditText
-            android:id="@+id/et_room_address2"
+            android:id="@+id/et_post_keywords"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="108dp"
@@ -140,7 +140,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/et_room_address" />
+            app:layout_constraintTop_toTopOf="@+id/et_post_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

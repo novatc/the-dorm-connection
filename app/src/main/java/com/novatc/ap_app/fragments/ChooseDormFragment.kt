@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import com.novatc.ap_app.R
-import kotlinx.android.synthetic.main.fragment_edit_wg.view.*
+import kotlinx.android.synthetic.main.fragment_choose_dorm.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -16,10 +16,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [EditWgFragment.newInstance] factory method to
+ * Use the [ChooseDormFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class EditWgFragment : Fragment() {
+class ChooseDormFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -37,8 +37,9 @@ class EditWgFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_edit_wg, container, false)
-        view.edit_wg_safe.setOnClickListener {
+        val view =  inflater.inflate(R.layout.fragment_choose_dorm, container, false)
+
+        view.btn_safe_dorm.setOnClickListener {
             val profileOptions = ProfileOptionsFragment()
             parentFragmentManager.commit {
                 isAddToBackStackAllowed
@@ -46,6 +47,7 @@ class EditWgFragment : Fragment() {
                 replace(R.id.fragment_container, profileOptions)
             }
         }
+
         return view
     }
 
@@ -56,12 +58,12 @@ class EditWgFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment EditWgFragment.
+         * @return A new instance of fragment ChooseDormFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            EditWgFragment().apply {
+            ChooseDormFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

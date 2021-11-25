@@ -49,6 +49,10 @@
     <string name="WG">WG</string>
     <string name="WG_invitation_code">Dein WG Einladungs QR-Code</string>
     <string name="delete_account">Account löschen</string>
+    <string name="btn_select_dorm">Wohnheim wählen</string>
+    <string name="dorm">Wohnheim</string>
+    <string name="btn_my_posts">Meine Beiträge</string>
+    <string name="edit_my_posts">Beiträge bearbeiten</string>
 
     #pinboard
     <string name="pinboard">Pinnwand</string>
