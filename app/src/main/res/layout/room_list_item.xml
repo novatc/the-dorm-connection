@@ -33,13 +33,22 @@
             app:layout_constraintTop_toBottomOf="@+id/roomName" />
 
         <TextView
+            android:id="@+id/roomUsage3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minimum_booking_time_pre"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roomUsage" />
+
+        <TextView
             android:id="@+id/roomDescription"
             android:layout_width="316dp"
             android:layout_height="35dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="70dp"
             android:text='The "Pinte" is a bar usable to have parties, show nights or other types of social gatherings in.'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/roomUsage" />
 
