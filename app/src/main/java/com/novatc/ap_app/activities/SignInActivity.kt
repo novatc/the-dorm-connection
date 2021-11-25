@@ -1,6 +1,6 @@
 package com.novatc.ap_app.activities
 
-import Firestore.Fireclass
+import com.novatc.ap_app.Firestore.Fireclass
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -9,8 +9,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.activity_log_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import model.BaseActivity
-import model.User
+import com.novatc.ap_app.model.BaseActivity
+import com.novatc.ap_app.model.User
 
 class SignInActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

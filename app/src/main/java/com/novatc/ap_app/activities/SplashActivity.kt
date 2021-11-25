@@ -1,6 +1,6 @@
 package com.novatc.ap_app.activities
 
-import Firestore.Fireclass
+import com.novatc.ap_app.Firestore.Fireclass
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -8,7 +8,7 @@ import android.os.Looper
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.novatc.ap_app.R
-import model.BaseActivity
+import com.novatc.ap_app.model.BaseActivity
 
 class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

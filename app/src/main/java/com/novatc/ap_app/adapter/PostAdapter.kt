@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
-import model.Post
+import com.novatc.ap_app.model.Post
 
 class PostAdapter(val postListItems: ArrayList<Post>):
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {

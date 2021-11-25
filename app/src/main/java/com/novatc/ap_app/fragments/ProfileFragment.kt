@@ -1,6 +1,6 @@
 package com.novatc.ap_app.fragments
 
-import Firestore.Fireclass
+import com.novatc.ap_app.Firestore.Fireclass
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

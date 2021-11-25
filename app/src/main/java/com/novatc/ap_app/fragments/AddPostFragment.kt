@@ -1,6 +1,6 @@
 package com.novatc.ap_app.fragments
 
-import Firestore.Fireclass
+import com.novatc.ap_app.Firestore.Fireclass
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,7 +16,7 @@ import com.novatc.ap_app.viewModels.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_add_post.view.created_room_address
 import kotlinx.android.synthetic.main.fragment_add_post.view.created_room_description
-import model.Post
+import com.novatc.ap_app.model.Post
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle

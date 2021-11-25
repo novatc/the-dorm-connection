@@ -16,7 +16,7 @@ import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.PostAdapter
 import com.novatc.ap_app.viewModels.PinboardViewModel
 import kotlinx.android.synthetic.main.fragment_pinboard.view.*
-import model.Post
+import com.novatc.ap_app.model.Post
 
 
 class PinnboardFragment : Fragment() {

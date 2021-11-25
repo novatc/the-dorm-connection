@@ -1,7 +1,7 @@
 package com.novatc.ap_app.viewModels
 
-import Constants.Constants
-import Firestore.Fireclass
+import com.novatc.ap_app.Constants.Constants
+import com.novatc.ap_app.Firestore.Fireclass
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,9 +13,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import model.Event
-import model.EventWithUser
-import model.User
+import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.model.EventWithUser
+import com.novatc.ap_app.model.User
 
 class EventViewModel : ViewModel() {
 

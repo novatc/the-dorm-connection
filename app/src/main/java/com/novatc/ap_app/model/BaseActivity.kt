@@ -1,4 +1,4 @@
-package model
+package com.novatc.ap_app.model
 
 import android.os.Build
 import android.text.TextUtils

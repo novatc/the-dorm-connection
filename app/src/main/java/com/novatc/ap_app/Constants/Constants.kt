@@ -1,4 +1,4 @@
-package Constants
+package com.novatc.ap_app.Constants
 
 object Constants {
 

@@ -1,6 +1,6 @@
 package com.novatc.ap_app.fragments
 
-import Firestore.Fireclass
+import com.novatc.ap_app.Firestore.Fireclass
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,8 +13,8 @@ import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.createRoom
-import model.Event
-import model.Room
+import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.model.Room
 
 
 class RoomCreateFragment : Fragment() {

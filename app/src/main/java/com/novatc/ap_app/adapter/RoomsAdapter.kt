@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
-import model.RoomWithUser
+import com.novatc.ap_app.model.RoomWithUser
 
 class RoomsAdapter(private val roomsListItem: ArrayList<RoomWithUser>): RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 

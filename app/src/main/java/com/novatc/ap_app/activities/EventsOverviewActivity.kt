@@ -2,7 +2,7 @@ package com.novatc.ap_app.activities
 
 import android.os.Bundle
 import com.novatc.ap_app.R
-import model.BaseActivity
+import com.novatc.ap_app.model.BaseActivity
 
 class EventsOverviewActivity : BaseActivity() {
 

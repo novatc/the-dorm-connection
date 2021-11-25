@@ -1,19 +1,21 @@
 package com.novatc.ap_app.viewModels
 
-import Constants.Constants
-import Firestore.Fireclass
+import com.novatc.ap_app.Constants.Constants
+import com.novatc.ap_app.Firestore.Fireclass
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.novatc.ap_app.fragments.*
+import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.model.RoomWithUser
+import com.novatc.ap_app.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import model.*
 
 class RoomViewModel : ViewModel() {
 
