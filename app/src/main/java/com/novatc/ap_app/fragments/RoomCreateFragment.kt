@@ -9,11 +9,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.commit
 import com.novatc.ap_app.R
+import kotlinx.android.synthetic.main.fragment_event_create.view.*
+import kotlinx.android.synthetic.main.fragment_room_create.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
+import kotlinx.android.synthetic.main.fragment_room_create.view.createRoom
+import model.Event
 import model.Room
 
 
 class RoomCreateFragment : Fragment() {
+    private var roomBookingTime = "01:00"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,21 +27,39 @@ class RoomCreateFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_room_create, container, false)
-        view.createEvent.setOnClickListener {
-            val room = Room(
-                view.et_room_name.text.toString(),
-                view.et_post_text.text.toString(),
-                Fireclass().getCurrentUserID()
-            )
-            Fireclass().addRoomToDD(room)
-            Toast.makeText(requireActivity(), "Room created", Toast.LENGTH_SHORT).show()
-            val roomList = RoomListFragment()
-            parentFragmentManager.commit {
-                replace(R.id.fragment_container, roomList)
-            }
+        view.createRoom.setOnClickListener {
+            onCreateRoom(view)
         }
-
         return view
+    }
+    private fun onCreateRoom(view: View) {
+        val roomName = view.created_room_name.text.toString().trim()
+        val roomAddress = view.created_room_address.text.toString().trim()
+        val roomDescription = view.created_room_description.text.toString().trim()
+
+        if (roomName.isBlank() || roomDescription.isBlank() || roomBookingTime.isBlank()) {
+            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        //if (dateIsInPast(eventDate)) {
+        //    Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
+        //    return
+        //}
+        val room = Room(
+            roomName,
+            roomAddress,
+            Fireclass().getCurrentUserID(),
+            roomDescription
+        )
+        Fireclass().addRoomToDD(room)
+        Toast.makeText(requireActivity(), "Room created", Toast.LENGTH_SHORT).show()
+        parentFragmentManager.commit {
+            replace(R.id.fragment_container, RoomFragment())
+        }
+    }
+
+    private fun minimumBookingTime(bookingTime: String){
+
     }
 }
 

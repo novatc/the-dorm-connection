@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
 
         <EditText
-            android:id="@+id/et_room_name"
+            android:id="@+id/created_room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -54,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
 
         <EditText
-            android:id="@+id/et_post_text"
+            android:id="@+id/created_room_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -64,10 +64,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_room_name" />
+            app:layout_constraintTop_toBottomOf="@+id/created_room_name" />
 
         <EditText
-            android:id="@+id/et_post_keywords"
+            android:id="@+id/created_room_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="108dp"
@@ -77,70 +77,48 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_room_name" />
+            app:layout_constraintTop_toBottomOf="@+id/created_room_name" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_place_image"
-            android:layout_width="@dimen/add_screen_room_image_size"
-            android:layout_height="@dimen/add_screen_room_image_size"
-            android:layout_marginBottom="32dp"
-            android:padding="@dimen/add_screen_room_image_padding"
-            android:scaleType="centerCrop"
-            android:src="@drawable/add_screen_image_placeholder"
-            app:layout_constraintBottom_toTopOf="@+id/createEvent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.284"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTime"
-            app:layout_constraintVertical_bias="0.195" />
-
-        <TextView
-            android:id="@+id/tv_add_image"
+        <EditText
+            android:id="@+id/created_room_booking_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="112dp"
-            android:background="@drawable/shape_button_rounded"
-            android:gravity="center"
-            android:padding="@dimen/add_screen_text_add_image_padding"
-            android:text="@string/text_add_image"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/createEvent"
+            android:layout_marginTop="184dp"
+            android:ems="10"
+            android:hint="01:00"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.904"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTime"
-            app:layout_constraintVertical_bias="0.39" />
+            app:layout_constraintTop_toBottomOf="@+id/created_room_name" />
 
         <TextView
             android:id="@+id/set_minimum_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="284dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/shape_button_rounded"
             android:gravity="center"
             android:padding="@dimen/add_screen_text_add_image_padding"
             android:text="Set the minimum booking time"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/createEvent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTime"
-            app:layout_constraintVertical_bias="0.39" />
+            app:layout_constraintTop_toBottomOf="@+id/created_room_booking_time" />
 
         <Button
-            android:id="@+id/createEvent"
+            android:id="@+id/createRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="488dp"
+            android:layout_marginBottom="32dp"
             android:backgroundTint="@color/patriarch"
             android:text="@string/btn_safe"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/et_post_text" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

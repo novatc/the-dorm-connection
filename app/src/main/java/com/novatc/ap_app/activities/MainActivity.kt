@@ -17,7 +17,7 @@ class MainActivity : BaseActivity() {
     private val userProfile = ProfileOptionsFragment()
     private val events = EventFragment()
     private val pinBoard = PinnboardFragment()
-    private val rooms = RoomListFragment()
+    private val rooms = RoomFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

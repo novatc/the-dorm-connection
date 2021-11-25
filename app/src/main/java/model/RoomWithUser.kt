@@ -1,9 +1,8 @@
 package model
 
-data class Room(
+data class RoomWithUser(
     val name: String = "",
     val address: String = "",
-    val userId: String = "",
     val text: String = "",
-    val minimumBookingTime: String = "",
+    var user: User? = null
 )

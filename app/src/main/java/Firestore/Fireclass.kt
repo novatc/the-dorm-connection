@@ -114,7 +114,7 @@ class Fireclass {
     fun addRoomToDD(room: Room) {
         mFirestore.collection(Constants.ROOMS).document().set(room, SetOptions.merge())
             .addOnSuccessListener { document ->
-                Log.e("EVENT", "Event saved to DB")
+                Log.e("EVENT", "Room saved to DB")
             }.addOnFailureListener { e ->
                 Log.e("EVENT", "Error while saving: $e")
             }
