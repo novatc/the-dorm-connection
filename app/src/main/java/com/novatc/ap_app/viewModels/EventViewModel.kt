@@ -5,6 +5,7 @@ import Firestore.Fireclass
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.novatc.ap_app.fragments.*
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +43,7 @@ class EventViewModel : ViewModel() {
             }
             if (snapshot != null) {
                 val documents = snapshot.documents
-                GlobalScope.launch(Dispatchers.IO) {
+                viewModelScope.launch(Dispatchers.IO) {
                     val allEvents = ArrayList<EventWithUser>()
                     documents.forEach {
                         val event = it.toObject(Event::class.java)
