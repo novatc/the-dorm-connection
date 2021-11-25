@@ -7,15 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.viewModels.AddPostViewModel
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_add_post.view.created_room_address
 import kotlinx.android.synthetic.main.fragment_add_post.view.created_room_description
 import com.novatc.ap_app.model.Post
+import kotlinx.android.synthetic.main.fragment_event.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -55,11 +59,8 @@ class AddPostFragment : Fragment() {
                 )
                 Fireclass().addPost(post)
                 Toast.makeText(requireContext(), "Post created", Toast.LENGTH_SHORT).show()
-                parentFragmentManager.commit {
-                    isAddToBackStackAllowed
-                    setReorderingAllowed(true)
-                    replace(R.id.nav_host_fragment, pinBoard)
-                }
+                setSavePostButtonListener(view)
+
             }
 
         }
@@ -71,6 +72,14 @@ class AddPostFragment : Fragment() {
         var fullLocaleFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
         var fullLocaleTime = current.format(fullLocaleFormat)
         return fullLocaleTime
+    }
+
+    private fun setSavePostButtonListener(view: View) {
+        val savePostButton: Button = view.btn_safe_new_post
+        savePostButton.setOnClickListener {
+            val action = AddPostFragmentDirections.actionAddPostFragmentToFragmentPinboard()
+            view.findNavController().navigate(action)
+        }
     }
 
 }
