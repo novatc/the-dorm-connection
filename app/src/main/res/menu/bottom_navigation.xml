@@ -8,7 +8,7 @@
         android:title="@string/pinboard" />
 
     <item
-        android:id="@+id/fragment_rooms_list"
+        android:id="@+id/fragment_rooms"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/rooms" />
 

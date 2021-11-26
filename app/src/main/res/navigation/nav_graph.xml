@@ -62,7 +62,8 @@
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.novatc.ap_app.fragments.AddPostFragment"
-        android:label="AddPostFragment" >
+        android:label="AddPostFragment"
+        tools:layout="@layout/fragment_add_post">
         <action
             android:id="@+id/action_addPostFragment_to_fragment_pinboard"
             app:destination="@id/fragment_pinboard" />
@@ -70,23 +71,27 @@
     <fragment
         android:id="@+id/roomCreateFragment"
         android:name="com.novatc.ap_app.fragments.RoomCreateFragment"
-        android:label="RoomCreateFragment" >
+        android:label="RoomCreateFragment"
+        tools:layout="@layout/fragment_room_create">
         <action
             android:id="@+id/action_roomCreateFragment_to_roomFragment"
-            app:destination="@id/roomFragment" />
+            app:destination="@id/fragment_rooms" />
     </fragment>
     <fragment
         android:id="@+id/myPostsFragment"
         android:name="com.novatc.ap_app.fragments.MyPostsFragment"
-        android:label="MyPostsFragment" />
+        android:label="MyPostsFragment"
+        tools:layout="@layout/fragment_my_posts"/>
     <fragment
         android:id="@+id/chooseDormFragment"
         android:name="com.novatc.ap_app.fragments.ChooseDormFragment"
-        android:label="ChooseDormFragment" />
+        android:label="ChooseDormFragment"
+        tools:layout="@layout/fragment_choose_dorm"/>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.novatc.ap_app.fragments.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_fragment_profile"
             app:destination="@id/fragment_profile" />
@@ -99,15 +104,18 @@
     <fragment
         android:id="@+id/editWgFragment"
         android:name="com.novatc.ap_app.fragments.EditWgFragment"
-        android:label="EditWgFragment" />
+        android:label="EditWgFragment"
+        tools:layout="@layout/fragment_edit_wg"/>
     <activity
         android:id="@+id/signInActivity"
         android:name="com.novatc.ap_app.activities.SignInActivity"
-        android:label="SignInActivity" />
+        android:label="SignInActivity"
+        tools:layout="@layout/activity_sign_up"/>
     <fragment
-        android:id="@+id/roomFragment"
-        android:name="com.novatc.ap_app.fragments.RoomFragment"
-        android:label="RoomFragment" >
+        android:id="@+id/fragment_rooms"
+        android:name="com.novatc.ap_app.fragments.RoomsFragment"
+        android:label="RoomFragment"
+        tools:layout="@layout/fragment_room_list">
         <action
             android:id="@+id/action_roomFragment_to_roomCreateFragment"
             app:destination="@id/roomCreateFragment" />

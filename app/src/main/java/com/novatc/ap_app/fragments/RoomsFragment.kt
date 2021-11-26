@@ -19,7 +19,7 @@ import com.novatc.ap_app.viewModels.RoomViewModel
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_room_list.view.*
 
-class RoomFragment : Fragment() {
+class RoomsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +46,7 @@ class RoomFragment : Fragment() {
     private fun setAddRoomButtonListener(view: View) {
         val addRoomButton: FloatingActionButton = view.btn_addRoomsButton
         addRoomButton.setOnClickListener {
-            val action = RoomFragmentDirections.actionRoomFragmentToRoomCreateFragment()
+            val action = RoomsFragmentDirections.actionRoomFragmentToRoomCreateFragment()
             view.findNavController().navigate(action)
         }
     }
