@@ -33,32 +33,16 @@ class ProfileOptionsFragment : Fragment() {
         val viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
         viewModel.userProfile.observe(viewLifecycleOwner, Observer {
-            view.tv_user_name.setText(it.username)
+            view.tv_user_name.text = it.username
         })
 
-        view.btn_my_posts.setOnClickListener {
-            setMyPostButtonListener(view)
-        }
+        setMyPostButtonListener(view)
+        setEditProfileButtonListener(view)
+        setEditWGButtonListener(view)
+        setDeleteUserButtonListener(view)
+        setLogOutUserButtonListener(view)
+        setEditDormButtonListener(view)
 
-        view.btn_edit_profile.setOnClickListener {
-            setEditProfileButtonListener(view)
-        }
-        view.btn_edit_wg.setOnClickListener {
-            setEditWGButtonListener(view)
-        }
-        view.btn_delet_profile.setOnClickListener {
-            Fireclass().deleteUser()
-            setDeleteUserButtonListener(view)
-            Toast.makeText(requireActivity(), "Your account hast been deleted.", Toast.LENGTH_SHORT)
-                .show()
-        }
-        view.btn_profile_logout.setOnClickListener {
-            Fireclass().logout()
-            setLogOutUserButtonListener(view)
-        }
-        view.btn_select_dorm.setOnClickListener {
-            setEditDormButtonListener(view)
-        }
         return view
     }
 
@@ -69,6 +53,7 @@ class ProfileOptionsFragment : Fragment() {
             view.findNavController().navigate(action)
         }
     }
+
     private fun setEditProfileButtonListener(view: View) {
         val editProfileButton: Button = view.btn_edit_profile
         editProfileButton.setOnClickListener {
@@ -88,26 +73,31 @@ class ProfileOptionsFragment : Fragment() {
     private fun setEditDormButtonListener(view: View) {
         val editDormButton: Button = view.btn_select_dorm
         editDormButton.setOnClickListener {
-            val action = ProfileOptionsFragmentDirections.actionFragmentProfileToChooseDormFragment()
+            val action =
+                ProfileOptionsFragmentDirections.actionFragmentProfileToChooseDormFragment()
             view.findNavController().navigate(action)
         }
     }
+
     private fun setDeleteUserButtonListener(view: View) {
         val deleteProfileButton: Button = view.btn_delet_profile
         deleteProfileButton.setOnClickListener {
+            Fireclass().deleteUser()
+            Toast.makeText(requireActivity(), "Your account hast been deleted.", Toast.LENGTH_SHORT)
+                .show()
             val action = ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpActivity()
             view.findNavController().navigate(action)
         }
     }
+
     private fun setLogOutUserButtonListener(view: View) {
         val setLogOutUserButton: Button = view.btn_profile_logout
         setLogOutUserButton.setOnClickListener {
+            Fireclass().logout()
             val action = ProfileOptionsFragmentDirections.actionFragmentProfileToSignInActivity()
             view.findNavController().navigate(action)
         }
     }
-
-
 
 
 }
