@@ -26,10 +26,7 @@ class RoomCreateFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_room_create, container, false)
-        view.btn_save_room.setOnClickListener {
-            setSaveRoomButtonListener(view)
-            onCreateRoom(view)
-        }
+        setSaveRoomButtonListener(view)
         return view
     }
     private fun onCreateRoom(view: View) {
@@ -64,6 +61,7 @@ class RoomCreateFragment : Fragment() {
     private fun setSaveRoomButtonListener(view: View) {
         val saveRoomButton: Button = view.btn_save_room
         saveRoomButton.setOnClickListener {
+            onCreateRoom(view)
             val action = RoomCreateFragmentDirections.actionRoomCreateFragmentToRoomFragment()
             view.findNavController().navigate(action)
         }

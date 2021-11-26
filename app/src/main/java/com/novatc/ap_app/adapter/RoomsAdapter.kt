@@ -14,6 +14,7 @@ class RoomsAdapter(private val roomsListItem: ArrayList<RoomWithUser>): Recycler
         val roomName: TextView = itemView.findViewById(R.id.roomName)
         val roomAddress: TextView = itemView.findViewById(R.id.roomUsage)
         val roomDescription: TextView = itemView.findViewById(R.id.roomDescription)
+        val minimumBookingTime: TextView = itemView.findViewById(R.id.roomBookingTimeField)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsViewHolder {
@@ -26,6 +27,7 @@ class RoomsAdapter(private val roomsListItem: ArrayList<RoomWithUser>): Recycler
         holder.roomName.text = roomsListItem.name
         holder.roomAddress.text = roomsListItem.address
         holder.roomDescription.text = roomsListItem.text
+        holder.minimumBookingTime.text = roomsListItem.minimumBookingTime
     }
 
     override fun getItemCount() = roomsListItem.size

@@ -54,7 +54,7 @@ class RoomViewModel : ViewModel() {
                                 .await()
                                 .toObject(User::class.java)
                             val roomWithUser =
-                                RoomWithUser(room.name, room.address, room.text, user)
+                                RoomWithUser(room.name, room.address, room.text, room.minimumBookingTime, user)
                                 allRooms.add(roomWithUser)
                         }
                     }
