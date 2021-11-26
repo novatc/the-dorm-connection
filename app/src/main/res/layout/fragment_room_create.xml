@@ -17,6 +17,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/created_room_booking_time"
+            style="?android:spinnerStyle"
+            android:layout_width="211dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="16dp"
+            android:text="01:00"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/created_room_address" />
+
         <TextView
             android:id="@+id/tv_create_room"
             android:layout_width="109dp"
@@ -78,35 +90,6 @@
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/created_room_description" />
-
-        <EditText
-            android:id="@+id/created_room_booking_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="01:00"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/created_room_address" />
-
-        <TextView
-            android:id="@+id/set_minimum_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/shape_button_rounded"
-            android:gravity="center"
-            android:padding="@dimen/add_screen_text_add_image_padding"
-            android:text="Set the minimum booking time"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/created_room_booking_time" />
 
         <Button
             android:id="@+id/btn_save_room"
