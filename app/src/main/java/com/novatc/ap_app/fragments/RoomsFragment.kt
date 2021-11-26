@@ -28,9 +28,7 @@ class RoomsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_room_list, container, false)
         fillRoomsList(view)
         val addRoomButton: FloatingActionButton = view.findViewById(R.id.btn_addRoomsButton)
-        addRoomButton.setOnClickListener {
-            setAddRoomButtonListener(view)
-        }
+        setAddRoomButtonListener(view)
         return view
     }
 
