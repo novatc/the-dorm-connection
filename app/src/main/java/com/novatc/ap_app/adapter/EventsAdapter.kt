@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
-import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.EventWithUser
 
 class EventsAdapter(private val eventListItems: ArrayList<EventWithUser>): RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
