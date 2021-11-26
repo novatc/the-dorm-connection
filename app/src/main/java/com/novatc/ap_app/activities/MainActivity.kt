@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-//        super.hideStatusBar()
+        super.hideStatusBar()
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val bottomNav: BottomNavigationView = findViewById(R.id.bottomNav)

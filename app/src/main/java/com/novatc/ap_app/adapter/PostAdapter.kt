@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Post
+import kotlinx.coroutines.flow.Flow
 
 class PostAdapter(val postListItems: ArrayList<Post>):
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {

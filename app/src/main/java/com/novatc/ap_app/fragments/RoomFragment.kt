@@ -6,14 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.RoomsAdapter
 import com.novatc.ap_app.viewModels.RoomViewModel
+import kotlinx.android.synthetic.main.fragment_add_post.view.*
+import kotlinx.android.synthetic.main.fragment_room_list.view.*
 
 class RoomFragment : Fragment() {
 
@@ -25,12 +29,7 @@ class RoomFragment : Fragment() {
         fillRoomsList(view)
         val addRoomButton: FloatingActionButton = view.findViewById(R.id.btn_addRoomsButton)
         addRoomButton.setOnClickListener {
-            val roomCreateFragment: Fragment = RoomCreateFragment()
-            parentFragmentManager.commit {
-                isAddToBackStackAllowed
-                setReorderingAllowed(true)
-                replace(R.id.nav_host_fragment, roomCreateFragment)
-            }
+            setAddRoomButtonListener(view)
         }
         return view
     }
@@ -42,6 +41,14 @@ class RoomFragment : Fragment() {
             recyclerView.adapter = RoomsAdapter(rooms)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
+    }
+
+    private fun setAddRoomButtonListener(view: View) {
+        val addRoomButton: FloatingActionButton = view.btn_addRoomsButton
+        addRoomButton.setOnClickListener {
+            val action = RoomFragmentDirections.actionRoomFragmentToRoomCreateFragment()
+            view.findNavController().navigate(action)
+        }
     }
 
 }

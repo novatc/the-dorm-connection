@@ -5,6 +5,9 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -16,6 +19,11 @@ import com.novatc.ap_app.model.User
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
 import com.novatc.ap_app.model.Post
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 
 
 class Fireclass {
@@ -73,15 +81,52 @@ class Fireclass {
             }
     }
 
+    @ExperimentalCoroutinesApi
+    fun getPostsAsFlow(): Flow<ArrayList<Post>> {
+        val db = FirebaseFirestore.getInstance()
+        return callbackFlow {
+            val listenerRegistration = db.collection(Constants.POST)
+                .addSnapshotListener { querySnapshot: QuerySnapshot?, firebaseFirestoreException: FirebaseFirestoreException?
+                    ->
+                    if (firebaseFirestoreException != null) {
+                        cancel(
+                            message = "Error fetching posts",
+                            cause = firebaseFirestoreException
+                        )
+                        return@addSnapshotListener
+                    }
+                    val map = querySnapshot?.documents?.mapNotNull { it.toObject(Post::class.java) }
+                    if (map != null) {
+                        offer(map as ArrayList<Post>)
+                    }
+                }
+            awaitClose {
+                Log.d("POSTS", "Cancelling posts listener")
+                listenerRegistration.remove()
+            }
+        }
+    }
+
     suspend fun getPosts(): ArrayList<Post> {
         val posts = ArrayList<Post>()
-        val snapshot= mFirestore.collection(Constants.POST).get().await()
-        for (post in snapshot){
+        val snapshot = mFirestore.collection(Constants.POST).get().await()
+        for (post in snapshot) {
             post.toObject(Post::class.java).let {
                 posts.add(it)
             }
         }
-        Log.e("POST", "POSTLIST: ${posts.size}")
+        return posts
+
+    }
+
+    suspend fun getUserPosts(userID: String): ArrayList<Post> {
+        val posts = ArrayList<Post>()
+        val snapshot = mFirestore.collection(Constants.POST).whereEqualTo("creatorID", userID).get().await()
+        for (post in snapshot) {
+            post.toObject(Post::class.java).let {
+                posts.add(it)
+            }
+        }
         return posts
 
     }

@@ -109,7 +109,7 @@
             app:layout_constraintTop_toBottomOf="@+id/created_room_booking_time" />
 
         <Button
-            android:id="@+id/createRoom"
+            android:id="@+id/btn_save_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
