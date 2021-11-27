@@ -2,6 +2,7 @@ package com.novatc.ap_app.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.icu.text.SimpleDateFormat
 import com.novatc.ap_app.Firestore.Fireclass
 import android.os.Bundle
 import android.util.Log
@@ -41,7 +42,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         val roomDescription = view.created_room_description.text.toString().trim()
         var minimumBookingTime = view.created_room_booking_time.text.toString().trim()
 
-        if (roomName.isBlank() || roomAddress.isBlank() || roomDescription.isBlank()) {
+        if (roomName.isBlank() || roomAddress.isBlank() || roomDescription.isBlank() || !(minimumBookingTime.matches(Regex("\\d{2}-\\d{2}")))) {
             Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
             return
         }

@@ -39,6 +39,7 @@
     <string name="rooms">Rooms</string>
     <string name="room_address">Address</string>
     <string name="minimum_booking_time_pre">Min. booking time:</string>
+    <string name="minimum_booking_time">Min. booking time  </string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>
@@ -66,7 +67,5 @@
     <string name="post_header">Post headline</string>
     <string name="post_text">Text</string>
     <string name="post_keywords">Keywords</string>
-    <string name="minimum_booking_time">Set the minimum booking time</string>
-
 
 </resources>

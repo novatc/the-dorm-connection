@@ -20,10 +20,10 @@
         <Button
             android:id="@+id/created_room_booking_time"
             style="?android:spinnerStyle"
-            android:layout_width="211dp"
-            android:layout_height="43dp"
+            android:layout_width="209dp"
+            android:layout_height="49dp"
             android:layout_marginTop="16dp"
-            android:text="01:00"
+            android:text="@string/minimum_booking_time"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
