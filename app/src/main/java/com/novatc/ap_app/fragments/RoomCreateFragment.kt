@@ -13,11 +13,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_room
 import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.permissions.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
@@ -33,6 +35,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         val view = inflater.inflate(R.layout.fragment_room_create, container, false)
         initTimePicker(view)
         setSaveRoomButtonListener(view)
+        setPermissions(view)
         return view
     }
 
@@ -65,6 +68,13 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             onCreateRoom(view)
             val action = RoomCreateFragmentDirections.actionRoomCreateFragmentToRoomFragment()
             view.findNavController().navigate(action)
+        }
+    }
+
+    private fun setPermissions(view: View){
+        val permissionsButton: Button = view.button
+        permissionsButton.setOnClickListener {
+            Permissions().checkPermissions(this)
         }
     }
 
