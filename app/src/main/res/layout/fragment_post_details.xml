@@ -31,7 +31,7 @@
                 android:text="POST TITEL"
                 android:textAlignment="center"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="30dp"
+                android:textSize="40dp"
                 android:textStyle="bold"
                 android:padding="10dp"/>
 
@@ -42,7 +42,7 @@
                 android:text="POST DATE"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="10dp" />
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tv_detail_post_text"
@@ -51,7 +51,7 @@
                 android:text="POST TEXT"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"
+                android:textSize="30dp"
                 android:padding="10dp"/>
             <TextView
                 android:id="@+id/tv_detail_post_author"
@@ -60,7 +60,7 @@
                 android:text="POST AUTHOR"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="10dp"
+                android:textSize="20dp"
                 android:padding="10dp"/>
 
             <TextView
@@ -70,7 +70,7 @@
                 android:text="POST KEYWORDS"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="10dp"
+                android:textSize="20dp"
                 android:padding="10dp"/>
 
             <Button

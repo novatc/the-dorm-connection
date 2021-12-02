@@ -11,9 +11,9 @@ data class Post(
     val creator: String? = "",
     val date: String? = "",
     val creatorID: String? = "",
-    var key: String? =""
+    var key: String? = ""
 
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -25,8 +25,14 @@ data class Post(
     ) {
     }
 
-    override fun writeToParcel(p0: Parcel?, p1: Int) {
-        TODO("Not yet implemented")
+    override fun writeToParcel(parcel: Parcel, p1: Int) {
+        parcel.writeString(headline)
+        parcel.writeString(text)
+        parcel.writeString(keyword)
+        parcel.writeString(creator)
+        parcel.writeString(date)
+        parcel.writeString(creatorID)
+        parcel.writeString(key)
     }
 
     override fun describeContents(): Int {

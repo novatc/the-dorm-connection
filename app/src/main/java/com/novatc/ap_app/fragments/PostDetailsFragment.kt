@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.novatc.ap_app.R
 import com.novatc.ap_app.firestore.UserFirestore
@@ -18,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_post_details.view.*
 import kotlinx.android.synthetic.main.post_list_item.view.*
 import kotlinx.android.synthetic.main.post_list_item.view.tv_post_text
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,6 +28,8 @@ class PostDetailsFragment : Fragment() {
     private val args by navArgs<PostDetailsFragmentArgs>()
     @Inject
     lateinit var  userRepository: UserRepository
+    @Inject
+    lateinit var  postRepository: PostRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +38,7 @@ class PostDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_post_details, container, false)
         val post:Post = args.clickedPost
-        Log.e("POST", "Post clicked: ${post}")
+        Log.e("FIRE", "Post viewed: ${post}")
 
         view.tv_detail_post_title.text = post.headline
         view.tv_detail_post_date.text = post.date
@@ -43,6 +48,13 @@ class PostDetailsFragment : Fragment() {
 
         if (post.creatorID == userRepository.readCurrentId()){
             view.btn_delete_post.visibility = View.VISIBLE
+            view.btn_delete_post.setOnClickListener {
+                lifecycleScope.launch {
+                    post.key?.let { it1 -> postRepository.deletePost(postID = it1) }
+                }
+                val action = PostDetailsFragmentDirections.actionPostDetailsFragmentToFragmentPinboard()
+                findNavController().navigate(action)
+            }
         }else{
             view.btn_delete_post.visibility = View.GONE
         }

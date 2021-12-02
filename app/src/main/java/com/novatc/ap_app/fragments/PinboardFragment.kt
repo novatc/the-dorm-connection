@@ -1,6 +1,7 @@
 package com.novatc.ap_app.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val post = postList[position]
+        Log.e("FIRE", "Post clicked with id: ${post.key}")
         val action = PinnboardFragmentDirections.actionFragmentPinboardToPostDetailsFragment(post)
         findNavController().navigate(action)
     }

@@ -18,6 +18,7 @@ class PostAdapter(val postListItems: ArrayList<Post>, private val listener: OnIt
         val postKeywords: TextView = itemView.findViewById(R.id.tv_post_keyword)
         val postAuthor: TextView = itemView.findViewById(R.id.tv_post_author)
         val date: TextView = itemView.findViewById(R.id.tv_post_date)
+        var key: String = ""
 
         init {
             itemView.setOnClickListener(this)
@@ -49,6 +50,7 @@ class PostAdapter(val postListItems: ArrayList<Post>, private val listener: OnIt
         holder.postText.text = postListItem.text
         holder.postKeywords.text = postListItem.keyword
         holder.date.text = postListItem.date
+        holder.key = postListItem.key.toString()
     }
 
     override fun getItemCount() = postListItems.size

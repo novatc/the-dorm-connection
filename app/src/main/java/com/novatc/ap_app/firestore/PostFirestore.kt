@@ -51,6 +51,7 @@ class PostFirestore @Inject constructor(){
         val snapshot = mFirestore.collection(Constants.POST).get().await()
         for (post in snapshot) {
             post.toObject(Post::class.java).let {
+                it.key = post.id
                 posts.add(it)
             }
         }
@@ -70,12 +71,14 @@ class PostFirestore @Inject constructor(){
 
     }
 
-    fun addPost(post: Post) {
-        mFirestore.collection(Constants.POST).document().set(post, SetOptions.merge())
-            .addOnSuccessListener { document ->
-                Log.e("POST", "Post saved to DB")
-            }.addOnFailureListener { e ->
-                Log.e("POST", "Error while saving: $e")
-            }
+    suspend fun addPost(post: Post) {
+        val ref = mFirestore.collection(Constants.POST).add(post).await()
+        post.key  = ref.id
+        Log.e("FIRE", "Created local Post with id: ${post.key}")
+    }
+
+    suspend fun deletePost(postID: String){
+        mFirestore.collection(Constants.POST).document(postID).delete().await()
+
     }
 }

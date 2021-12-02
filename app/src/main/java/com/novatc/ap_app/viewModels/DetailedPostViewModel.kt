@@ -15,4 +15,6 @@ class DetailedPostViewModel @Inject constructor(
 ) : ViewModel() {
 
 
+
+
 }
