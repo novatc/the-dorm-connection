@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
@@ -22,8 +23,10 @@ import kotlinx.android.synthetic.main.fragment_pinboard.view.rv_posts
 import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
 @AndroidEntryPoint
-class MyPostsFragment : Fragment() {
+class MyPostsFragment : Fragment(), PostAdapter.OnItemClickListener {
     private lateinit var layoutManager: LinearLayoutManager
+    var postList:ArrayList<Post> = ArrayList()
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,13 +46,20 @@ class MyPostsFragment : Fragment() {
     }
 
     private fun populateUSerPostList(view: View){
-        val recyclerView: RecyclerView = view.rv_my_posts
+        val recyclerView: RecyclerView = view.rv_posts
         val model = ViewModelProvider(this)[MyPostViewModel::class.java]
         model.posts.observe(this, {posts ->
-            posts.sortedByDescending {  it.date }
-            recyclerView.adapter = PostAdapter(posts as ArrayList<Post>)
+            postList = posts
+            postList.sortedByDescending {  it.date }
+            recyclerView.adapter = PostAdapter(postList, this)
         })
-        recyclerView.layoutManager = layoutManager
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+    }
+
+    override fun onItemClick(position: Int) {
+        val post = postList[position]
+        val action = PinnboardFragmentDirections.actionFragmentPinboardToPostDetailsFragment(post)
+        findNavController().navigate(action)
     }
 
 

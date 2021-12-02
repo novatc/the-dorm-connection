@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
 
 @AndroidEntryPoint
-class PinnboardFragment : Fragment() {
+class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
+    var postList:ArrayList<Post> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,12 +35,19 @@ class PinnboardFragment : Fragment() {
         return view
     }
 
+    override fun onItemClick(position: Int) {
+        val post = postList[position]
+        val action = PinnboardFragmentDirections.actionFragmentPinboardToPostDetailsFragment(post)
+        findNavController().navigate(action)
+    }
+
     private fun populatePostList(view: View){
         val recyclerView: RecyclerView = view.rv_posts
         val model = ViewModelProvider(this)[PinboardViewModel::class.java]
         model.posts.observe(this, {posts ->
-            posts.sortedByDescending {  it.date }
-            recyclerView.adapter = PostAdapter(posts as ArrayList<Post>)
+            postList = posts
+            postList.sortedByDescending {  it.date }
+            recyclerView.adapter = PostAdapter(postList, this)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
     }

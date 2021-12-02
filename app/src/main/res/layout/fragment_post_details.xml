@@ -25,30 +25,61 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_detail_post_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="POST TITEL"
                 android:textAlignment="center"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="30dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:padding="10dp"/>
 
             <TextView
-                android:id="@+id/tv_post_text"
-                android:layout_width="0dp"
+                android:id="@+id/tv_detail_post_date"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="70dp"
-                android:text="POST TEXT"/>
+                android:text="POST DATE"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10dp" />
 
+            <TextView
+                android:id="@+id/tv_detail_post_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POST TEXT"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="15dp"
+                android:padding="10dp"/>
+            <TextView
+                android:id="@+id/tv_detail_post_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POST AUTHOR"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10dp"
+                android:padding="10dp"/>
 
+            <TextView
+                android:id="@+id/tv_detail_post_keywords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="POST KEYWORDS"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="10dp"
+                android:padding="10dp"/>
 
             <Button
-                android:id="@+id/btn_delet_profile"
+                android:id="@+id/btn_delete_post"
                 android:layout_width="@dimen/btn_edit_profile_width"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/btn_delete_profile_margin_top"
                 android:backgroundTint="@color/radical_red"
-                android:text="@string/delete_account"
+                android:text="@string/delete_post"
                 android:textColor="@color/white" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
