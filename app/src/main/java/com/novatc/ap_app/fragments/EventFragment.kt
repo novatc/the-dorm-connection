@@ -15,11 +15,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
 import com.novatc.ap_app.viewModels.EventViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
 
 /**
  * The event fragment displays a list of events
  */
+@AndroidEntryPoint
 class EventFragment : Fragment() {
 
     override fun onCreateView(

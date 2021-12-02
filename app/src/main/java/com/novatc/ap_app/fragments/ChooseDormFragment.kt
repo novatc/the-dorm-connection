@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import com.novatc.ap_app.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_choose_dorm.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +20,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ChooseDormFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class ChooseDormFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

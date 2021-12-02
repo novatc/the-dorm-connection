@@ -1,6 +1,6 @@
 package com.novatc.ap_app.activities
 
-import com.novatc.ap_app.Firestore.Fireclass
+import com.novatc.ap_app.firestore.UserFirestore
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -45,7 +45,7 @@ class SignUpActivity : BaseActivity() {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
                         val registeredMail = firebaseUser.email!!
                         val user = User(firebaseUser.uid, name, registeredMail)
-                        Fireclass().registerUser(this@SignUpActivity, user)
+                        UserFirestore().registerUser(this@SignUpActivity, user)
 
 
                     } else {

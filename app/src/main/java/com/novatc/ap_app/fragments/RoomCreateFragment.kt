@@ -1,9 +1,6 @@
 package com.novatc.ap_app.fragments
 
-import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.icu.text.SimpleDateFormat
-import com.novatc.ap_app.Firestore.Fireclass
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,19 +10,22 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_room
-import com.novatc.ap_app.model.Room
 import com.novatc.ap_app.permissions.*
-import kotlinx.android.synthetic.main.fragment_event_create.view.*
+import com.novatc.ap_app.repository.RoomRepository
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
+
+    @Inject
+    lateinit var roomsRepository: RoomRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,19 +45,12 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         val roomDescription = view.created_room_description.text.toString().trim()
         var minimumBookingTime = view.created_room_booking_time.text.toString().trim()
 
-        if (roomName.isBlank() || roomAddress.isBlank() || roomDescription.isBlank() || !(minimumBookingTime.matches(Regex("\\d{2}-\\d{2}")))) {
-            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
-            return
-        }
+//        if (roomName.isBlank() || roomAddress.isBlank() || roomDescription.isBlank() || !(minimumBookingTime.matches(Regex("\\d{2}-\\d{2}")))) {
+//            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+        roomsRepository.add(roomName, roomAddress, roomDescription, minimumBookingTime)
 
-        val room = Room(
-            roomName,
-            roomAddress,
-            Fireclass().getCurrentUserID(),
-            roomDescription,
-            minimumBookingTime
-        )
-        Fireclass().addRoomToDD(room)
         Toast.makeText(requireContext(), "Room created", Toast.LENGTH_SHORT).show()
 
     }

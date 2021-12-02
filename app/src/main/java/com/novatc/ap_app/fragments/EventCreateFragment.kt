@@ -1,6 +1,5 @@
 package com.novatc.ap_app.fragments
 
-import com.novatc.ap_app.Firestore.Fireclass
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
@@ -16,14 +15,18 @@ import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEventName
-import com.novatc.ap_app.model.Event
-import java.text.SimpleDateFormat
+import com.novatc.ap_app.repository.EventRepository
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
+
+    @Inject
+    lateinit var eventRepository: EventRepository
     private lateinit var dateButton: Button
     private var eventDate = "2021-01-01"
 
@@ -51,13 +54,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
             return
         }
-        val event = Event(
-            eventName,
-            eventDate,
-            Fireclass().getCurrentUserID(),
-            eventText
-        )
-        Fireclass().addEvent(event)
+        eventRepository.add(eventName, eventDate, eventText)
         Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
         parentFragmentManager.commit {
             replace(R.id.nav_host_fragment, EventFragment())

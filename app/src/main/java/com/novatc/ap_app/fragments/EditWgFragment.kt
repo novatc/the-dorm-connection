@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.commit
 import com.novatc.ap_app.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit_wg.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +20,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [EditWgFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class EditWgFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

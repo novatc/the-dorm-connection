@@ -1,6 +1,6 @@
 package com.novatc.ap_app.activities
 
-import com.novatc.ap_app.Firestore.Fireclass
+import com.novatc.ap_app.firestore.UserFirestore
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -31,7 +31,7 @@ class SignInActivity : BaseActivity() {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(mail, password).addOnCompleteListener {
                     task ->
                 if(task.isSuccessful){
-                    Fireclass().signInUser(this)
+                    UserFirestore().signInUser(this)
                 }else{
                     Toast.makeText(
                         this@SignInActivity,

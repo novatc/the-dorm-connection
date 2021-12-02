@@ -1,9 +1,7 @@
 package com.novatc.ap_app.viewModels
 
-import com.novatc.ap_app.Constants.Constants
-import com.novatc.ap_app.Firestore.Fireclass
+import com.novatc.ap_app.constants.Constants
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,13 +9,19 @@ import com.novatc.ap_app.fragments.*
 import com.novatc.ap_app.model.Room
 import com.novatc.ap_app.model.RoomWithUser
 import com.novatc.ap_app.model.User
+import com.novatc.ap_app.repository.RoomRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RoomViewModel : ViewModel() {
+@HiltViewModel
+class RoomViewModel @Inject constructor(
+    roomRepository: RoomRepository
+): ViewModel() {
 
     private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val TAG = "RoomViewModel"

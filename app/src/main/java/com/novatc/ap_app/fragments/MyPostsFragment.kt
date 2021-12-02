@@ -15,12 +15,13 @@ import com.novatc.ap_app.adapter.PostAdapter
 import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.viewModels.MyPostViewModel
 import com.novatc.ap_app.viewModels.PinboardViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_posts.view.*
 import kotlinx.android.synthetic.main.fragment_pinboard.view.*
 import kotlinx.android.synthetic.main.fragment_pinboard.view.rv_posts
 import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
-
+@AndroidEntryPoint
 class MyPostsFragment : Fragment() {
     private lateinit var layoutManager: LinearLayoutManager
 

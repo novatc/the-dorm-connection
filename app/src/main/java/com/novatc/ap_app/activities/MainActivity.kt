@@ -9,7 +9,9 @@ import com.novatc.ap_app.R
 import com.novatc.ap_app.fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 import com.novatc.ap_app.model.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

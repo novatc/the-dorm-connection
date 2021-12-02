@@ -1,6 +1,6 @@
 package com.novatc.ap_app.viewModels
 
-import com.novatc.ap_app.Constants.Constants
+import com.novatc.ap_app.constants.Constants
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,11 +14,18 @@ import kotlinx.coroutines.withContext
 import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.EventWithUser
 import com.novatc.ap_app.model.User
+import com.novatc.ap_app.repository.EventRepository
+import com.novatc.ap_app.repository.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * The event view model is responsible for loading events from the database
  */
-class EventViewModel : ViewModel() {
+@HiltViewModel
+class EventViewModel @Inject constructor(
+    eventRepository: EventRepository
+) : ViewModel() {
 
     private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val TAG = "EventViewModel"

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.RoomsAdapter
+import com.novatc.ap_app.viewModels.EventViewModel
 import com.novatc.ap_app.viewModels.RoomViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_room_list.view.*
 
+@AndroidEntryPoint
 class RoomsFragment : Fragment() {
 
     override fun onCreateView(
@@ -34,7 +38,7 @@ class RoomsFragment : Fragment() {
 
     private fun fillRoomsList(view: View) {
         val recyclerView: RecyclerView = view.findViewById((R.id.available_rooms))
-        val model = ViewModelProvider(this)[RoomViewModel::class.java]
+        val model: RoomViewModel by viewModels()
         model.rooms.observe(this, { rooms ->
             recyclerView.adapter = RoomsAdapter(rooms)
         })

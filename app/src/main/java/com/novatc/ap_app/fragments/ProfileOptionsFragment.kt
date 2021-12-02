@@ -1,25 +1,22 @@
 package com.novatc.ap_app.fragments
 
-import com.novatc.ap_app.Firestore.Fireclass
-import android.content.Intent
+import com.novatc.ap_app.firestore.UserFirestore
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.novatc.ap_app.R
-import com.novatc.ap_app.activities.SignUpActivity
 import com.novatc.ap_app.viewModels.ProfileViewModel
-import kotlinx.android.synthetic.main.fragment_add_post.view.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
+@AndroidEntryPoint
 class ProfileOptionsFragment : Fragment() {
     private val profile = ProfileFragment()
     private val wg = EditWgFragment()
@@ -82,7 +79,7 @@ class ProfileOptionsFragment : Fragment() {
     private fun setDeleteUserButtonListener(view: View) {
         val deleteProfileButton: Button = view.btn_delet_profile
         deleteProfileButton.setOnClickListener {
-            Fireclass().deleteUser()
+            UserFirestore().deleteUser()
             Toast.makeText(requireActivity(), "Your account hast been deleted.", Toast.LENGTH_SHORT)
                 .show()
             val action = ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpActivity()
@@ -93,7 +90,7 @@ class ProfileOptionsFragment : Fragment() {
     private fun setLogOutUserButtonListener(view: View) {
         val setLogOutUserButton: Button = view.btn_profile_logout
         setLogOutUserButton.setOnClickListener {
-            Fireclass().logout()
+            UserFirestore().logout()
             val action = ProfileOptionsFragmentDirections.actionFragmentProfileToSignInActivity()
             view.findNavController().navigate(action)
         }

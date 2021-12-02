@@ -1,6 +1,5 @@
 package com.novatc.ap_app.activities
 
-import com.novatc.ap_app.Firestore.Fireclass
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
