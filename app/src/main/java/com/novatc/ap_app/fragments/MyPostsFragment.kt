@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.PostAdapter
 import com.novatc.ap_app.model.Post
+import com.novatc.ap_app.repository.PostRepository
 import com.novatc.ap_app.viewModels.MyPostViewModel
 import com.novatc.ap_app.viewModels.PinboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
