@@ -64,6 +64,7 @@ class PostFirestore @Inject constructor(){
         val snapshot = mFirestore.collection(Constants.POST).whereEqualTo("creatorID", userID).get().await()
         for (post in snapshot) {
             post.toObject(Post::class.java).let {
+                it.key = post.id
                 posts.add(it)
             }
         }

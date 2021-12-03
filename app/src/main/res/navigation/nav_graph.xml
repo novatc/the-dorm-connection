@@ -84,7 +84,11 @@
         android:id="@+id/myPostsFragment"
         android:name="com.novatc.ap_app.fragments.MyPostsFragment"
         android:label="MyPostsFragment"
-        tools:layout="@layout/fragment_my_posts"/>
+        tools:layout="@layout/fragment_my_posts">
+        <action
+            android:id="@+id/action_myPostsFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chooseDormFragment"
         android:name="com.novatc.ap_app.fragments.ChooseDormFragment"

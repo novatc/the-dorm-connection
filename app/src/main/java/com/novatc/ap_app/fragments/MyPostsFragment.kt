@@ -47,7 +47,7 @@ class MyPostsFragment : Fragment(), PostAdapter.OnItemClickListener {
     }
 
     private fun populateUSerPostList(view: View){
-        val recyclerView: RecyclerView = view.rv_posts
+        val recyclerView: RecyclerView = view.rv_my_posts
         val model = ViewModelProvider(this)[MyPostViewModel::class.java]
         model.posts.observe(this, {posts ->
             postList = posts
@@ -59,7 +59,7 @@ class MyPostsFragment : Fragment(), PostAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val post = postList[position]
-        val action = PinnboardFragmentDirections.actionFragmentPinboardToPostDetailsFragment(post)
+        val action = MyPostsFragmentDirections.actionMyPostsFragmentToPostDetailsFragment(post)
         findNavController().navigate(action)
     }
 
