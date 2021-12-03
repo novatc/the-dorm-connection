@@ -11,11 +11,14 @@ import android.widget.Button
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEventName
 import com.novatc.ap_app.repository.EventRepository
+import com.novatc.ap_app.viewModels.CreateEventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.ZoneId
@@ -29,6 +32,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     lateinit var eventRepository: EventRepository
     private lateinit var dateButton: Button
     private var eventDate = "2021-01-01"
+    val createEventViewModel: CreateEventViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,8 +58,13 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
             return
         }
-        eventRepository.add(eventName, eventDate, eventText)
-        Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
+        try {
+            createEventViewModel.addEvent(eventName, eventDate, eventText)
+            Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(requireActivity(), "Could not create event", Toast.LENGTH_SHORT).show()
+        }
+
         parentFragmentManager.commit {
             replace(R.id.nav_host_fragment, EventFragment())
         }
