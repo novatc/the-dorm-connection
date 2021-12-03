@@ -22,6 +22,10 @@ class PostRepository
         return postFirestore.getPosts()
     }
 
+    suspend fun deletePost(postID: String) {
+        postFirestore.deletePost(postID)
+    }
+
     suspend fun getUserPosts(): ArrayList<Post> {
         val userId = userFirestore.getCurrentUserID()
         return postFirestore.getUserPosts(userId)

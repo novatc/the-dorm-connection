@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_fragment_pinboard_to_addPostFragment"
             app:destination="@id/addPostFragment" />
+        <action
+            android:id="@+id/action_fragment_pinboard_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventCreateFragment"
@@ -81,7 +84,11 @@
         android:id="@+id/myPostsFragment"
         android:name="com.novatc.ap_app.fragments.MyPostsFragment"
         android:label="MyPostsFragment"
-        tools:layout="@layout/fragment_my_posts"/>
+        tools:layout="@layout/fragment_my_posts">
+        <action
+            android:id="@+id/action_myPostsFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chooseDormFragment"
         android:name="com.novatc.ap_app.fragments.ChooseDormFragment"
@@ -119,5 +126,16 @@
         <action
             android:id="@+id/action_roomFragment_to_roomCreateFragment"
             app:destination="@id/roomCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.novatc.ap_app.fragments.PostDetailsFragment"
+        android:label="PostDetailsFragment" >
+        <action
+            android:id="@+id/action_postDetailsFragment_to_fragment_pinboard"
+            app:destination="@id/fragment_pinboard" />
+        <argument
+            android:name="clickedPost"
+            app:argType="com.novatc.ap_app.model.Post" />
     </fragment>
 </navigation>

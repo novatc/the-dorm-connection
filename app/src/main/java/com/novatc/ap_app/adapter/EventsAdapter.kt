@@ -25,7 +25,12 @@ class EventsAdapter(private val eventListItems: ArrayList<EventWithUser>): Recyc
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
         val eventListItem = eventListItems[position]
-        holder.eventAuthor.text = eventListItem.user!!.username
+        if (eventListItem.user != null) {
+            holder.eventAuthor.text = eventListItem.user!!.username
+        } else {
+            holder.eventAuthor.text = "NO USER"
+        }
+
         holder.eventName.text = eventListItem.name
         holder.eventText.text = eventListItem.text
         holder.eventDate.text = eventListItem.date

@@ -65,5 +65,6 @@
     <string name="post_text">Text</string>
     <string name="post_keywords">Schlagwörter</string>
     <string name="minimum_booking_time">Bestimme den Mindestbuchzeitraum</string>
+    <string name="delete_post">Post löschen</string>
 
 </resources>

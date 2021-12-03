@@ -1,30 +1,30 @@
 package com.novatc.ap_app.viewModels
 
-import com.novatc.ap_app.constants.Constants
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
-import com.novatc.ap_app.fragments.*
-import kotlinx.coroutines.Dispatchers
+import com.novatc.ap_app.firestore.EventFirestore
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
-import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.EventWithUser
-import com.novatc.ap_app.model.User
 import com.novatc.ap_app.repository.EventRepository
 import com.novatc.ap_app.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
  * The event view model is responsible for loading events from the database
  */
+@ExperimentalCoroutinesApi
 @HiltViewModel
 class EventViewModel @Inject constructor(
-    eventRepository: EventRepository
+    private val eventRepository: EventRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -46,37 +46,21 @@ class EventViewModel @Inject constructor(
 
     /**
      * Listens for new events in database and populates for each event the event author
-     * TODO: Put function into firestore class, database should not be accessed from viewModel
      */
+    @ExperimentalCoroutinesApi
     private fun loadEvents() {
-        fireStore.collection(Constants.EVENTS).addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.w(TAG, "Listen for events failed", e)
-                return@addSnapshotListener
-            }
-            if (snapshot != null) {
-                val documents = snapshot.documents
-                // Load event authors async in coroutine
-                viewModelScope.launch(Dispatchers.IO) {
-                    val allEvents = ArrayList<EventWithUser>()
-                    documents.forEach {
-                        val event = it.toObject(Event::class.java)
-                        if (event != null) {
-                            val user = fireStore.collection(Constants.USER)
-                                .document(event.userId)
-                                .get()
-                                .await()
-                                .toObject(User::class.java)
-                            val eventWithUser =
-                                EventWithUser(event.name, event.date, event.text, user)
-                                allEvents.add(eventWithUser)
-                        }
-                    }
-                    withContext(Dispatchers.Main) {
-                        _events.value = allEvents
+        viewModelScope.launch(Dispatchers.IO) {
+            val eventsWithUser = ArrayList<EventWithUser>()
+            eventRepository.getEvents().collect { events ->
+                events.forEach {
+                    val user = userRepository.read(it.userId)
+                    if (user != null) {
+                        eventsWithUser.add(EventWithUser(it.name, it.date, it.text, user))
                     }
                 }
-
+                withContext(Dispatchers.Main) {
+                    _events.value = eventsWithUser
+                }
 
             }
         }

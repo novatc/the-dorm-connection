@@ -67,5 +67,6 @@
     <string name="post_header">Post headline</string>
     <string name="post_text">Text</string>
     <string name="post_keywords">Keywords</string>
+    <string name="delete_post">Delete post</string>
 
 </resources>
