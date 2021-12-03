@@ -2,7 +2,10 @@ package com.novatc.ap_app.repository
 
 import com.novatc.ap_app.firestore.PostFirestore
 import com.novatc.ap_app.firestore.UserFirestore
+import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Post
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.concurrent.Flow
 import javax.inject.Inject
 
 class PostRepository
@@ -16,6 +19,10 @@ class PostRepository
         val userName = userFirestore.getUserData(userId)!!.username
         val post = Post(headline, text, keyword, userName, date, userId)
         postFirestore.addPost(post)
+    }
+    @ExperimentalCoroutinesApi
+    fun getPostsAsFlow(): kotlinx.coroutines.flow.Flow<List<Post>> {
+        return postFirestore.getPostsAsFlow()
     }
 
     suspend fun getPosts(): ArrayList<Post> {

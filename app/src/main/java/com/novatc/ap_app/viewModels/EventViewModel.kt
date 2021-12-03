@@ -27,8 +27,6 @@ class EventViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val TAG = "EventViewModel"
     private var _events: MutableLiveData<ArrayList<EventWithUser>> = MutableLiveData()
 
     init {
