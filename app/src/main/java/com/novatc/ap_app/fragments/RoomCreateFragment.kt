@@ -1,16 +1,26 @@
 package com.novatc.ap_app.fragments
 
+import android.app.Activity
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.findNavController
+import com.github.dhaval2404.imagepicker.*
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_room
@@ -20,12 +30,32 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
 import javax.inject.Inject
+import com.google.firebase.firestore.OnProgressListener
+
+import com.novatc.ap_app.activities.MainActivity
+
+import androidx.annotation.NonNull
+
+import com.google.android.gms.tasks.OnFailureListener
+
+import com.google.android.gms.tasks.OnSuccessListener
+
+import android.app.ProgressDialog
+
+
+
 
 @AndroidEntryPoint
 class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
+    private var mCameraUri: Uri? = null
+    private var mGalleryUri: Uri? = null
+    private var mProfileUri: Uri? = null
+    private lateinit var imgProfile: ImageView
+
     @Inject
     lateinit var roomsRepository: RoomRepository
+    lateinit var startForProfileImageResult: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +63,29 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_room_create, container, false)
+        /*resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result : ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                Log.d("test", "test")
+                val data: Intent? = result.data
+            }
+        }*/
+        startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            if (resultCode == Activity.RESULT_OK) {
+                //Image Uri will not be null for RESULT_OK
+                val fileUri = data?.data!!
+                imgProfile = view.imageView2
+                mProfileUri = fileUri
+                imgProfile.setImageURI(fileUri)
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                Log.d("Error", "Error")
+            } else {
+                Log.d("Error", "Error")
+            }
+        }
         initTimePicker(view)
         setSaveRoomButtonListener(view)
         setPermissions(view)
@@ -49,7 +102,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 //            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
 //            return
 //        }
-        roomsRepository.add(roomName, roomAddress, roomDescription, minimumBookingTime)
+        roomsRepository.add(roomName, roomAddress, roomDescription, minimumBookingTime, (mProfileUri as Uri).toString())
 
         Toast.makeText(requireContext(), "Room created", Toast.LENGTH_SHORT).show()
 
@@ -64,12 +117,30 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         }
     }
 
-    private fun setPermissions(view: View){
+    private fun setPermissions(view: View) {
         val permissionsButton: Button = view.button
         permissionsButton.setOnClickListener {
             Permissions().checkPermissions(this)
+            //val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            //resultLauncher.launch(intent)
+            ImagePicker.with(this)
+                .compress(1024)         //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .createIntent { intent ->
+                    startForProfileImageResult.launch(intent)
+                }
         }
     }
+
+    private fun onActivityResult(requestCode: Int, result: ActivityResult) {
+        if(result.resultCode == Activity.RESULT_OK) {
+            val intent = result.data
+            when (requestCode) {
+
+            }
+        }
+    }
+
 
     private fun initTimePicker(view: View) {
         val cal = Calendar.getInstance()
@@ -88,5 +159,6 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         var resultTime = hourString + ":" + minuteString
         created_room_booking_time.text = resultTime
     }
+
 }
 
