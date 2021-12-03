@@ -7,6 +7,9 @@
     android:layout_gravity="center"
     android:background="@color/shadow_blue">
 
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
@@ -18,70 +21,77 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_detail_post_title"
+            android:layout_height="match_parent">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="POST TITEL"
-                android:textAlignment="center"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="40dp"
-                android:textStyle="bold"
-                android:padding="10dp"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_detail_post_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="POST DATE"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="20dp" />
+                <TextView
+                    android:id="@+id/tv_detail_post_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="POST TITEL"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="40dp"
+                    android:textStyle="bold"
+                    android:padding="10dp"/>
 
-            <TextView
-                android:id="@+id/tv_detail_post_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="POST TEXT"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="30dp"
-                android:padding="10dp"/>
-            <TextView
-                android:id="@+id/tv_detail_post_author"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="POST AUTHOR"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="20dp"
-                android:padding="10dp"/>
+                <TextView
+                    android:id="@+id/tv_detail_post_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="POST DATE"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/tv_detail_post_keywords"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="POST KEYWORDS"
-                android:textAlignment="center"
-                android:textColor="@android:color/black"
-                android:textSize="20dp"
-                android:padding="10dp"/>
+                <TextView
+                    android:id="@+id/tv_detail_post_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="POST TEXT"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="30dp"
+                    android:padding="10dp"/>
+                <TextView
+                    android:id="@+id/tv_detail_post_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="POST AUTHOR"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:padding="10dp"/>
 
-            <Button
-                android:id="@+id/btn_delete_post"
-                android:layout_width="@dimen/btn_edit_profile_width"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/btn_delete_profile_margin_top"
-                android:backgroundTint="@color/radical_red"
-                android:text="@string/delete_post"
-                android:textColor="@color/white" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_detail_post_keywords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="POST KEYWORDS"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dp"
+                    android:padding="10dp"/>
+
+                <Button
+                    android:id="@+id/btn_delete_post"
+                    android:layout_width="@dimen/btn_edit_profile_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/btn_delete_profile_margin_top"
+                    android:backgroundTint="@color/radical_red"
+                    android:text="@string/delete_post"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </ScrollView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
