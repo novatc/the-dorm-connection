@@ -10,7 +10,7 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(
     private val userFirestore: UserFirestore
 ) {
-    private fun readCurrentId(): String {
+    fun readCurrentId(): String {
         return userFirestore.getCurrentUserID()
     }
 
