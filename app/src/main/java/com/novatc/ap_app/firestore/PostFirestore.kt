@@ -96,7 +96,10 @@ class PostFirestore @Inject constructor(){
 
     // Parses the document snapshot to the desired object
     fun getPostFromSnapshot(documentSnapshot: DocumentSnapshot) : Post {
-        return  documentSnapshot.toObject(Post::class.java)!!
+          return documentSnapshot.toObject(Post::class.java)!!.let {
+            it.key = documentSnapshot.id
+              return@let it
+        }
 
     }
 }

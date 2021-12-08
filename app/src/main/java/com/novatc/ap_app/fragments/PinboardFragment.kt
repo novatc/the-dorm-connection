@@ -22,6 +22,7 @@ import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.viewModels.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
@@ -45,11 +46,14 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
         findNavController().navigate(action)
     }
 
+    @ExperimentalCoroutinesApi
     private fun populatePostList(view: View){
         val recyclerView: RecyclerView = view.rv_posts
         val model: PinboardViewModel by viewModels()
         model.postsList.observe(this, {posts ->
-            recyclerView.adapter = PostAdapter(posts, this)
+            postList = posts
+            postList.sortedByDescending {  it.date }
+            recyclerView.adapter = PostAdapter(postList, this)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
     }
