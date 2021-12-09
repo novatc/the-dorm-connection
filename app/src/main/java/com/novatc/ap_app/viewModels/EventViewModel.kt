@@ -48,8 +48,8 @@ class EventViewModel @Inject constructor(
     @ExperimentalCoroutinesApi
     private fun loadEvents() {
         viewModelScope.launch(Dispatchers.IO) {
-            val eventsWithUser = ArrayList<EventWithUser>()
             eventRepository.getEvents().collect { events ->
+                val eventsWithUser = ArrayList<EventWithUser>()
                 events.forEach {
                     val user = userRepository.read(it.userId)
                     if (user != null) {

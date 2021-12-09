@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class EventFirestore @Inject constructor(
     private val userFirestore: UserFirestore
-){
+) {
     private val mFirestore = FirebaseFirestore.getInstance()
 
     @ExperimentalCoroutinesApi
@@ -29,7 +29,7 @@ class EventFirestore @Inject constructor(
                     trySend(querySnapshot).isSuccess
                 }
             awaitClose {
-                Log.e("","cancelling the listener on collection at path - $path")
+                Log.e("", "cancelling the listener on collection at path - $path")
                 listenerRegistration.remove()
             }
         }
@@ -55,15 +55,14 @@ class EventFirestore @Inject constructor(
     }
 
     // Parses the document snapshot to the desired object
-    fun getEventFromSnapshot(documentSnapshot: DocumentSnapshot) : Event {
-        return  documentSnapshot.toObject(Event::class.java)!!
+    fun getEventFromSnapshot(documentSnapshot: DocumentSnapshot): Event {
+        return documentSnapshot.toObject(Event::class.java)!!
 
     }
 
     fun addEvent(event: Event): Task<Void> {
         return mFirestore.collection(Constants.EVENTS).document().set(event, SetOptions.merge())
     }
-
 
 
 }

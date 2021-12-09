@@ -43,8 +43,8 @@ class PinboardViewModel @Inject constructor(
     @ExperimentalCoroutinesApi
     private fun loadPosts() {
         viewModelScope.launch(Dispatchers.IO) {
-            val postList = ArrayList<Post>()
             postRepository.getPostsAsFlow().collect { posts ->
+                val postList = ArrayList<Post>()
                 posts.forEach {
                     postList.add(it)
                 }
