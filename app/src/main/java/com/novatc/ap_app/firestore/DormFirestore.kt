@@ -42,7 +42,6 @@ class DormFirestore @Inject constructor(
     fun getDormFromSnapshot(documentSnapshot: DocumentSnapshot) : Dorm {
         return documentSnapshot.toObject(Dorm::class.java)!!.let {
             Log.e("FIRE", "Dorm from DB: ${it}")
-
             it.id = documentSnapshot.id
             return@let it
         }

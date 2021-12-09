@@ -1,7 +1,6 @@
 package com.novatc.ap_app.repository
 
 import com.novatc.ap_app.firestore.DormFirestore
-import com.novatc.ap_app.firestore.EventFirestore
 import com.novatc.ap_app.firestore.UserFirestore
 import com.novatc.ap_app.model.Dorm
 import com.novatc.ap_app.model.Post

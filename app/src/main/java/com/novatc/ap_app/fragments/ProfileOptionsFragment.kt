@@ -29,6 +29,10 @@ class ProfileOptionsFragment : Fragment() {
 
         viewModel.userProfile.observe(viewLifecycleOwner, Observer {
             view.tv_user_name.text = it.username
+            view.tv_user_dorm.text = it.userDorm
+            if (it.userDorm!=""){
+                view.btn_select_dorm.visibility = View.GONE
+            }
         })
 
         setMyPostButtonListener(view)

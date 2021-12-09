@@ -31,7 +31,6 @@ class ChooseDormFragment : Fragment(), DormAdapter.OnItemClickListener {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_choose_dorm, container, false)
         populateDormList(view)
-        Log.e("FIRE", "Dorm list after methode: ${dormList}")
 
 
         view.tv_create_new_dorm.setOnClickListener {
@@ -46,10 +45,8 @@ class ChooseDormFragment : Fragment(), DormAdapter.OnItemClickListener {
     private fun populateDormList(view: View) {
         val recyclerView: RecyclerView = view.rv_dorm_list
         val model: ChooseDormFragmentViewModel by viewModels()
-        Log.e("FIRE", "entered methode: ${model}")
         model.dormList.observe(this, { dorms ->
             dormList = dorms
-            Log.e("FIRE", "Dorm list: ${dorms}")
             recyclerView.adapter = DormAdapter(dormList, this)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -57,6 +54,9 @@ class ChooseDormFragment : Fragment(), DormAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val dorm = dormList[position]
+        val action = ChooseDormFragmentDirections.actionChooseDormFragmentToDormDetailFragment(dorm)
+        findNavController().navigate(action)
+
     }
 
 
