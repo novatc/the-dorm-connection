@@ -93,7 +93,11 @@
         android:id="@+id/chooseDormFragment"
         android:name="com.novatc.ap_app.fragments.ChooseDormFragment"
         android:label="ChooseDormFragment"
-        tools:layout="@layout/fragment_choose_dorm"/>
+        tools:layout="@layout/fragment_choose_dorm">
+        <action
+            android:id="@+id/action_chooseDormFragment_to_createDormFragment"
+            app:destination="@id/createDormFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.novatc.ap_app.fragments.ProfileFragment"
@@ -137,5 +141,14 @@
         <argument
             android:name="clickedPost"
             app:argType="com.novatc.ap_app.model.Post" />
+    </fragment>
+    <fragment
+        android:id="@+id/createDormFragment"
+        android:name="com.novatc.ap_app.fragments.CreateDormFragment"
+        android:label="fragment_create_dorm"
+        tools:layout="@layout/fragment_create_dorm" >
+        <action
+            android:id="@+id/action_createDormFragment_to_chooseDormFragment"
+            app:destination="@id/chooseDormFragment" />
     </fragment>
 </navigation>

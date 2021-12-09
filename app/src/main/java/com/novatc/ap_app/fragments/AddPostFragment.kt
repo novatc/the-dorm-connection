@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
-import kotlinx.android.synthetic.main.fragment_add_post.view.created_room_address
-import kotlinx.android.synthetic.main.fragment_add_post.view.created_room_description
+import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_address
+import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_description
 import com.novatc.ap_app.repository.PostRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -39,17 +38,17 @@ class AddPostFragment: Fragment() {
                 Toast.makeText(requireContext(), "Pls set a post headline", Toast.LENGTH_SHORT)
                     .show()
             }
-            if (view.created_room_description.text.isEmpty()) {
+            if (view.et_created_dorm_description.text.isEmpty()) {
                 Toast.makeText(requireContext(), "Pls set a post text", Toast.LENGTH_SHORT).show()
             }
-            if (view.created_room_address.text.isEmpty()) {
+            if (view.et_created_dorm_address.text.isEmpty()) {
                 Toast.makeText(requireContext(), "Pls set a post keyword", Toast.LENGTH_SHORT)
                     .show()
             }
-            if (view.et_post_headline.text.isNotEmpty() && view.created_room_description.text.isNotEmpty() && view.created_room_address.text.isNotEmpty()) {
+            if (view.et_post_headline.text.isNotEmpty() && view.et_created_dorm_description.text.isNotEmpty() && view.et_created_dorm_address.text.isNotEmpty()) {
                 val headline = view.et_post_headline.text.toString()
-                val text = view.created_room_description.text.toString()
-                val keyword = view.created_room_address.text.toString()
+                val text = view.et_created_dorm_description.text.toString()
+                val keyword = view.et_created_dorm_address.text.toString()
                 val date = getCurrentDate()
                 lifecycleScope.launch {
                     postRepository.addPost(headline, text, keyword, date)

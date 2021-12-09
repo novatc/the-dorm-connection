@@ -2,11 +2,9 @@ package com.novatc.ap_app.fragments
 
 import android.app.Activity
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,26 +21,13 @@ import androidx.navigation.findNavController
 import com.github.dhaval2404.imagepicker.*
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
-import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_room
+import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_dorm
 import com.novatc.ap_app.permissions.*
 import com.novatc.ap_app.repository.RoomRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
 import javax.inject.Inject
-import com.google.firebase.firestore.OnProgressListener
-
-import com.novatc.ap_app.activities.MainActivity
-
-import androidx.annotation.NonNull
-
-import com.google.android.gms.tasks.OnFailureListener
-
-import com.google.android.gms.tasks.OnSuccessListener
-
-import android.app.ProgressDialog
-
-
 
 
 @AndroidEntryPoint
@@ -93,9 +78,9 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     }
 
     private fun onCreateRoom(view: View) {
-        val roomName = view.created_room_name.text.toString().trim()
-        val roomAddress = view.created_room_address.text.toString().trim()
-        val roomDescription = view.created_room_description.text.toString().trim()
+        val roomName = view.et_created_dorm_name.text.toString().trim()
+        val roomAddress = view.et_created_dorm_address.text.toString().trim()
+        val roomDescription = view.et_created_dorm_description.text.toString().trim()
         var minimumBookingTime = view.created_room_booking_time.text.toString().trim()
 
 //        if (roomName.isBlank() || roomAddress.isBlank() || roomDescription.isBlank() || !(minimumBookingTime.matches(Regex("\\d{2}-\\d{2}")))) {
@@ -109,7 +94,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     }
 
     private fun setSaveRoomButtonListener(view: View) {
-        val saveRoomButton: Button = view.btn_save_room
+        val saveRoomButton: Button = view.btn_save_dorm
         saveRoomButton.setOnClickListener {
             onCreateRoom(view)
             val action = RoomCreateFragmentDirections.actionRoomCreateFragmentToRoomFragment()

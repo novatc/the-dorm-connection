@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
 @AndroidEntryPoint
 class ProfileOptionsFragment : Fragment() {
-    private val profile = ProfileFragment()
-    private val wg = EditWgFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
