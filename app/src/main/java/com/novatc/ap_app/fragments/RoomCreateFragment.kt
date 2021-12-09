@@ -18,7 +18,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.findNavController
-import com.github.dhaval2404.imagepicker.*
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_dorm
@@ -28,6 +27,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
 import javax.inject.Inject
+import android.app.Dialog
+import androidx.annotation.Nullable
+import androidx.appcompat.app.AlertDialog
+import com.github.dhaval2404.imagepicker.ImagePicker
 
 
 @AndroidEntryPoint
@@ -48,12 +51,6 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_room_create, container, false)
-        /*resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result : ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                Log.d("test", "test")
-                val data: Intent? = result.data
-            }
-        }*/
         startForProfileImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             val resultCode = result.resultCode
@@ -71,6 +68,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 Log.d("Error", "Error")
             }
         }
+        super.onCreate(savedInstanceState)
         initTimePicker(view)
         setSaveRoomButtonListener(view)
         setPermissions(view)
@@ -87,7 +85,11 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 //            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
 //            return
 //        }
-        roomsRepository.add(roomName, roomAddress, roomDescription, minimumBookingTime, (mProfileUri as Uri).toString())
+        context?.let {
+            roomsRepository.add(roomName, roomAddress, roomDescription, minimumBookingTime, (mProfileUri!!).toString(),
+                it
+            )
+        }
 
         Toast.makeText(requireContext(), "Room created", Toast.LENGTH_SHORT).show()
 
