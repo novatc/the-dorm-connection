@@ -11,9 +11,9 @@ import com.novatc.ap_app.model.EventWithUser
 class EventsAdapter(private val eventListItems: ArrayList<EventWithUser>): RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     class EventsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val eventAuthor: TextView = itemView.findViewById(R.id.eventAuthor)
+        val eventAuthor: TextView = itemView.findViewById(R.id.tv_dorm_name)
         val eventName: TextView = itemView.findViewById(R.id.eventName)
-        val eventText: TextView = itemView.findViewById(R.id.eventText)
+        val eventText: TextView = itemView.findViewById(R.id.tv_dorm_description)
         val eventDate: TextView = itemView.findViewById(R.id.eventDate)
 
     }

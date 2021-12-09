@@ -28,6 +28,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
     var postList:ArrayList<Post> = ArrayList()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

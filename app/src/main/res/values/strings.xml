@@ -68,5 +68,10 @@
     <string name="post_text">Text</string>
     <string name="post_keywords">Keywords</string>
     <string name="delete_post">Delete post</string>
+    <string name="new_dorm">Coundn\'t find your dorm?</string>
+    <string name="create_new_dorm">Click here to create your dorm</string>
+    <string name="dorm_hint">Dorm name</string>
+    <string name="dorms">Dorm</string>
+    <string name="dorm_add_tagline">Create a new dorm</string>
 
 </resources>
