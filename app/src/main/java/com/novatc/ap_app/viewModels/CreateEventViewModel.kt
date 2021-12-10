@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.novatc.ap_app.repository.EventRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -15,7 +16,7 @@ class CreateEventViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun addEvent(eventName: String, eventDate: String, eventText: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             eventRepository.add(eventName, eventDate, eventText)
         }
     }

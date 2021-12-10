@@ -1,7 +1,5 @@
 package com.novatc.ap_app.repository
 
-import com.novatc.ap_app.activities.SignInActivity
-import com.novatc.ap_app.activities.SignUpActivity
 import com.novatc.ap_app.firestore.UserFirestore
 import com.novatc.ap_app.model.User
 import javax.inject.Inject
@@ -10,7 +8,7 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(
     private val userFirestore: UserFirestore
 ) {
-    fun readCurrentId(): String {
+    fun readCurrentId(): String? {
         return userFirestore.getCurrentUserID()
     }
 
@@ -18,24 +16,24 @@ class UserRepository @Inject constructor(
         return userFirestore.getCurrentUserMail()
     }
 
-    fun register(activity: SignUpActivity, userInfo: User) {
-        return userFirestore.registerUser(activity, userInfo)
+    suspend fun signUp(name: String, email: String, password: String) {
+        return userFirestore.signUp(name, email, password)
     }
 
-    fun login(activity: SignInActivity) {
-        return userFirestore.signInUser(activity)
+    suspend fun login(email: String, password: String) {
+        return userFirestore.login(email, password)
     }
 
     fun logout() {
         return userFirestore.logout()
     }
 
-    fun delete() {
+    suspend fun delete() {
         return userFirestore.deleteUser()
     }
 
     suspend fun readCurrent(): User? {
-        val currentUserId = readCurrentId()
+        val currentUserId = readCurrentId() ?: return null
         return userFirestore.getUserData(currentUserId)
     }
 

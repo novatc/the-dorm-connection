@@ -18,14 +18,7 @@ class SplashActivity : BaseActivity() {
 
         // Changes the activity to the intro activity after 2.5 seconds
         Handler(Looper.getMainLooper()).postDelayed({
-            val user = Firebase.auth.currentUser
-            if (user == null) {
-                startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
-
-            } else {
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            }
-
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         }, 1500)
 

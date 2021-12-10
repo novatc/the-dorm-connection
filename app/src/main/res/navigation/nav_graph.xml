@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragment_pinboard">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/fragment_events"
@@ -56,11 +56,15 @@
             android:id="@+id/action_fragment_profile_to_editWgFragment"
             app:destination="@id/editWgFragment" />
         <action
-            android:id="@+id/action_fragment_profile_to_signUpActivity"
-            app:destination="@id/signUpActivity" />
+            android:id="@+id/action_fragment_profile_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="false" />
         <action
-            android:id="@+id/action_fragment_profile_to_signInActivity"
-            app:destination="@id/signInActivity" />
+            android:id="@+id/action_fragment_profile_to_signUpFragment"
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
@@ -103,21 +107,11 @@
             android:id="@+id/action_profileFragment_to_fragment_profile"
             app:destination="@id/fragment_profile" />
     </fragment>
-    <activity
-        android:id="@+id/signUpActivity"
-        android:name="com.novatc.ap_app.activities.SignUpActivity"
-        android:label="activity_log_in"
-        tools:layout="@layout/activity_log_in" />
     <fragment
         android:id="@+id/editWgFragment"
         android:name="com.novatc.ap_app.fragments.EditWgFragment"
         android:label="EditWgFragment"
         tools:layout="@layout/fragment_edit_wg"/>
-    <activity
-        android:id="@+id/signInActivity"
-        android:name="com.novatc.ap_app.activities.SignInActivity"
-        android:label="SignInActivity"
-        tools:layout="@layout/activity_sign_up"/>
     <fragment
         android:id="@+id/fragment_rooms"
         android:name="com.novatc.ap_app.fragments.RoomsFragment"
@@ -130,7 +124,8 @@
     <fragment
         android:id="@+id/postDetailsFragment"
         android:name="com.novatc.ap_app.fragments.PostDetailsFragment"
-        android:label="PostDetailsFragment" >
+        android:label="PostDetailsFragment"
+        tools:layout="@layout/fragment_post_details">
         <action
             android:id="@+id/action_postDetailsFragment_to_fragment_pinboard"
             app:destination="@id/fragment_pinboard" />
@@ -138,4 +133,33 @@
             android:name="clickedPost"
             app:argType="com.novatc.ap_app.model.Post" />
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.novatc.ap_app.fragments.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_fragment_pinboard"
+            app:destination="@id/fragment_pinboard" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.novatc.ap_app.fragments.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_fragment_pinboard"
+            app:destination="@id/fragment_pinboard" />
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.novatc.ap_app.activities.MainActivity"
+        android:label="MainActivity"
+        tools:layout="@layout/activity_main"/>
 </navigation>

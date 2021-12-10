@@ -8,17 +8,21 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_safe">Save</string>
 
-    #sign_in and sign up
-    <string name="sign_in">SIGN IN</string>
-    <string name="sign_up">SIGN UP</string>
-    <string name="sign_up_text">Welcome to THE DORM CONNECTION Sign up here</string>
-    <string name="sign_in_text">Welcome to THE DORM CONNECTION Sign in to your account here</string>
+    #login and sign up
+    <string name="login_tagline">Login</string>
+    <string name="sign_up_tagline">Sign up</string>
+    <string name="sign_up_header">Welcome</string>
+    <string name="login_header">Welcome</string>
     <string name="sign_up_name">Name</string>
     <string name="sign_up_password">Password</string>
     <string name="sign_up_mail">Mail</string>
     <string name="new_to_the_dorm_connection">New to THE DORM CONNECTION?</string>
     <string name="already_a_member_question">Already a member?</string>
-    <string name="btn_sing_up">Sign Up</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="btn_login">Login</string>
+    <string name="login_error">Could not login, please try again.</string>
+    <string name="sign_up_error">Could not sign up, please try again.</string>
+    <string name="empty_field_error">Please fill in all field</string>
 
     #events
     <string name="events">Events</string>
@@ -57,6 +61,8 @@
     <string name="dorm">Dorm</string>
     <string name="btn_my_posts">My posts</string>
     <string name="edit_my_posts">Edit your posts</string>
+    <string name="delete_user_error">Could not delete user, please try again later</string>
+    <string name="delete_user_success">User successful delete</string>
 
 
     #pinboard
@@ -68,5 +74,14 @@
     <string name="post_text">Text</string>
     <string name="post_keywords">Keywords</string>
     <string name="delete_post">Delete post</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 
 </resources>

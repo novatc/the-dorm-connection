@@ -2,16 +2,22 @@ package com.novatc.ap_app.fragments
 
 import com.novatc.ap_app.firestore.UserFirestore
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.novatc.ap_app.R
+import com.novatc.ap_app.model.Request
+import com.novatc.ap_app.viewModels.LoginViewModel
 import com.novatc.ap_app.viewModels.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile_options.view.*
@@ -21,15 +27,16 @@ class ProfileOptionsFragment : Fragment() {
     private val profile = ProfileFragment()
     private val wg = EditWgFragment()
 
+    val model: ProfileViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile_options, container, false)
-        val viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
-        viewModel.userProfile.observe(viewLifecycleOwner, Observer {
+        model.userProfile.observe(viewLifecycleOwner, Observer {
             view.tv_user_name.text = it.username
         })
 
@@ -79,11 +86,20 @@ class ProfileOptionsFragment : Fragment() {
     private fun setDeleteUserButtonListener(view: View) {
         val deleteProfileButton: Button = view.btn_delet_profile
         deleteProfileButton.setOnClickListener {
-            UserFirestore().deleteUser()
-            Toast.makeText(requireActivity(), "Your account hast been deleted.", Toast.LENGTH_SHORT)
-                .show()
-            val action = ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpActivity()
-            view.findNavController().navigate(action)
+            model.deleteUser()
+            model.deleteRequest.observe(this) { request ->
+                when (request.status) {
+
+                    Request.Status.SUCCESS -> {
+                        Toast.makeText(activity, R.string.delete_user_success, Toast.LENGTH_SHORT)
+                            .show()
+                        findNavController().navigate(
+                            ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpFragment()
+                        )
+                    }
+                    else -> Toast.makeText(activity, request.message!!, Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
@@ -91,10 +107,9 @@ class ProfileOptionsFragment : Fragment() {
         val setLogOutUserButton: Button = view.btn_profile_logout
         setLogOutUserButton.setOnClickListener {
             UserFirestore().logout()
-            val action = ProfileOptionsFragmentDirections.actionFragmentProfileToSignInActivity()
+            val action = ProfileOptionsFragmentDirections.actionFragmentProfileToLoginFragment()
             view.findNavController().navigate(action)
         }
     }
-
 
 }

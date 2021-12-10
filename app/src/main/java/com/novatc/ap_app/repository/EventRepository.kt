@@ -8,6 +8,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 import javax.inject.Inject
 
 class EventRepository
@@ -17,7 +18,7 @@ class EventRepository
 ) {
 
     suspend fun add(eventName: String, eventDate: String, eventText: String) {
-        val userId = userFirestore.getCurrentUserID()
+        val userId = userFirestore.getCurrentUserID() ?: throw Exception("No user id, when trying to create an event.")
         val event = Event(eventName,eventDate, userId, eventText)
         return withContext(Dispatchers.IO) {
             eventFirestore.addEvent(event).await()

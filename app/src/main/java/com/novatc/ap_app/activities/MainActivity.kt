@@ -1,13 +1,13 @@
 package com.novatc.ap_app.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.navigation.Navigation
+import android.util.Log
+import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.novatc.ap_app.R
-import com.novatc.ap_app.fragments.*
-import kotlinx.android.synthetic.main.activity_main.*
 import com.novatc.ap_app.model.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +24,13 @@ class MainActivity : BaseActivity() {
         val bottomNav: BottomNavigationView = findViewById(R.id.bottomNav)
         NavigationUI.setupWithNavController(bottomNav, navController)
 
+        navController.addOnDestinationChangedListener{_, destination, _ ->
+            if (destination.id == R.id.loginFragment || destination.id == R.id.signUpFragment) {
+                bottomNav.visibility = View.GONE
+            } else {
+                bottomNav.visibility = View.VISIBLE
+            }
+        }
 
     }
 

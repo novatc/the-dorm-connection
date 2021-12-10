@@ -27,42 +27,7 @@ open class BaseActivity: AppCompatActivity() {
         }
     }
 
-    fun validateForm(name:String, mail: String, password: String): Boolean {
-        return when {
-            TextUtils.isEmpty(mail) -> {
-                Toast.makeText(this, "Bitte Mail angeben", Toast.LENGTH_LONG)
-                false
-            }
-            TextUtils.isEmpty(mail) -> {
-                Toast.makeText(this, "Bitte Passwort angeben", Toast.LENGTH_LONG)
-                false
-            }
-            TextUtils.isEmpty(password) -> {
-                Toast.makeText(this, "Bitte Mail angeben", Toast.LENGTH_LONG)
-                false
-            }
-            else -> {
-                true
-            }
-        }
-    }
 
-    fun validateForm(name: String, mail: String): Boolean {
-        return when {
-            TextUtils.isEmpty(mail) -> {
-                Toast.makeText(this, "Bitte Mail angeben", Toast.LENGTH_LONG)
-                false
-            }
-            TextUtils.isEmpty(mail) -> {
-                Toast.makeText(this, "Bitte Passwort angeben", Toast.LENGTH_LONG)
-                false
-            }
-            else -> {
-                true
-            }
-        }
-
-    }
 
 
 }

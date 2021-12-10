@@ -5,6 +5,7 @@ import com.novatc.ap_app.firestore.UserFirestore
 import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Post
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.lang.Exception
 import java.util.concurrent.Flow
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ class PostRepository
 ) {
 
     suspend fun addPost(headline: String, text: String, keyword: String, date: String) {
-        val userId = userFirestore.getCurrentUserID()
+        val userId = userFirestore.getCurrentUserID() ?: throw Exception("No user id, when trying to add a post.")
         val userName = userFirestore.getUserData(userId)!!.username
         val post = Post(headline, text, keyword, userName, date, userId)
         postFirestore.addPost(post)
@@ -34,7 +35,7 @@ class PostRepository
     }
 
     suspend fun getUserPosts(): ArrayList<Post> {
-        val userId = userFirestore.getCurrentUserID()
+        val userId = userFirestore.getCurrentUserID() ?: throw Exception("No user id, when trying to get user posts.")
         return postFirestore.getUserPosts(userId)
     }
 }
