@@ -88,5 +88,7 @@
     <string name="dorm_add_tagline">Create a new dorm</string>
     <string name="choose_my_dorm">Choose this as my dorm</string>
     <string name="choose_dorm_warning">Be aware that you can only choose one dorm with your account. Changes to your dorm are no longer possible after you selected one!</string>
+    <string name="book_room_button">Book room</string>
+    <string name="participate_in_event">Join event</string>
 
 </resources>
