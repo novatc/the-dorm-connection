@@ -1,14 +1,17 @@
 package com.novatc.ap_app.firestore
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.net.Uri
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.*
 import com.novatc.ap_app.constants.Constants
+import com.novatc.ap_app.fragments.RoomCreateFragment
 import com.novatc.ap_app.model.Room
 import java.net.URI
 import java.util.*
@@ -16,13 +19,13 @@ import javax.inject.Inject
 
 class RoomFirestore @Inject constructor(){
     private val mFirestore = Firebase.firestore
-    lateinit var storage: FirebaseStorage
     var randomKey: String = ""
 
-    fun addRoom(room: Room) {
-        if (room.mProfileURI != null){
+    fun addRoom(room: Room, context: Context) {
+        if (room.imageName != null){
             randomKey = UUID.randomUUID().toString()
-            uploadPicture(Uri.parse(room.mProfileURI))
+            FirestoreMethods.uploadPicture(Uri.parse(room.imageName), context)
+            room.imageName = Uri.parse(room.imageName).pathSegments[Uri.parse(room.imageName).pathSegments.lastIndex].toString()
         }
         mFirestore.collection(Constants.ROOMS).document().set(room, SetOptions.merge())
             .addOnSuccessListener { document ->
@@ -32,9 +35,8 @@ class RoomFirestore @Inject constructor(){
             }
     }
 
-    private fun uploadPicture(profileImg: Uri){
+    /*private fun uploadPicture(profileImg: Uri, context: Context){
 
-        //val pd = ProgressDialog()
 
         storage = Firebase.storage
         // Create a storage reference from our app
@@ -50,12 +52,10 @@ class RoomFirestore @Inject constructor(){
         val riversRef = storageRef.child("images/")
         val uploadTask = riversRef.putFile(file)
 
-// Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
         }.addOnSuccessListener { taskSnapshot ->
             // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
             // ...
         }
-    }
+    }*/
 }

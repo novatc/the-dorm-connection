@@ -97,7 +97,14 @@
         android:id="@+id/chooseDormFragment"
         android:name="com.novatc.ap_app.fragments.ChooseDormFragment"
         android:label="ChooseDormFragment"
-        tools:layout="@layout/fragment_choose_dorm"/>
+        tools:layout="@layout/fragment_choose_dorm">
+        <action
+            android:id="@+id/action_chooseDormFragment_to_createDormFragment"
+            app:destination="@id/createDormFragment" />
+        <action
+            android:id="@+id/action_chooseDormFragment_to_dormDetailFragment"
+            app:destination="@id/dormDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.novatc.ap_app.fragments.ProfileFragment"
@@ -132,6 +139,27 @@
         <argument
             android:name="clickedPost"
             app:argType="com.novatc.ap_app.model.Post" />
+    </fragment>
+    <fragment
+        android:id="@+id/createDormFragment"
+        android:name="com.novatc.ap_app.fragments.CreateDormFragment"
+        android:label="fragment_create_dorm"
+        tools:layout="@layout/fragment_create_dorm" >
+        <action
+            android:id="@+id/action_createDormFragment_to_chooseDormFragment"
+            app:destination="@id/chooseDormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dormDetailFragment"
+        android:name="com.novatc.ap_app.fragments.DormDetailFragment"
+        android:label="fragment_dorm_detail"
+        tools:layout="@layout/fragment_dorm_detail" >
+        <argument
+            android:name="selectedDorm"
+            app:argType="com.novatc.ap_app.model.Dorm" />
+        <action
+            android:id="@+id/action_dormDetailFragment_to_fragment_profile"
+            app:destination="@id/fragment_profile" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

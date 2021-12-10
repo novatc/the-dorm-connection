@@ -24,8 +24,6 @@ import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
 @AndroidEntryPoint
 class ProfileOptionsFragment : Fragment() {
-    private val profile = ProfileFragment()
-    private val wg = EditWgFragment()
 
     val model: ProfileViewModel by viewModels()
 
@@ -38,6 +36,10 @@ class ProfileOptionsFragment : Fragment() {
 
         model.userProfile.observe(viewLifecycleOwner, Observer {
             view.tv_user_name.text = it.username
+            view.tv_user_dorm.text = it.userDorm
+            if (it.userDorm!=""){
+                view.btn_select_dorm.visibility = View.GONE
+            }
         })
 
         setMyPostButtonListener(view)

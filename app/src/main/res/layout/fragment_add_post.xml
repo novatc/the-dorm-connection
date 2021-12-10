@@ -55,7 +55,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
 
         <EditText
-            android:id="@+id/created_room_description"
+            android:id="@+id/et_created_dorm_description"
             android:layout_width="207dp"
             android:layout_height="105dp"
             android:layout_marginTop="32dp"
@@ -69,7 +69,7 @@
 
 
         <EditText
-            android:id="@+id/created_room_address"
+            android:id="@+id/et_created_dorm_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="192dp"
@@ -94,7 +94,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.232"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/created_room_address"
+            app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_address"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
@@ -112,7 +112,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.91"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/created_room_address"
+            app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_address"
             app:layout_constraintVertical_bias="1.0" />
 
         <Button

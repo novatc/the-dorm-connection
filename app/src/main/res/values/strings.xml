@@ -23,6 +23,13 @@
     <string name="login_error">Could not login, please try again.</string>
     <string name="sign_up_error">Could not sign up, please try again.</string>
     <string name="empty_field_error">Please fill in all field</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 
     #events
     <string name="events">Events</string>
@@ -74,14 +81,12 @@
     <string name="post_text">Text</string>
     <string name="post_keywords">Keywords</string>
     <string name="delete_post">Delete post</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome!"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="new_dorm">Coundn\'t find your dorm?</string>
+    <string name="create_new_dorm">Click here to create your dorm</string>
+    <string name="dorm_hint">Dorm name</string>
+    <string name="dorms">Dorm</string>
+    <string name="dorm_add_tagline">Create a new dorm</string>
+    <string name="choose_my_dorm">Choose this as my dorm</string>
+    <string name="choose_dorm_warning">Be aware that you can only choose one dorm with your account. Changes to your dorm are no longer possible after you selected one!</string>
 
 </resources>

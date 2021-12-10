@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="122dp"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@color/white"
         android:padding="5dp">
@@ -18,47 +18,44 @@
             android:id="@+id/tv_dorm_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pinte 42"
+            android:text="DORM NAME"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/eventName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pintenmittwoch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_dorm_name" />
 
         <TextView
             android:id="@+id/tv_dorm_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="70dp"
-            android:text="Join us every Wednesday with your study buddies to grab a couple of beer for cheap :)"
+            android:text="DORM DESCRIPTION"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventName" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_dorm_name" />
 
         <TextView
-            android:id="@+id/eventDate"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_dorm_address"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Today 20:00"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/eventLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/shadow_blue"
-            android:clickable="true"
-            app:backgroundTint="@color/shadow_blue"
+            android:layout_marginEnd="70dp"
+            android:text="DORM ADDRESS"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eventDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dorm_description" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_dorm_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/radical_red"
+            android:clickable="true"
+            app:backgroundTint="@color/radical_red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

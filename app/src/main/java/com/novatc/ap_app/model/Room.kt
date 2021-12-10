@@ -8,5 +8,5 @@ data class Room(
     val userId: String = "",
     val text: String = "",
     val minimumBookingTime: String = "",
-    val mProfileURI: String = "",
+    var imageName: String = "",
 )
