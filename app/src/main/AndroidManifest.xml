@@ -14,17 +14,6 @@
         android:theme="@style/Theme.Apapp">
 
         <activity
-            android:name=".activities.SignInActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Apapp.NoActionBar">
-        </activity>
-        <activity
-            android:name=".activities.SignUpActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.Apapp.NoActionBar" />
-        <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Apapp.NoActionBar"

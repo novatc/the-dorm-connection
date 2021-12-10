@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
-import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_address
+import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_post_keywords
 import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_description
 import com.novatc.ap_app.repository.PostRepository
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,20 +41,21 @@ class AddPostFragment: Fragment() {
             if (view.et_created_dorm_description.text.isEmpty()) {
                 Toast.makeText(requireContext(), "Pls set a post text", Toast.LENGTH_SHORT).show()
             }
-            if (view.et_created_dorm_address.text.isEmpty()) {
+            if (view.et_created_post_keywords.text.isEmpty()) {
                 Toast.makeText(requireContext(), "Pls set a post keyword", Toast.LENGTH_SHORT)
                     .show()
             }
-            if (view.et_post_headline.text.isNotEmpty() && view.et_created_dorm_description.text.isNotEmpty() && view.et_created_dorm_address.text.isNotEmpty()) {
+            if (view.et_post_headline.text.isNotEmpty() && view.et_created_dorm_description.text.isNotEmpty() && view.et_created_post_keywords.text.isNotEmpty()) {
                 val headline = view.et_post_headline.text.toString()
                 val text = view.et_created_dorm_description.text.toString()
-                val keyword = view.et_created_dorm_address.text.toString()
+                val keyword = view.et_created_post_keywords.text.toString()
                 val date = getCurrentDate()
                 lifecycleScope.launch {
                     postRepository.addPost(headline, text, keyword, date)
                     Toast.makeText(requireContext(), "Post created", Toast.LENGTH_SHORT).show()
                 }
-                setSavePostButtonListener(view)
+                val action = AddPostFragmentDirections.actionAddPostFragmentToFragmentPinboard()
+                view.findNavController().navigate(action)
 
             }
 
@@ -72,8 +73,7 @@ class AddPostFragment: Fragment() {
     private fun setSavePostButtonListener(view: View) {
         val savePostButton: Button = view.btn_safe_new_post
         savePostButton.setOnClickListener {
-            val action = AddPostFragmentDirections.actionAddPostFragmentToFragmentPinboard()
-            view.findNavController().navigate(action)
+
         }
     }
 

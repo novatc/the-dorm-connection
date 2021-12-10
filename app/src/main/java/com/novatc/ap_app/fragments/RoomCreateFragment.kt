@@ -27,9 +27,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
 import javax.inject.Inject
-import android.app.Dialog
-import androidx.annotation.Nullable
-import androidx.appcompat.app.AlertDialog
 import com.github.dhaval2404.imagepicker.ImagePicker
 
 
@@ -77,7 +74,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     private fun onCreateRoom(view: View) {
         val roomName = view.et_created_dorm_name.text.toString().trim()
-        val roomAddress = view.et_created_dorm_address.text.toString().trim()
+        val roomAddress = view.et_created_post_keywords.text.toString().trim()
         val roomDescription = view.et_created_dorm_description.text.toString().trim()
         var minimumBookingTime = view.created_room_booking_time.text.toString().trim()
 

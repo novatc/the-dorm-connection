@@ -67,7 +67,7 @@
             app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_name" />
 
         <EditText
-            android:id="@+id/et_created_dorm_address"
+            android:id="@+id/et_created_post_keywords"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -98,7 +98,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btn_save_dorm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_address"
+            app:layout_constraintTop_toBottomOf="@+id/et_created_post_keywords"
             app:srcCompat="@drawable/add_screen_image_placeholder" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
