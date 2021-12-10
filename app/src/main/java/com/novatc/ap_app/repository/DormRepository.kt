@@ -16,7 +16,7 @@ class DormRepository @Inject constructor(
     private val userFirestore: UserFirestore
 ) {
     suspend fun add(dormName: String, dormDescription: String, dormAddress: String){
-        val user = userFirestore.getUserData(userFirestore.getCurrentUserID())!!
+        val user = userFirestore.getUserData(userFirestore.getCurrentUserID()!!)!!
         val dorm = Dorm(name = dormName, address = dormAddress, description = dormDescription)
         dorm.addUserToDorm(user)
         return withContext(Dispatchers.IO) {

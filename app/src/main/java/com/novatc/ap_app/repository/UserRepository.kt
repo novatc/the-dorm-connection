@@ -37,9 +37,9 @@ class UserRepository @Inject constructor(
         val currentUserId = readCurrentId() ?: return null
         return userFirestore.getUserData(currentUserId)
     }
-    suspend fun readCurrentUserAsFlow(): Flow<User> {
-        return userFirestore.getUserDataAsFlow()
-    }
+//    suspend fun readCurrentUserAsFlow(): Flow<User> {
+//        return userFirestore.getUserDataAsFlow()
+//    }
 
     suspend fun read(uid: String): User? {
         return userFirestore.getUserData(uid)

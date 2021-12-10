@@ -59,15 +59,17 @@ class UserFirestore @Inject constructor() {
         if (snapshot.data == null) return null
         return snapshot.toObject<User>()
     }
-    suspend fun getUserDataAsFlow(): Flow<User>{
-        return mFirestore.collection(Constants.USER).getDataFlow {
-            querySnapshot ->
-            querySnapshot?.toObjects(User::class.java)
-            (querySnapshot?.documents?.map {
-                getUserFromSnapshot(it)
-            }?: User) as User
-        }
-    }
+
+//    @ExperimentalCoroutinesApi
+//    suspend fun getUserDataAsFlow(): Flow<User>{
+//        return mFirestore.collection(Constants.USER).getDataFlow<User> {
+//            querySnapshot ->
+//            querySnapshot?.toObjects(User::class.java)
+//            (querySnapshot?.documents?.map {
+//                getUserFromSnapshot(it)
+//            }
+//        }
+//    }
 
     fun updateUserDorm(user: User) {
         val dbUser = mFirestore.collection(Constants.USER).document(user.id)
@@ -87,9 +89,7 @@ class UserFirestore @Inject constructor() {
 
     // Parses the document snapshot to the desired object
     fun getUserFromSnapshot(documentSnapshot: DocumentSnapshot) : User {
-        return documentSnapshot.toObject(User::class.java)!!.let {
-            return@let it
-        }
+        return documentSnapshot.toObject(User::class.java)!!
 
     }
 
