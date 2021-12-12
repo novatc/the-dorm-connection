@@ -56,6 +56,7 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val event = eventList[position]
+        Log.e("EVENT", "Event cklicked: ${event}")
         val action = EventFragmentDirections.actionFragmentEventsToEventDetailsFragment(event)
         findNavController().navigate(action)
     }

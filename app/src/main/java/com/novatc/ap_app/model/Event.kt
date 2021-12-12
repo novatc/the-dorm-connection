@@ -50,4 +50,7 @@ data class Event(
             return arrayOfNulls(size)
         }
     }
+    fun addUser(user: User){
+        userList.add(user)
+    }
 }

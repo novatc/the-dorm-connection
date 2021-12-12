@@ -59,6 +59,7 @@ class EventFirestore @Inject constructor(
     fun getEventFromSnapshot(documentSnapshot: DocumentSnapshot): Event {
         return documentSnapshot.toObject(Event::class.java)!!.let {
             it.id = documentSnapshot.id
+            Log.e("EVENT", "transformed Event from Snapshot: ${it}")
             return@let it
         }
 

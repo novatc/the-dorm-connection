@@ -13,8 +13,7 @@ import com.novatc.ap_app.model.EventWithUser
 
 class EventsAdapter(
     private val eventListItems: ArrayList<EventWithUser>,
-    private val listener: OnItemClickListener
-    private val listener: EventsAdapter.OnItemClickListener,
+    private val listener: OnItemClickListener,
     private val onLocationClick: (Int) -> Unit
 ) : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 

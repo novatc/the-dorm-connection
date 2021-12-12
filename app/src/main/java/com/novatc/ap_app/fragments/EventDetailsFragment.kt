@@ -1,6 +1,7 @@
 package com.novatc.ap_app.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class EventDetailsFragment : Fragment() {
     lateinit var  userRepository: UserRepository
     @Inject
     lateinit var  eventRepository: EventRepository
+    var me: User = User()
 
 
     override fun onCreateView(
@@ -33,11 +35,20 @@ class EventDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view =  inflater.inflate(R.layout.event_details_fragment, container, false)
+        lifecycleScope.launch {
+            me = userRepository.readCurrent()!!
+            if (userList.contains(me)){
+                Log.e("EVENT", "ALREADY JOINED")
+                view.btn_join_event.visibility = View.GONE
+            }
+        }
+        Log.e("EVENT", "Me: ${me}")
         val event = args.selectedEvent
         view.tv_room_name.text = event.name
         view.tv_event_description.text  = event.text
         view.tv_event_date.text = event.date
         userList = event.userList
+
         view.btn_join_event.setOnClickListener {
             userJoinsEvent()
         }

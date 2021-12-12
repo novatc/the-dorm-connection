@@ -11,8 +11,8 @@ data class EventWithUser(
     val streetName: String? = "",
     val houseNumber: String? = "",
     val city: String? = "",
-    var user: User? = null,
-    val userList: ArrayList<User> = ArrayList()
+    var user: User? = User(),
+    var userList: ArrayList<User> = ArrayList()
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -22,6 +22,7 @@ data class EventWithUser(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+
     )
     override fun describeContents(): Int {
         return 0
@@ -47,5 +48,8 @@ data class EventWithUser(
         override fun newArray(size: Int): Array<EventWithUser?> {
             return arrayOfNulls(size)
         }
+    }
+    fun addUserList(user: ArrayList<User>){
+        userList = user
     }
 }

@@ -24,11 +24,22 @@ class EventRepository
         eventText: String,
         eventStreet: String,
         eventHouseNumber: String,
-        eventCity: String
+        eventCity: String,
+        user: User
     ) {
         val userId = userFirestore.getCurrentUserID()
             ?: throw Exception("No user id, when trying to create an event.")
-        val event = Event(eventName, eventDate, userId, eventText, eventStreet, eventHouseNumber, eventCity)
+        val event = Event(
+            name = eventName,
+            date =
+            eventDate,
+            userId = userId,
+            text = eventText,
+            streetName = eventStreet,
+            houseNumber = eventHouseNumber,
+            city = eventCity
+        )
+        event.addUser(user)
         return withContext(Dispatchers.IO) {
             eventFirestore.addEvent(event).await()
         }
@@ -39,7 +50,7 @@ class EventRepository
         return eventFirestore.getEventsFlow()
     }
 
-    fun updateUserList(user:ArrayList<User>, eventID: String){
+    fun updateUserList(user: ArrayList<User>, eventID: String) {
         return eventFirestore.updateUserList(user, eventID)
     }
 }

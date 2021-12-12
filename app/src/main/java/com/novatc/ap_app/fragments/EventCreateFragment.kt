@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEventName
 import com.novatc.ap_app.repository.EventRepository
+import com.novatc.ap_app.repository.UserRepository
 import com.novatc.ap_app.viewModels.CreateEventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
@@ -30,6 +31,8 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     @Inject
     lateinit var eventRepository: EventRepository
+    @Inject
+    lateinit var userRepository: UserRepository
     private lateinit var dateButton: Button
     private var eventDate = "2021-01-01"
     val createEventViewModel: CreateEventViewModel by viewModels()
