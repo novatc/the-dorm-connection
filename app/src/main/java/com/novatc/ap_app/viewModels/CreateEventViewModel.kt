@@ -15,9 +15,16 @@ class CreateEventViewModel @Inject constructor(
     private val eventRepository: EventRepository
 ) : ViewModel() {
 
-    fun addEvent(eventName: String, eventDate: String, eventText: String) {
+    fun addEvent(
+        eventName: String,
+        eventDate: String,
+        eventText: String,
+        eventStreet: String,
+        eventHouseNumber: String,
+        eventCity: String
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            eventRepository.add(eventName, eventDate, eventText)
+            eventRepository.add(eventName, eventDate, eventText, eventStreet, eventHouseNumber, eventCity)
         }
     }
 

@@ -7,6 +7,9 @@ data class EventWithUser(
     val name: String? = "",
     val date: String? = "",
     val text: String? = "",
+    val streetName: String? = "",
+    val houseNumber: String? = "",
+    val city: String? = "",
     var user: User? = null,
     val userList: ArrayList<User> = ArrayList()
 ) : Parcelable {
@@ -14,6 +17,9 @@ data class EventWithUser(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
     )
     override fun describeContents(): Int {
         return 0
@@ -24,6 +30,9 @@ data class EventWithUser(
         parcel.writeString(text)
         parcel.writeString(date)
         parcel.writeString(date)
+        parcel.writeString(streetName)
+        parcel.writeString(houseNumber)
+        parcel.writeString(city)
 
     }
 

@@ -53,7 +53,17 @@ class EventViewModel @Inject constructor(
                 events.forEach {
                     val user = it.userId?.let { it1 -> userRepository.read(it1) }
                     if (user != null) {
-                        eventsWithUser.add(EventWithUser(it.name, it.date, it.text, user))
+                        eventsWithUser.add(
+                            EventWithUser(
+                                it.name,
+                                it.date,
+                                it.text,
+                                it.streetName,
+                                it.houseNumber,
+                                it.city,
+                                user
+                            )
+                        )
                     }
                 }
                 withContext(Dispatchers.Main) {
