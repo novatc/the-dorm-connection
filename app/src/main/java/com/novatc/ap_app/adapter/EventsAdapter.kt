@@ -6,20 +6,41 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
+import com.novatc.ap_app.adapter.PostAdapter
 import com.novatc.ap_app.model.EventWithUser
 
-class EventsAdapter(private val eventListItems: ArrayList<EventWithUser>): RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
+class EventsAdapter(
+    private val eventListItems: ArrayList<EventWithUser>,
+    private val listener: EventsAdapter.OnItemClickListener
+) : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
-    class EventsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class EventsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val eventAuthor: TextView = itemView.findViewById(R.id.tv_dorm_name)
         val eventName: TextView = itemView.findViewById(R.id.eventName)
         val eventText: TextView = itemView.findViewById(R.id.tv_dorm_description)
         val eventDate: TextView = itemView.findViewById(R.id.eventDate)
 
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position: Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
+
+        }
+
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
-        val view  = LayoutInflater.from(parent.context).inflate(R.layout.event_list_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.event_list_item, parent, false)
         return EventsViewHolder(view)
     }
 

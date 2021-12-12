@@ -1,6 +1,7 @@
 package com.novatc.ap_app.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
+import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.model.EventWithUser
+import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.viewModels.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
@@ -22,7 +27,9 @@ import kotlinx.android.synthetic.main.fragment_event.view.*
  * The event fragment displays a list of events
  */
 @AndroidEntryPoint
-class EventFragment : Fragment() {
+class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
+    var eventList:ArrayList<EventWithUser> = ArrayList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +41,7 @@ class EventFragment : Fragment() {
         return view
     }
 
-    /**
-     * Sets an on click listener to navigate to the EventCreate fragment
-     * @param view
-     */
+
     private fun setAddEventButtonListener(view: View) {
         val addEventButton: FloatingActionButton = view.createEventButton
         addEventButton.setOnClickListener {
@@ -46,15 +50,19 @@ class EventFragment : Fragment() {
         }
     }
 
-    /**
-     * Observes events and sets the recyclerViews adapter and layoutManager
-     * @param view
-     */
+    override fun onItemClick(position: Int) {
+        val event = eventList[position]
+        val action = EventFragmentDirections.actionFragmentEventsToEventDetailsFragment(event)
+        findNavController().navigate(action)
+    }
+
+
     private fun fillEventsList(view: View) {
         val recyclerView: RecyclerView = view.upcoming_events
         val model: EventViewModel by viewModels()
         model.events.observe(this, { events ->
-            recyclerView.adapter = EventsAdapter(events)
+            eventList = events
+            recyclerView.adapter = EventsAdapter(events, this)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
     }

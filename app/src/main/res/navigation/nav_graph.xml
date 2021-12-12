@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_eventFragment_to_eventCreateFragment"
             app:destination="@id/eventCreateFragment" />
+        <action
+            android:id="@+id/action_fragment_events_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_pinboard"
@@ -190,4 +193,12 @@
         android:name="com.novatc.ap_app.activities.MainActivity"
         android:label="MainActivity"
         tools:layout="@layout/activity_main"/>
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.novatc.ap_app.fragments.EventDetailsFragment"
+        android:label="EventDetailsFragment" >
+        <argument
+            android:name="selectedEvent"
+            app:argType="com.novatc.ap_app.model.EventWithUser" />
+    </fragment>
 </navigation>

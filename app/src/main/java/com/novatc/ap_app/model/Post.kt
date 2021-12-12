@@ -22,8 +22,8 @@ data class Post(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
+
 
     override fun writeToParcel(parcel: Parcel, p1: Int) {
         parcel.writeString(headline)

@@ -6,27 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.novatc.ap_app.R
+import com.novatc.ap_app.model.EventWithUser
+import kotlinx.android.synthetic.main.event_details_fragment.view.*
 
 class EventDetailsFragment : Fragment() {
+    private val args by navArgs<EventDetailsFragmentArgs>()
 
-    companion object {
-        fun newInstance() = EventDetailsFragment()
-    }
-
-    private lateinit var viewModel: EventDetailsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.event_details_fragment, container, false)
+        val view =  inflater.inflate(R.layout.event_details_fragment, container, false)
+        val event = args.selectedEvent
+        view.tv_event_name.text = event.name
+        view.tv_event_description.text  = event.text
+        view.tv_event_date.text = event.date
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EventDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }
