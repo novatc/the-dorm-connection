@@ -14,7 +14,7 @@
         android:background="@drawable/rounded_corners_background">
 
         <TextView
-            android:id="@+id/tv_event_name"
+            android:id="@+id/tv_room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
@@ -34,29 +34,33 @@
             android:src="@drawable/add_screen_image_placeholder"
             app:layout_constraintBottom_toTopOf="@+id/fab_event_location"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_event_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_room_name"
+            app:layout_constraintVertical_bias="0.247" />
 
         <TextView
             android:id="@+id/tv_event_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="68dp"
             android:padding="10dp"
             android:text="EVENT DESCRIPTION"
             app:layout_constraintBottom_toTopOf="@+id/button4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_event_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="148dp"
             android:clickable="true"
             android:src="@drawable/ic_baseline_location_on_24"
             app:layout_constraintBottom_toTopOf="@+id/tv_event_description"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -67,8 +71,10 @@
             android:text="EVENT DATE"
             app:layout_constraintBottom_toTopOf="@+id/tv_event_description"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fab_event_location" />
+            app:layout_constraintTop_toBottomOf="@+id/fab_event_location"
+            app:layout_constraintVertical_bias="0.11" />
 
         <Button
             android:id="@+id/button4"

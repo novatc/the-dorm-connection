@@ -52,14 +52,25 @@ class RoomViewModel @Inject constructor(
                     documents.forEach {
                         val room = it.toObject(Room::class.java)
                         if (room != null) {
-                            val user = fireStore.collection(Constants.USER)
-                                .document(room.userId)
-                                .get()
-                                .await()
-                                .toObject(User::class.java)
+                            val user = room.userId?.let { it1 ->
+                                fireStore.collection(Constants.USER)
+                                    .document(it1)
+                                    .get()
+                                    .await()
+                                    .toObject(User::class.java)
+                            }
                             val roomWithUser =
-                                RoomWithUser(room.name, room.address, room.text, room.minimumBookingTime, user)
+                                room.name?.let { it1 -> room.address?.let { it2 ->
+                                    room.text?.let { it3 ->
+                                        room.minimumBookingTime?.let { it4 ->
+                                            RoomWithUser(it1,
+                                                it2, it3, it4, user)
+                                        }
+                                    }
+                                } }
+                            if (roomWithUser != null) {
                                 allRooms.add(roomWithUser)
+                            }
                         }
                     }
                     withContext(Dispatchers.Main) {

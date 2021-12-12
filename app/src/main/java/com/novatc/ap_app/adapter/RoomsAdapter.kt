@@ -8,17 +8,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.RoomWithUser
 
-class RoomsAdapter(private val roomsListItem: ArrayList<RoomWithUser>): RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
+class RoomsAdapter(
+    private val roomsListItem: ArrayList<RoomWithUser>,
+    private val listener: RoomsAdapter.OnItemClickListener
+) : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 
-    class RoomsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class RoomsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val roomName: TextView = itemView.findViewById(R.id.roomName)
         val roomAddress: TextView = itemView.findViewById(R.id.roomUsage)
         val roomDescription: TextView = itemView.findViewById(R.id.roomDescription)
         val minimumBookingTime: TextView = itemView.findViewById(R.id.roomBookingTimeField)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position:Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION){
+                listener.onItemClick(position)
+            }
+
+        }
+    }
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsViewHolder {
-        val view  = LayoutInflater.from(parent.context).inflate(R.layout.room_list_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.room_list_item, parent, false)
         return RoomsViewHolder(view)
     }
 

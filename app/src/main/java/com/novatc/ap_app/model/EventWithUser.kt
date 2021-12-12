@@ -36,12 +36,12 @@ data class EventWithUser(
 
     }
 
-    companion object CREATOR : Parcelable.Creator<Event> {
-        override fun createFromParcel(parcel: Parcel): Event {
-            return Event(parcel)
+    companion object CREATOR : Parcelable.Creator<EventWithUser> {
+        override fun createFromParcel(parcel: Parcel): EventWithUser {
+            return EventWithUser(parcel)
         }
 
-        override fun newArray(size: Int): Array<Event?> {
+        override fun newArray(size: Int): Array<EventWithUser?> {
             return arrayOfNulls(size)
         }
     }
