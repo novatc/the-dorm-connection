@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.viewModels
 
 import androidx.lifecycle.ViewModel
 

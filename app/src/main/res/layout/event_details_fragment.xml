@@ -29,8 +29,8 @@
 
         <ImageView
             android:id="@+id/iv_event_picture"
-            android:layout_width="190dp"
-            android:layout_height="190dp"
+            android:layout_width="136dp"
+            android:layout_height="140dp"
             android:src="@drawable/add_screen_image_placeholder"
             app:layout_constraintBottom_toTopOf="@+id/fab_event_location"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,10 +43,10 @@
             android:id="@+id/tv_event_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="68dp"
+            android:layout_marginBottom="16dp"
             android:padding="10dp"
             android:text="EVENT DESCRIPTION"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintBottom_toTopOf="@+id/btn_join_event"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
@@ -55,7 +55,7 @@
             android:id="@+id/fab_event_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="148dp"
+            android:layout_marginBottom="288dp"
             android:clickable="true"
             android:src="@drawable/ic_baseline_location_on_24"
             app:layout_constraintBottom_toTopOf="@+id/tv_event_description"
@@ -63,21 +63,37 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
+
         <TextView
             android:id="@+id/tv_event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="5dp"
             android:text="EVENT DATE"
             app:layout_constraintBottom_toTopOf="@+id/tv_event_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fab_event_location"
-            app:layout_constraintVertical_bias="0.11" />
+            app:layout_constraintVertical_bias="0.054" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_user_list"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:maxHeight="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_event_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_event_date"
+            app:layout_constraintVertical_bias="0.318" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btn_join_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="70dp"
@@ -85,6 +101,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_participants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"
+            app:layout_constraintBottom_toTopOf="@+id/rv_user_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_event_date" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

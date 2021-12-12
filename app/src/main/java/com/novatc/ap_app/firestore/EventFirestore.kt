@@ -5,6 +5,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import com.novatc.ap_app.constants.Constants
 import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.model.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -56,12 +57,21 @@ class EventFirestore @Inject constructor(
 
     // Parses the document snapshot to the desired object
     fun getEventFromSnapshot(documentSnapshot: DocumentSnapshot): Event {
-        return documentSnapshot.toObject(Event::class.java)!!
+        return documentSnapshot.toObject(Event::class.java)!!.let {
+            it.id = documentSnapshot.id
+            return@let it
+        }
 
     }
 
     fun addEvent(event: Event): Task<Void> {
         return mFirestore.collection(Constants.EVENTS).document().set(event, SetOptions.merge())
+    }
+
+    fun updateUserList(userList: ArrayList<User>, eventID: String) {
+        val dbEvent = mFirestore.collection(Constants.EVENTS).document(eventID)
+        dbEvent.update("userList", userList)
+
     }
 
 

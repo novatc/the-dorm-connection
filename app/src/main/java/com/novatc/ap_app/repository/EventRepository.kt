@@ -3,6 +3,7 @@ package com.novatc.ap_app.repository
 import com.novatc.ap_app.firestore.EventFirestore
 import com.novatc.ap_app.firestore.UserFirestore
 import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,7 @@ class EventRepository
 
     suspend fun add(eventName: String, eventDate: String, eventText: String) {
         val userId = userFirestore.getCurrentUserID() ?: throw Exception("No user id, when trying to create an event.")
-        val event = Event(eventName,eventDate, userId, eventText)
+        val event = Event(name = eventName, date = eventDate, userId = userId, text = eventText)
         return withContext(Dispatchers.IO) {
             eventFirestore.addEvent(event).await()
         }
@@ -28,5 +29,9 @@ class EventRepository
     @ExperimentalCoroutinesApi
     fun getEvents(): Flow<List<Event>> {
         return eventFirestore.getEventsFlow()
+    }
+
+    fun updateUserList(user:ArrayList<User>, eventID: String){
+        return eventFirestore.updateUserList(user, eventID)
     }
 }

@@ -61,6 +61,7 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         val recyclerView: RecyclerView = view.upcoming_events
         val model: EventViewModel by viewModels()
         model.events.observe(this, { events ->
+            Log.e("EVENT", "Event list: ${events}")
             eventList = events
             recyclerView.adapter = EventsAdapter(events, this)
         })

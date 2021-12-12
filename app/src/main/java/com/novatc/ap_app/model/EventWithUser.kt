@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class EventWithUser(
+    val id: String? = "",
     val name: String? = "",
     val date: String? = "",
     val text: String? = "",
@@ -14,6 +15,7 @@ data class EventWithUser(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
     )
     override fun describeContents(): Int {
         return 0
@@ -21,6 +23,7 @@ data class EventWithUser(
 
     override fun writeToParcel(parcel: Parcel, p1: Int) {
         parcel.writeString(name)
+        parcel.writeString(id)
         parcel.writeString(text)
         parcel.writeString(date)
         parcel.writeString(date)

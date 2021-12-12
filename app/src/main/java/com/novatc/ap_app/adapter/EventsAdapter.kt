@@ -11,7 +11,7 @@ import com.novatc.ap_app.model.EventWithUser
 
 class EventsAdapter(
     private val eventListItems: ArrayList<EventWithUser>,
-    private val listener: EventsAdapter.OnItemClickListener
+    private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
     inner class EventsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {

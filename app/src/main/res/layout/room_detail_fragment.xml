@@ -44,7 +44,7 @@
                     android:layout_marginBottom="60dp"
                     android:padding="10dp"
                     android:text="ROOM DESCRIPTION"
-                    app:layout_constraintBottom_toTopOf="@+id/button4"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_join_event"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -60,7 +60,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/btn_join_event"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="70dp"
