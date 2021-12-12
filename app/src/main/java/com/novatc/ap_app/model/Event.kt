@@ -9,9 +9,15 @@ data class Event(
     val date: String? = "",
     val userId: String? = "",
     val text: String? = "",
+    val streetName: String? = "",
+    val houseNumber: String? = "",
+    val city: String? = "",
     val userList: ArrayList<User> = ArrayList()
 ): Parcelable{
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -29,6 +35,9 @@ data class Event(
         parcel.writeString(date)
         parcel.writeString(userId)
         parcel.writeString(date)
+        parcel.writeString(streetName)
+        parcel.writeString(houseNumber)
+        parcel.writeString(city)
 
     }
 

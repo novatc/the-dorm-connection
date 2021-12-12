@@ -18,9 +18,17 @@ class EventRepository
     private val userFirestore: UserFirestore
 ) {
 
-    suspend fun add(eventName: String, eventDate: String, eventText: String) {
-        val userId = userFirestore.getCurrentUserID() ?: throw Exception("No user id, when trying to create an event.")
-        val event = Event(name = eventName, date = eventDate, userId = userId, text = eventText)
+    suspend fun add(
+        eventName: String,
+        eventDate: String,
+        eventText: String,
+        eventStreet: String,
+        eventHouseNumber: String,
+        eventCity: String
+    ) {
+        val userId = userFirestore.getCurrentUserID()
+            ?: throw Exception("No user id, when trying to create an event.")
+        val event = Event(eventName, eventDate, userId, eventText, eventStreet, eventHouseNumber, eventCity)
         return withContext(Dispatchers.IO) {
             eventFirestore.addEvent(event).await()
         }

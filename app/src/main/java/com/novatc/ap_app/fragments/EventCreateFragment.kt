@@ -49,17 +49,22 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private fun onCreateEvent(view: View) {
         val eventName = view.createEventName.text.toString().trim()
         val eventText = view.createEventText.text.toString().trim()
+        val eventStreet = view.textStreetName.text.toString().trim()
+        val eventHouseNumber = view.textHouseNumber.text.toString().trim()
+        val eventCity = view.textCity.text.toString().trim()
 
-        if (eventName.isBlank() || eventText.isBlank() || eventDate.isBlank()) {
-            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
-            return
-        }
-        if (dateIsInPast(eventDate)) {
-            Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
-            return
-        }
+        if (!isFormValid(
+                eventName,
+                eventText,
+                eventDate,
+                eventStreet,
+                eventHouseNumber,
+                eventCity
+            )
+        ) return
+
         try {
-            createEventViewModel.addEvent(eventName, eventDate, eventText)
+            createEventViewModel.addEvent(eventName, eventDate, eventText, eventStreet, eventHouseNumber, eventCity)
             Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             Toast.makeText(requireActivity(), "Could not create event", Toast.LENGTH_SHORT).show()
@@ -68,6 +73,31 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         parentFragmentManager.commit {
             replace(R.id.nav_host_fragment, EventFragment())
         }
+    }
+
+    private fun isFormValid(
+        eventName: String,
+        eventText: String,
+        eventDate: String,
+        eventStreet: String,
+        eventHouseNumber: String,
+        eventCity: String
+    ): Boolean {
+        if (eventName.isBlank()
+            || eventText.isBlank()
+            || eventDate.isBlank()
+            || eventStreet.isBlank()
+            || eventHouseNumber.isBlank()
+            || eventCity.isBlank()
+        ) {
+            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if (dateIsInPast(eventDate)) {
+            Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
     private fun dateIsInPast(date: String): Boolean {

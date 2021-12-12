@@ -31,6 +31,12 @@
     <string name="events_add_tagline">Neues Event anlegen</string>
     <string name="event_description">Eventbeschreibung</string>
     <string name="event_name">Name</string>
+    <string name="create_event_address">Straßennamer</string>
+    <string name="create_event_house_number">Hausnummer</string>
+    <string name="create_event_city">Stadt</string>
+    <string name="create_event_general_information">Allgemeines</string>
+    <string name="create_event_address_information">Adresse</string>
+    <string name="no_maps">Google Maps konnte nicht gefunden werden</string>
 
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>

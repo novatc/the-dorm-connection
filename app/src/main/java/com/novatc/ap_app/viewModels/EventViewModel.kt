@@ -57,10 +57,13 @@ class EventViewModel @Inject constructor(
                     if (user != null) {
                         eventsWithUser.add(
                             EventWithUser(
-                                name = it.name,
-                                date = it.date,
-                                text = it.text,
-                                user = user
+                                it.name,
+                                it.date,
+                                it.text,
+                                it.streetName,
+                                it.houseNumber,
+                                it.city,
+                                user
                             )
                         )
                     }
