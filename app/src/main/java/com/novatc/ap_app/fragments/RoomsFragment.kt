@@ -2,6 +2,7 @@ package com.novatc.ap_app.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,19 +12,21 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.RoomsAdapter
-import com.novatc.ap_app.viewModels.EventViewModel
+import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.model.RoomWithUser
 import com.novatc.ap_app.viewModels.RoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_room_list.view.*
 
 @AndroidEntryPoint
-class RoomsFragment : Fragment() {
+class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
+    var roomList:ArrayList<RoomWithUser> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,11 +39,18 @@ class RoomsFragment : Fragment() {
         return view
     }
 
+    override fun onItemClick(position: Int) {
+        val room = roomList[position]
+        val action = RoomsFragmentDirections.actionFragmentRoomsToRoomDetailFragment(room)
+        findNavController().navigate(action)
+    }
+
     private fun fillRoomsList(view: View) {
         val recyclerView: RecyclerView = view.findViewById((R.id.available_rooms))
         val model: RoomViewModel by viewModels()
         model.rooms.observe(this, { rooms ->
-            recyclerView.adapter = RoomsAdapter(rooms)
+            roomList = rooms
+            recyclerView.adapter = RoomsAdapter(rooms, this)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
     }

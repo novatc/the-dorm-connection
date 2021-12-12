@@ -6,27 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.novatc.ap_app.R
+import kotlinx.android.synthetic.main.room_detail_fragment.view.*
 
 class RoomDetailFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = RoomDetailFragment()
-    }
-
-    private lateinit var viewModel: RoomDetailViewModel
+    private val args by navArgs<RoomDetailFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.room_detail_fragment, container, false)
+        val view = inflater.inflate(R.layout.room_detail_fragment, container, false)
+        val room = args.selectedRoom
+
+        view.tv_room_name.text = room.text
+        view.tv_room_description.text = room.text
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RoomDetailViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }
