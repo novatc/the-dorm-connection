@@ -46,10 +46,12 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
     }
 
     private fun fillRoomsList(view: View) {
+        view.roomsListSpinner.visibility = View.VISIBLE
         val recyclerView: RecyclerView = view.findViewById((R.id.available_rooms))
         val model: RoomViewModel by viewModels()
         model.rooms.observe(this, { rooms ->
             roomList = rooms
+            view.roomsListSpinner.visibility = View.GONE
             recyclerView.adapter = RoomsAdapter(rooms, this)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)

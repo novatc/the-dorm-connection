@@ -11,8 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,9 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
-import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.EventWithUser
-import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.viewModels.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
@@ -79,8 +75,9 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
     private fun fillEventsList(view: View) {
         val recyclerView: RecyclerView = view.upcoming_events
         val model: EventViewModel by viewModels()
+        view.eventsListSpinner.visibility = View.VISIBLE
         model.events.observe(this, { events ->
-            Log.e("EVENT", "Event list: ${events}")
+            view.eventsListSpinner.visibility = View.GONE
             eventList = events
             recyclerView.adapter = EventsAdapter(events, this) { position -> onLocationClick(position) }
         })

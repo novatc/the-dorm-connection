@@ -49,11 +49,13 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
 
     @ExperimentalCoroutinesApi
     private fun populatePostList(view: View){
+        view.pinboardListSpinner.visibility = View.VISIBLE
         val recyclerView: RecyclerView = view.rv_posts
         val model: PinboardViewModel by viewModels()
         model.postsList.observe(this, {posts ->
             postList = posts
             postList.sortedByDescending {  it.date }
+            view.pinboardListSpinner.visibility = View.GONE
             recyclerView.adapter = PostAdapter(postList, this)
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
