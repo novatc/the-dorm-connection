@@ -3,6 +3,7 @@ package com.novatc.ap_app.firestore
 import android.app.Dialog
 import android.content.Context
 import android.net.Uri
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.ktx.firestore
@@ -19,6 +20,7 @@ class FirestoreMethods {
         fun uploadPicture(profileImg: Uri, context: Context){
             val builder: AlertDialog.Builder = AlertDialog.Builder(context!!)
             builder.setView(R.layout.progress_bar)
+            Looper.prepare()
             dialog = builder.create()
             storage = Firebase.storage
             val filename = profileImg.pathSegments[profileImg.pathSegments.lastIndex]
@@ -29,7 +31,7 @@ class FirestoreMethods {
             val uploadTask = storageRef.putFile(file)
             setDialog(true)
             uploadTask.addOnSuccessListener { taskSnapshot ->
-                Toast.makeText(context, "Image uploaded successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.image_upload_successful, Toast.LENGTH_SHORT).show()
                 setDialog(false)
             }.addOnFailureListener() {
                 Toast.makeText(context, "Image could not be uploaded", Toast.LENGTH_SHORT).show()

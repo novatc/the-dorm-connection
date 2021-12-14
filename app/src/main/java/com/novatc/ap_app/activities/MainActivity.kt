@@ -1,6 +1,7 @@
 package com.novatc.ap_app.activities
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -17,7 +19,13 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        try {
+            setContentView(R.layout.activity_main)
+        }
+        catch (e: Exception){
+            Log.e(TAG, "onCreateView", e);
+            throw e;
+        }
         super.hideStatusBar()
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController

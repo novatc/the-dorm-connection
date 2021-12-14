@@ -11,7 +11,9 @@ data class Room(
     val text: String? = "",
     val minimumBookingTime: String? = "",
     var imageName: String? = "",
-) : Parcelable {
+    var key: String? = "",
+
+    ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -19,7 +21,8 @@ data class Room(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-    )
+        parcel.readString(),
+        )
 
 
     override fun writeToParcel(parcel: Parcel, p1: Int) {
@@ -30,6 +33,7 @@ data class Room(
         parcel.writeString(text)
         parcel.writeString(minimumBookingTime)
         parcel.writeString(imageName)
+        parcel.writeString(key)
     }
 
     override fun describeContents(): Int {

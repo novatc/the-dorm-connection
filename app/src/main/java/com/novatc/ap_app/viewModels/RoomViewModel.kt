@@ -11,16 +11,13 @@ import com.novatc.ap_app.model.RoomWithUser
 import com.novatc.ap_app.model.User
 import com.novatc.ap_app.repository.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class RoomViewModel @Inject constructor(
-    roomRepository: RoomRepository
+    private val roomRepository: RoomRepository
 ): ViewModel() {
 
     private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -38,6 +35,11 @@ class RoomViewModel @Inject constructor(
         set(value) {
             _rooms = value
         }
+
+    suspend fun deleteRoom(roomID: String) {
+        roomRepository.deleteRoom(roomID)
+    }
+
 
     private fun loadRooms() {
         fireStore.collection(Constants.ROOMS).addSnapshotListener { snapshot, e ->
@@ -83,6 +85,9 @@ class RoomViewModel @Inject constructor(
         }
 
     }
+
+
+
 
 
 }

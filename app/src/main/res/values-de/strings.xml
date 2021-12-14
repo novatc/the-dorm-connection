@@ -6,6 +6,8 @@
     <string name="edit_text_hint_date">Datum</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_safe">Speichern</string>
+    <string name="image_upload_successful">Bild erfolgreich hochgeladen</string>
+    <string name="image_upload_not_successful">Bild konnte nicht hochgeladen werden</string>
 
     #login and sign up
     <string name="login_tagline">Anmelden</string>
@@ -22,6 +24,12 @@
     <string name="login_error">Fehler bei der Anmeldung, bitte versuche es nochmal.</string>
     <string name="sign_up_error">Fehler bei der Registrierung, bitte versuche es nochmal.</string>
     <string name="empty_field_error">Bitte fülle alle Felder aus.</string>
+    <string name="prompt_password">Passwort</string>
+    <string name="action_sign_in">Logge dich ein oder registriere dich</string>
+    <string name="action_sign_in_short">Einloggen</string>
+    <string name="invalid_username">Kein valider Nutzername</string>
+    <string name="invalid_password">Passwortlänge > 5 Zeichen</string>
+    <string name="login_failed">"Login fehlgeschlagen"</string>
 
     #events
     <string name="events">Events</string>
@@ -47,6 +55,9 @@
     <string name="room_description">Description</string>
     <string name="room_address">Adresse</string>
     <string name="minimum_booking_time_pre">Min. Buchzeit:</string>
+    <string name="btn_book_room">Buche diesen Raum</string>
+    <string name="book_room_button">Buche diesen Raum</string>
+
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>
@@ -78,5 +89,13 @@
     <string name="post_keywords">Schlagwörter</string>
     <string name="minimum_booking_time">Bestimme den Mindestbuchzeitraum</string>
     <string name="delete_post">Post löschen</string>
+    <string name="new_dorm">Du konntest dein Wohnheim nicht finden?</string>
+    <string name="create_new_dorm">Hier klicken, um dein eigenes Wohnheim zu erstellen</string>
+    <string name="dorm_hint">Wohnheimsname</string>
+    <string name="dorms">Wohnheim</string>
+    <string name="dorm_add_tagline">Erstelle ein neues Wohnheim</string>
+    <string name="choose_my_dorm">Nimm dieses als mein Wohnheim</string>
+    <string name="choose_dorm_warning">Sei dir bewusst, dass du nur ein Wohnheim pro Account wählen kannst! Diese Entscheidung kann nicht revidiert werden!</string>
+    <string name="participate_in_event">Nimm am Event teil</string>
 
 </resources>

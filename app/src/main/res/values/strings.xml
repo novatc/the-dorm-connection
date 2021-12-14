@@ -7,6 +7,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_safe">Save</string>
+    <string name="image_upload_successful">Image uploaded successfully</string>
+    <string name="image_upload_not_successful">Image could not be uploaded</string>
 
     #login and sign up
     <string name="login_tagline">Login</string>
@@ -23,7 +25,7 @@
     <string name="login_error">Could not login, please try again.</string>
     <string name="sign_up_error">Could not sign up, please try again.</string>
     <string name="empty_field_error">Please fill in all field</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -57,6 +59,7 @@
     <string name="room_address">Address</string>
     <string name="minimum_booking_time_pre">Min. booking time:</string>
     <string name="minimum_booking_time">Min. booking time  </string>
+    <string name="btn_book_room">Book room</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>

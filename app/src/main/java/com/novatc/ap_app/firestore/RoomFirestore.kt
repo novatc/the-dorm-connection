@@ -13,6 +13,7 @@ import com.google.firebase.storage.ktx.*
 import com.novatc.ap_app.constants.Constants
 import com.novatc.ap_app.fragments.RoomCreateFragment
 import com.novatc.ap_app.model.Room
+import kotlinx.coroutines.tasks.await
 import java.net.URI
 import java.util.*
 import javax.inject.Inject
@@ -21,41 +22,18 @@ class RoomFirestore @Inject constructor(){
     private val mFirestore = Firebase.firestore
     var randomKey: String = ""
 
-    fun addRoom(room: Room, context: Context) {
-        if (room.imageName != null){
+    suspend fun addRoom(room: Room, context: Context) {
+        if (room.imageName != ""){
             randomKey = UUID.randomUUID().toString()
             FirestoreMethods.uploadPicture(Uri.parse(room.imageName), context)
             room.imageName = Uri.parse(room.imageName).pathSegments[Uri.parse(room.imageName).pathSegments.lastIndex].toString()
         }
-        mFirestore.collection(Constants.ROOMS).document().set(room, SetOptions.merge())
-            .addOnSuccessListener { document ->
-                Log.e("ROOM", "Room saved to DB")
-            }.addOnFailureListener { e ->
-                Log.e("ROOM", "Error while saving: $e")
-            }
+        val ref = mFirestore.collection(Constants.ROOMS).add(room).await()
+        room.key  = ref.id
+        Log.e("FIRE", "Created room with id: ${room.key}")
     }
 
-    /*private fun uploadPicture(profileImg: Uri, context: Context){
-
-
-        storage = Firebase.storage
-        // Create a storage reference from our app
-        val storageRef = storage.reference
-
-        val mountainsRef = storageRef.child("mountains.jpg")
-
-        val mountainImagesRef = storageRef.child("images/mountains.jpg")
-
-        mountainsRef.name == mountainImagesRef.name // true
-        mountainsRef.path == mountainImagesRef.path // false
-        var file = profileImg
-        val riversRef = storageRef.child("images/")
-        val uploadTask = riversRef.putFile(file)
-
-        uploadTask.addOnFailureListener {
-        }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-            // ...
-        }
-    }*/
+    suspend fun deleteRoom(roomID: String){
+        mFirestore.collection(Constants.ROOMS).document(roomID).delete().await()
+    }
 }

@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
@@ -28,18 +29,17 @@ import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
 import javax.inject.Inject
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.novatc.ap_app.viewModels.CreateRoomViewModel
 
 
 @AndroidEntryPoint
 class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
+    private val createRoomViewModel: CreateRoomViewModel  by viewModels()
     private var mCameraUri: Uri? = null
     private var mGalleryUri: Uri? = null
     private var mProfileUri: Uri? = null
     private lateinit var imgProfile: ImageView
-
-    @Inject
-    lateinit var roomsRepository: RoomRepository
     lateinit var startForProfileImageResult: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
@@ -83,9 +83,16 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 //            return
 //        }
         context?.let {
-            roomsRepository.add(roomName, roomAddress, roomDescription, minimumBookingTime, (mProfileUri!!).toString(),
-                it
-            )
+            if(mProfileUri != null){
+                createRoomViewModel.addRoom(roomName, roomAddress, roomDescription, minimumBookingTime, (mProfileUri!!).toString(),
+                    it
+                )
+            }
+            else{
+                createRoomViewModel.addRoom(roomName, roomAddress, roomDescription, minimumBookingTime, "",
+                    it
+                )
+            }
         }
 
         Toast.makeText(requireContext(), "Room created", Toast.LENGTH_SHORT).show()

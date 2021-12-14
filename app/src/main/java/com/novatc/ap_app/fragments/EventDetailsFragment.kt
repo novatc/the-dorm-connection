@@ -27,6 +27,8 @@ class EventDetailsFragment : Fragment() {
     lateinit var  userRepository: UserRepository
     @Inject
     lateinit var  eventRepository: EventRepository
+
+
     var me: User = User()
 
 
