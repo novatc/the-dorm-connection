@@ -133,9 +133,6 @@
         <action
             android:id="@+id/action_fragment_rooms_to_roomCreateFragment"
             app:destination="@id/roomCreateFragment" />
-        <action
-            android:id="@+id/action_fragment_rooms_to_roomDetailFragment"
-            app:destination="@id/roomDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/postDetailsFragment"
@@ -204,7 +201,7 @@
             app:destination="@id/fragment_rooms" />
         <argument
             android:name="clickedRoom"
-            app:argType="com.novatc.ap_app.model.Room" />
+            app:argType="com.novatc.ap_app.model.RoomWithUser" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
@@ -218,13 +215,5 @@
         <argument
             android:name="selectedEvent"
             app:argType="com.novatc.ap_app.model.EventWithUser" />
-    </fragment>
-    <fragment
-        android:id="@+id/roomDetailFragment"
-        android:name="com.novatc.ap_app.fragments.RoomDetailFragment"
-        android:label="RoomDetailFragment" >
-        <argument
-            android:name="selectedRoom"
-            app:argType="com.novatc.ap_app.model.RoomWithUser" />
     </fragment>
 </navigation>

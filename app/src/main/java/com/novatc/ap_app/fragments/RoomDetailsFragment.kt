@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.model.RoomWithUser
 import com.novatc.ap_app.repository.RoomRepository
 import com.novatc.ap_app.repository.UserRepository
 import com.novatc.ap_app.viewModels.RoomDetailsViewModel
@@ -34,7 +35,7 @@ class RoomDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_room_details, container, false)
-        val room: Room = args.clickedRoom
+        val room: RoomWithUser = args.clickedRoom
         Log.e("FIRE", "Post viewed: ${room}")
 
         view.detail_room_title.text = room.name
@@ -46,8 +47,8 @@ class RoomDetailsFragment : Fragment() {
                 lifecycleScope.launch {
                     room.key?.let { it1 -> roomDetailsViewModel.deleteRoom(roomID = it1) }
                 }
-                val action = PostDetailsFragmentDirections.actionPostDetailsFragmentToFragmentPinboard()
-                findNavController().navigate(action)
+                //val action = PostDetailsFragmentDirections.actionPostDetailsFragmentToFragmentPinboard()
+                //findNavController().navigate(action)
             }
         }else{
             view.btn_delete_post.visibility = View.GONE

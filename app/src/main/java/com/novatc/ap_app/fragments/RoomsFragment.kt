@@ -42,7 +42,7 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val room = roomList[position]
-        val action = RoomsFragmentDirections.actionFragmentRoomsToRoomDetailFragment(room)
+        val action = RoomsFragmentDirections.actionFragmentRoomsToRoomDetailsFragment(room)
         findNavController().navigate(action)
     }
 
