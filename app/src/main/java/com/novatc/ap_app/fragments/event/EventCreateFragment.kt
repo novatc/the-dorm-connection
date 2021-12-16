@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.event
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -12,14 +12,13 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEventName
 import com.novatc.ap_app.repository.EventRepository
 import com.novatc.ap_app.repository.UserRepository
-import com.novatc.ap_app.viewModels.CreateEventViewModel
+import com.novatc.ap_app.viewModels.event.CreateEventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.ZoneId

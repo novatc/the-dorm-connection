@@ -7,5 +7,6 @@ object Constants {
     const val EVENTS: String = "events"
     const val ROOMS: String = "rooms"
     const val DORMS: String = "dorms"
+    const val ATTENDEES: String = "attendees"
 
 }

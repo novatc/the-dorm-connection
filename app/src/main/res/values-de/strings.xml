@@ -29,14 +29,28 @@
     <string name="events_header">Events</string>
     <string name="events_add_event_button">Neues Event</string>
     <string name="events_add_tagline">Neues Event anlegen</string>
-    <string name="event_description">Eventbeschreibung</string>
+    <string name="event_description">Beschreibung</string>
     <string name="event_name">Name</string>
+    <string name="event_date">Datum</string>
     <string name="create_event_address">Straßennamer</string>
     <string name="create_event_house_number">Hausnummer</string>
     <string name="create_event_city">Stadt</string>
     <string name="create_event_general_information">Allgemeines</string>
     <string name="create_event_address_information">Adresse</string>
     <string name="no_maps">Google Maps konnte nicht gefunden werden</string>
+    <string name="detail_event_general">Allgemein</string>
+    <string name="detail_event_location">Ort</string>
+    <string name="detail_event_join">Teilnehmen</string>
+    <string name="detail_event_address">Adresse</string>
+    <plurals name="detail_event_attendees_text">
+        <item quantity="zero">Das Event hat momentan keine Teilnehmer.</item>
+        <item quantity="one">Das Event hat momentan einen Teilnehmer.</item>
+        <item quantity="other">Das Event hat momentan %d Teilnehmer.</item>
+    </plurals>
+    <string name="detail_event_join_button">Teilnehmen</string>
+    <string name="detail_event_leave_button">Verlassen</string>
+    <string name="detail_event_join_error">Konnte dem Event nicht beitreten, versuche es nochmal.</string>
+    <string name="detail_event_leave_error">Konnte das Event nicht verlassen, versuche es nochmal.</string>
 
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>

@@ -1,7 +1,7 @@
 package com.novatc.ap_app.model
 
 data class User(
-    val id: String = "",
+    var id: String = "",
     val username: String = "",
     val mail: String = "",
     var userDorm: String = "",

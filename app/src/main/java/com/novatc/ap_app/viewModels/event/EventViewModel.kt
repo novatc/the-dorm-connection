@@ -1,11 +1,9 @@
-package com.novatc.ap_app.viewModels
+package com.novatc.ap_app.viewModels.event
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.firestore.FirebaseFirestore
-import com.novatc.ap_app.firestore.EventFirestore
 import kotlinx.coroutines.launch
 import com.novatc.ap_app.model.EventWithUser
 import com.novatc.ap_app.repository.EventRepository

@@ -50,7 +50,22 @@ class EventRepository
         return eventFirestore.getEventsFlow()
     }
 
-    fun updateUserList(user: ArrayList<User>, eventID: String) {
-        return eventFirestore.updateUserList(user, eventID)
+    @ExperimentalCoroutinesApi
+    fun getEventAttendees(eventId: String): Flow<List<User>> {
+        return eventFirestore.getEventAttendeesFlow(eventId)
+    }
+
+    suspend fun leaveEvent(eventId: String): Void? {
+        val userId = userFirestore.getCurrentUserID()
+            ?: throw Exception("No user id, when trying to remove user from event")
+        return eventFirestore.removeUserFromEvent(userId, eventId)
+    }
+
+    suspend fun joinEvent(eventId: String): Void? {
+        val userId = userFirestore.getCurrentUserID()
+            ?: throw Exception("No user id, when trying to add user to event")
+        val user = userFirestore.getUserData(userId)
+            ?: throw Exception("No user, when trying to add user to event")
+        return eventFirestore.addUserToEvent(user, eventId)
     }
 }

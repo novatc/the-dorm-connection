@@ -14,7 +14,7 @@
             android:background="@drawable/rounded_corners_background">
 
                 <TextView
-                    android:id="@+id/tv_room_name"
+                    android:id="@+id/eventDetailsName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
@@ -35,7 +35,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/fab_room_location"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsName" />
 
                 <TextView
                     android:id="@+id/tv_room_description"

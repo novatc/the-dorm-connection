@@ -37,14 +37,28 @@
     <string name="events_header">Events</string>
     <string name="events_add_event_button">Create new event</string>
     <string name="events_add_tagline">Create an Event</string>
-    <string name="event_description">Event description</string>
+    <string name="event_description">Description</string>
     <string name="event_name">Name</string>
+    <string name="event_date">Date</string>
     <string name="create_event_address">Street name</string>
     <string name="create_event_house_number">House number</string>
     <string name="create_event_city">City</string>
     <string name="create_event_general_information">General</string>
-    <string name="create_event_address_information">Address</string>
+    <string name="create_event_address_information">Location</string>
     <string name="no_maps">Could not find Google Maps</string>
+    <string name="detail_event_general">General</string>
+    <string name="detail_event_location">Location</string>
+    <string name="detail_event_join">Join</string>
+    <string name="detail_event_address">Address</string>
+    <plurals name="detail_event_attendees_text">
+        <item quantity="zero">The event currently got no attendees.</item>
+        <item quantity="one">The event currently got %d.</item>
+        <item quantity="other">The event currently got %d attendees.</item>
+    </plurals>
+    <string name="detail_event_join_button">Join</string>
+    <string name="detail_event_leave_button">Leave</string>
+    <string name="detail_event_join_error">Could not join event, please try again.</string>
+    <string name="detail_event_leave_error">Could not leave event, please try again.</string>
 
     #rooms
     <string name="rooms_add_tagline">Create a Room</string>

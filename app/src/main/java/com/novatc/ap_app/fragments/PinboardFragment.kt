@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +17,7 @@ import com.novatc.ap_app.adapter.PostAdapter
 import com.novatc.ap_app.viewModels.PinboardViewModel
 import kotlinx.android.synthetic.main.fragment_pinboard.view.*
 import com.novatc.ap_app.model.Post
-import com.novatc.ap_app.viewModels.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_event.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint

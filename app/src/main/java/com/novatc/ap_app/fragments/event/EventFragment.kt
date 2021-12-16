@@ -1,10 +1,9 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.event
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
 import com.novatc.ap_app.model.EventWithUser
-import com.novatc.ap_app.viewModels.EventViewModel
+import com.novatc.ap_app.viewModels.event.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
 
@@ -52,7 +51,6 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val event = eventList[position]
-        Log.e("EVENT", "Event cklicked: ${event}")
         val action = EventFragmentDirections.actionFragmentEventsToEventDetailsFragment(event)
         findNavController().navigate(action)
     }
