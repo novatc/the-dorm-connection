@@ -42,8 +42,8 @@ class RoomDetailsFragment : Fragment() {
         view.detail_room_description.text = room.text
 
         if (room.userId == userRepository.readCurrentId()){
-            view.btn_delete_post.visibility = View.VISIBLE
-            view.btn_delete_post.setOnClickListener {
+            view.btn_delete_room.visibility = View.VISIBLE
+            view.btn_delete_room.setOnClickListener {
                 lifecycleScope.launch {
                     room.key?.let { it1 -> roomDetailsViewModel.deleteRoom(roomID = it1) }
                 }
@@ -51,7 +51,7 @@ class RoomDetailsFragment : Fragment() {
                 //findNavController().navigate(action)
             }
         }else{
-            view.btn_delete_post.visibility = View.GONE
+            view.btn_delete_room.visibility = View.GONE
         }
 
         return view

@@ -8,70 +8,80 @@
     android:background="@color/shadow_blue">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/rounded_corners_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+            android:background="@drawable/rounded_corners_background">
 
                 <TextView
                     android:id="@+id/detail_room_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="ROOM TITEL"
+                    android:paddingTop="10dp"
+                    android:text="ROOM NAME"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="40dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/detail_image_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/add_screen_image_placeholder" />
+                    android:id="@+id/iv_room_picture"
+                    android:layout_width="190dp"
+                    android:layout_height="190dp"
+                    android:src="@drawable/add_screen_image_placeholder"
+                    app:layout_constraintBottom_toTopOf="@+id/fab_room_location"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_room_title" />
 
                 <TextView
                     android:id="@+id/detail_room_description"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="60dp"
                     android:padding="10dp"
-                    android:text="@string/room_description"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="40dp"
-                    android:textStyle="bold" />
+                    android:text="ROOM DESCRIPTION"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_join_event"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_room_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="100dp"
+                    android:clickable="true"
+                    android:src="@drawable/ic_baseline_location_on_24"
+                    app:layout_constraintBottom_toTopOf="@+id/detail_room_description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <Button
-                    android:id="@+id/btn_book_room"
+                    android:id="@+id/btn_join_event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="70dp"
+                    android:text="@string/book_room_button"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_delete_room"
                     android:layout_width="@dimen/btn_edit_profile_width"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#4CAF50"
-                    android:text="@string/btn_book_room"
-                    android:textColor="@color/white" />
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/radical_red"
+                    android:text="@string/btn_delete_room"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_join_event" />
 
-            </LinearLayout>
-        </ScrollView>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

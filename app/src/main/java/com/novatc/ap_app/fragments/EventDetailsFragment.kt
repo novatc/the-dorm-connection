@@ -46,7 +46,7 @@ class EventDetailsFragment : Fragment() {
         }
         Log.e("EVENT", "Me: ${me}")
         val event = args.selectedEvent
-        view.tv_room_name.text = event.name
+        view.detail_room_title.text = event.name
         view.tv_event_description.text  = event.text
         view.tv_event_date.text = event.date
         userList = event.userList
