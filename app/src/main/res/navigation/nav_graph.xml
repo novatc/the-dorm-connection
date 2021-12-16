@@ -128,11 +128,11 @@
         android:label="RoomFragment"
         tools:layout="@layout/fragment_room_list">
         <action
-            android:id="@+id/action_roomFragment_to_roomCreateFragment"
-            app:destination="@id/roomCreateFragment" />
+            android:id="@+id/action_fragment_rooms_to_roomDetailsFragment"
+            app:destination="@id/roomDetailsFragment" />
         <action
-            android:id="@+id/action_fragment_rooms_to_roomDetailFragment"
-            app:destination="@id/roomDetailFragment" />
+            android:id="@+id/action_fragment_rooms_to_roomCreateFragment"
+            app:destination="@id/roomCreateFragment" />
     </fragment>
     <fragment
         android:id="@+id/postDetailsFragment"
@@ -191,6 +191,18 @@
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/roomDetailsFragment"
+        android:name="com.novatc.ap_app.fragments.RoomDetailsFragment"
+        android:label="RoomDetailsFragment"
+        tools:layout="@layout/fragment_room_details">
+        <action
+            android:id="@+id/action_roomDetailsFragment_to_fragment_rooms"
+            app:destination="@id/fragment_rooms" />
+        <argument
+            android:name="clickedRoom"
+            app:argType="com.novatc.ap_app.model.RoomWithUser" />
+    </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.novatc.ap_app.activities.MainActivity"
@@ -203,13 +215,5 @@
         <argument
             android:name="event"
             app:argType="com.novatc.ap_app.model.EventWithUser" />
-    </fragment>
-    <fragment
-        android:id="@+id/roomDetailFragment"
-        android:name="com.novatc.ap_app.fragments.RoomDetailFragment"
-        android:label="RoomDetailFragment" >
-        <argument
-            android:name="selectedRoom"
-            app:argType="com.novatc.ap_app.model.RoomWithUser" />
     </fragment>
 </navigation>

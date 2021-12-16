@@ -14,7 +14,7 @@
             android:background="@drawable/rounded_corners_background">
 
                 <TextView
-                    android:id="@+id/eventDetailsName"
+                    android:id="@+id/detail_room_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
@@ -35,10 +35,10 @@
                     app:layout_constraintBottom_toTopOf="@+id/fab_room_location"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/eventDetailsName" />
+                    app:layout_constraintTop_toBottomOf="@+id/detail_room_title" />
 
                 <TextView
-                    android:id="@+id/tv_room_description"
+                    android:id="@+id/detail_room_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="60dp"
@@ -55,7 +55,7 @@
                     android:layout_marginBottom="100dp"
                     android:clickable="true"
                     android:src="@drawable/ic_baseline_location_on_24"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_room_description"
+                    app:layout_constraintBottom_toTopOf="@+id/detail_room_description"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -68,6 +68,20 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/btn_delete_room"
+                    android:layout_width="@dimen/btn_edit_profile_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="@color/radical_red"
+                    android:text="@string/btn_delete_room"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_join_event" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

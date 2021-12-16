@@ -22,7 +22,10 @@ import com.novatc.ap_app.model.Room
 import com.novatc.ap_app.model.RoomWithUser
 import com.novatc.ap_app.viewModels.RoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_add_post.view.*
+import kotlinx.android.synthetic.main.fragment_event.view.*
 import kotlinx.android.synthetic.main.fragment_room_list.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
@@ -34,17 +37,17 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_room_list, container, false)
         fillRoomsList(view)
-        val addRoomButton: FloatingActionButton = view.findViewById(R.id.btn_addRoomsButton)
         setAddRoomButtonListener(view)
         return view
     }
 
     override fun onItemClick(position: Int) {
         val room = roomList[position]
-        val action = RoomsFragmentDirections.actionFragmentRoomsToRoomDetailFragment(room)
+        val action = RoomsFragmentDirections.actionFragmentRoomsToRoomDetailsFragment(room)
         findNavController().navigate(action)
     }
 
+    @ExperimentalCoroutinesApi
     private fun fillRoomsList(view: View) {
         view.roomsListSpinner.visibility = View.VISIBLE
         val recyclerView: RecyclerView = view.findViewById((R.id.available_rooms))
@@ -60,7 +63,7 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
     private fun setAddRoomButtonListener(view: View) {
         val addRoomButton: FloatingActionButton = view.btn_addRoomsButton
         addRoomButton.setOnClickListener {
-            val action = RoomsFragmentDirections.actionRoomFragmentToRoomCreateFragment()
+            val action = RoomsFragmentDirections.actionFragmentRoomsToRoomCreateFragment()
             view.findNavController().navigate(action)
         }
     }

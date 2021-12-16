@@ -34,7 +34,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     lateinit var userRepository: UserRepository
     private lateinit var dateButton: Button
     private var eventDate = "2021-01-01"
-    val createEventViewModel: CreateEventViewModel by viewModels()
+    private val createEventViewModel: CreateEventViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

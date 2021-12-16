@@ -11,16 +11,13 @@ import com.novatc.ap_app.model.RoomWithUser
 import com.novatc.ap_app.model.User
 import com.novatc.ap_app.repository.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class RoomViewModel @Inject constructor(
-    roomRepository: RoomRepository
+    private val roomRepository: RoomRepository
 ): ViewModel() {
 
     private var fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -52,6 +49,7 @@ class RoomViewModel @Inject constructor(
                     documents.forEach {
                         val room = it.toObject(Room::class.java)
                         if (room != null) {
+                            room.key = it.id
                             val user = room.userId?.let { it1 ->
                                 fireStore.collection(Constants.USER)
                                     .document(it1)
@@ -60,14 +58,25 @@ class RoomViewModel @Inject constructor(
                                     .toObject(User::class.java)
                             }
                             val roomWithUser =
-                                room.name?.let { it1 -> room.address?.let { it2 ->
-                                    room.text?.let { it3 ->
-                                        room.minimumBookingTime?.let { it4 ->
-                                            RoomWithUser(it1,
-                                                it2, it3, it4, user)
+                                room.name?.let { it1 ->
+                                    room.address?.let { it2 ->
+                                        room.userId?.let { it3 ->
+                                            room.text?.let { it4 ->
+                                                room.minimumBookingTime?.let { it5 ->
+                                                    room.imageName?.let { it6 ->
+                                                        room.key?.let { it7 ->
+                                                            RoomWithUser(
+                                                                it1, it2, it3, it4, it5, it6, it7, user
+                                                            )
+                                                        }
+
+                                                    }
+
+                                                }
+                                            }
                                         }
                                     }
-                                } }
+                                }
                             if (roomWithUser != null) {
                                 allRooms.add(roomWithUser)
                             }
@@ -83,6 +92,9 @@ class RoomViewModel @Inject constructor(
         }
 
     }
+
+
+
 
 
 }
