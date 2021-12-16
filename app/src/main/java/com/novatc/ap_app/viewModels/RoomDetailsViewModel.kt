@@ -20,8 +20,8 @@ class RoomDetailsViewModel @Inject constructor(
         }
     }
 
-    suspend fun deleteRoom(roomID: String){
-        roomRepository.deleteRoom(roomID)
+    suspend fun deleteRoom(roomID: String, imageUri:String){
+        roomRepository.deleteRoom(roomID, imageUri)
     }
 
 }

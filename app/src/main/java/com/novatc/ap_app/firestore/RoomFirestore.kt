@@ -13,6 +13,7 @@ import com.google.firebase.storage.ktx.*
 import com.novatc.ap_app.constants.Constants
 import com.novatc.ap_app.fragments.RoomCreateFragment
 import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.model.RoomWithUser
 import kotlinx.coroutines.tasks.await
 import java.net.URI
 import java.util.*
@@ -33,7 +34,10 @@ class RoomFirestore @Inject constructor(){
         Log.e("FIRE", "Created room with id: ${room.key}")
     }
 
-    suspend fun deleteRoom(roomID: String){
+    suspend fun deleteRoom(roomID: String, imageUri: String){
+        if(imageUri != ""){
+            FirestoreMethods.deletePicture(imageUri)
+        }
         mFirestore.collection(Constants.ROOMS).document(roomID).delete().await()
     }
 }

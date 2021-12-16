@@ -21,7 +21,7 @@ data class RoomWithUser(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
+        parcel.readString()
     )
 
 
@@ -40,12 +40,12 @@ data class RoomWithUser(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Room> {
-        override fun createFromParcel(parcel: Parcel): Room {
-            return Room(parcel)
+    companion object CREATOR : Parcelable.Creator<RoomWithUser> {
+        override fun createFromParcel(parcel: Parcel): RoomWithUser {
+            return RoomWithUser(parcel)
         }
 
-        override fun newArray(size: Int): Array<Room?> {
+        override fun newArray(size: Int): Array<RoomWithUser?> {
             return arrayOfNulls(size)
         }
     }

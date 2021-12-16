@@ -45,10 +45,13 @@ class RoomDetailsFragment : Fragment() {
             view.btn_delete_room.visibility = View.VISIBLE
             view.btn_delete_room.setOnClickListener {
                 lifecycleScope.launch {
-                    room.key?.let { it1 -> roomDetailsViewModel.deleteRoom(roomID = it1) }
+                    room.key?.let { it1 ->
+                        room.imageName?.let { it2 ->
+                            roomDetailsViewModel.deleteRoom(roomID = it1, imageUri = it2)
+                        }}
                 }
-                //val action = PostDetailsFragmentDirections.actionPostDetailsFragmentToFragmentPinboard()
-                //findNavController().navigate(action)
+                val action = RoomDetailsFragmentDirections.actionRoomDetailsFragmentToFragmentRooms()
+                findNavController().navigate(action)
             }
         }else{
             view.btn_delete_room.visibility = View.GONE

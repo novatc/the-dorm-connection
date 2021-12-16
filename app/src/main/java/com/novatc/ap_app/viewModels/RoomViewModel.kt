@@ -36,11 +36,6 @@ class RoomViewModel @Inject constructor(
             _rooms = value
         }
 
-    suspend fun deleteRoom(roomID: String) {
-        roomRepository.deleteRoom(roomID)
-    }
-
-
     private fun loadRooms() {
         fireStore.collection(Constants.ROOMS).addSnapshotListener { snapshot, e ->
             if (e != null) {
@@ -54,6 +49,7 @@ class RoomViewModel @Inject constructor(
                     documents.forEach {
                         val room = it.toObject(Room::class.java)
                         if (room != null) {
+                            room.key = it.id
                             val user = room.userId?.let { it1 ->
                                 fireStore.collection(Constants.USER)
                                     .document(it1)

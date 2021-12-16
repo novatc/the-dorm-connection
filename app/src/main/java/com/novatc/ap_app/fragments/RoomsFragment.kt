@@ -25,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_event.view.*
 import kotlinx.android.synthetic.main.fragment_room_list.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
@@ -46,6 +47,7 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
         findNavController().navigate(action)
     }
 
+    @ExperimentalCoroutinesApi
     private fun fillRoomsList(view: View) {
         view.roomsListSpinner.visibility = View.VISIBLE
         val recyclerView: RecyclerView = view.findViewById((R.id.available_rooms))

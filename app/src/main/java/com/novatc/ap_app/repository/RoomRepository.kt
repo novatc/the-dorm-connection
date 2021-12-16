@@ -23,9 +23,9 @@ class RoomRepository @Inject constructor(
         roomFirestore.addRoom(room, context)
     }
 
-    suspend fun deleteRoom(roomID: String)
+    suspend fun deleteRoom(roomID: String, imageUri: String)
     {
-        roomFirestore.deleteRoom(roomID)
+        roomFirestore.deleteRoom(roomID, imageUri)
     }
 
 }

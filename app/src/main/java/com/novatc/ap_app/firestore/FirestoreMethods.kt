@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import com.novatc.ap_app.R
 
@@ -37,6 +38,12 @@ class FirestoreMethods {
                 Toast.makeText(context, "Image could not be uploaded", Toast.LENGTH_SHORT).show()
                 setDialog(false)
             }
+        }
+
+        fun deletePicture(profileImg: String){
+            storage = Firebase.storage
+            val photoRef: StorageReference = FirebaseStorage.getInstance().getReference("images/$profileImg")
+            photoRef.delete().addOnSuccessListener {  }.addOnFailureListener {  }
         }
 
         private fun setDialog(show: Boolean) {
