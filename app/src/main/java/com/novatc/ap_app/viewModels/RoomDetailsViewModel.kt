@@ -1,6 +1,7 @@
 package com.novatc.ap_app.viewModels
 
 import android.content.Context
+import android.widget.ImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.novatc.ap_app.repository.RoomRepository
@@ -22,6 +23,10 @@ class RoomDetailsViewModel @Inject constructor(
 
     suspend fun deleteRoom(roomID: String, imageUri:String){
         roomRepository.deleteRoom(roomID, imageUri)
+    }
+
+    suspend fun loadPicture(imageView: ImageView, imageName: String?, context: Context?){
+        roomRepository.loadPicture(imageView, imageName, context)
     }
 
 }

@@ -1,6 +1,7 @@
 package com.novatc.ap_app.repository
 
 import android.content.Context
+import android.widget.ImageView
 import com.novatc.ap_app.firestore.RoomFirestore
 import com.novatc.ap_app.firestore.UserFirestore
 import com.novatc.ap_app.model.Room
@@ -26,6 +27,10 @@ class RoomRepository @Inject constructor(
     suspend fun deleteRoom(roomID: String, imageUri: String)
     {
         roomFirestore.deleteRoom(roomID, imageUri)
+    }
+
+    suspend fun loadPicture(imageView: ImageView, imageName: String?, context: Context?){
+        roomFirestore.loadPicture(imageView, imageName, context)
     }
 
 }

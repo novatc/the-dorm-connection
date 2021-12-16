@@ -1,5 +1,6 @@
 package com.novatc.ap_app.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,13 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.novatc.ap_app.R
-import com.novatc.ap_app.model.Room
 import com.novatc.ap_app.model.RoomWithUser
-import com.novatc.ap_app.repository.RoomRepository
 import com.novatc.ap_app.repository.UserRepository
 import com.novatc.ap_app.viewModels.RoomDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_post_details.view.*
 import kotlinx.android.synthetic.main.fragment_room_details.view.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -40,6 +38,10 @@ class RoomDetailsFragment : Fragment() {
 
         view.detail_room_title.text = room.name
         view.detail_room_description.text = room.text
+        val context : Context? = context
+        lifecycleScope.launch{
+            roomDetailsViewModel.loadPicture(view.iv_room_picture, room.imageName, context)
+        }
 
         if (room.userId == userRepository.readCurrentId()){
             view.btn_delete_room.visibility = View.VISIBLE

@@ -1,21 +1,14 @@
 package com.novatc.ap_app.firestore
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import android.widget.Toast
-import com.google.firebase.firestore.SetOptions
+import android.widget.ImageView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.*
 import com.novatc.ap_app.constants.Constants
-import com.novatc.ap_app.fragments.RoomCreateFragment
 import com.novatc.ap_app.model.Room
-import com.novatc.ap_app.model.RoomWithUser
 import kotlinx.coroutines.tasks.await
-import java.net.URI
 import java.util.*
 import javax.inject.Inject
 
@@ -39,5 +32,11 @@ class RoomFirestore @Inject constructor(){
             FirestoreMethods.deletePicture(imageUri)
         }
         mFirestore.collection(Constants.ROOMS).document(roomID).delete().await()
+    }
+
+    suspend fun loadPicture(imageView: ImageView, imageName: String?, context: Context?){
+        if (imageName != null) {
+            FirestoreMethods.loadPicture(imageView, imageName, context)
+        }
     }
 }
