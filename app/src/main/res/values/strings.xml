@@ -61,6 +61,8 @@
     <string name="detail_event_leave_button">Leave</string>
     <string name="detail_event_join_error">Could not join event, please try again.</string>
     <string name="detail_event_leave_error">Could not leave event, please try again.</string>
+    <string name="detail_event_img_description">Image of the event</string>
+    <string name="create_event_date">01-01-2021</string>
 
     #rooms
     <string name="rooms_add_tagline">Create a Room</string>
@@ -115,5 +117,6 @@
     <string name="choose_dorm_warning">Be aware that you can only choose one dorm with your account. Changes to your dorm are no longer possible after you selected one!</string>
     <string name="book_room_button">Book room</string>
     <string name="participate_in_event">Join event</string>
+
 
 </resources>

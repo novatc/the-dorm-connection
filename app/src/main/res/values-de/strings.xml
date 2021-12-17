@@ -40,7 +40,7 @@
     <string name="event_description">Beschreibung</string>
     <string name="event_name">Name</string>
     <string name="event_date">Datum</string>
-    <string name="create_event_address">Straßennamer</string>
+    <string name="create_event_address">Straßenname</string>
     <string name="create_event_house_number">Hausnummer</string>
     <string name="create_event_city">Stadt</string>
     <string name="create_event_general_information">Allgemeines</string>
@@ -59,6 +59,8 @@
     <string name="detail_event_leave_button">Verlassen</string>
     <string name="detail_event_join_error">Konnte dem Event nicht beitreten, versuche es nochmal.</string>
     <string name="detail_event_leave_error">Konnte das Event nicht verlassen, versuche es nochmal.</string>
+    <string name="detail_event_img_description">Bild des Events</string>
+    <string name="create_event_date">01-01-2021</string>
 
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>
@@ -111,5 +113,6 @@
     <string name="choose_my_dorm">Nimm dieses als mein Wohnheim</string>
     <string name="choose_dorm_warning">Sei dir bewusst, dass du nur ein Wohnheim pro Account wählen kannst! Diese Entscheidung kann nicht revidiert werden!</string>
     <string name="participate_in_event">Nimm am Event teil</string>
+
 
 </resources>
