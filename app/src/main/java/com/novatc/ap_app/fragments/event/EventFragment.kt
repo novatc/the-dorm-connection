@@ -44,8 +44,7 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
     private fun setAddEventButtonListener(view: View) {
         val addEventButton: FloatingActionButton = view.createEventButton
         addEventButton.setOnClickListener {
-            val action = EventFragmentDirections.actionEventFragmentToEventCreateFragment()
-            view.findNavController().navigate(action)
+            view.findNavController().navigate(EventFragmentDirections.actionEventFragmentToEventCreateFragment())
         }
     }
 

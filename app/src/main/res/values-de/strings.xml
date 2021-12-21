@@ -61,6 +61,9 @@
     <string name="detail_event_leave_error">Konnte das Event nicht verlassen, versuche es nochmal.</string>
     <string name="detail_event_img_description">Bild des Events</string>
     <string name="create_event_date">01-01-2021</string>
+    <string name="delete_event_button_text">Löschen</string>
+    <string name="details_event_delete_successfull">Event erfolgreich gelöscht</string>
+    <string name="details_event_delete_error">Das Event konnte nicht gelöscht werden, versuche es nochmal.</string>
 
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>

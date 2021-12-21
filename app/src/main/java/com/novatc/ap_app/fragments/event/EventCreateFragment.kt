@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.Toast
-import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
@@ -71,10 +71,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         } catch (e: Exception) {
             Toast.makeText(requireActivity(), "Could not create event", Toast.LENGTH_SHORT).show()
         }
-
-        parentFragmentManager.commit {
-            replace(R.id.nav_host_fragment, EventFragment())
-        }
+        view.findNavController().navigate(EventCreateFragmentDirections.actionEventCreateFragmentToEventFragment())
     }
 
     private fun isFormValid(
@@ -119,7 +116,6 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        Log.d("Datepicker", "Jahr: $year Monat: $month Tag: $dayOfMonth")
         var monthString = (month + 1).toString()
         var dayOfMonthString = dayOfMonth.toString()
         if (month < 10) {

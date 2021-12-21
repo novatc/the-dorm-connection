@@ -68,4 +68,8 @@ class EventRepository
             ?: throw Exception("No user, when trying to add user to event")
         return eventFirestore.addUserToEvent(user, eventId)
     }
+
+    suspend fun deleteEvent(eventId: String): Void? {
+        return eventFirestore.deleteEvent(eventId)
+    }
 }

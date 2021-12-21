@@ -25,12 +25,16 @@ class EventDetailsViewModel @Inject constructor(
     private val _event = MutableLiveData<EventWithUser>()
     val event: LiveData<EventWithUser> = _event
 
-    private val _attendees = MutableLiveData<List<User>>()
-    val attendees: LiveData<List<User>> = _attendees
-
     fun setEvent(event: EventWithUser) {
         this._event.value = event
     }
+
+    private val _attendees = MutableLiveData<List<User>>()
+    val attendees: LiveData<List<User>> = _attendees
+
+    private val _deleteEventRequest = MutableLiveData<Request<*>>()
+    val deleteEventRequest: LiveData<Request<*>> = _deleteEventRequest
+
 
     private val _switchAttendanceRequest = MutableLiveData<Request<*>>()
     val switchAttendanceRequest: LiveData<Request<*>> = _switchAttendanceRequest
@@ -81,6 +85,32 @@ class EventDetailsViewModel @Inject constructor(
                             Request.error(R.string.detail_event_join_error, null)
                     }
                 }
+            }
+        }
+    }
+
+    fun isEventAuthor(): Boolean {
+        val currentUserId = userRepository.readCurrentId()
+        val currentEventUserId = _event.value?.user?.id
+        return currentUserId != null && currentEventUserId == currentUserId
+    }
+
+    fun deleteEvent() {
+        val currentEventId = _event.value?.id
+        if (currentEventId != null) {
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    eventRepository.deleteEvent(currentEventId)
+                    withContext(Dispatchers.Main) {
+                        _deleteEventRequest.value = Request.success(null)
+                    }
+                } catch (e: Exception) {
+                    Log.e("EventDetailsViewModel", e.toString())
+                    withContext(Dispatchers.Main) {
+                        _deleteEventRequest.value = Request.error(R.string.details_event_delete_error, null)
+                    }
+                }
+
             }
         }
     }

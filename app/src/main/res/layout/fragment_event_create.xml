@@ -107,7 +107,6 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="@string/create_event_city"
-            android:hintTextColor="#616161"
             android:importantForAutofill="no"
             android:inputType="textPostalAddress"
             android:minHeight="48dp"
