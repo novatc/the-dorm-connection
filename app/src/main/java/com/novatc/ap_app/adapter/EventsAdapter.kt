@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
@@ -12,7 +14,6 @@ import com.novatc.ap_app.model.EventWithUser
 
 
 class EventsAdapter(
-    private val eventListItems: ArrayList<EventWithUser>,
     private val listener: OnItemClickListener,
     private val onLocationClick: (Int) -> Unit
 ) : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
@@ -44,6 +45,38 @@ class EventsAdapter(
         }
 
     }
+    private val differCallback = object: DiffUtil.ItemCallback<EventWithUser>() {
+        override fun areItemsTheSame(oldItem: EventWithUser, newItem: EventWithUser): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: EventWithUser, newItem: EventWithUser): Boolean {
+            return when {
+                oldItem.id != newItem.id -> {
+                    false
+                }
+                oldItem.name != newItem.name -> {
+                    false
+                }
+                oldItem.text != newItem.text -> {
+                    false
+                }
+                oldItem.user != newItem.user -> {
+                    false
+                }
+                oldItem.date != newItem.date -> {
+                    false
+                }
+                oldItem.city != newItem.city -> {
+                    false
+                }
+                else -> true
+            }
+        }
+
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
@@ -56,7 +89,7 @@ class EventsAdapter(
     }
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
-        val eventListItem = eventListItems[position]
+        val eventListItem = differ.currentList[position]
         if (eventListItem.user != null) {
             holder.eventAuthor.text = eventListItem.user!!.username
         } else {
@@ -68,6 +101,8 @@ class EventsAdapter(
         holder.eventDate.text = eventListItem.date
     }
 
-    override fun getItemCount() = eventListItems.size
+    override fun getItemCount() = differ.currentList.size
 
 }
+
+

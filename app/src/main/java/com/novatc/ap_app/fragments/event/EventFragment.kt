@@ -27,8 +27,9 @@ import kotlinx.android.synthetic.main.fragment_event.view.*
  */
 @AndroidEntryPoint
 class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
-    var eventList:ArrayList<EventWithUser> = ArrayList()
 
+    var eventList:ArrayList<EventWithUser> = ArrayList()
+    lateinit var eventsAdapter: EventsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,12 +74,16 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         val recyclerView: RecyclerView = view.upcoming_events
         val model: EventViewModel by viewModels()
         view.eventsListSpinner.visibility = View.VISIBLE
+        eventsAdapter = EventsAdapter( this) { position -> onLocationClick(position) }
+        recyclerView.adapter = eventsAdapter
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+
         model.events.observe(this, { events ->
             view.eventsListSpinner.visibility = View.GONE
+            eventsAdapter.differ.submitList(events)
             eventList = events
-            recyclerView.adapter = EventsAdapter(events, this) { position -> onLocationClick(position) }
+
         })
-        recyclerView.layoutManager = LinearLayoutManager(activity)
     }
 
 }
