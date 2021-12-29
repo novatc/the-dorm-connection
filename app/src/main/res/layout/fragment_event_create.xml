@@ -24,6 +24,17 @@
             app:layout_constraintTop_toBottomOf="@+id/createEventDate"
             tools:ignore="TextContrastCheck" />
 
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/create_event_image_section"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCity"
+            tools:ignore="TextContrastCheck" />
+
         <Button
             android:id="@+id/createEventDate"
             style="?android:spinnerStyle"
@@ -65,14 +76,30 @@
         <Button
             android:id="@+id/createEvent"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/patriarch"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
+            android:backgroundTint="@color/green"
             android:text="@string/events_add_event_button"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eventCreateSelectImageButton"
+            tools:ignore="TextContrastCheck" />
+
+        <Button
+            android:id="@+id/eventCreateSelectImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/patriarch"
+            android:text="@string/create_event_select_image_button"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textCity" />
+            app:layout_constraintTop_toBottomOf="@+id/eventCreateImage" />
 
         <TextView
             android:id="@+id/textView3"
@@ -159,6 +186,18 @@
             app:layout_constraintEnd_toEndOf="@+id/createEventName"
             app:layout_constraintStart_toStartOf="@+id/createEventName"
             app:layout_constraintTop_toBottomOf="@+id/createEventName" />
+
+        <ImageView
+            android:id="@+id/eventCreateImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/create_event_image_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:srcCompat="@drawable/add_screen_image_placeholder"
+            tools:ignore="ImageContrastCheck" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

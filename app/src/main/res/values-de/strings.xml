@@ -51,7 +51,6 @@
     <string name="detail_event_join">Teilnehmen</string>
     <string name="detail_event_address">Adresse</string>
     <plurals name="detail_event_attendees_text">
-        <item quantity="zero">Das Event hat momentan keine Teilnehmer.</item>
         <item quantity="one">Das Event hat momentan einen Teilnehmer.</item>
         <item quantity="other">Das Event hat momentan %d Teilnehmer.</item>
     </plurals>
@@ -64,6 +63,13 @@
     <string name="delete_event_button_text">Löschen</string>
     <string name="details_event_delete_successfull">Event erfolgreich gelöscht</string>
     <string name="details_event_delete_error">Das Event konnte nicht gelöscht werden, versuche es nochmal.</string>
+    <string name="create_event_image_section">Bild</string>
+    <string name="create_event_image_title">Bild des Events</string>
+    <string name="create_event_select_image_button">Auswählen</string>
+    <string name="create_event_required_field">Alle Felder müssen ausgefüllt werden</string>
+    <string name="create_event_date_past">Das Eventdatum kann nicht in der Vergangenheit liegen</string>
+    <string name="create_event_event_created_message">Event erstellt</string>
+    <string name="create_event_event_not_created_message">Das Event konnte nicht stellt werden, versuche es nochmal.</string>
 
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>

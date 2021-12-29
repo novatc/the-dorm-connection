@@ -39,6 +39,9 @@ class EventDetailsViewModel @Inject constructor(
     private val _switchAttendanceRequest = MutableLiveData<Request<*>>()
     val switchAttendanceRequest: LiveData<Request<*>> = _switchAttendanceRequest
 
+    private val _loadImageRequest = MutableLiveData<Request<String?>>()
+    val loadImageRequest: LiveData<Request<String?>> = _loadImageRequest
+
     @ExperimentalCoroutinesApi
     fun loadEventAttendees() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -96,19 +99,38 @@ class EventDetailsViewModel @Inject constructor(
     }
 
     fun deleteEvent() {
-        val currentEventId = _event.value?.id
-        if (currentEventId != null) {
-            viewModelScope.launch(Dispatchers.IO) {
-                try {
-                    eventRepository.deleteEvent(currentEventId)
+        val currentEventId = _event.value?.id!!
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                eventRepository.deleteEvent(currentEventId)
+                eventRepository.deleteEventImage(currentEventId)
+                withContext(Dispatchers.Main) {
+                    _deleteEventRequest.value = Request.success(null)
+                }
+            } catch (e: Exception) {
+                Log.e("EventDetailsViewModel", e.toString())
+                withContext(Dispatchers.Main) {
+                    _deleteEventRequest.value =
+                        Request.error(R.string.details_event_delete_error, null)
+                }
+            }
+
+        }
+    }
+
+    fun loadEventImage() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _event.value?.id?.let {
+                    val imageUri = eventRepository.loadEventImage(it)
                     withContext(Dispatchers.Main) {
-                        _deleteEventRequest.value = Request.success(null)
+                        _loadImageRequest.value = Request.success(imageUri)
                     }
-                } catch (e: Exception) {
-                    Log.e("EventDetailsViewModel", e.toString())
-                    withContext(Dispatchers.Main) {
-                        _deleteEventRequest.value = Request.error(R.string.details_event_delete_error, null)
-                    }
+                }
+            } catch (e: Exception) {
+                Log.e("LoadEventImage", "Could not load event image with id ${_event.value?.id}")
+                withContext(Dispatchers.Main) {
+                    _loadImageRequest.value = Request.error(null, null)
                 }
 
             }

@@ -1,6 +1,8 @@
 package com.novatc.ap_app.fragments.event
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,8 +12,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
@@ -30,11 +34,13 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     @Inject
     lateinit var eventRepository: EventRepository
+
     @Inject
     lateinit var userRepository: UserRepository
     private lateinit var dateButton: Button
     private var eventDate = "2021-01-01"
     private val createEventViewModel: CreateEventViewModel by viewModels()
+    private var imageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,34 +50,72 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         val view = inflater.inflate(R.layout.fragment_event_create, container, false)
         initDatePicker(view)
         dateButton = view.createEventDate
-        view.createEvent.setOnClickListener { onCreateEvent(view) }
+        setupOnCreateEventListener(view)
+        setupOnSelectImageListener(view)
         return view
     }
 
-    private fun onCreateEvent(view: View) {
-        val eventName = view.createEventName.text.toString().trim()
-        val eventText = view.createEventText.text.toString().trim()
-        val eventStreet = view.textStreetName.text.toString().trim()
-        val eventHouseNumber = view.textHouseNumber.text.toString().trim()
-        val eventCity = view.textCity.text.toString().trim()
+    private fun setupOnCreateEventListener(view: View) {
+        view.createEvent.setOnClickListener {
+            val eventName = view.createEventName.text.toString().trim()
+            val eventText = view.createEventText.text.toString().trim()
+            val eventStreet = view.textStreetName.text.toString().trim()
+            val eventHouseNumber = view.textHouseNumber.text.toString().trim()
+            val eventCity = view.textCity.text.toString().trim()
 
-        if (!isFormValid(
-                eventName,
-                eventText,
-                eventDate,
-                eventStreet,
-                eventHouseNumber,
-                eventCity
-            )
-        ) return
+            if (!isFormValid(
+                    eventName,
+                    eventText,
+                    eventDate,
+                    eventStreet,
+                    eventHouseNumber,
+                    eventCity
+                )
+            ) return@setOnClickListener
 
-        try {
-            createEventViewModel.addEvent(eventName, eventDate, eventText, eventStreet, eventHouseNumber, eventCity)
-            Toast.makeText(requireActivity(), "Event created", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(requireActivity(), "Could not create event", Toast.LENGTH_SHORT).show()
+            try {
+                createEventViewModel.addEvent(
+                    eventName,
+                    eventDate,
+                    eventText,
+                    eventStreet,
+                    eventHouseNumber,
+                    eventCity,
+                    imageUri
+                )
+                Toast.makeText(requireActivity(), R.string.create_event_event_created_message, Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Toast.makeText(requireActivity(), R.string.create_event_event_not_created_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+            view.findNavController()
+                .navigate(EventCreateFragmentDirections.actionEventCreateFragmentToEventFragment())
         }
-        view.findNavController().navigate(EventCreateFragmentDirections.actionEventCreateFragmentToEventFragment())
+    }
+
+    private fun setupOnSelectImageListener(view: View) {
+        val imagePickerResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result ->
+            when (result.resultCode) {
+                Activity.RESULT_OK -> imageSelected(result.data?.data, view)
+                else -> Log.i("CreateEvent", "No image selected.")
+            }
+        }
+        view.eventCreateSelectImageButton.setOnClickListener {
+            ImagePicker.with(this)
+                .compress(1024)
+                .cropSquare()
+                .maxResultSize(400, 400)
+                .createIntent { intent -> imagePickerResult.launch(intent) }
+        }
+
+    }
+
+    private fun imageSelected(uri: Uri?, view: View) {
+        if (uri != null) {
+            view.eventCreateImage.setImageURI(uri)
+            imageUri = uri
+        }
     }
 
     private fun isFormValid(
@@ -89,11 +133,11 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             || eventHouseNumber.isBlank()
             || eventCity.isBlank()
         ) {
-            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context!!, R.string.create_event_required_field, Toast.LENGTH_SHORT).show()
             return false
         }
         if (dateIsInPast(eventDate)) {
-            Toast.makeText(context!!, "Event date is in the past.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context!!, R.string.create_event_date_past, Toast.LENGTH_SHORT).show()
             return false
         }
         return true

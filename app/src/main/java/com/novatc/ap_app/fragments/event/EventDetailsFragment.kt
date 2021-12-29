@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.EventDetailsStateAdapter
+import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.viewModels.event.EventDetailsViewModel
-import com.novatc.ap_app.viewModels.event.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event_details.view.*
 
@@ -39,6 +39,17 @@ class EventDetailsFragment : Fragment() {
         model.setEvent(event)
         view.eventDetailsName.text = event.name
         view.eventDetailsDate.text = event.date
+        model.loadEventImage()
+        model.loadImageRequest.observe(this, { request ->
+            if (request.status == Request.Status.SUCCESS) {
+                val imageUri = request.data
+                Glide.with(this)
+                    .load(imageUri)
+                    .fitCenter()
+                    .placeholder(R.drawable.circular_progress_bar)
+                    .into(view.eventDetailsImage)
+            }
+        })
         return view
     }
 

@@ -30,12 +30,12 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_event_picture"
+            app:layout_constraintStart_toEndOf="@+id/eventDetailsImage"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Name" />
 
         <ImageView
-            android:id="@+id/iv_event_picture"
+            android:id="@+id/eventDetailsImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toEndOf="@+id/iv_event_picture"
+            app:layout_constraintStart_toEndOf="@+id/eventDetailsImage"
             app:layout_constraintTop_toBottomOf="@+id/eventDetailsName"
             tools:text="Date" />
 

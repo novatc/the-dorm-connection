@@ -1,7 +1,6 @@
 package com.novatc.ap_app.firestore
 
 import android.util.Log
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import com.novatc.ap_app.constants.Constants
 import com.novatc.ap_app.model.Event
@@ -62,8 +61,8 @@ class EventFirestore @Inject constructor() {
         }
     }
 
-    fun addEvent(event: Event): Task<Void> {
-        return mFirestore.collection(Constants.EVENTS).document().set(event, SetOptions.merge())
+    suspend fun addEvent(event: Event): String {
+        return mFirestore.collection(Constants.EVENTS).add(event).await().id
     }
 
     fun getEventAttendeesFlow(eventId: String): Flow<List<User>> {

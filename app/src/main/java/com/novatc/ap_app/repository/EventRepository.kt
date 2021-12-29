@@ -1,21 +1,23 @@
 package com.novatc.ap_app.repository
 
+import android.net.Uri
+import com.google.firebase.storage.UploadTask
+import com.novatc.ap_app.constants.UploadDirectories
 import com.novatc.ap_app.firestore.EventFirestore
+import com.novatc.ap_app.firestore.StorageFirestore
 import com.novatc.ap_app.firestore.UserFirestore
 import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.User
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import java.lang.Exception
 import javax.inject.Inject
 
 class EventRepository
 @Inject constructor(
     private val eventFirestore: EventFirestore,
-    private val userFirestore: UserFirestore
+    private val userFirestore: UserFirestore,
+    private val storageFirestore: StorageFirestore
 ) {
 
     suspend fun add(
@@ -25,8 +27,8 @@ class EventRepository
         eventStreet: String,
         eventHouseNumber: String,
         eventCity: String,
-        user: User
-    ) {
+        imageUri: Uri?,
+    ): UploadTask.TaskSnapshot? {
         val userId = userFirestore.getCurrentUserID()
             ?: throw Exception("No user id, when trying to create an event.")
         val event = Event(
@@ -39,10 +41,9 @@ class EventRepository
             houseNumber = eventHouseNumber,
             city = eventCity
         )
-        event.addUser(user)
-        return withContext(Dispatchers.IO) {
-            eventFirestore.addEvent(event).await()
-        }
+        val eventId = eventFirestore.addEvent(event)
+        return if(imageUri != null) storageFirestore.uploadImage(UploadDirectories.EVENTS, eventId, imageUri) else null
+
     }
 
     @ExperimentalCoroutinesApi
@@ -71,5 +72,13 @@ class EventRepository
 
     suspend fun deleteEvent(eventId: String): Void? {
         return eventFirestore.deleteEvent(eventId)
+    }
+
+    suspend fun deleteEventImage(eventId: String): Void? {
+        return storageFirestore.deleteImage(UploadDirectories.EVENTS, eventId)
+    }
+
+    suspend fun loadEventImage(eventId: String): String {
+        return storageFirestore.loadImage(UploadDirectories.EVENTS, eventId)
     }
 }

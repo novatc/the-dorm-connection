@@ -66,6 +66,13 @@
     <string name="delete_event_button_text">Delete</string>
     <string name="details_event_delete_successfull">Event successfully deleted</string>
     <string name="details_event_delete_error">Could not delete event, please try again.</string>
+    <string name="create_event_image_section">Image</string>
+    <string name="create_event_image_title">Image of the event</string>
+    <string name="create_event_select_image_button">Select</string>
+    <string name="create_event_required_field">All fields are required</string>
+    <string name="create_event_date_past">Event dates cannot be in the past</string>
+    <string name="create_event_event_created_message">Event created</string>
+    <string name="create_event_event_not_created_message">Could not create event, please try again.</string>
 
     #rooms
     <string name="rooms_add_tagline">Create a Room</string>

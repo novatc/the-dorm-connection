@@ -1,5 +1,6 @@
 package com.novatc.ap_app.viewModels.event
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.novatc.ap_app.repository.EventRepository
@@ -11,8 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateEventViewModel @Inject constructor(
-    private val eventRepository: EventRepository,
-    private val userRepository: UserRepository
+    private val eventRepository: EventRepository
 ) : ViewModel() {
 
     fun addEvent(
@@ -22,15 +22,15 @@ class CreateEventViewModel @Inject constructor(
         eventStreet: String,
         eventHouseNumber: String,
         eventCity: String,
+        imageUri: Uri?
 
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            userRepository.readCurrent()?.let {
-                eventRepository.add(eventName, eventDate, eventText, eventStreet, eventHouseNumber, eventCity,
-                    it
-                )
-            }
+            eventRepository.add(
+                eventName, eventDate, eventText, eventStreet, eventHouseNumber, eventCity, imageUri
+            )
         }
     }
+
 
 }

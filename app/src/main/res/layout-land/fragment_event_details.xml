@@ -28,14 +28,14 @@
             android:textColor="@color/shadow_blue"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_event_picture"
-            app:layout_constraintStart_toEndOf="@+id/iv_event_picture"
-            app:layout_constraintTop_toTopOf="@+id/iv_event_picture"
+            app:layout_constraintBottom_toBottomOf="@+id/eventDetailsImage"
+            app:layout_constraintStart_toEndOf="@+id/eventDetailsImage"
+            app:layout_constraintTop_toTopOf="@+id/eventDetailsImage"
             tools:ignore="TextContrastCheck"
             tools:text="Name" />
 
         <ImageView
-            android:id="@+id/iv_event_picture"
+            android:id="@+id/eventDetailsImage"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="24dp"
@@ -55,7 +55,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_event_picture"
+            app:layout_constraintTop_toBottomOf="@+id/eventDetailsImage"
             app:tabIndicatorColor="@color/patriarch"
             app:tabMode="fixed">
 

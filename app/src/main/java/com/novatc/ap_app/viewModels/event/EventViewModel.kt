@@ -50,7 +50,6 @@ class EventViewModel @Inject constructor(
                 val eventsWithUser = ArrayList<EventWithUser>()
                 events.forEach {
                     val user = it.userId?.let { it1 -> userRepository.read(it1) }
-                    Log.e("EVENT", "User found in db event: ${user}")
                     if (user != null) {
                         val ev = EventWithUser(
                             name = it.name,
@@ -62,7 +61,6 @@ class EventViewModel @Inject constructor(
                             user = user,
                             id = it.id
                         )
-                        ev.addUserList(it.userList)
                         eventsWithUser.add(ev)
                     }
                 }
