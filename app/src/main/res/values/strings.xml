@@ -62,7 +62,7 @@
     <string name="detail_event_join_error">Could not join event, please try again.</string>
     <string name="detail_event_leave_error">Could not leave event, please try again.</string>
     <string name="detail_event_img_description">Image of the event</string>
-    <string name="create_event_date">01-01-2021</string>
+    <string name="create_event_date">01-01-2022</string>
     <string name="delete_event_button_text">Delete</string>
     <string name="details_event_delete_successfull">Event successfully deleted</string>
     <string name="details_event_delete_error">Could not delete event, please try again.</string>

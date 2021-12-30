@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.novatc.ap_app.R
-import com.novatc.ap_app.model.EventWithUser
+import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.model.User
 import com.novatc.ap_app.repository.EventRepository
@@ -22,10 +22,10 @@ class EventDetailsViewModel @Inject constructor(
     private val eventRepository: EventRepository
 ) : ViewModel() {
 
-    private val _event = MutableLiveData<EventWithUser>()
-    val event: LiveData<EventWithUser> = _event
+    private val _event = MutableLiveData<Event>()
+    val event: LiveData<Event> = _event
 
-    fun setEvent(event: EventWithUser) {
+    fun setEvent(event: Event) {
         this._event.value = event
     }
 
@@ -65,6 +65,7 @@ class EventDetailsViewModel @Inject constructor(
         return false
     }
 
+    // Switches the event attendance dependent on the current attendance state
     fun switchEventAttendance() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -94,10 +95,11 @@ class EventDetailsViewModel @Inject constructor(
 
     fun isEventAuthor(): Boolean {
         val currentUserId = userRepository.readCurrentId()
-        val currentEventUserId = _event.value?.user?.id
+        val currentEventUserId = _event.value?.authorId
         return currentUserId != null && currentEventUserId == currentUserId
     }
 
+    // Deletes an event and the corresponding image
     fun deleteEvent() {
         val currentEventId = _event.value?.id!!
         viewModelScope.launch(Dispatchers.IO) {

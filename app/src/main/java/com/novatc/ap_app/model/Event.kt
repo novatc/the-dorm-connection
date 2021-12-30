@@ -2,18 +2,21 @@ package com.novatc.ap_app.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.firestore.Exclude
 
 data class Event(
-    var id: String? = "",
+    @get:Exclude var id: String? = "",
     val name: String? = "",
     val date: String? = "",
-    val userId: String? = "",
+    val authorId: String? = "",
+    val authorName: String? = "",
     val text: String? = "",
     val streetName: String? = "",
     val houseNumber: String? = "",
     val city: String? = ""
 ): Parcelable{
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -32,7 +35,8 @@ data class Event(
         parcel.writeString(id)
         parcel.writeString(text)
         parcel.writeString(date)
-        parcel.writeString(userId)
+        parcel.writeString(authorId)
+        parcel.writeString(authorName)
         parcel.writeString(date)
         parcel.writeString(streetName)
         parcel.writeString(houseNumber)

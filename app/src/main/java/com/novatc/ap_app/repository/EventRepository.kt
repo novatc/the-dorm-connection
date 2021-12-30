@@ -20,6 +20,7 @@ class EventRepository
     private val storageFirestore: StorageFirestore
 ) {
 
+    // Adds a new event and uploads an image
     suspend fun add(
         eventName: String,
         eventDate: String,
@@ -31,11 +32,13 @@ class EventRepository
     ): UploadTask.TaskSnapshot? {
         val userId = userFirestore.getCurrentUserID()
             ?: throw Exception("No user id, when trying to create an event.")
+        val user = userFirestore.getUserData(userId)
         val event = Event(
             name = eventName,
             date =
             eventDate,
-            userId = userId,
+            authorId = userId,
+            authorName = user!!.username,
             text = eventText,
             streetName = eventStreet,
             houseNumber = eventHouseNumber,

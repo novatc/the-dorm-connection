@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
-import com.novatc.ap_app.model.EventWithUser
+import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.viewModels.event.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
@@ -28,8 +28,9 @@ import kotlinx.android.synthetic.main.fragment_event.view.*
 @AndroidEntryPoint
 class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
 
-    var eventList:ArrayList<EventWithUser> = ArrayList()
+    var eventList:List<Event> = emptyList()
     lateinit var eventsAdapter: EventsAdapter
+    val model: EventViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +42,7 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         return view
     }
 
-
+    // Navigate on plus button click to create event view
     private fun setAddEventButtonListener(view: View) {
         val addEventButton: FloatingActionButton = view.createEventButton
         addEventButton.setOnClickListener {
@@ -49,12 +50,14 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         }
     }
 
+    // Navigate on event click to event detail view
     override fun onItemClick(position: Int) {
         val event = eventList[position]
         val action = EventFragmentDirections.actionFragmentEventsToEventDetailsFragment(event)
         findNavController().navigate(action)
     }
 
+    // Opens Google Maps on location button click
     private fun onLocationClick(position: Int) {
         val event = eventList[position]
         val mapSearch = "${event.streetName} ${event.houseNumber}, ${event.city}"
@@ -70,9 +73,9 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
     }
 
 
+    // Setup recyclerview with events
     private fun fillEventsList(view: View) {
         val recyclerView: RecyclerView = view.upcoming_events
-        val model: EventViewModel by viewModels()
         view.eventsListSpinner.visibility = View.VISIBLE
         eventsAdapter = EventsAdapter( this) { position -> onLocationClick(position) }
         recyclerView.adapter = eventsAdapter

@@ -213,11 +213,11 @@
         android:name="com.novatc.ap_app.fragments.event.EventDetailsFragment"
         android:label="EventDetailsFragment"
         tools:layout="@layout/fragment_event_details">
-        <argument
-            android:name="event"
-            app:argType="com.novatc.ap_app.model.EventWithUser" />
         <action
             android:id="@+id/action_eventDetailsFragment_to_fragment_events"
             app:destination="@id/fragment_events" />
+        <argument
+            android:name="event"
+            app:argType="com.novatc.ap_app.model.Event" />
     </fragment>
 </navigation>

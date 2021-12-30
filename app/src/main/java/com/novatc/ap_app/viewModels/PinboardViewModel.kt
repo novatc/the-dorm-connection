@@ -1,19 +1,13 @@
 package com.novatc.ap_app.viewModels
 
-import com.novatc.ap_app.firestore.UserFirestore
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.novatc.ap_app.firestore.PostFirestore
-import com.novatc.ap_app.model.EventWithUser
 import kotlinx.coroutines.launch
 import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.repository.PostRepository
-import com.novatc.ap_app.repository.UserRepository
-import com.squareup.okhttp.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext

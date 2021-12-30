@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
-import com.novatc.ap_app.model.EventWithUser
+import com.novatc.ap_app.model.Event
 
 
 class EventsAdapter(
@@ -45,12 +45,12 @@ class EventsAdapter(
         }
 
     }
-    private val differCallback = object: DiffUtil.ItemCallback<EventWithUser>() {
-        override fun areItemsTheSame(oldItem: EventWithUser, newItem: EventWithUser): Boolean {
+    private val differCallback = object: DiffUtil.ItemCallback<Event>() {
+        override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: EventWithUser, newItem: EventWithUser): Boolean {
+        override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
             return when {
                 oldItem.id != newItem.id -> {
                     false
@@ -61,7 +61,7 @@ class EventsAdapter(
                 oldItem.text != newItem.text -> {
                     false
                 }
-                oldItem.user != newItem.user -> {
+                oldItem.authorId != newItem.authorId -> {
                     false
                 }
                 oldItem.date != newItem.date -> {
@@ -90,12 +90,7 @@ class EventsAdapter(
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
         val eventListItem = differ.currentList[position]
-        if (eventListItem.user != null) {
-            holder.eventAuthor.text = eventListItem.user!!.username
-        } else {
-            holder.eventAuthor.text = "NO USER"
-        }
-
+        holder.eventAuthor.text = eventListItem.authorName
         holder.eventName.text = eventListItem.name
         holder.eventText.text = eventListItem.text
         holder.eventDate.text = eventListItem.date

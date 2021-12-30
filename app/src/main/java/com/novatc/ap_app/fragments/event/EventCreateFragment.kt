@@ -20,25 +20,17 @@ import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEventName
-import com.novatc.ap_app.repository.EventRepository
-import com.novatc.ap_app.repository.UserRepository
 import com.novatc.ap_app.viewModels.event.CreateEventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
-    @Inject
-    lateinit var eventRepository: EventRepository
-
-    @Inject
-    lateinit var userRepository: UserRepository
     private lateinit var dateButton: Button
-    private var eventDate = "2021-01-01"
+    private var eventDate = "2022-01-01"
     private val createEventViewModel: CreateEventViewModel by viewModels()
     private var imageUri: Uri? = null
 
@@ -46,7 +38,6 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_event_create, container, false)
         initDatePicker(view)
         dateButton = view.createEventDate
@@ -55,6 +46,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         return view
     }
 
+    // Checks form on submit and creates a new event
     private fun setupOnCreateEventListener(view: View) {
         view.createEvent.setOnClickListener {
             val eventName = view.createEventName.text.toString().trim()
@@ -93,6 +85,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
     }
 
+    // Listener for when user has selected an image
     private fun setupOnSelectImageListener(view: View) {
         val imagePickerResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 result ->

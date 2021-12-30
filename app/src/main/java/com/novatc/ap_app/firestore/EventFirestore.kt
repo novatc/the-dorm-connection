@@ -13,7 +13,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class EventFirestore @Inject constructor() {
+class EventFirestore @Inject constructor(
+    private val helperFirestore: HelperFirestore
+) {
     private val mFirestore = FirebaseFirestore.getInstance()
 
     @ExperimentalCoroutinesApi
@@ -92,6 +94,8 @@ class EventFirestore @Inject constructor() {
     }
 
     suspend fun deleteEvent(eventId: String): Void? {
+        val attendees = mFirestore.collection(Constants.EVENTS).document(eventId).collection(Constants.ATTENDEES)
+        helperFirestore.deleteCollection(attendees, 5)
         return mFirestore.collection(Constants.EVENTS).document(eventId).delete().await()
     }
 
