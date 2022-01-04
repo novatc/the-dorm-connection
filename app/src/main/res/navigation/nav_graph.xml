@@ -119,7 +119,7 @@
     </fragment>
     <fragment
         android:id="@+id/editWgFragment"
-        android:name="com.novatc.ap_app.fragments.EditWgFragment"
+        android:name="com.novatc.ap_app.fragments.wg.EditWgFragment"
         android:label="EditWgFragment"
         tools:layout="@layout/fragment_edit_wg"/>
     <fragment
