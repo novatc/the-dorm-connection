@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
-import com.novatc.ap_app.model.RoomWithUser
+import com.novatc.ap_app.model.Room
 
 class RoomsAdapter(
-    private val roomsListItem: ArrayList<RoomWithUser>,
-    private val listener: RoomsAdapter.OnItemClickListener
+    private val roomsListItem: List<Room>,
+    private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 
     inner class RoomsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {

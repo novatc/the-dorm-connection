@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.room
 
 import android.app.Activity
 import android.app.TimePickerDialog
@@ -23,11 +23,9 @@ import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_dorm
 import com.novatc.ap_app.permissions.*
-import com.novatc.ap_app.repository.RoomRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
-import javax.inject.Inject
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.novatc.ap_app.viewModels.CreateRoomViewModel
 
@@ -36,8 +34,6 @@ import com.novatc.ap_app.viewModels.CreateRoomViewModel
 class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     private val createRoomViewModel: CreateRoomViewModel  by viewModels()
-    private var mCameraUri: Uri? = null
-    private var mGalleryUri: Uri? = null
     private var mProfileUri: Uri? = null
     private lateinit var imgProfile: ImageView
     lateinit var startForProfileImageResult: ActivityResultLauncher<Intent>
@@ -73,15 +69,14 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     }
 
     private fun onCreateRoom(view: View) {
-        val roomName = view.et_created_dorm_name.text.toString().trim()
-        val roomAddress = view.et_created_post_keywords.text.toString().trim()
-        val roomDescription = view.et_created_dorm_description.text.toString().trim()
+        val roomName = view.et_created_room_name.text.toString().trim()
+        val roomDescription = view.et_created_room_description.text.toString().trim()
+        val roomAddress = view.et_created_room_address.text.toString().trim()
         var minimumBookingTime = view.created_room_booking_time.text.toString().trim()
 
-//        if (roomName.isBlank() || roomAddress.isBlank() || roomDescription.isBlank() || !(minimumBookingTime.matches(Regex("\\d{2}-\\d{2}")))) {
-//            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
-//            return
-//        }
+        if(!isFormValid(roomName, roomAddress, roomDescription, minimumBookingTime)){
+            return
+        }
         context?.let {
             if(mProfileUri != null){
                 createRoomViewModel.addRoom(roomName, roomAddress, roomDescription, minimumBookingTime, (mProfileUri!!).toString(),
@@ -94,7 +89,6 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 )
             }
         }
-
         Toast.makeText(requireContext(), "Room created", Toast.LENGTH_SHORT).show()
 
     }
@@ -115,23 +109,14 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             //val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             //resultLauncher.launch(intent)
             ImagePicker.with(this)
-                .compress(1024)         //Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .compress(1024)
+                .cropSquare()//Final image size will be less than 1 MB(Optional)
+                .maxResultSize(400, 400)  //Final image resolution will be less than 1080 x 1080(Optional)
                 .createIntent { intent ->
                     startForProfileImageResult.launch(intent)
                 }
         }
     }
-
-    private fun onActivityResult(requestCode: Int, result: ActivityResult) {
-        if(result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            when (requestCode) {
-
-            }
-        }
-    }
-
 
     private fun initTimePicker(view: View) {
         val cal = Calendar.getInstance()
@@ -149,6 +134,27 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         var minuteString = minute.toString()
         var resultTime = hourString + ":" + minuteString
         created_room_booking_time.text = resultTime
+    }
+
+    private fun isFormValid(
+        roomName: String,
+        roomDescription: String,
+        roomAddress: String,
+        minimumBookingTime: String,
+    ): Boolean {
+        if (roomName.isBlank()
+            || roomDescription.isBlank()
+            || roomAddress.isBlank()
+            || minimumBookingTime.isBlank()
+        ) {
+            Toast.makeText(context!!, R.string.create_event_required_field, Toast.LENGTH_SHORT).show()
+            return false
+        }
+        //if (!(minimumBookingTime.matches(Regex("\\d{2}:\\d{2}")))) {
+        //    Toast.makeText(context!!, R.string.minimum_booking_time_invalid, Toast.LENGTH_SHORT).show()
+        //    return false
+        //}
+        return true
     }
 
 }

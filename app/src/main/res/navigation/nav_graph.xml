@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/roomCreateFragment"
-        android:name="com.novatc.ap_app.fragments.RoomCreateFragment"
+        android:name="com.novatc.ap_app.fragments.room.RoomCreateFragment"
         android:label="RoomCreateFragment"
         tools:layout="@layout/fragment_room_create">
         <action
@@ -124,7 +124,7 @@
         tools:layout="@layout/fragment_edit_wg"/>
     <fragment
         android:id="@+id/fragment_rooms"
-        android:name="com.novatc.ap_app.fragments.RoomsFragment"
+        android:name="com.novatc.ap_app.fragments.room.RoomsFragment"
         android:label="RoomFragment"
         tools:layout="@layout/fragment_room_list">
         <action
@@ -193,7 +193,7 @@
     </fragment>
     <fragment
         android:id="@+id/roomDetailsFragment"
-        android:name="com.novatc.ap_app.fragments.RoomDetailsFragment"
+        android:name="com.novatc.ap_app.fragments.room.RoomDetailsFragment"
         android:label="RoomDetailsFragment"
         tools:layout="@layout/fragment_room_details">
         <action
@@ -201,7 +201,7 @@
             app:destination="@id/fragment_rooms" />
         <argument
             android:name="clickedRoom"
-            app:argType="com.novatc.ap_app.model.RoomWithUser" />
+            app:argType="com.novatc.ap_app.model.Room" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"

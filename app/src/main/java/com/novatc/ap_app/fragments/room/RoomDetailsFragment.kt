@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.room
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.novatc.ap_app.R
-import com.novatc.ap_app.model.RoomWithUser
+import com.novatc.ap_app.model.Room
 import com.novatc.ap_app.repository.UserRepository
 import com.novatc.ap_app.viewModels.RoomDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +33,7 @@ class RoomDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_room_details, container, false)
-        val room: RoomWithUser = args.clickedRoom
+        val room: Room = args.clickedRoom
         Log.e("FIRE", "Post viewed: ${room}")
 
         view.detail_room_title.text = room.name
@@ -43,7 +43,7 @@ class RoomDetailsFragment : Fragment() {
             roomDetailsViewModel.loadPicture(view.iv_room_picture, room.imageName, context)
         }
 
-        if (room.userId == userRepository.readCurrentId()){
+        if (room.creatorID == userRepository.readCurrentId()){
             view.btn_delete_room.visibility = View.VISIBLE
             view.btn_delete_room.setOnClickListener {
                 lifecycleScope.launch {

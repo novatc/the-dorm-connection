@@ -17,7 +17,7 @@ class RoomDetailsViewModel @Inject constructor(
 
     fun addRoom(roomName: String, roomAddress: String, roomDescription: String, minimumBookingTime: String, profileImg: String, context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            roomRepository.add(roomName, roomAddress, roomDescription, minimumBookingTime, profileImg, context)
+            roomRepository.addRoom(roomName, roomAddress, roomDescription, minimumBookingTime, profileImg, context)
         }
     }
 
