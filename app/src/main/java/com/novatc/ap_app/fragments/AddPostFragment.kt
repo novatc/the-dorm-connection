@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.novatc.ap_app.R
@@ -14,6 +15,8 @@ import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_post_keywords
 import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_description
 import com.novatc.ap_app.repository.PostRepository
+import com.novatc.ap_app.viewModels.AddPostViewModel
+import com.novatc.ap_app.viewModels.CreateRoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -24,8 +27,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class AddPostFragment: Fragment() {
 
-    @Inject
-    lateinit var  postRepository: PostRepository
+    private val addPostViewModel: AddPostViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +53,7 @@ class AddPostFragment: Fragment() {
                 val keyword = view.et_created_post_keywords.text.toString()
                 val date = getCurrentDate()
                 lifecycleScope.launch {
-                    postRepository.addPost(headline, text, keyword, date)
+                    addPostViewModel.addPost(headline, text, keyword, date)
                     Toast.makeText(requireContext(), "Post created", Toast.LENGTH_SHORT).show()
                 }
                 val action = AddPostFragmentDirections.actionAddPostFragmentToFragmentPinboard()
