@@ -47,7 +47,7 @@ class RoomDetailsFragment : Fragment() {
             view.btn_delete_room.visibility = View.VISIBLE
             view.btn_delete_room.setOnClickListener {
                 lifecycleScope.launch {
-                    room.key?.let { it1 ->
+                    room.id?.let { it1 ->
                         room.imageName?.let { it2 ->
                             roomDetailsViewModel.deleteRoom(roomID = it1, imageUri = it2)
                         }}

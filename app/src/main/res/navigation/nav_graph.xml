@@ -98,7 +98,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseDormFragment"
-        android:name="com.novatc.ap_app.fragments.ChooseDormFragment"
+        android:name="com.novatc.ap_app.fragments.dorm.ChooseDormFragment"
         android:label="ChooseDormFragment"
         tools:layout="@layout/fragment_choose_dorm">
         <action
@@ -148,7 +148,7 @@
     </fragment>
     <fragment
         android:id="@+id/createDormFragment"
-        android:name="com.novatc.ap_app.fragments.CreateDormFragment"
+        android:name="com.novatc.ap_app.fragments.dorm.CreateDormFragment"
         android:label="fragment_create_dorm"
         tools:layout="@layout/fragment_create_dorm" >
         <action
@@ -157,7 +157,7 @@
     </fragment>
     <fragment
         android:id="@+id/dormDetailFragment"
-        android:name="com.novatc.ap_app.fragments.DormDetailFragment"
+        android:name="com.novatc.ap_app.fragments.dorm.DormDetailFragment"
         android:label="fragment_dorm_detail"
         tools:layout="@layout/fragment_dorm_detail" >
         <argument
