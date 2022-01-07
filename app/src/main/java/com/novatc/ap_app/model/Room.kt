@@ -3,19 +3,18 @@ package com.novatc.ap_app.model
 import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.firestore.Exclude
 
 data class Room(
     val name: String? = "",
     val address: String? = "",
-    val userId: String? = "",
-    val text: String? = "",
+    val description: String? = "",
     val minimumBookingTime: String? = "",
-    var imageName: String? = "",
+    val creatorID: String? = "",
     var key: String? = "",
-
+    @get:Exclude var id: String? = "",
     ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -27,13 +26,12 @@ data class Room(
 
     override fun writeToParcel(parcel: Parcel, p1: Int) {
         parcel.writeString(name)
-        parcel.writeString(text)
         parcel.writeString(address)
-        parcel.writeString(userId)
-        parcel.writeString(text)
+        parcel.writeString(description)
         parcel.writeString(minimumBookingTime)
-        parcel.writeString(imageName)
+        parcel.writeString(creatorID)
         parcel.writeString(key)
+        parcel.writeString(id)
     }
 
     override fun describeContents(): Int {

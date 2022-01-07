@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.dorm
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

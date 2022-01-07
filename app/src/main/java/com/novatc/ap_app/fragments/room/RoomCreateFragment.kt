@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.room
 
 import android.app.Activity
 import android.app.TimePickerDialog
@@ -21,24 +21,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
-import kotlinx.android.synthetic.main.fragment_room_create.view.btn_save_dorm
 import com.novatc.ap_app.permissions.*
-import com.novatc.ap_app.repository.RoomRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
-import javax.inject.Inject
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.novatc.ap_app.viewModels.CreateRoomViewModel
+import kotlinx.android.synthetic.main.fragment_event_create.view.*
 
 
 @AndroidEntryPoint
 class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     private val createRoomViewModel: CreateRoomViewModel  by viewModels()
-    private var mCameraUri: Uri? = null
-    private var mGalleryUri: Uri? = null
-    private var mProfileUri: Uri? = null
+    private var imageUri: Uri? = null
     private lateinit var imgProfile: ImageView
     lateinit var startForProfileImageResult: ActivityResultLauncher<Intent>
 
@@ -57,7 +53,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 //Image Uri will not be null for RESULT_OK
                 val fileUri = data?.data!!
                 imgProfile = view.imageView2
-                mProfileUri = fileUri
+                imageUri = fileUri
                 imgProfile.setImageURI(fileUri)
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 Log.d("Error", "Error")
@@ -67,42 +63,47 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         }
         super.onCreate(savedInstanceState)
         initTimePicker(view)
-        setSaveRoomButtonListener(view)
         setPermissions(view)
+        setOnCreateRoom(view)
         return view
     }
 
-    private fun onCreateRoom(view: View) {
-        val roomName = view.et_created_dorm_name.text.toString().trim()
-        val roomAddress = view.et_created_post_keywords.text.toString().trim()
-        val roomDescription = view.et_created_dorm_description.text.toString().trim()
-        var minimumBookingTime = view.created_room_booking_time.text.toString().trim()
+    private fun setOnCreateRoom(view: View) {
+        view.btn_create_room.setOnClickListener {
+            val roomName = view.et_created_room_name.text.toString().trim()
+            val roomAddress = view.et_created_room_address.text.toString().trim()
+            val roomDescription = view.et_created_room_description.text.toString().trim()
+            val minimumBookingTime = view.et_created_room_booking_time.text.toString().trim()
 
-//        if (roomName.isBlank() || roomAddress.isBlank() || roomDescription.isBlank() || !(minimumBookingTime.matches(Regex("\\d{2}-\\d{2}")))) {
-//            Toast.makeText(context!!, "All fields are required.", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-        context?.let {
-            if(mProfileUri != null){
-                createRoomViewModel.addRoom(roomName, roomAddress, roomDescription, minimumBookingTime, (mProfileUri!!).toString(),
-                    it
+            if (!isFormValid(
+                    roomName,
+                    roomAddress,
+                    roomDescription,
+                    minimumBookingTime,
                 )
-            }
-            else{
-                createRoomViewModel.addRoom(roomName, roomAddress, roomDescription, minimumBookingTime, "",
-                    it
+            ) return@setOnClickListener
+
+            try {
+                createRoomViewModel.addRoom(
+                    roomName,
+                    roomAddress,
+                    roomDescription,
+                    minimumBookingTime,
+                    imageUri
                 )
+                Toast.makeText(
+                    requireActivity(),
+                    R.string.create_event_event_created_message,
+                    Toast.LENGTH_SHORT
+                ).show()
+            } catch (e: Exception) {
+                Toast.makeText(
+                    requireActivity(),
+                    R.string.create_event_event_not_created_message,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
             }
-        }
-
-        Toast.makeText(requireContext(), "Room created", Toast.LENGTH_SHORT).show()
-
-    }
-
-    private fun setSaveRoomButtonListener(view: View) {
-        val saveRoomButton: Button = view.btn_save_dorm
-        saveRoomButton.setOnClickListener {
-            onCreateRoom(view)
             val action = RoomCreateFragmentDirections.actionRoomCreateFragmentToRoomFragment()
             view.findNavController().navigate(action)
         }
@@ -115,29 +116,20 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             //val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             //resultLauncher.launch(intent)
             ImagePicker.with(this)
-                .compress(1024)         //Final image size will be less than 1 MB(Optional)
-                .maxResultSize(1080, 1080)  //Final image resolution will be less than 1080 x 1080(Optional)
+                .compress(1024)
+                .cropSquare()//Final image size will be less than 1 MB(Optional)
+                .maxResultSize(400, 400)  //Final image resolution will be less than 1080 x 1080(Optional)
                 .createIntent { intent ->
                     startForProfileImageResult.launch(intent)
                 }
         }
     }
 
-    private fun onActivityResult(requestCode: Int, result: ActivityResult) {
-        if(result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            when (requestCode) {
-
-            }
-        }
-    }
-
-
     private fun initTimePicker(view: View) {
         val cal = Calendar.getInstance()
         val hour = cal.get(Calendar.HOUR)
         val minute = cal.get(Calendar.MINUTE)
-        view.created_room_booking_time.setOnClickListener {
+        view.et_created_room_booking_time.setOnClickListener {
             TimePickerDialog(context!!, this, hour, minute, true).show()
         }
 
@@ -148,7 +140,24 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         var hourString = hour.toString()
         var minuteString = minute.toString()
         var resultTime = hourString + ":" + minuteString
-        created_room_booking_time.text = resultTime
+        et_created_room_booking_time.text = resultTime
+    }
+
+    private fun isFormValid(
+        roomName: String,
+        roomDescription: String,
+        roomAddress: String,
+        minimumBookingTime: String,
+    ): Boolean {
+        if (roomName.isBlank()
+            || roomDescription.isBlank()
+            || roomAddress.isBlank()
+            || minimumBookingTime.isBlank()
+        ) {
+            Toast.makeText(context!!, R.string.create_event_required_field, Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
     }
 
 }

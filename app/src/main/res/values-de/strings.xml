@@ -85,6 +85,7 @@
     <string name="btn_book_room">Buche diesen Raum</string>
     <string name="book_room_button">Buche diesen Raum</string>
     <string name="btn_delete_room">Lösche Raum</string>
+    <string name="minimum_booking_time_invalid">Bitte nutze das vorgeschlagene Format für die min. Buchzeit!</string>
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>
