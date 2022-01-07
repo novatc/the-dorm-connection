@@ -11,7 +11,8 @@ data class Post(
     val creator: String? = "",
     val date: String? = "",
     val creatorID: String? = "",
-    var key: String? = ""
+    var key: String? = "",
+    var comment_for_post: ArrayList<Comment> = ArrayList()
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
@@ -23,6 +24,10 @@ data class Post(
         parcel.readString(),
         parcel.readString()
     )
+
+    fun addComment(c: Comment){
+        comment_for_post.add(c)
+    }
 
 
     override fun writeToParcel(parcel: Parcel, p1: Int) {

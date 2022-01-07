@@ -143,6 +143,9 @@
     <string name="choose_dorm_warning">Be aware that you can only choose one dorm with your account. Changes to your dorm are no longer possible after you selected one!</string>
     <string name="book_room_button">Book room</string>
     <string name="participate_in_event">Join event</string>
+    <string name="comment_on_post">Comment</string>
+    <string name="wirte_your_comment">Write your comment</string>
+    <string name="comment_send">send</string>
 
 
 </resources>

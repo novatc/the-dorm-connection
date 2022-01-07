@@ -140,6 +140,8 @@
     <string name="choose_my_dorm">Nimm dieses als mein Wohnheim</string>
     <string name="choose_dorm_warning">Sei dir bewusst, dass du nur ein Wohnheim pro Account wählen kannst! Diese Entscheidung kann nicht revidiert werden!</string>
     <string name="participate_in_event">Nimm am Event teil</string>
+    <string name="comment_on_post">Kommentieren</string>
+
 
 
 </resources>
