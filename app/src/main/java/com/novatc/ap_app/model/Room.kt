@@ -8,15 +8,13 @@ import com.google.firebase.firestore.Exclude
 data class Room(
     val name: String? = "",
     val address: String? = "",
-    val text: String? = "",
+    val description: String? = "",
     val minimumBookingTime: String? = "",
-    var imageName: String? = "",
     val creatorID: String? = "",
     var key: String? = "",
     @get:Exclude var id: String? = "",
     ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -29,9 +27,8 @@ data class Room(
     override fun writeToParcel(parcel: Parcel, p1: Int) {
         parcel.writeString(name)
         parcel.writeString(address)
-        parcel.writeString(text)
+        parcel.writeString(description)
         parcel.writeString(minimumBookingTime)
-        parcel.writeString(imageName)
         parcel.writeString(creatorID)
         parcel.writeString(key)
         parcel.writeString(id)
