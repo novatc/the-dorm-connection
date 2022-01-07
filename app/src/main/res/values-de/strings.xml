@@ -8,6 +8,9 @@
     <string name="btn_safe">Speichern</string>
     <string name="image_upload_successful">Bild erfolgreich hochgeladen</string>
     <string name="image_upload_not_successful">Bild konnte nicht hochgeladen werden</string>
+    <string name="create_button">Erstellen</string>
+    <string name="join_button">Beitreten</string>
+    <string name="empty_field_error">Bitte fülle alle Felder aus.</string>
 
     #login and sign up
     <string name="login_tagline">Anmelden</string>
@@ -23,7 +26,6 @@
     <string name="btn_login">Anmelden</string>
     <string name="login_error">Fehler bei der Anmeldung, bitte versuche es nochmal.</string>
     <string name="sign_up_error">Fehler bei der Registrierung, bitte versuche es nochmal.</string>
-    <string name="empty_field_error">Bitte fülle alle Felder aus.</string>
     <string name="prompt_password">Passwort</string>
     <string name="action_sign_in">Logge dich ein oder registriere dich</string>
     <string name="action_sign_in_short">Einloggen</string>
@@ -93,8 +95,6 @@
     <string name="repeat_new_password">Neues Passwort wiederholen</string>
     <string name="new_password">Neues Passwort</string>
     <string name="current_password">Aktuelles Passwort</string>
-    <string name="WG">WG</string>
-    <string name="WG_invitation_code">Dein WG Einladungs QR-Code</string>
     <string name="delete_account">Account löschen</string>
     <string name="btn_select_dorm">Wohnheim wählen</string>
     <string name="dorm">Wohnheim</string>
@@ -102,6 +102,20 @@
     <string name="edit_my_posts">Beiträge bearbeiten</string>
     <string name="delete_user_error">Der Nutzer konnte nicht gelöscht werden, bitte versuche es nochmal.</string>
     <string name="delete_user_success">Nutzer erfolgreich gelöscht</string>
+
+    #wg
+    <string name="WG">WG</string>
+    <string name="WG_invitation_code">Dein WG Einladungs QR-Code</string>
+    <string name="wg_choose_tagline">Bearbeite deine WG</string>
+    <string name="wg_choose_header">WG</string>
+    <string name="wg_choose_select_wg">Existierende auswählen</string>
+    <string name="wg_choose_create_new">Neu erstellen</string>
+    <string name="wg_create_tagline">Erstelle eine WG</string>
+    <string name="wg_create_name">Namen</string>
+    <string name="wg_create_motto">WG-Motto</string>
+    <string name="wg_join_tagline">Tritt einer WG bei</string>
+    <string name="wg_create_success">WG erstellt</string>
+    <string name="wg_create_failure">Die WG konnte nicht erstellt werden, bitte versuche es nochmal</string>
 
     #pinboard
     <string name="pinboard">Pinnwand</string>

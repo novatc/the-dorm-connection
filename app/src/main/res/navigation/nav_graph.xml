@@ -56,9 +56,6 @@
             android:id="@+id/action_fragment_profile_to_profileFragment3"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_fragment_profile_to_editWgFragment"
-            app:destination="@id/editWgFragment" />
-        <action
             android:id="@+id/action_fragment_profile_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
@@ -68,6 +65,9 @@
             app:destination="@id/signUpFragment"
             app:popUpTo="@id/signUpFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_fragment_profile_to_wgChoose"
+            app:destination="@id/wgChoose" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
@@ -219,5 +219,35 @@
         <argument
             android:name="event"
             app:argType="com.novatc.ap_app.model.Event" />
+    </fragment>
+    <fragment
+        android:id="@+id/wgChoose"
+        android:name="com.novatc.ap_app.fragments.wg.WgChooseFragment"
+        android:label="fragment_wg_choose"
+        tools:layout="@layout/fragment_wg_choose" >
+        <action
+            android:id="@+id/action_wgChoose_to_wgCreateFragment"
+            app:destination="@id/wgCreateFragment" />
+        <action
+            android:id="@+id/action_wgChoose_to_wgFragment"
+            app:destination="@id/wgFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wgCreateFragment"
+        android:name="com.novatc.ap_app.fragments.wg.WgCreateFragment"
+        android:label="fragment_wg_create"
+        tools:layout="@layout/fragment_wg_create" >
+        <action
+            android:id="@+id/action_wgCreateFragment_to_wgFragment"
+            app:destination="@id/wgFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wgFragment"
+        android:name="com.novatc.ap_app.fragments.wg.WgFragment"
+        android:label="fragment_wg"
+        tools:layout="@layout/fragment_wg" >
+        <action
+            android:id="@+id/action_wgFragment_to_editWgFragment"
+            app:destination="@id/editWgFragment" />
     </fragment>
 </navigation>

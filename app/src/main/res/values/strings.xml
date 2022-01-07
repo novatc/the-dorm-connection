@@ -4,11 +4,13 @@
     <string name="logo_description">Logo The Dorm Connection</string>
     <string name="text_add_image">Add image</string>
     <string name="edit_text_hint_date">Date</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_safe">Save</string>
     <string name="image_upload_successful">Image uploaded successfully</string>
     <string name="image_upload_not_successful">Image could not be uploaded</string>
+    <string name="create_button">Create</string>
+    <string name="join_button">Join</string>
+    <string name="empty_field_error">Please fill in all field</string>
 
     #login and sign up
     <string name="login_tagline">Login</string>
@@ -24,7 +26,6 @@
     <string name="btn_login">Login</string>
     <string name="login_error">Could not login, please try again.</string>
     <string name="sign_up_error">Could not sign up, please try again.</string>
-    <string name="empty_field_error">Please fill in all field</string>
     <string name="prompt_email" translatable="false">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -98,8 +99,7 @@
     <string name="repeat_new_password">Repeat new password</string>
     <string name="new_password">New password</string>
     <string name="current_password">Current password</string>
-    <string name="WG">WG</string>
-    <string name="WG_invitation_code">Your WG invitation QR-Code</string>
+
     <string name="delete_account">Delete your account</string>
     <string name="btn_select_dorm">Choose your dorm</string>
     <string name="dorm">Dorm</string>
@@ -108,6 +108,19 @@
     <string name="delete_user_error">Could not delete user, please try again later</string>
     <string name="delete_user_success">User successful delete</string>
 
+    #wg
+    <string name="WG">WG</string>
+    <string name="WG_invitation_code">Your WG invitation QR-Code</string>
+    <string name="wg_choose_tagline">Edit your WG</string>
+    <string name="wg_choose_header">WG</string>
+    <string name="wg_choose_select_wg">Select existing</string>
+    <string name="wg_choose_create_new">Create</string>
+    <string name="wg_create_tagline">Create a WG</string>
+    <string name="wg_create_name">Name</string>
+    <string name="wg_create_motto">WG slogan</string>
+    <string name="wg_join_tagline">Join a WG</string>
+    <string name="wg_create_success">Wg created</string>
+    <string name="wg_create_failure">Could not create event, please try again later</string>
 
     #pinboard
     <string name="pinboard">Pinboard</string>

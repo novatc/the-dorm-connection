@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 class ProfileOptionsFragment : Fragment() {
 
     val model: ProfileViewModel by viewModels()
+    private var userWgId = "";
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +38,7 @@ class ProfileOptionsFragment : Fragment() {
         model.userProfile.observe(viewLifecycleOwner, Observer {
             view.tv_user_name.text = it.username
             view.tv_user_dorm.text = it.userDorm
+            userWgId = it.userWgId
             if (it.userDorm!=""){
                 view.btn_select_dorm.visibility = View.GONE
             }
@@ -71,8 +73,12 @@ class ProfileOptionsFragment : Fragment() {
     private fun setEditWGButtonListener(view: View) {
         val editWGButton: Button = view.btn_edit_wg
         editWGButton.setOnClickListener {
-            val action = ProfileOptionsFragmentDirections.actionFragmentProfileToEditWgFragment()
-            view.findNavController().navigate(action)
+            if (userWgId != "") {
+                view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToWgChoose())
+            } else {
+                view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToWgChoose())
+            }
+
         }
     }
 
