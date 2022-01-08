@@ -9,5 +9,6 @@ object Constants {
     const val DORMS: String = "dorms"
     const val ATTENDEES: String = "attendees"
     const val WG: String = "wg"
+    const val COMMENTS: String = "comments"
 
 }

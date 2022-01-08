@@ -1,7 +1,9 @@
 package com.novatc.ap_app.repository
 
+import com.google.firebase.firestore.DocumentReference
 import com.novatc.ap_app.firestore.PostFirestore
 import com.novatc.ap_app.firestore.UserFirestore
+import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Post
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.lang.Exception
@@ -26,6 +28,10 @@ class PostRepository
 
     suspend fun getPosts(): ArrayList<Post> {
         return postFirestore.getPosts()
+    }
+
+    suspend fun addComment(postID: String, comment: Comment): DocumentReference? {
+        return postFirestore.addComment(postID, comment = comment)
     }
 
     suspend fun deletePost(postID: String) {
