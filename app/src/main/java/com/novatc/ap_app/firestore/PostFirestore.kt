@@ -88,6 +88,7 @@ class PostFirestore @Inject constructor() {
 
     suspend fun addPost(post: Post) {
         val ref = mFirestore.collection(Constants.POST).add(post).await()
+        mFirestore.collection(Constants.POST).document().collection(Constants.COMMENTS)
         post.key = ref.id
         Log.e("FIRE", "Created local Post with id: ${post.key}")
     }
@@ -110,5 +111,23 @@ class PostFirestore @Inject constructor() {
         return mFirestore.collection(Constants.POST).document(postID).collection(Constants.COMMENTS)
             .add(comment).await()
     }
+
+    fun getCommentsFlow(postID: String): Flow<List<Comment>> {
+        return mFirestore.collection(Constants.POST).document(postID).collection(Constants.COMMENTS)
+            .getDataFlow { querySnapshot ->
+                querySnapshot?.documents?.map {
+                    getCommentsFromSnapshot(it)
+                } ?: listOf()
+            }
+
+    }
+
+    fun getCommentsFromSnapshot(documentSnapshot: DocumentSnapshot): Comment {
+        return documentSnapshot.toObject(Comment::class.java)!!.let {
+            it.id = documentSnapshot.id
+            return@let it
+        }
+    }
+
 
 }
