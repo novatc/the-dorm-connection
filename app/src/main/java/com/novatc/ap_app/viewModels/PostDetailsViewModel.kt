@@ -39,6 +39,9 @@ class PostDetailsViewModel @Inject constructor(
 
     fun setPost(post_: Post) {
         this._post.value = post_
+        viewModelScope.launch {
+            _userProfile.value = userRepository.readCurrent()
+        }
     }
 
 //    init {
@@ -73,14 +76,15 @@ class PostDetailsViewModel @Inject constructor(
             postRepository.getCommentsAsFlow(post.value?.key!!).collect { comments ->
                 if (comments.isEmpty()) {
                     Log.e("COMMENTS", "NO Comments")
-                }else{
+                } else {
                     val commentList = ArrayList<Comment>()
                     comments.forEach {
                         commentList.add(it)
                     }
                     withContext(Dispatchers.Main) {
                         _comments.value = commentList
-                    }}
+                    }
+                }
 
             }
         }
