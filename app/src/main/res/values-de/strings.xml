@@ -87,6 +87,9 @@
     <string name="book_room_button">Buche diesen Raum</string>
     <string name="btn_delete_room">Lösche Raum</string>
     <string name="minimum_booking_time_invalid">Bitte nutze das vorgeschlagene Format für die min. Buchzeit!</string>
+    <string name="detail_room_general">Infos</string>
+    <string name="detail_room_location">Ort</string>
+    <string name="detail_room_book">Buchen</string>
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>
@@ -150,6 +153,8 @@
     <string name="choose_my_dorm">Nimm dieses als mein Wohnheim</string>
     <string name="choose_dorm_warning">Sei dir bewusst, dass du nur ein Wohnheim pro Account wählen kannst! Diese Entscheidung kann nicht revidiert werden!</string>
     <string name="participate_in_event">Nimm am Event teil</string>
+    <string name="comment_on_post">Kommentieren</string>
+
 
 
 </resources>

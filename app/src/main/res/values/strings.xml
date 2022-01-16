@@ -90,6 +90,9 @@
     <string name="btn_book_room">Book room</string>
     <string name="btn_delete_room">Delete room</string>
     <string name="minimum_booking_time_invalid">Please use the suggested format for the minimum booking time!</string>
+    <string name="detail_room_general">General</string>
+    <string name="detail_room_location">Location</string>
+    <string name="detail_room_book">Book</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>
@@ -153,6 +156,9 @@
     <string name="choose_dorm_warning">Be aware that you can only choose one dorm with your account. Changes to your dorm are no longer possible after you selected one!</string>
     <string name="book_room_button">Book room</string>
     <string name="participate_in_event">Join event</string>
+    <string name="comment_on_post">Comment</string>
+    <string name="wirte_your_comment">Write your comment</string>
+    <string name="comment_send">send</string>
 
 
 </resources>

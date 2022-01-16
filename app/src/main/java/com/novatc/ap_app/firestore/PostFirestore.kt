@@ -5,8 +5,10 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.novatc.ap_app.constants.Constants
+import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Post
+import com.novatc.ap_app.model.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
@@ -16,7 +18,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class PostFirestore @Inject constructor(){
+class PostFirestore @Inject constructor() {
     private val mFirestore = Firebase.firestore
 
 
@@ -32,7 +34,7 @@ class PostFirestore @Inject constructor(){
                     trySend(querySnapshot).isSuccess
                 }
             awaitClose {
-                Log.e("","cancelling the listener on collection at path - $path")
+                Log.e("", "cancelling the listener on collection at path - $path")
                 listenerRegistration.remove()
             }
         }
@@ -72,7 +74,8 @@ class PostFirestore @Inject constructor(){
 
     suspend fun getUserPosts(userID: String): ArrayList<Post> {
         val posts = ArrayList<Post>()
-        val snapshot = mFirestore.collection(Constants.POST).whereEqualTo("creatorID", userID).get().await()
+        val snapshot =
+            mFirestore.collection(Constants.POST).whereEqualTo("creatorID", userID).get().await()
         for (post in snapshot) {
             post.toObject(Post::class.java).let {
                 it.key = post.id
@@ -85,21 +88,46 @@ class PostFirestore @Inject constructor(){
 
     suspend fun addPost(post: Post) {
         val ref = mFirestore.collection(Constants.POST).add(post).await()
-        post.key  = ref.id
+        mFirestore.collection(Constants.POST).document().collection(Constants.COMMENTS)
+        post.key = ref.id
         Log.e("FIRE", "Created local Post with id: ${post.key}")
     }
 
-    suspend fun deletePost(postID: String){
+    suspend fun deletePost(postID: String) {
         mFirestore.collection(Constants.POST).document(postID).delete().await()
 
     }
 
     // Parses the document snapshot to the desired object
-    fun getPostFromSnapshot(documentSnapshot: DocumentSnapshot) : Post {
-          return documentSnapshot.toObject(Post::class.java)!!.let {
+    fun getPostFromSnapshot(documentSnapshot: DocumentSnapshot): Post {
+        return documentSnapshot.toObject(Post::class.java)!!.let {
             it.key = documentSnapshot.id
-              return@let it
+            return@let it
         }
 
     }
+
+    suspend fun addComment(postID: String, comment: Comment): DocumentReference? {
+        return mFirestore.collection(Constants.POST).document(postID).collection(Constants.COMMENTS)
+            .add(comment).await()
+    }
+
+    fun getCommentsFlow(postID: String): Flow<List<Comment>> {
+        return mFirestore.collection(Constants.POST).document(postID).collection(Constants.COMMENTS)
+            .getDataFlow { querySnapshot ->
+                querySnapshot?.documents?.map {
+                    getCommentsFromSnapshot(it)
+                } ?: listOf()
+            }
+
+    }
+
+    fun getCommentsFromSnapshot(documentSnapshot: DocumentSnapshot): Comment {
+        return documentSnapshot.toObject(Comment::class.java)!!.let {
+            it.id = documentSnapshot.id
+            return@let it
+        }
+    }
+
+
 }

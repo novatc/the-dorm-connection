@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@color/shadow_blue">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
@@ -16,9 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,14 +80,58 @@
                     android:textColor="@android:color/black"
                     android:textSize="20dp" />
 
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_comments_on_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <EditText
+                    android:id="@+id/et_write_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:hint="@string/wirte_your_comment"
+                    android:inputType="textMultiLine" />
                 <Button
-                    android:id="@+id/btn_delete_post"
+                    android:id="@+id/btn_send_comment"
                     android:layout_width="@dimen/btn_edit_profile_width"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/btn_delete_profile_margin_top"
-                    android:backgroundTint="@color/radical_red"
-                    android:text="@string/delete_post"
+                    android:backgroundTint="@color/shadow_blue"
+                    android:text="@string/comment_send"
                     android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:id="@+id/LinearLayout02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+
+                    <Button
+                        android:id="@+id/btn_comment_on_post"
+                        android:layout_width="@dimen/btn_edit_profile_width"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/btn_delete_profile_margin_top"
+                        android:backgroundTint="@color/shadow_blue"
+                        android:text="@string/comment_on_post"
+                        android:layout_marginEnd="2.dp"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/white" />
+
+                    <Button
+                        android:id="@+id/btn_delete_post"
+                        android:layout_width="@dimen/btn_edit_profile_width"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/btn_delete_profile_margin_top"
+                        android:backgroundTint="@color/radical_red"
+                        android:text="@string/delete_post"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="2.5dp"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
+
+
             </LinearLayout>
         </ScrollView>
 

@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.Exception
 
 @AndroidEntryPoint

@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
-        android:name="com.novatc.ap_app.fragments.AddPostFragment"
+        android:name="com.novatc.ap_app.fragments.post.AddPostFragment"
         android:label="AddPostFragment"
         tools:layout="@layout/fragment_add_post">
         <action
@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPostsFragment"
-        android:name="com.novatc.ap_app.fragments.MyPostsFragment"
+        android:name="com.novatc.ap_app.fragments.post.MyPostsFragment"
         android:label="MyPostsFragment"
         tools:layout="@layout/fragment_my_posts">
         <action
@@ -134,7 +134,7 @@
     </fragment>
     <fragment
         android:id="@+id/postDetailsFragment"
-        android:name="com.novatc.ap_app.fragments.PostDetailsFragment"
+        android:name="com.novatc.ap_app.fragments.post.PostDetailsFragment"
         android:label="PostDetailsFragment"
         tools:layout="@layout/fragment_post_details">
         <action

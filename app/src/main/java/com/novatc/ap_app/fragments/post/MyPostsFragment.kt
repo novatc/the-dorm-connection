@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.post
 
 import android.content.Context
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,14 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.PostAdapter
 import com.novatc.ap_app.model.Post
-import com.novatc.ap_app.repository.PostRepository
 import com.novatc.ap_app.viewModels.MyPostViewModel
-import com.novatc.ap_app.viewModels.PinboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_posts.view.*
-import kotlinx.android.synthetic.main.fragment_pinboard.view.*
-import kotlinx.android.synthetic.main.fragment_pinboard.view.rv_posts
-import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
 @AndroidEntryPoint
 class MyPostsFragment : Fragment(), PostAdapter.OnItemClickListener {

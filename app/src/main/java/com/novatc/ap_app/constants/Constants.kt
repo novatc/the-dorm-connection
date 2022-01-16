@@ -10,5 +10,6 @@ object Constants {
     const val ATTENDEES: String = "attendees"
     const val WG: String = "wgs"
     const val MEMBERS: String = "members"
+    const val COMMENTS: String = "comments"
 
 }

@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.post
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,15 +14,12 @@ import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_post_keywords
 import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_description
-import com.novatc.ap_app.repository.PostRepository
 import com.novatc.ap_app.viewModels.AddPostViewModel
-import com.novatc.ap_app.viewModels.CreateRoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddPostFragment: Fragment() {
