@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_fragment_profile_to_wgChoose"
             app:destination="@id/wgChoose" />
+        <action
+            android:id="@+id/action_fragment_profile_to_wgDetailFragment"
+            app:destination="@id/wgDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
@@ -117,11 +120,6 @@
             android:id="@+id/action_profileFragment_to_fragment_profile"
             app:destination="@id/fragment_profile" />
     </fragment>
-    <fragment
-        android:id="@+id/editWgFragment"
-        android:name="com.novatc.ap_app.fragments.wg.EditWgFragment"
-        android:label="EditWgFragment"
-        tools:layout="@layout/fragment_edit_wg"/>
     <fragment
         android:id="@+id/fragment_rooms"
         android:name="com.novatc.ap_app.fragments.room.RoomsFragment"
@@ -240,6 +238,9 @@
         <action
             android:id="@+id/action_wgCreateFragment_to_wgFragment"
             app:destination="@id/wgFragment" />
+        <action
+            android:id="@+id/action_wgCreateFragment_to_wgDetailFragment"
+            app:destination="@id/wgDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/wgFragment"
@@ -247,7 +248,19 @@
         android:label="fragment_wg"
         tools:layout="@layout/fragment_wg" >
         <action
-            android:id="@+id/action_wgFragment_to_editWgFragment"
-            app:destination="@id/editWgFragment" />
+            android:id="@+id/action_wgFragment_to_wgDetailFragment"
+            app:destination="@id/wgDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wgDetailFragment"
+        android:name="com.novatc.ap_app.fragments.wg.WgDetailFragment"
+        android:label="WgDetailFragment"
+        tools:layout="@layout/fragment_wg_detail">
+        <action
+            android:id="@+id/action_wgDetailFragment_to_fragment_profile"
+            app:destination="@id/fragment_profile" />
+        <argument
+            android:name="wgId"
+            app:argType="string" />
     </fragment>
 </navigation>

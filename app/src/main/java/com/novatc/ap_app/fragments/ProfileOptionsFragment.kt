@@ -74,7 +74,7 @@ class ProfileOptionsFragment : Fragment() {
         val editWGButton: Button = view.btn_edit_wg
         editWGButton.setOnClickListener {
             if (userWgId != "") {
-                view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToWgChoose())
+                view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToWgDetailFragment(userWgId))
             } else {
                 view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToWgChoose())
             }

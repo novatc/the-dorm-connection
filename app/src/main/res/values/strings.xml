@@ -10,6 +10,7 @@
     <string name="image_upload_not_successful">Image could not be uploaded</string>
     <string name="create_button">Create</string>
     <string name="join_button">Join</string>
+    <string name="leave_button">Leave</string>
     <string name="empty_field_error">Please fill in all field</string>
 
     #login and sign up
@@ -106,7 +107,7 @@
     <string name="btn_my_posts">My posts</string>
     <string name="edit_my_posts">Edit your posts</string>
     <string name="delete_user_error">Could not delete user, please try again later</string>
-    <string name="delete_user_success">User successful delete</string>
+    <string name="delete_user_success">User successfully deleted</string>
 
     #wg
     <string name="WG">WG</string>
@@ -119,8 +120,20 @@
     <string name="wg_create_name">Name</string>
     <string name="wg_create_motto">WG slogan</string>
     <string name="wg_join_tagline">Join a WG</string>
-    <string name="wg_create_success">Wg created</string>
+    <string name="wg_create_success">WG created</string>
     <string name="wg_create_failure">Could not create event, please try again later</string>
+    <string name="wg_list_qr_code_button">Scan invitation QR-Code</string>
+    <string name="wg_list_join_success">WG successfully joined</string>
+    <string name="wg_list_join_error">Could not join WG, please try again later</string>
+    <string name="wg_list_leave_success">WG successfully left</string>
+    <string name="wg_list_leave_error">Could not leave WG, please try again later</string>
+    <string name="wg_list_join_wg_error">Could not find any WG with the supplied QR-Code</string>
+    <string name="wg_detail_tagline">Invite others</string>
+    <string name="wg_detail_invite_hint">Let other roommates scan this QR-Code to able to join</string>
+    <string name="wg_detail_qr_code_description">QR-Code for joining a WG</string>
+    <string name="wg_detail_load_error">Could not load wg, please try again later</string>
+    <string name="wg_scanner_hint">Scan a WG invitation qr-code</string>
+    <string name="wg_list_hint">Or select from the list below</string>
 
     #pinboard
     <string name="pinboard">Pinboard</string>
@@ -131,7 +144,7 @@
     <string name="post_text">Text</string>
     <string name="post_keywords">Keywords</string>
     <string name="delete_post">Delete post</string>
-    <string name="new_dorm">Coundn\'t find your dorm?</string>
+    <string name="new_dorm">Could not find your dorm?</string>
     <string name="create_new_dorm">Click here to create your dorm</string>
     <string name="dorm_hint">Dorm name</string>
     <string name="dorms">Dorm</string>

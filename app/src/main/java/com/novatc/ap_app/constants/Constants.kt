@@ -8,6 +8,7 @@ object Constants {
     const val ROOMS: String = "rooms"
     const val DORMS: String = "dorms"
     const val ATTENDEES: String = "attendees"
-    const val WG: String = "wg"
+    const val WG: String = "wgs"
+    const val MEMBERS: String = "members"
 
 }

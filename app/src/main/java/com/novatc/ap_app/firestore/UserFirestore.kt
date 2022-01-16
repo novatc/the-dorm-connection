@@ -79,6 +79,11 @@ class UserFirestore @Inject constructor() {
 
     }
 
+    suspend fun updateUserWg(userId: String, wgId: String, wgName: String) {
+        mFirestore.collection(Constants.USER).document(userId)
+            .update("userWgId", wgId, "userWgName", wgName).await()
+    }
+
     @ExperimentalCoroutinesApi
     fun <T> CollectionReference.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
         return getQuerySnapshotFlow()

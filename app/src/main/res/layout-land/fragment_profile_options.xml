@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/btn_my_posts"
-        android:layout_width="@dimen/btn_edit_profile_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
         android:backgroundTint="@color/patriarch"
@@ -32,7 +32,7 @@
 
     <Button
         android:id="@+id/btn_select_dorm"
-        android:layout_width="@dimen/btn_edit_profile_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:backgroundTint="@color/patriarch"
@@ -43,7 +43,7 @@
 
     <Button
         android:id="@+id/btn_profile_logout"
-        android:layout_width="@dimen/btn_edit_profile_width"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/patriarch"
@@ -55,7 +55,7 @@
 
     <Button
         android:id="@+id/btn_delet_profile"
-        android:layout_width="@dimen/btn_edit_profile_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/radical_red"
@@ -92,7 +92,7 @@
 
     <Button
         android:id="@+id/btn_edit_wg"
-        android:layout_width="@dimen/btn_edit_profile_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/patriarch"
@@ -104,7 +104,7 @@
 
     <Button
         android:id="@+id/btn_edit_profile"
-        android:layout_width="@dimen/btn_edit_profile_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/patriarch"
