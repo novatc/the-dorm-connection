@@ -40,7 +40,8 @@ class ProfileOptionsFragment : Fragment() {
             view.tv_user_dorm.text = it.userDorm
             userWgId = it.userWgId
             if (it.userDorm!=""){
-                view.btn_select_dorm.visibility = View.GONE
+                view.btn_select_dorm.isEnabled = false
+                view.btn_select_dorm.alpha = 0.5F
             }
         })
 
