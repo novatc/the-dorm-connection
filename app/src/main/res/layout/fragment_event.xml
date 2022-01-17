@@ -59,6 +59,26 @@
             app:srcCompat="@drawable/ic_baseline_add_24"
             tools:ignore="ImageContrastCheck" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_viewEventMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/radical_red"
+            android:clickable="true"
+            android:contentDescription="@string/events_add_event_button"
+            android:focusable="true"
+            app:backgroundTint="@color/radical_red"
+            app:layout_constraintBottom_toTopOf="@+id/createEventButton"
+            app:layout_constraintEnd_toEndOf="@+id/upcoming_events"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/upcoming_events"
+            app:layout_constraintTop_toTopOf="@+id/upcoming_events"
+            app:layout_constraintVertical_bias="0.97"
+            app:maxImageSize="30dp"
+            app:rippleColor="@color/radical_red"
+            app:srcCompat="@drawable/ic_baseline_add_24"
+            tools:ignore="ImageContrastCheck" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/upcoming_events"
             android:layout_width="0dp"

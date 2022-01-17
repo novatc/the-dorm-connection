@@ -38,6 +38,7 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         val view = inflater.inflate(R.layout.fragment_event, container, false)
         fillEventsList(view)
         setAddEventButtonListener(view)
+        setMapOverviewButtonListener(view)
         return view
     }
 
@@ -46,6 +47,14 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         val addEventButton: FloatingActionButton = view.createEventButton
         addEventButton.setOnClickListener {
             view.findNavController().navigate(EventFragmentDirections.actionEventFragmentToEventCreateFragment())
+        }
+    }
+
+    // Navigate to the event overview map
+    private fun setMapOverviewButtonListener(view: View){
+        val mapOverviewButton = view.btn_viewEventMap
+        mapOverviewButton.setOnClickListener {
+            view.findNavController().navigate(EventFragmentDirections.actionFragmentEventsToEventOverviewMapsFragment())
         }
     }
 
