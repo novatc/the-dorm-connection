@@ -19,14 +19,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
-        view.btn_edit_profile_safe.setOnClickListener {
-            val profileOptions = ProfileOptionsFragment()
-            parentFragmentManager.commit {
-                isAddToBackStackAllowed
-                setReorderingAllowed(true)
-                replace(R.id.nav_host_fragment, profileOptions)
-            }
-        }
+
         return view
     }
 }

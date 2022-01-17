@@ -11,6 +11,7 @@
     <string name="create_button">Erstellen</string>
     <string name="join_button">Beitreten</string>
     <string name="leave_button">Verlassen</string>
+    <string name="update_button">Aktualisieren</string>
     <string name="empty_field_error">Bitte fülle alle Felder aus.</string>
 
     #login and sign up
@@ -97,6 +98,7 @@
     <string name="btn_edit_profile_logout">Abmelden</string>
     <string name="setting">Einstellungen</string>
     <string name="you">Du</string>
+    <string name="profile_new_name">Neuer Name</string>
     <string name="repeat_new_password">Neues Passwort wiederholen</string>
     <string name="new_password">Neues Passwort</string>
     <string name="current_password">Aktuelles Passwort</string>
