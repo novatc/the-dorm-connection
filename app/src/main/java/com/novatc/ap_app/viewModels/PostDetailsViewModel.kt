@@ -44,13 +44,6 @@ class PostDetailsViewModel @Inject constructor(
         }
     }
 
-//    init {
-//        loadComments()
-//        viewModelScope.launch {
-//            _userProfile.value = userRepository.readCurrent()
-//        }
-//    }
-
     // Variable for exposing livedata to other classes
     internal var commentList: MutableLiveData<ArrayList<Comment>>
         get() {

@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_fragment_pinboard_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment" />
+        <action
+            android:id="@+id/action_fragment_pinboard_to_chooseDormFragment"
+            app:destination="@id/chooseDormFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventCreateFragment"

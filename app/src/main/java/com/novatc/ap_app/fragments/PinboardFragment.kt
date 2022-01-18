@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,8 +22,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
+@ExperimentalCoroutinesApi
 class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
-    var postList:ArrayList<Post> = ArrayList()
+    var postList: ArrayList<Post> = ArrayList()
+    val model: PinboardViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -30,9 +33,19 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_pinboard, container, false)
+        val view = inflater.inflate(R.layout.fragment_pinboard, container, false)
         populatePostList(view)
+        model.getCurrentUser()
+
+//        model.userProfile.observe(this, Observer {
+//            Log.e("LOGIN", "${it.userDorm}")
+//            if (it.userDormID == "") {
+//                val action = PinnboardFragmentDirections.actionFragmentPinboardToChooseDormFragment()
+//                findNavController().navigate(action)
+//            }
+//        })
         setAddPostButtonListener(view)
+
         return view
     }
 
@@ -44,13 +57,13 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
     }
 
     @ExperimentalCoroutinesApi
-    private fun populatePostList(view: View){
+    private fun populatePostList(view: View) {
         view.pinboardListSpinner.visibility = View.VISIBLE
         val recyclerView: RecyclerView = view.rv_posts
         val model: PinboardViewModel by viewModels()
-        model.postsList.observe(this, {posts ->
+        model.postsList.observe(this, { posts ->
             postList = posts
-            postList.sortedByDescending {  it.date }
+            postList.sortedByDescending { it.date }
             view.pinboardListSpinner.visibility = View.GONE
             recyclerView.adapter = PostAdapter(postList, this)
         })
