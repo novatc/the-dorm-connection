@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_profile"
-        android:name="com.novatc.ap_app.fragments.ProfileOptionsFragment"
+        android:name="com.novatc.ap_app.fragments.you.ProfileOptionsFragment"
         android:label="ProfileOptionsFragment"
         tools:layout="@layout/fragment_profile_options">
         <action
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.novatc.ap_app.fragments.ProfileFragment"
+        android:name="com.novatc.ap_app.fragments.you.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action

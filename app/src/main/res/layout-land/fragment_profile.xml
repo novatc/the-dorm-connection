@@ -10,7 +10,7 @@
         android:id="@+id/profileUpdateButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/green"
         android:gravity="center"
         android:text="@string/update_button"
@@ -53,14 +53,14 @@
         android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
         android:autofillHints="Name"
         android:ems="10"
         android:hint="@string/profile_new_name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -68,16 +68,15 @@
         android:id="@+id/profileCurrentPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
         android:autofillHints="Password"
         android:ems="10"
         android:hint="@string/current_password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/profileName"
-        app:layout_constraintStart_toStartOf="@+id/profileName"
-        app:layout_constraintTop_toBottomOf="@+id/profileName" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profileName" />
 
     <EditText
         android:id="@+id/profileNewPassword"
@@ -90,9 +89,9 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/profileCurrentPassword"
-        app:layout_constraintStart_toStartOf="@+id/profileCurrentPassword"
-        app:layout_constraintTop_toBottomOf="@+id/profileCurrentPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/profileName"
+        app:layout_constraintStart_toStartOf="@+id/profileName"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <EditText
         android:id="@+id/profileRepeatPassword"
@@ -105,7 +104,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="@color/black"
-        app:layout_constraintEnd_toEndOf="@+id/profileNewPassword"
-        app:layout_constraintStart_toStartOf="@+id/profileNewPassword"
-        app:layout_constraintTop_toBottomOf="@+id/profileNewPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/profileCurrentPassword"
+        app:layout_constraintStart_toStartOf="@+id/profileCurrentPassword"
+        app:layout_constraintTop_toBottomOf="@+id/profileCurrentPassword" />
 </androidx.constraintlayout.widget.ConstraintLayout>

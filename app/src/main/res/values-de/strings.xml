@@ -12,7 +12,9 @@
     <string name="join_button">Beitreten</string>
     <string name="leave_button">Verlassen</string>
     <string name="update_button">Aktualisieren</string>
-    <string name="empty_field_error">Bitte fülle alle Felder aus.</string>
+    <string name="empty_field_error">Bitte fülle alle Felder aus</string>
+    <string name="empty_all_field_error">Bitt fülle Felderpaare aus</string>
+
 
     #login and sign up
     <string name="login_tagline">Anmelden</string>
@@ -102,12 +104,19 @@
     <string name="repeat_new_password">Neues Passwort wiederholen</string>
     <string name="new_password">Neues Passwort</string>
     <string name="current_password">Aktuelles Passwort</string>
+    <string name="profile_update_name_error">Der Nutzername konnte nicht aktualisiert werden, bitte versuche es nochmal</string>
+    <string name="profile_update_password_error">Das Passwort konnte nicht aktualisiert werden, bitte versuche es nochma</string>
+    <string name="profile_update_name_success">Der Name wurde erfolgreich aktualisiert</string>
+    <string name="profile_update_password_succeess">Das Passwort wurde erfolgreich aktualisiert</string>
+    <string name="profile_update_password_match_error">Die neuen Passwörter stimmen nicht überein</string>
+    <string name="profile_update_password_incorrect_error">Das aktuelle Passwort ist nicht korrekt</string>
+
     <string name="delete_account">Account löschen</string>
     <string name="btn_select_dorm">Wohnheim wählen</string>
     <string name="dorm">Wohnheim</string>
     <string name="btn_my_posts">Meine Beiträge</string>
     <string name="edit_my_posts">Beiträge bearbeiten</string>
-    <string name="delete_user_error">Der Nutzer konnte nicht gelöscht werden, bitte versuche es nochmal.</string>
+    <string name="delete_user_error">Der Nutzer konnte nicht gelöscht werden, bitte versuche es nochmal</string>
     <string name="delete_user_success">Nutzer erfolgreich gelöscht</string>
 
     #wg

@@ -2,7 +2,9 @@ package com.novatc.ap_app.firestore
 
 import com.novatc.ap_app.constants.Constants
 import android.util.Log
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
@@ -32,6 +34,10 @@ class UserFirestore @Inject constructor() {
         return user!!.email
     }
 
+    fun getCurrentUser(): FirebaseUser? {
+        return FirebaseAuth.getInstance().currentUser
+    }
+
     suspend fun signUp(name: String, email: String, password: String) {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).await()
         mFirestore.collection(Constants.USER)
@@ -49,7 +55,8 @@ class UserFirestore @Inject constructor() {
     }
 
     suspend fun deleteUser() {
-        val user = Firebase.auth.currentUser ?: throw Exception("No current user, when deleting user.")
+        val user =
+            Firebase.auth.currentUser ?: throw Exception("No current user, when deleting user.")
         user.delete().await()
         mFirestore.collection(Constants.USER).document(user.uid).delete().await()
     }
@@ -60,16 +67,6 @@ class UserFirestore @Inject constructor() {
         return snapshot.toObject<User>()
     }
 
-//    @ExperimentalCoroutinesApi
-//    suspend fun getUserDataAsFlow(): Flow<User>{
-//        return mFirestore.collection(Constants.USER).getDataFlow<User> {
-//            querySnapshot ->
-//            querySnapshot?.toObjects(User::class.java)
-//            (querySnapshot?.documents?.map {
-//                getUserFromSnapshot(it)
-//            }
-//        }
-//    }
 
     fun updateUserDorm(user: User) {
         val dbUser = mFirestore.collection(Constants.USER).document(user.id)
@@ -84,6 +81,16 @@ class UserFirestore @Inject constructor() {
             .update("userWgId", wgId, "userWgName", wgName).await()
     }
 
+    suspend fun updateUserName(userId: String, userName: String) {
+        mFirestore.collection(Constants.USER).document(userId).update("username", userName).await()
+    }
+
+    suspend fun updateUserPassword(user: FirebaseUser, currentPassword: String, newPassword: String) {
+        val credential = EmailAuthProvider.getCredential(user.email!!, currentPassword)
+        user.reauthenticate(credential).await()
+        user.updatePassword(newPassword)
+    }
+
     @ExperimentalCoroutinesApi
     fun <T> CollectionReference.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
         return getQuerySnapshotFlow()
@@ -93,7 +100,7 @@ class UserFirestore @Inject constructor() {
     }
 
     // Parses the document snapshot to the desired object
-    fun getUserFromSnapshot(documentSnapshot: DocumentSnapshot) : User {
+    fun getUserFromSnapshot(documentSnapshot: DocumentSnapshot): User {
         return documentSnapshot.toObject(User::class.java)!!
 
     }
@@ -110,7 +117,7 @@ class UserFirestore @Inject constructor() {
                     trySend(querySnapshot).isSuccess
                 }
             awaitClose {
-                Log.e("","cancelling the listener on collection at path - $path")
+                Log.e("", "cancelling the listener on collection at path - $path")
                 listenerRegistration.remove()
             }
         }

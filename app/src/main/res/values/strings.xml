@@ -13,6 +13,7 @@
     <string name="leave_button">Leave</string>
     <string name="update_button">Update</string>
     <string name="empty_field_error">Please fill in all field</string>
+    <string name="empty_all_field_error">Please fill field pairs</string>
 
     #login and sign up
     <string name="login_tagline">Login</string>
@@ -105,6 +106,12 @@
     <string name="repeat_new_password">Repeat new password</string>
     <string name="new_password">New password</string>
     <string name="current_password">Current password</string>
+    <string name="profile_update_name_error">Could not update the user name, please try again later</string>
+    <string name="profile_update_password_error">Could not update the password, please try again later</string>
+    <string name="profile_update_name_success">Name successfully updated</string>
+    <string name="profile_update_password_succeess">Password successfully updated</string>
+    <string name="profile_update_password_match_error">The new passwords do not match</string>
+    <string name="profile_update_password_incorrect_error">The current password is not correct</string>
 
     <string name="delete_account">Delete your account</string>
     <string name="btn_select_dorm">Choose your dorm</string>
