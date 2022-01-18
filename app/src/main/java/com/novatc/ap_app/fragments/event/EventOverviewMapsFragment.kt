@@ -60,10 +60,8 @@ class EventOverviewMapsFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         getEvents()
         map = googleMap
-        //setMapLongClick(map)
         setPoiClick(map)
         enableMyLocation()
-        getAddress(map)
 
     }
 
@@ -144,6 +142,7 @@ class EventOverviewMapsFragment : Fragment(), OnMapReadyCallback {
     private fun getEvents() {
         model.events.observe(this, { events ->
             eventList = events
+            getAddress(map)
         })
     }
 
