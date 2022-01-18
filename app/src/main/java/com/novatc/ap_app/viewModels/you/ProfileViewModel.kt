@@ -1,4 +1,4 @@
-package com.novatc.ap_app.viewModels
+package com.novatc.ap_app.viewModels.you
 
 import android.util.Log
 import androidx.lifecycle.LiveData

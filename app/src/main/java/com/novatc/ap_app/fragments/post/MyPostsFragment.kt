@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.PostAdapter
 import com.novatc.ap_app.model.Post
-import com.novatc.ap_app.viewModels.MyPostViewModel
+import com.novatc.ap_app.viewModels.you.MyPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_posts.view.*
 
