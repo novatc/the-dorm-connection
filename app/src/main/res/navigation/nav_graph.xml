@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_fragment_events_to_eventDetailsFragment"
             app:destination="@id/eventDetailsFragment" />
+        <action
+            android:id="@+id/action_fragment_events_to_eventOverviewMapsFragment"
+            app:destination="@id/eventOverviewMapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_pinboard"
@@ -263,4 +266,9 @@
             android:name="wgId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/eventOverviewMapsFragment"
+        android:name="com.novatc.ap_app.fragments.event.EventOverviewMapsFragment"
+        android:label="fragment_event_overview_maps"
+        tools:layout="@layout/fragment_event_overview_maps" />
 </navigation>
