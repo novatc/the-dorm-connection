@@ -5,6 +5,7 @@ data class User(
     val username: String = "",
     val mail: String = "",
     var userDorm: String = "",
+    var userDormID: String = "",
     var userWgName: String = "",
     var userWgId: String = ""
 )

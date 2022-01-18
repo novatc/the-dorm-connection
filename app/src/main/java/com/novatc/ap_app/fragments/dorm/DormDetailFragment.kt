@@ -45,6 +45,7 @@ class DormDetailFragment : Fragment() {
         view.btn_choose_dorm.setOnClickListener {
             lifecycleScope.launch {
                 me.userDorm = dorm.name.toString()
+                me.userDormID = dorm.id.toString()
                 userRepository.updateUserWithDorm(me)
 
             }
