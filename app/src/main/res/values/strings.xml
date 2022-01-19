@@ -168,6 +168,7 @@
     <string name="comment_on_post">Comment</string>
     <string name="wirte_your_comment">Write your comment</string>
     <string name="comment_send">send</string>
+    <string name="events_map_overview">Event Map Overview</string>
 
 
 </resources>
