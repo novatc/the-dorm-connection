@@ -57,6 +57,10 @@ class PostDetailsViewModel @Inject constructor(
         postRepository.deletePost(postID)
     }
 
+    suspend fun deleteComment(commentID: String, postID: String){
+        postRepository.deleteComment(commentID, postID)
+    }
+
     fun readCurrentID(): String? {
         return userRepository.readCurrentId()
     }

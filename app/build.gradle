@@ -44,7 +44,6 @@ android {
         viewBinding true
     }
 }
-
 dependencies {
     api 'com.google.android.material:material:1.1.0-alpha06'
     //noinspection GradleCompatible
@@ -92,6 +91,8 @@ dependencies {
     implementation 'com.github.kizitonwose:CalendarView:1.0.4'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
     implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
+    implementation("androidx.core:core-ktx:1.6.0")
+
 }
 
 // Allow references to generated code

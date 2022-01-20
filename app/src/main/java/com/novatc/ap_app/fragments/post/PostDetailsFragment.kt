@@ -1,11 +1,14 @@
 package com.novatc.ap_app.fragments.post
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
+import androidx.core.view.iterator
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -19,6 +22,7 @@ import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.model.User
 import com.novatc.ap_app.viewModels.PostDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_comments.view.*
 import kotlinx.android.synthetic.main.fragment_post_details.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -38,7 +42,6 @@ class PostDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_post_details, container, false)
         val post: Post = args.clickedPost
-        Log.e("POST", "Post in Fragment: $post")
         postDetailsViewModel.setPost(post)
         postDetailsViewModel.loadComments()
         populateCommentsList(view, post)
@@ -104,14 +107,22 @@ class PostDetailsFragment : Fragment() {
         model.commentList.observe(this, { comment ->
             commentListOnPost = comment
             recyclerView.adapter = CommentAdapter(commentListOnPost)
+            for (item in recyclerView) {
+                if (currentUser.id == item.tv_comment_author.toString()) {
+                    item.btn_delete_post.visibility = View.VISIBLE
+                    item.btn_delete_post.setOnClickListener {
+                    }
+                }
+
+            }
 
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
     }
 
     @ExperimentalCoroutinesApi
-    fun getUserName(){
-        postDetailsViewModel.userProfile.observe(viewLifecycleOwner,{
+    fun getUserName() {
+        postDetailsViewModel.userProfile.observe(viewLifecycleOwner, {
             currentUser = it
         })
     }
