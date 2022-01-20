@@ -29,7 +29,7 @@ class RoomDetailsBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_room_details_book, container, false)
-        calendar = view.calendarView
+        //calendar = view.calendarView
         selectedDate = calendar.date
         // Observe event and setup event description
         addDateListener(calendar)
