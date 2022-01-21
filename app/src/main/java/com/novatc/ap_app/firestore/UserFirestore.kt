@@ -97,7 +97,7 @@ class UserFirestore @Inject constructor(
 
     fun updateUserDorm(user: User) {
         val dbUser = mFirestore.collection(Constants.USER).document(user.id)
-        dbUser.update("userDorm", user.userDorm)
+        dbUser.update("userDorm", user.userDorm, "userDormID", user.userDormID)
             .addOnSuccessListener { Log.d("FIRE", "DocumentSnapshot successfully updated!") }
             .addOnFailureListener { e -> Log.w("FIRE", "Error updating document", e) }
 

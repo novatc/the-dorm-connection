@@ -34,5 +34,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_comment_author" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_delete_comment"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="x"
+            app:cornerRadius="30dp"
+            android:backgroundTint="@color/radical_red"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_comment_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_comment_content" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

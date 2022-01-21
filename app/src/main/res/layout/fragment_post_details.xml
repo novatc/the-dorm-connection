@@ -85,12 +85,13 @@
                     android:id="@+id/rv_comments_on_post"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
                 <EditText
                     android:id="@+id/et_write_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:hint="@string/wirte_your_comment"
+                    android:hint="@string/write_your_comment"
                     android:inputType="textMultiLine" />
                 <Button
                     android:id="@+id/btn_send_comment"

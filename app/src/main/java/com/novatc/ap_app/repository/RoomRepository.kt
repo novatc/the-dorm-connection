@@ -3,13 +3,13 @@ package com.novatc.ap_app.repository
 import android.content.Context
 import android.net.Uri
 import android.widget.ImageView
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.storage.UploadTask
 import com.novatc.ap_app.constants.UploadDirectories
 import com.novatc.ap_app.firestore.RoomFirestore
 import com.novatc.ap_app.firestore.StorageFirestore
 import com.novatc.ap_app.firestore.UserFirestore
-import com.novatc.ap_app.model.Event
-import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.model.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import java.lang.Exception
@@ -43,6 +43,15 @@ class RoomRepository @Inject constructor(
     @ExperimentalCoroutinesApi
     fun getRooms(): Flow<List<Room>> {
         return roomFirestore.getRoomsFlow()
+    }
+
+    suspend fun addBooking(roomID: String, booking: Booking ): DocumentReference? {
+        return roomFirestore.addBooking(roomID, booking = booking)
+    }
+
+    @ExperimentalCoroutinesApi
+    suspend fun getBookingsAsFlow(roomID: String): Flow<List<Booking>> {
+        return roomFirestore.getBookingsFlow(roomID)
     }
 
 }

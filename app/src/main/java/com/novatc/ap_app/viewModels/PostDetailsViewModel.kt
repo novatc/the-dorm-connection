@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.DocumentReference
-import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.model.User
 import com.novatc.ap_app.repository.PostRepository
@@ -44,13 +44,6 @@ class PostDetailsViewModel @Inject constructor(
         }
     }
 
-//    init {
-//        loadComments()
-//        viewModelScope.launch {
-//            _userProfile.value = userRepository.readCurrent()
-//        }
-//    }
-
     // Variable for exposing livedata to other classes
     internal var commentList: MutableLiveData<ArrayList<Comment>>
         get() {
@@ -62,6 +55,10 @@ class PostDetailsViewModel @Inject constructor(
 
     suspend fun deletePost(postID: String) {
         postRepository.deletePost(postID)
+    }
+
+    suspend fun deleteComment(commentID: String, postID: String){
+        postRepository.deleteComment(commentID, postID)
     }
 
     fun readCurrentID(): String? {

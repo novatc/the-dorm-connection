@@ -12,7 +12,7 @@
     <string name="join_button">Join</string>
     <string name="leave_button">Leave</string>
     <string name="update_button">Update</string>
-    <string name="empty_field_error">Please fill in all field</string>
+    <string name="empty_field_error">Please fill in all fields</string>
     <string name="empty_all_field_error">Please fill field pairs</string>
 
     #login and sign up
@@ -95,6 +95,8 @@
     <string name="detail_room_general">General</string>
     <string name="detail_room_location">Location</string>
     <string name="detail_room_book">Book</string>
+    <string name="booking_time_incorrect">Please enter a valid time slot! Could not create the booking.</string>
+    <string name="successful_booking">Booking of time slot successful!</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>
@@ -166,8 +168,9 @@
     <string name="book_room_button">Book room</string>
     <string name="participate_in_event">Join event</string>
     <string name="comment_on_post">Comment</string>
-    <string name="wirte_your_comment">Write your comment</string>
+    <string name="write_your_comment">Write your comment</string>
     <string name="comment_send">send</string>
+    <string name="events_map_overview">Event Map Overview</string>
 
 
 </resources>
