@@ -76,6 +76,8 @@
     <string name="create_event_date_past">Das Eventdatum kann nicht in der Vergangenheit liegen</string>
     <string name="create_event_event_created_message">Event erstellt</string>
     <string name="create_event_event_not_created_message">Das Event konnte nicht stellt werden, versuche es nochmal.</string>
+    <string name="events_map_overview">Event-Karte</string>
+
 
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>
@@ -93,6 +95,7 @@
     <string name="detail_room_general">Infos</string>
     <string name="detail_room_location">Ort</string>
     <string name="detail_room_book">Buchen</string>
+    <string name="booking_time_incorrect">Bitte gib ein valides Zeitfenster an. Die Buchung konnte nicht abgeschlossen werden.</string>
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>
@@ -165,7 +168,7 @@
     <string name="choose_dorm_warning">Sei dir bewusst, dass du nur ein Wohnheim pro Account wählen kannst! Diese Entscheidung kann nicht revidiert werden!</string>
     <string name="participate_in_event">Nimm am Event teil</string>
     <string name="comment_on_post">Kommentieren</string>
-
-
+    <string name="write_your_comment">Schreib deinen Kommentar</string>
+    <string name="comment_send">Senden</string>
 
 </resources>

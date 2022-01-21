@@ -2,12 +2,15 @@ package com.novatc.ap_app.firestore
 
 import android.util.Log
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.novatc.ap_app.constants.Constants
 import com.novatc.ap_app.constants.UploadDirectories
+import com.novatc.ap_app.model.Booking
+import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Room
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -72,6 +75,28 @@ class RoomFirestore @Inject constructor(
     // Parses the document snapshot to the desired object
     fun getRoomFromSnapshot(documentSnapshot: DocumentSnapshot): Room {
         return documentSnapshot.toObject(Room::class.java)!!.let {
+            it.id = documentSnapshot.id
+            return@let it
+        }
+    }
+
+    suspend fun addBooking(roomID: String, booking: Booking): DocumentReference? {
+        return mFirestore.collection(Constants.ROOMS).document(roomID).collection(Constants.BOOKINGS)
+            .add(booking).await()
+    }
+
+    fun getBookingsFlow(roomID: String): Flow<List<Booking>> {
+        return mFirestore.collection(Constants.ROOMS).document(roomID).collection(Constants.BOOKINGS)
+            .getDataFlow { querySnapshot ->
+                querySnapshot?.documents?.map {
+                    getBookingsFromSnapshot(it)
+                } ?: listOf()
+            }
+
+    }
+
+    fun getBookingsFromSnapshot(documentSnapshot: DocumentSnapshot): Booking {
+        return documentSnapshot.toObject(Booking::class.java)!!.let {
             it.id = documentSnapshot.id
             return@let it
         }

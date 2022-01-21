@@ -6,6 +6,7 @@ object Constants {
     const val POST: String = "posts"
     const val EVENTS: String = "events"
     const val ROOMS: String = "rooms"
+    const val BOOKINGS: String = "bookings"
     const val DORMS: String = "dorms"
     const val ATTENDEES: String = "attendees"
     const val WG: String = "wgs"

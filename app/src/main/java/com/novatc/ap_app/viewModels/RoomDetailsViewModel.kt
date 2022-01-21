@@ -7,27 +7,38 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.novatc.ap_app.model.Event
-import com.novatc.ap_app.model.Request
-import com.novatc.ap_app.model.Room
+import com.google.firebase.firestore.DocumentReference
+import com.novatc.ap_app.model.*
 import com.novatc.ap_app.repository.RoomRepository
+import com.novatc.ap_app.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class RoomDetailsViewModel @Inject constructor(
-    private val roomRepository: RoomRepository
+    private val roomRepository: RoomRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val _room = MutableLiveData<Room>()
     val room: LiveData<Room> = _room
 
+    private val _userProfile = MutableLiveData<User>()
+    val userProfile: LiveData<User> = _userProfile
+
+    private var _bookings: MutableLiveData<ArrayList<Booking>> =
+        MutableLiveData<ArrayList<Booking>>()
+
     fun setRoom(selectedRoom: Room) {
         this._room.value = selectedRoom
+        viewModelScope.launch {
+            _userProfile.value = userRepository.readCurrent()
+        }
     }
 
     private val _loadImageRequest = MutableLiveData<Request<String?>>()
@@ -36,6 +47,14 @@ class RoomDetailsViewModel @Inject constructor(
     suspend fun deleteRoom(roomID: String){
         roomRepository.deleteRoom(roomID)
     }
+
+    internal var bookingList: MutableLiveData<ArrayList<Booking>>
+        get() {
+            return _bookings
+        }
+        set(value) {
+            _bookings = value
+        }
 
     fun loadRoomImage() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -55,6 +74,31 @@ class RoomDetailsViewModel @Inject constructor(
 
             }
         }
+    }
+
+    @ExperimentalCoroutinesApi
+    fun loadBookings() {
+        Log.e("POST", "Room is ${room.value}")
+        viewModelScope.launch(Dispatchers.IO) {
+            roomRepository.getBookingsAsFlow(room.value?.id!!).collect { bookings ->
+                if (bookings.isEmpty()) {
+                    Log.e("BOOKINGS", "NO Bookings")
+                } else {
+                    val bookingList = ArrayList<Booking>()
+                    bookings.forEach {
+                        bookingList.add(it)
+                    }
+                    withContext(Dispatchers.Main) {
+                        _bookings.value = bookingList
+                    }
+                }
+
+            }
+        }
+    }
+
+    suspend fun addBooking(roomID: String, booking: Booking): DocumentReference? {
+        return roomRepository.addBooking(roomID, booking)
     }
 
 }

@@ -274,4 +274,10 @@
         android:name="com.novatc.ap_app.fragments.event.EventOverviewMapsFragment"
         android:label="fragment_event_overview_maps"
         tools:layout="@layout/fragment_event_overview_maps" />
+    <fragment
+        android:id="@+id/roomDetailsBookFragment"
+        android:name="com.novatc.ap_app.fragments.room.RoomDetailsBookFragment"
+        android:label="fragment_room_details_book"
+        tools:layout="@layout/fragment_room_details_book" >
+    </fragment>
 </navigation>
