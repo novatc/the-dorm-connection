@@ -96,6 +96,7 @@
     <string name="detail_room_location">Ort</string>
     <string name="detail_room_book">Buchen</string>
     <string name="booking_time_incorrect">Bitte gib ein valides Zeitfenster an. Die Buchung konnte nicht abgeschlossen werden.</string>
+    <string name="successful_booking">Das Buchen des Zeitslots war erfolgreich!</string>
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>

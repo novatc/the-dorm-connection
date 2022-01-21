@@ -48,14 +48,7 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import android.graphics.drawable.Drawable
-
-
-
-
-
-
-
-
+import com.novatc.ap_app.fragments.event.EventCreateFragmentDirections
 
 
 class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
@@ -156,6 +149,11 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                             }
                         }
                     }
+                    Toast.makeText(context!!, com.novatc.ap_app.R.string.successful_booking, Toast.LENGTH_SHORT).show()
+                    val layout = view.tutView1
+                    layout.visibility = View.VISIBLE
+                    val layout2 = view.tutView2
+                    layout2.visibility = View.GONE
                 }
             }
             else{

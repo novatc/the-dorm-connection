@@ -96,6 +96,7 @@
     <string name="detail_room_location">Location</string>
     <string name="detail_room_book">Book</string>
     <string name="booking_time_incorrect">Please enter a valid time slot! Could not create the booking.</string>
+    <string name="successful_booking">Booking of time slot successful!</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>
