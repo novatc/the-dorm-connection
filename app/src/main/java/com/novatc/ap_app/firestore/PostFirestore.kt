@@ -18,7 +18,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class PostFirestore @Inject constructor() {
+class PostFirestore @Inject constructor(
+    private val helperFirestore: HelperFirestore) {
     private val mFirestore = Firebase.firestore
 
 
@@ -94,6 +95,9 @@ class PostFirestore @Inject constructor() {
     }
 
     suspend fun deletePost(postID: String) {
+        val comments =
+            mFirestore.collection(Constants.POST).document(postID).collection(Constants.COMMENTS)
+        helperFirestore.deleteCollection(comments, 5)
         mFirestore.collection(Constants.POST).document(postID).delete().await()
 
     }
@@ -127,6 +131,10 @@ class PostFirestore @Inject constructor() {
             it.id = documentSnapshot.id
             return@let it
         }
+    }
+
+    suspend fun deleteComment(commentID: String, postID: String) {
+        mFirestore.collection(Constants.POST).document(postID).collection(Constants.COMMENTS).document(commentID).delete().await()
     }
 
 

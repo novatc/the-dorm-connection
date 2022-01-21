@@ -50,4 +50,8 @@ class PostRepository
     suspend fun getCommentsAsFlow(postID: String): Flow<List<Comment>> {
         return postFirestore.getCommentsFlow(postID)
     }
+
+    suspend fun deleteComment(commentID: String, postID: String) {
+        postFirestore.deleteComment(commentID, postID)
+    }
 }
