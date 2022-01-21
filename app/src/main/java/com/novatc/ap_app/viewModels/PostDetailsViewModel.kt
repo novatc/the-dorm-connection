@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.DocumentReference
-import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.model.User
 import com.novatc.ap_app.repository.PostRepository

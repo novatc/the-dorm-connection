@@ -1,6 +1,7 @@
 package com.novatc.ap_app.fragments.room
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,6 @@ class RoomDetailsGeneralFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_room_details_general, container, false)
-        // Observe event and setup event description
         model.room.observe(this, { room ->
             view.room_details_description.text = room.description
         })
