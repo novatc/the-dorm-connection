@@ -40,6 +40,7 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
     val model: PinboardViewModel by viewModels()
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationId = 101
+    private var FIRST_RUN = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,11 +69,15 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
         val recyclerView: RecyclerView = view.rv_posts
         val model: PinboardViewModel by viewModels()
         model.postsList.observe(this, { posts ->
-            sendNotification()
+            if (FIRST_RUN == 1 && (posts.size > postList.size)) {
+                sendNotification()
+            }
+
             postList = posts
             postList.sortedByDescending { it.date }
             view.pinboardListSpinner.visibility = View.GONE
             recyclerView.adapter = PostAdapter(postList, this)
+            FIRST_RUN = 1
         })
         recyclerView.layoutManager = LinearLayoutManager(activity)
     }
