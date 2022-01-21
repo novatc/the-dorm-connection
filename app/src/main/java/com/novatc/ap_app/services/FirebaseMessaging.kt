@@ -23,21 +23,25 @@ class FirebaseMessaging : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         createNotificationChannel()
-        remoteMessage.notification!!.title?.let { remoteMessage.notification!!.body?.let { it1 ->
-            createNotification(it,
-                it1
-            )
-        } }
+        remoteMessage.notification!!.title?.let {
+            remoteMessage.notification!!.body?.let { it1 ->
+                createNotification(
+                    it,
+                    it1
+                )
+            }
+        }
 
     }
 
-    fun createNotification(title: String, message: String) {
+    private fun createNotification(title: String, message: String) {
         val intent = Intent(this, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
-        var builder = NotificationCompat.Builder(applicationContext, CHANNEL_NAME)
+
+        val builder = NotificationCompat.Builder(this, CHANNEL_NAME)
             .setSmallIcon(R.drawable.transfer_64px)
             .setContentTitle(title)
             .setStyle(
@@ -46,8 +50,6 @@ class FirebaseMessaging : FirebaseMessagingService() {
             )
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-        builder = builder.setContent(getRemovedView(title, message))
 
         with(NotificationManagerCompat.from(this)) {
             notify(NOTIFICATION_ID, builder.build())
