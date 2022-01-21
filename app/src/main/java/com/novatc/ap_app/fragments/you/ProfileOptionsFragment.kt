@@ -91,18 +91,23 @@ class ProfileOptionsFragment : Fragment() {
     private fun setDeleteUserButtonListener(view: View) {
         val deleteProfileButton: Button = view.btn_delet_profile
         deleteProfileButton.setOnClickListener {
+            view.deleteUserProgress.visibility = View.VISIBLE
             model.deleteUser()
             model.deleteRequest.observe(this) { request ->
                 when (request.status) {
 
                     Request.Status.SUCCESS -> {
+                        view.deleteUserProgress.visibility = View.GONE
                         Toast.makeText(activity, R.string.delete_user_success, Toast.LENGTH_SHORT)
                             .show()
                         findNavController().navigate(
                             ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpFragment()
                         )
                     }
-                    else -> Toast.makeText(activity, request.message!!, Toast.LENGTH_LONG).show()
+                    else -> {
+                        view.deleteUserProgress.visibility = View.GONE
+                        Toast.makeText(activity, request.message!!, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
@@ -111,7 +116,7 @@ class ProfileOptionsFragment : Fragment() {
     private fun setLogOutUserButtonListener(view: View) {
         val setLogOutUserButton: Button = view.btn_profile_logout
         setLogOutUserButton.setOnClickListener {
-            UserFirestore().logout()
+//            UserFirestore().logout()
             val action = ProfileOptionsFragmentDirections.actionFragmentProfileToLoginFragment()
             view.findNavController().navigate(action)
         }

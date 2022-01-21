@@ -21,7 +21,9 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 
-class UserFirestore @Inject constructor() {
+class UserFirestore @Inject constructor(
+    private val helperFirestore: HelperFirestore
+) {
 
     private val mFirestore = Firebase.firestore
 
@@ -57,8 +59,33 @@ class UserFirestore @Inject constructor() {
     suspend fun deleteUser() {
         val user =
             Firebase.auth.currentUser ?: throw Exception("No current user, when deleting user.")
+        val userId = user.uid
+
+        // Delete all posts by the user
+        val userPostsSnapshot =
+            mFirestore.collection(Constants.POST).whereEqualTo("creatorID", userId).get().await()
+        for (post in userPostsSnapshot.documents) {
+            helperFirestore.deleteCollection(post.reference.collection(Constants.COMMENTS), 100)
+            post.reference.delete().await()
+        }
+        // Delete all comments by the user
+        val postsSnapshot =
+            mFirestore.collection(Constants.POST).get().await()
+        for (post in postsSnapshot.documents) {
+            val postComments = post.reference.collection(Constants.COMMENTS).whereEqualTo("authorID", userId).get().await()
+            for (postComment in postComments.documents)
+                postComment.reference.delete().await()
+        }
+        // Delete all user events
+        val eventsSnapshot = mFirestore.collection(Constants.EVENTS).whereEqualTo("authorId", userId).get().await()
+        for (event in eventsSnapshot.documents) {
+            helperFirestore.deleteCollection(event.reference.collection(Constants.ATTENDEES), 100)
+            event.reference.delete().await()
+        }
+        // Delete user from firebase auth and from firebase db
         user.delete().await()
         mFirestore.collection(Constants.USER).document(user.uid).delete().await()
+
     }
 
     suspend fun getUserData(uid: String): User? {

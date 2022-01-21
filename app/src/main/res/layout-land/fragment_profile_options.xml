@@ -7,6 +7,15 @@
     android:layout_gravity="center"
     android:background="@color/eggshell">
 
+    <ProgressBar
+        android:id="@+id/deleteUserProgress"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btn_my_posts"
         android:layout_width="wrap_content"
