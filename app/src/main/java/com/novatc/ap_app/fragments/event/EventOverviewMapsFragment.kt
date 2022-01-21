@@ -112,7 +112,7 @@ class EventOverviewMapsFragment : Fragment(), OnMapReadyCallback {
                     .position(poi.latLng)
                     .title(poi.name)
             )
-            poiMarker.showInfoWindow()
+            poiMarker!!.showInfoWindow()
         }
     }
 

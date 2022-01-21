@@ -171,6 +171,7 @@
     <string name="write_your_comment">Write your comment</string>
     <string name="comment_send">send</string>
     <string name="events_map_overview">Event Map Overview</string>
+    <string name="notification_new_post">A new post appeard on your Pinnboard!</string>
 
 
 </resources>
