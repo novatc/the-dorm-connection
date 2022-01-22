@@ -4,51 +4,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView.OnDateChangeListener
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.novatc.ap_app.viewModels.RoomDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
 import kotlinx.android.synthetic.main.fragment_room_details_general.view.*
-import kotlin.properties.Delegates
-import androidx.annotation.NonNull
-import androidx.navigation.findNavController
 import com.applandeo.materialcalendarview.EventDay
 
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
-import com.github.dhaval2404.imagepicker.ImagePicker
-import com.novatc.ap_app.permissions.Permissions
 import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import java.util.*
-import android.R
 import android.app.TimePickerDialog
-import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.widget.*
 
-import androidx.compose.ui.text.style.TextOverflow.Companion.Visible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.novatc.ap_app.adapter.CommentAdapter
 import com.novatc.ap_app.model.*
-import com.novatc.ap_app.viewModels.PostDetailsViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_post_details.view.*
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
-import android.graphics.drawable.Drawable
-import com.novatc.ap_app.fragments.event.EventCreateFragmentDirections
 
 
 class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
@@ -213,7 +193,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         bookingListOnRoom.forEach {booking ->
             val calendar = Calendar.getInstance()
             calendar.setTimeInMillis(booking.startingDate);
-            events.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot, Color.parseColor("#228B22")))
+            events.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_black, Color.parseColor("#228B22")))
             calendarList.add(calendar)
         }
         calendar.setEvents(events)

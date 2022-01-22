@@ -16,12 +16,15 @@ class CreateRoomViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun addRoom(roomName: String,
-                roomAddress: String,
+                streetName: String,
+                houseNumber: String,
+                city: String,
                 roomDescription: String,
                 minimumBookingTime: String,
+                maximumBookingTime: String,
                 imageUri: Uri?) {
         viewModelScope.launch(Dispatchers.IO) {
-            roomRepository.addRoom(roomName, roomAddress, roomDescription, minimumBookingTime, imageUri)
+            roomRepository.addRoom(roomName, streetName, houseNumber, city, roomDescription, minimumBookingTime, maximumBookingTime, imageUri)
         }
     }
 
