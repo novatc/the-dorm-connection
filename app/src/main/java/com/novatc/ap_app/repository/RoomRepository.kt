@@ -20,9 +20,9 @@ class RoomRepository @Inject constructor(
     private val userFirestore: UserFirestore,
     private val storageFirestore: StorageFirestore
 ) {
-    suspend fun addRoom(roomName: String, roomAddress: String, roomDescription: String, minimumBookingTime: String, imageUri: Uri?): UploadTask.TaskSnapshot? {
+    suspend fun addRoom(roomName: String, streetName: String, houseNumber: String, city:String, roomDescription: String, minimumBookingTime: String, maximumBookingTime: String, imageUri: Uri?): UploadTask.TaskSnapshot? {
         val creatorID = userFirestore.getCurrentUserID() ?: throw Exception("No user id found when trying to add a room.")
-        val room = Room(roomName, roomAddress, roomDescription, minimumBookingTime, creatorID)
+        val room = Room(roomName, streetName, houseNumber, city, roomDescription, minimumBookingTime, maximumBookingTime, creatorID)
         val roomId = roomFirestore.addRoom(room)
         return if(imageUri != null) imageUri?.let {
             storageFirestore.uploadImage(UploadDirectories.ROOMS, roomId,

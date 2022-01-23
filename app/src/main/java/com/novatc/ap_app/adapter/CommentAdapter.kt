@@ -1,27 +1,45 @@
 package com.novatc.ap_app.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
+import com.novatc.ap_app.fragments.post.PostDetailsFragment
 import com.novatc.ap_app.model.Comment
-import com.novatc.ap_app.repository.PostRepository
 import kotlinx.android.synthetic.main.fragment_comments.view.*
 import kotlinx.android.synthetic.main.fragment_post_details.view.*
 
-class CommentAdapter(val commentList: ArrayList<Comment>) :
+class CommentAdapter(val commentList: ArrayList<Comment>, userID: String, private val listener: OnItemClickListener) :
 
     RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
+    var userID = userID
 
-    class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         var author: TextView = itemView.findViewById(R.id.tv_comment_author)
         var commentContent: TextView = itemView.findViewById(R.id.tv_comment_content)
         var authorID: String = ""
-        var delete_btn: com.google.android.material.button.MaterialButton =
-            itemView.findViewById(R.id.btn_delete_comment)
+        var deleteButton: com.google.android.material.button.MaterialButton = itemView.findViewById(R.id.btn_delete_comment)
+
+        init {
+            deleteButton.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position:Int = adapterPosition
+            if (position != RecyclerView.NO_POSITION){
+                listener.onItemClick(position)
+            }
+
+        }
+
     }
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -38,8 +56,13 @@ class CommentAdapter(val commentList: ArrayList<Comment>) :
         holder.commentContent.text = comment.content
         holder.authorID = comment.authorID
 
+        if (userID == holder.authorID) {
+            holder.deleteButton.visibility = View.VISIBLE
+        } else {
+            holder.deleteButton.visibility = View.GONE
+        }
 
-        holder.delete_btn.visibility = View.VISIBLE
+
 
 
     }

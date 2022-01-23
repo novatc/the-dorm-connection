@@ -28,6 +28,7 @@ import java.util.*
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.novatc.ap_app.viewModels.CreateRoomViewModel
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
+import kotlin.math.max
 
 
 @AndroidEntryPoint
@@ -71,24 +72,34 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     private fun setOnCreateRoom(view: View) {
         view.btn_create_room.setOnClickListener {
             val roomName = view.et_created_room_name.text.toString().trim()
-            val roomAddress = view.et_created_room_address.text.toString().trim()
+            val streetName = ""
+            val houseNumber = ""
+            val city = ""
             val roomDescription = view.et_created_room_description.text.toString().trim()
             val minimumBookingTime = view.et_created_room_booking_time.text.toString().trim()
+            val maximumBookingTime = ""
+
 
             if (!isFormValid(
                     roomName,
-                    roomAddress,
+                    streetName,
+                    houseNumber,
+                    city,
                     roomDescription,
                     minimumBookingTime,
+                    maximumBookingTime
                 )
             ) return@setOnClickListener
 
             try {
                 createRoomViewModel.addRoom(
                     roomName,
-                    roomAddress,
+                    streetName,
+                    houseNumber,
+                    city,
                     roomDescription,
                     minimumBookingTime,
+                    maximumBookingTime,
                     imageUri
                 )
                 Toast.makeText(
@@ -145,14 +156,20 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     private fun isFormValid(
         roomName: String,
+        streetName: String,
+        houseNumber: String,
+        city: String,
         roomDescription: String,
-        roomAddress: String,
         minimumBookingTime: String,
+        maximumBookingTIme: String
     ): Boolean {
         if (roomName.isBlank()
             || roomDescription.isBlank()
-            || roomAddress.isBlank()
+            || streetName.isBlank()
+            || houseNumber.isBlank()
+            || city.isBlank()
             || minimumBookingTime.isBlank()
+            || maximumBookingTIme.isBlank()
         ) {
             Toast.makeText(context!!, R.string.create_event_required_field, Toast.LENGTH_SHORT).show()
             return false

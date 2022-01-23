@@ -129,8 +129,8 @@ class EventOverviewMapsFragment : Fragment(), OnMapReadyCallback {
             val address = returnAddressFromEvent(event)
             Log.e("MAP", "Address for Event: $address")
             val location = geo.getFromLocationName(address, 1)
-            var lat = location.get(0).latitude
-            var long = location.get(0).longitude
+            val lat = location.get(0).latitude
+            val long = location.get(0).longitude
             val homeLatLng = LatLng(lat, long)
             map.addMarker(MarkerOptions().position(homeLatLng))
         }
