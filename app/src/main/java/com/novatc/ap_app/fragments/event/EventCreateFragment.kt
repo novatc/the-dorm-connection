@@ -156,7 +156,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         var monthString = (month + 1).toString()
         var dayOfMonthString = dayOfMonth.toString()
         if (month < 10) {
-            monthString = "0$month"
+            monthString = "0$monthString"
         }
         if (dayOfMonth < 10) {
             dayOfMonthString = "0$dayOfMonth"

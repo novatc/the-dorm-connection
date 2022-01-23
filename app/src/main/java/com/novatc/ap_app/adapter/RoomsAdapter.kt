@@ -44,7 +44,7 @@ class RoomsAdapter(
     override fun onBindViewHolder(holder: RoomsViewHolder, position: Int) {
         val roomsListItem = roomsListItem[position]
         holder.roomName.text = roomsListItem.name
-        holder.roomAddress.text = roomsListItem.address
+//        holder.roomAddress.text = roomsListItem.address
         holder.roomDescription.text = roomsListItem.description
         holder.minimumBookingTime.text = roomsListItem.minimumBookingTime
     }
