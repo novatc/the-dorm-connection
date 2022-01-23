@@ -14,6 +14,8 @@
     <string name="update_button">Update</string>
     <string name="empty_field_error">Please fill in all fields</string>
     <string name="empty_all_field_error">Please fill field pairs</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="cancel_button">Cancel</string>
 
     #login and sign up
     <string name="login_tagline">Login</string>

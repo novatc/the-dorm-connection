@@ -30,10 +30,10 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun deleteUser() {
+    fun deleteUser(password: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                userRepository.delete()
+                userRepository.delete(password)
                 withContext(Dispatchers.Main) {
                     deleteRequest.value = Request.success(null)
                 }
@@ -43,10 +43,11 @@ class ProfileViewModel @Inject constructor(
                     deleteRequest.value = Request.error(R.string.delete_user_error, null)
                 }
             }
-
         }
-
     }
 
+    fun logoutUser() {
+        userRepository.logout()
+    }
 
 }

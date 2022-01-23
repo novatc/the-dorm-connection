@@ -77,6 +77,9 @@
         <action
             android:id="@+id/action_fragment_profile_to_wgDetailFragment"
             app:destination="@id/wgDetailFragment" />
+        <action
+            android:id="@+id/action_fragment_profile_to_signUpFragment2"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
@@ -280,4 +283,9 @@
         android:label="fragment_room_details_book"
         tools:layout="@layout/fragment_room_details_book" >
     </fragment>
+    <fragment
+        android:id="@+id/passwordDialog"
+        android:name="com.novatc.ap_app.fragments.you.PasswordDialog"
+        android:label="PasswordDialog"
+        tools:layout="@layout/dialog_password"/>
 </navigation>

@@ -29,8 +29,8 @@ class UserRepository @Inject constructor(
         return userFirestore.logout()
     }
 
-    suspend fun delete() {
-        return userFirestore.deleteUser()
+    suspend fun delete(password: String) {
+        return userFirestore.deleteUser(password)
     }
 
     suspend fun readCurrent(): User? {

@@ -14,6 +14,8 @@
     <string name="update_button">Aktualisieren</string>
     <string name="empty_field_error">Bitte fülle alle Felder aus</string>
     <string name="empty_all_field_error">Bitt fülle Felderpaare aus</string>
+    <string name="confirm_button">Bestätigen</string>
+    <string name="cancel_button">Abbrechen</string>
 
 
     #login and sign up

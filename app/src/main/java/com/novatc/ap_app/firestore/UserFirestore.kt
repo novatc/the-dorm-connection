@@ -56,10 +56,12 @@ class UserFirestore @Inject constructor(
         FirebaseAuth.getInstance().signOut()
     }
 
-    suspend fun deleteUser() {
+    suspend fun deleteUser(password: String) {
         val user =
             Firebase.auth.currentUser ?: throw Exception("No current user, when deleting user.")
         val userId = user.uid
+        val credential = EmailAuthProvider.getCredential(user.email!!, password)
+        user.reauthenticate(credential).await()
 
         // Delete all posts by the user
         val userPostsSnapshot =

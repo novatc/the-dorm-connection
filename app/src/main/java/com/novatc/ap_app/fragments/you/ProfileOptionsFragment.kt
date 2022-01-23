@@ -1,14 +1,14 @@
 package com.novatc.ap_app.fragments.you
 
-import com.novatc.ap_app.firestore.UserFirestore
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 @AndroidEntryPoint
 class ProfileOptionsFragment : Fragment() {
 
-    val model: ProfileViewModel by viewModels()
+    val model: ProfileViewModel by activityViewModels()
     private var userWgId = "";
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class ProfileOptionsFragment : Fragment() {
             view.tv_user_name.text = it.username
             view.tv_user_dorm.text = it.userDorm
             userWgId = it.userWgId
-            if (it.userDorm!=""){
+            if (it.userDorm != "") {
                 view.btn_select_dorm.isEnabled = false
                 view.btn_select_dorm.alpha = 0.5F
             }
@@ -71,9 +71,14 @@ class ProfileOptionsFragment : Fragment() {
         val editWGButton: Button = view.btn_edit_wg
         editWGButton.setOnClickListener {
             if (userWgId != "") {
-                view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToWgDetailFragment(userWgId))
+                view.findNavController().navigate(
+                    ProfileOptionsFragmentDirections.actionFragmentProfileToWgDetailFragment(
+                        userWgId
+                    )
+                )
             } else {
-                view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToWgChoose())
+                view.findNavController()
+                    .navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToWgChoose())
             }
 
         }
@@ -91,34 +96,43 @@ class ProfileOptionsFragment : Fragment() {
     private fun setDeleteUserButtonListener(view: View) {
         val deleteProfileButton: Button = view.btn_delet_profile
         deleteProfileButton.setOnClickListener {
-            view.deleteUserProgress.visibility = View.VISIBLE
-            model.deleteUser()
+            val dialog = PasswordDialog(view)
+            dialog.show(parentFragmentManager, "passwordDialog")
             model.deleteRequest.observe(this) { request ->
                 when (request.status) {
-
                     Request.Status.SUCCESS -> {
                         view.deleteUserProgress.visibility = View.GONE
-                        Toast.makeText(activity, R.string.delete_user_success, Toast.LENGTH_SHORT)
-                            .show()
-                        findNavController().navigate(
-                            ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpFragment()
+                        Toast.makeText(
+                            activity,
+                            R.string.delete_user_success,
+                            Toast.LENGTH_SHORT
                         )
+                            .show()
+                    findNavController().navigate(
+                        ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpFragment()
+                    )
                     }
                     else -> {
                         view.deleteUserProgress.visibility = View.GONE
-                        Toast.makeText(activity, request.message!!, Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, request.message!!, Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
             }
         }
+
     }
 
     private fun setLogOutUserButtonListener(view: View) {
         val setLogOutUserButton: Button = view.btn_profile_logout
         setLogOutUserButton.setOnClickListener {
-//            UserFirestore().logout()
-            val action = ProfileOptionsFragmentDirections.actionFragmentProfileToLoginFragment()
-            view.findNavController().navigate(action)
+            try {
+                model.logoutUser()
+                view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToLoginFragment())
+            } catch (e: Exception) {
+                Log.e("LogoutUser", e.toString())
+            }
+
         }
     }
 
