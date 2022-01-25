@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
+import com.novatc.ap_app.model.User
 import com.novatc.ap_app.viewModels.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -22,20 +23,28 @@ class LoginFragment : Fragment() {
 
     val model: LoginViewModel by viewModels()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        navigateIfAlreadyLoggedIn()
+
         setOnLoginListener(view)
         setOnSwitchToSignUpListener(view)
+        model.loadUserObject()
+        model.me.observe(this, {
+            navigateIfAlreadyLoggedIn(it)
+        })
         return view
     }
 
-    private fun navigateIfAlreadyLoggedIn() {
-        if (model.getCurrentFirebaseUser() != null) {
+    private fun navigateIfAlreadyLoggedIn(user: User) {
+        if (model.getCurrentFirebaseUser() != null && user.userDormID != "") {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToFragmentPinboard())
+        }
+        if(model.getCurrentFirebaseUser() != null && user.userDormID==""){
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToChooseDormFragment())
         }
     }
 

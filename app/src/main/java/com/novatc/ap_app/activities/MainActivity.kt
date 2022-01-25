@@ -20,6 +20,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         try {
             setContentView(R.layout.activity_main)
         }
@@ -40,6 +41,7 @@ class MainActivity : BaseActivity() {
                 bottomNav.visibility = View.VISIBLE
             }
         }
+        Log.e("START", "NAV is here")
 
     }
 

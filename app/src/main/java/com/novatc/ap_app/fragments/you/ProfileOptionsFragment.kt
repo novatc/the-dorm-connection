@@ -30,8 +30,8 @@ class ProfileOptionsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile_options, container, false)
-
-        model.userProfile.observe(viewLifecycleOwner, Observer {
+        model.loadUser()
+        model.userProfile.observe(this, Observer {
             view.tv_user_name.text = it.username
             view.tv_user_dorm.text = it.userDorm
             userWgId = it.userWgId

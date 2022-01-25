@@ -1,5 +1,6 @@
 package com.novatc.ap_app.viewModels
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,7 +27,6 @@ class PinboardViewModel @Inject constructor(
 
     init {
         loadPosts()
-        getCurrentUser()
     }
 
     // Variable for exposing livedata to other classes
@@ -61,10 +61,5 @@ class PinboardViewModel @Inject constructor(
         }
     }
 
-    fun getCurrentUser() {
-        viewModelScope.launch {
-            _userProfile.value = userRepository.readCurrent()
 
-        }
-    }
 }
