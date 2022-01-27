@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.novatc.ap_app.viewModels.RoomDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
-import kotlinx.android.synthetic.main.fragment_room_details_general.view.*
 import com.applandeo.materialcalendarview.EventDay
 
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
-import kotlinx.android.synthetic.main.fragment_room_create.view.*
 import java.util.*
 import android.app.TimePickerDialog
 import android.graphics.Color
@@ -21,12 +19,12 @@ import android.widget.*
 
 import androidx.lifecycle.lifecycleScope
 import com.novatc.ap_app.model.*
-import kotlinx.android.synthetic.main.fragment_post_details.view.*
-import kotlinx.android.synthetic.main.fragment_room_create.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
@@ -36,7 +34,7 @@ import kotlin.collections.HashMap
 class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     val model: RoomDetailsViewModel by activityViewModels()
 
-    val partlyBookedDays: ArrayList<EventDay> = ArrayList()
+    val bookedDays: ArrayList<EventDay> = ArrayList()
     val fullyBookedDays: ArrayList<EventDay> = ArrayList()
     var bookedDaysViaDate: HashMap<String, ArrayList<Long>> = HashMap()
     lateinit var calendar: com.applandeo.materialcalendarview.CalendarView
@@ -46,7 +44,9 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     lateinit var endTime: TextView
     private var selectedRoom: Room = Room()
     private var currentUser: User = User()
-    private var bookingListOnRoom: ArrayList<Booking> = ArrayList()
+    private var bookingListOnRoom: List<Booking> = ArrayList<Booking>()
+    val disabledDaysList: ArrayList<Calendar> = ArrayList()
+    private val aDayInMilliseconds: Long = 86400000L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +56,10 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         model.room.observe(this, { room ->
             selectedRoom = room
         })
-        model.loadBookings()
+        bookingListOnRoom = ArrayList()
+        model.room.observe(this, { room ->
+            model.loadBookings(this)
+        })
         calendar = view.calendar
         var instance: Calendar = Calendar.getInstance()
         instance.add(Calendar.DATE, -1)
@@ -70,7 +73,6 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         addBookDateButtonListener(view)
         currentTimePicker = "start"
         getUserName()
-        populateCalendar(view, selectedRoom)
         return view
     }
 
@@ -78,10 +80,12 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         calendar.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
                 selectedDate = eventDay.calendar
-                if(calendar.selectedDates.isEmpty()){
-                   calendar.setDate(selectedDate)
+                if(isDisabled(selectedDate)){
+                   findNextPossibleDate()
                 }
-        calendar.setDate(selectedDate)
+                else{
+                    calendar.setDate(selectedDate)
+                }
             }
         })
     }
@@ -195,9 +199,8 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         })
     }
 
-    @ExperimentalCoroutinesApi
-    private fun populateCalendar(view: View, room: Room) {
-        model.bookingList.observe(this, { booking ->
+    fun populateCalendar() {
+        model.bookings.observe(this, { booking ->
             bookingListOnRoom = booking
             if(bookingListOnRoom.size > 0){
                 fillCalendar()
@@ -206,43 +209,39 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     }
 
     fun fillCalendar(){
-        val calendarList: ArrayList<Calendar> = ArrayList()
+        bookedDays.clear()
+        fullyBookedDays.clear()
+        disabledDaysList.clear()
+        bookedDaysViaDate.clear()
         var date = ""
         var dateList = ArrayList<String>()
         bookingListOnRoom.forEach {booking ->
             if(date != convertUnixToDate(booking.startingDate)){
                 date = convertUnixToDate(booking.startingDate)
                 dateList.add(date)
+                bookedDaysViaDate.put(date, ArrayList())
             }
             bookedDaysViaDate[date]?.add(booking.endDate - booking.startingDate)
-            //calendar.setTimeInMillis(booking.startingDate)
-            //partlyBookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_black, Color.parseColor("#228B22")))
-            //calendarList.add(calendar)
         }
         dateList.forEach{
             date ->
-            var firstBookedTime = 0L
             val calendar = Calendar.getInstance()
             var bookedTime = 0L
             bookedDaysViaDate[date]?.forEach{
                 time ->
-                if(firstBookedTime == 0L) {
-                    firstBookedTime = time
-                }
                 bookedTime = (bookedTime + time)
             }
-            calendar.setTimeInMillis(firstBookedTime)
-            if(bookedTime > selectedRoom.minimumBookingTime?.toLong()!!){
-                fullyBookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_black, Color.parseColor("#228B22")))
-                calendarList.add(calendar)
+            calendar.setTimeInMillis(convertDateToUnix(date).toLong())
+            if(aDayInMilliseconds - bookedTime < selectedRoom.minimumBookingTime?.toLong()!!){
+                bookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_black, Color.parseColor("#228B22")))
+                disabledDaysList.add(calendar)
             }
             else{
-                partlyBookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_yellow, Color.parseColor("#228B22")))
+                bookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_yellow, Color.parseColor("#228B22")))
             }
         }
-        calendar.setEvents(partlyBookedDays)
-        calendar.setEvents(fullyBookedDays)
-        calendar.setDisabledDays(calendarList)
+        calendar.setEvents(bookedDays)
+        calendar.setDisabledDays(disabledDaysList)
     }
 
     private fun addZeroToShortNumber(string: String, fromBehind:Boolean):String{
@@ -263,14 +262,44 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         return DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.ofEpochSecond((unixDate/1000))).split("T")[0]
     }
 
+    private fun convertDateToUnix(date: String): String {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atStartOfDay(ZoneId.systemDefault()).toInstant().epochSecond.toString() + "000"
+    }
+
     private fun millisToHours(millis: Long): Long {
         return millis/3600000L
     }
 
     private fun findNextPossibleDate(){
-        var instance: Calendar = Calendar.getInstance()
-        instance.add(Calendar.DATE, -1)
-        print("tst")
+        var dateSearcher: Calendar = Calendar.getInstance()
+        dateSearcher.add(Calendar.DATE, 0)
+        var x = 0
+        if(disabledDaysList.size > 0){
+            while (x <= disabledDaysList.size){
+                if(dateSearcher.time < disabledDaysList.get(x).time){
+                    print("test")
+                    selectedDate = dateSearcher
+                    calendar.setDate(selectedDate)
+                    break
+                }
+                else{
+                    dateSearcher.add(Calendar.DATE,x)
+                }
+                x++
+            }
+            dateSearcher.add(Calendar.DATE,x)
+            calendar.setDate(dateSearcher)
+        }
+    }
+
+    private fun isDisabled(date: Calendar): Boolean{
+        disabledDaysList.forEach{
+            day ->
+            if(day.time == date.time){
+                return true
+            }
+        }
+        return false
     }
 
 }

@@ -36,6 +36,10 @@ class RoomRepository @Inject constructor(
         roomFirestore.deleteRoom(roomID)
     }
 
+    suspend fun deleteRoomImage(roomID: String): Void? {
+        return storageFirestore.deleteImage(UploadDirectories.ROOMS, roomID)
+    }
+
     suspend fun loadRoomImage(roomId: String): String {
         return storageFirestore.loadImage(UploadDirectories.ROOMS, roomId)
     }

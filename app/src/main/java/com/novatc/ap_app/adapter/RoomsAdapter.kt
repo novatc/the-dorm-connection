@@ -15,7 +15,6 @@ class RoomsAdapter(
 
     inner class RoomsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val roomName: TextView = itemView.findViewById(R.id.roomName)
-        val roomAddress: TextView = itemView.findViewById(R.id.roomUsage)
         val roomDescription: TextView = itemView.findViewById(R.id.roomDescription)
         val minimumBookingTime: TextView = itemView.findViewById(R.id.roomBookingTimeField)
 
@@ -44,7 +43,6 @@ class RoomsAdapter(
     override fun onBindViewHolder(holder: RoomsViewHolder, position: Int) {
         val roomsListItem = roomsListItem[position]
         holder.roomName.text = roomsListItem.name
-//        holder.roomAddress.text = roomsListItem.address
         holder.roomDescription.text = roomsListItem.description
         holder.minimumBookingTime.text = roomsListItem.minimumBookingTime.toString()
     }

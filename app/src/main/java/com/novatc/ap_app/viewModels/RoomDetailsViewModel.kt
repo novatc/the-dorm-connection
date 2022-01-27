@@ -1,13 +1,13 @@
 package com.novatc.ap_app.viewModels
 
-import android.content.Context
 import android.util.Log
-import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.DocumentReference
+import com.novatc.ap_app.R
+import com.novatc.ap_app.fragments.room.RoomDetailsBookFragment
 import com.novatc.ap_app.model.*
 import com.novatc.ap_app.repository.RoomRepository
 import com.novatc.ap_app.repository.UserRepository
@@ -31,8 +31,11 @@ class RoomDetailsViewModel @Inject constructor(
     private val _userProfile = MutableLiveData<User>()
     val userProfile: LiveData<User> = _userProfile
 
-    private var _bookings: MutableLiveData<ArrayList<Booking>> =
-        MutableLiveData<ArrayList<Booking>>()
+    private val _bookings = MutableLiveData<List<Booking>>()
+    val bookings: LiveData<List<Booking>> = _bookings
+
+    private val _deleteRoomRequest = MutableLiveData<Request<*>>()
+    val deleteRoomRequest: LiveData<Request<*>> = _deleteRoomRequest
 
     fun setRoom(selectedRoom: Room) {
         this._room.value = selectedRoom
@@ -44,17 +47,25 @@ class RoomDetailsViewModel @Inject constructor(
     private val _loadImageRequest = MutableLiveData<Request<String?>>()
     val loadImageRequest: LiveData<Request<String?>> = _loadImageRequest
 
-    suspend fun deleteRoom(roomID: String){
-        roomRepository.deleteRoom(roomID)
-    }
+    fun deleteRoom(){
+        val currentRoomId = _room.value?.id!!
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                roomRepository.deleteRoom(currentRoomId)
+                roomRepository.deleteRoomImage(currentRoomId)
+                withContext(Dispatchers.Main) {
+                    _deleteRoomRequest.value = Request.success(null)
+                }
+            } catch (e: Exception) {
+                Log.e("RoomDetailsViewModel", e.toString())
+                withContext(Dispatchers.Main) {
+                    _deleteRoomRequest.value =
+                        Request.error(R.string.details_event_delete_error, null)
+                }
+            }
 
-    internal var bookingList: MutableLiveData<ArrayList<Booking>>
-        get() {
-            return _bookings
         }
-        set(value) {
-            _bookings = value
-        }
+    }
 
     fun loadRoomImage() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -76,13 +87,11 @@ class RoomDetailsViewModel @Inject constructor(
         }
     }
 
-    @ExperimentalCoroutinesApi
-    fun loadBookings() {
-        _bookings
+    fun loadBookings(roomDetailsBookFragment: RoomDetailsBookFragment) {
         Log.e("ROOM", "Room is ${room.value}")
         viewModelScope.launch(Dispatchers.IO) {
             val bookingList = ArrayList<Booking>()
-            roomRepository.getBookingsAsFlow(room.value?.id!!).collect { bookings ->
+            roomRepository.getBookingsAsFlow(room.value!!.id!!).collect { bookings ->
                 if (bookings.isEmpty()) {
                     Log.e("BOOKINGS", "NO BOOKINGS")
                 } else {
@@ -92,6 +101,7 @@ class RoomDetailsViewModel @Inject constructor(
                 }
                     withContext(Dispatchers.Main) {
                         _bookings.value = bookingList
+                        roomDetailsBookFragment.populateCalendar()
                     }
             }
         }
