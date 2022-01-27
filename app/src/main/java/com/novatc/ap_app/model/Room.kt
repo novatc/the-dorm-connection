@@ -23,6 +23,9 @@ data class Room(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
         )
 
 

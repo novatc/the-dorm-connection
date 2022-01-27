@@ -29,11 +29,16 @@ import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     val model: RoomDetailsViewModel by activityViewModels()
 
+    val partlyBookedDays: ArrayList<EventDay> = ArrayList()
+    val fullyBookedDays: ArrayList<EventDay> = ArrayList()
+    var bookedDaysViaDate: HashMap<String, ArrayList<Long>> = HashMap()
     lateinit var calendar: com.applandeo.materialcalendarview.CalendarView
     lateinit var selectedDate :Calendar
     lateinit var currentTimePicker :String
@@ -74,6 +79,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
             override fun onDayClick(eventDay: EventDay) {
                 selectedDate = eventDay.calendar
                 print("test")
+                calendar.setDate(selectedDate)
             }
         })
     }
@@ -116,24 +122,34 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                         DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", Locale.GERMAN)
                     val startingDateInMilliseconds: Long = LocalDateTime.parse(startingDate, formatter).atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
                     val endingDateInMilliseconds: Long = LocalDateTime.parse(endingDate, formatter).atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
-                    var c: Booking? = Booking(
-                        userID = currentUser.id,
-                        startingDate = startingDateInMilliseconds,
-                        endDate = endingDateInMilliseconds
-                    )
+                    when {
+                        endingDateInMilliseconds - startingDateInMilliseconds < selectedRoom.minimumBookingTime?.toLong()!! -> {
+                            Toast.makeText(context!!, com.novatc.ap_app.R.string.booking_time_falls_below_the_minimum_booking_time, Toast.LENGTH_SHORT).show()
+                        }
+                        endingDateInMilliseconds - startingDateInMilliseconds > selectedRoom.maximumBookingTime?.toLong()!! -> {
+                            Toast.makeText(context!!, com.novatc.ap_app.R.string.booking_time_exceeds_maximum_booking_time, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            var c: Booking? = Booking(
+                                userID = currentUser.id,
+                                startingDate = startingDateInMilliseconds,
+                                endDate = endingDateInMilliseconds
+                            )
 
-                    lifecycleScope.launch {
-                        selectedRoom.id?.let { it1 ->
-                            if (c != null) {
-                                model.addBooking(selectedRoom.id!!, c)
+                            lifecycleScope.launch {
+                                selectedRoom.id?.let { it1 ->
+                                    if (c != null) {
+                                        model.addBooking(selectedRoom.id!!, c)
+                                    }
+                                }
                             }
+                            Toast.makeText(context!!, com.novatc.ap_app.R.string.successful_booking, Toast.LENGTH_SHORT).show()
+                            val layout = view.tutView1
+                            layout.visibility = View.VISIBLE
+                            val layout2 = view.tutView2
+                            layout2.visibility = View.GONE
                         }
                     }
-                    Toast.makeText(context!!, com.novatc.ap_app.R.string.successful_booking, Toast.LENGTH_SHORT).show()
-                    val layout = view.tutView1
-                    layout.visibility = View.VISIBLE
-                    val layout2 = view.tutView2
-                    layout2.visibility = View.GONE
                 }
             }
             else{
@@ -188,15 +204,42 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     }
 
     fun fillCalendar(){
-        val events: ArrayList<EventDay> = ArrayList()
         val calendarList: ArrayList<Calendar> = ArrayList()
+        var date = ""
+        var dateList = ArrayList<String>()
         bookingListOnRoom.forEach {booking ->
-            val calendar = Calendar.getInstance()
-            calendar.setTimeInMillis(booking.startingDate);
-            events.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_black, Color.parseColor("#228B22")))
-            calendarList.add(calendar)
+            if(date != convertUnixToDate(booking.startingDate)){
+                date = convertUnixToDate(booking.startingDate)
+                dateList.add(date)
+            }
+            bookedDaysViaDate[date]?.add(booking.endDate - booking.startingDate)
+            //calendar.setTimeInMillis(booking.startingDate)
+            //partlyBookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_black, Color.parseColor("#228B22")))
+            //calendarList.add(calendar)
         }
-        calendar.setEvents(events)
+        dateList.forEach{
+            date ->
+            var firstBookedTime = 0L
+            val calendar = Calendar.getInstance()
+            var bookedTime = 0L
+            bookedDaysViaDate[date]?.forEach{
+                time ->
+                if(firstBookedTime == 0L) {
+                    firstBookedTime = time
+                }
+                bookedTime = (bookedTime + time)
+            }
+            calendar.setTimeInMillis(firstBookedTime)
+            if(bookedTime > selectedRoom.minimumBookingTime?.toLong()!!){
+                fullyBookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_black, Color.parseColor("#228B22")))
+                calendarList.add(calendar)
+            }
+            else{
+                partlyBookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_yellow, Color.parseColor("#228B22")))
+            }
+        }
+        calendar.setEvents(partlyBookedDays)
+        calendar.setEvents(fullyBookedDays)
         calendar.setDisabledDays(calendarList)
     }
 
@@ -212,6 +255,20 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         else{
             return string
         }
+    }
+
+    private fun convertUnixToDate(unixDate: Long): String {
+        return DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.ofEpochSecond((unixDate/1000))).split("T")[0]
+    }
+
+    private fun millisToHours(millis: Long): Long {
+        return millis/3600000L
+    }
+
+    private fun findNextPossibleDate(){
+        var instance: Calendar = Calendar.getInstance()
+        instance.add(Calendar.DATE, -1)
+        print("tst")
     }
 
 }

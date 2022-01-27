@@ -16,7 +16,9 @@
     <string name="empty_all_field_error">Bitt fülle Felderpaare aus</string>
     <string name="confirm_button">Bestätigen</string>
     <string name="cancel_button">Abbrechen</string>
-
+    <string name="upload_image">Bild hochladen</string>
+    <string name="continue_to_next_page">Continue ></string>
+    <string name="back">&lt; zurück ></string>
 
     #login and sign up
     <string name="login_tagline">Anmelden</string>
@@ -80,7 +82,6 @@
     <string name="create_event_event_not_created_message">Das Event konnte nicht stellt werden, versuche es nochmal.</string>
     <string name="events_map_overview">Event-Karte</string>
 
-
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>
     <string name="rooms_tagline">Räume für alle zum mieten</string>
@@ -99,6 +100,8 @@
     <string name="detail_room_book">Buchen</string>
     <string name="booking_time_incorrect">Bitte gib ein valides Zeitfenster an. Die Buchung konnte nicht abgeschlossen werden.</string>
     <string name="successful_booking">Das Buchen des Zeitslots war erfolgreich!</string>
+    <string name="booking_time_exceeds_maximum_booking_time">Das gewählte Zeitfenster überschreitet die maximal erlaubte Buchzeit. Die Buchung konnte nicht angelegt werden.</string>
+    <string name="booking_time_falls_below_the_minimum_booking_time">Das gewählte Zeitfenster unterschreitet die minimal erlaubte Buchzeit. Die Buchung konnte nicht angelegt werden.</string>
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>

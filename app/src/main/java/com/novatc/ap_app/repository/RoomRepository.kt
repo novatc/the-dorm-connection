@@ -50,7 +50,7 @@ class RoomRepository @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    suspend fun getBookingsAsFlow(roomID: String): Flow<List<Booking>> {
+    fun getBookingsAsFlow(roomID: String): Flow<List<Booking>> {
         return roomFirestore.getBookingsFlow(roomID)
     }
 

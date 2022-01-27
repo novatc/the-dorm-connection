@@ -17,23 +17,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <EditText
+            android:id="@+id/et_house_number"
+            android:layout_width="300dp"
+            android:layout_height="46dp"
+            android:ems="10"
+            android:hint="@string/create_event_house_number"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="308dp" />
+
         <Button
-            android:id="@+id/et_created_room_booking_time"
-            style="?android:spinnerStyle"
-            android:layout_width="209dp"
-            android:layout_height="49dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/minimum_booking_time"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_room_address" />
+            android:id="@+id/button3"
+            android:layout_width="331dp"
+            android:layout_height="1dp"
+            android:text="Button"
+            tools:layout_editor_absoluteX="31dp"
+            tools:layout_editor_absoluteY="490dp" />
+
+        <EditText
+            android:id="@+id/et_created_room_description"
+            android:layout_width="304dp"
+            android:layout_height="43dp"
+            android:hint="@string/room_description"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="147dp" />
+
+        <EditText
+            android:id="@+id/et_city"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="@string/create_event_city"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="372dp" />
+
+        <EditText
+            android:id="@+id/et_created_room_name"
+            android:layout_width="305dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="@string/room_hint"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="85dp" />
+
+        <EditText
+            android:id="@+id/et_street_name"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:hint="Street name"
+            android:inputType="text"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="240dp" />
 
         <TextView
             android:id="@+id/tv_create_room"
             android:layout_width="109dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/roboto"
             android:text="@string/rooms_add_tagline"
             android:textAlignment="center"
@@ -53,77 +98,88 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
 
-        <EditText
-            android:id="@+id/et_created_room_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:ems="10"
-            android:hint="@string/room_hint"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_create_room" />
+        <Button
+            android:id="@+id/et_created_room_maximum_booking_time"
+            style="?android:spinnerStyle"
+            android:layout_width="221dp"
+            android:layout_height="50dp"
+            android:text="Max. booking time"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="692dp" />
 
-        <EditText
-            android:id="@+id/et_created_room_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="@string/room_description"
-            android:inputType="textMultiLine"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_room_name" />
-
-        <EditText
-            android:id="@+id/et_created_room_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="@string/room_address"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_room_description" />
+        <Button
+            android:id="@+id/et_created_room_minimum_booking_time"
+            style="?android:spinnerStyle"
+            android:layout_width="221dp"
+            android:layout_height="50dp"
+            android:text="@string/minimum_booking_time"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="642dp" />
 
         <Button
             android:id="@+id/btn_create_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="32dp"
-            android:backgroundTint="@color/patriarch"
-            android:text="@string/btn_safe"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            android:backgroundTint="@color/green"
+            android:text="create room"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="950dp" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Permissions"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:text="@string/create_event_general_information"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="57dp" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:text="@string/detail_event_location"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="130dp"
+            android:layout_height="21dp"
+            android:text="Profilbild auswählen:"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="630dp" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="181dp"
             android:layout_height="181dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_room_booking_time"
-            app:srcCompat="@drawable/add_screen_image_placeholder" />
+            app:srcCompat="@drawable/add_screen_image_placeholder"
+            tools:layout_editor_absoluteX="57dp"
+            tools:layout_editor_absoluteY="746dp" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="331dp"
+            android:layout_height="1dp"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_image"
+            tools:layout_editor_absoluteX="260dp"
+            tools:layout_editor_absoluteY="759dp" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="130dp"
+            android:layout_height="21dp"
+            android:text="Maximale Buchzeit:"
+            tools:layout_editor_absoluteX="21dp"
+            tools:layout_editor_absoluteY="702dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

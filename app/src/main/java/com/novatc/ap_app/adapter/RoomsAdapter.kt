@@ -46,7 +46,7 @@ class RoomsAdapter(
         holder.roomName.text = roomsListItem.name
 //        holder.roomAddress.text = roomsListItem.address
         holder.roomDescription.text = roomsListItem.description
-        holder.minimumBookingTime.text = roomsListItem.minimumBookingTime
+        holder.minimumBookingTime.text = roomsListItem.minimumBookingTime.toString()
     }
 
     override fun getItemCount() = roomsListItem.size
