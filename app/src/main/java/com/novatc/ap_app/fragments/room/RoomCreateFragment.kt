@@ -150,8 +150,8 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
         Log.d("Datepicker", "Stunde: $hour Minute: $minute")
-        var hourString = hour.toString()
-        var minuteString = minute.toString()
+        var hourString = addZeroToShortNumber(hour.toString(), false)
+        var minuteString = addZeroToShortNumber(minute.toString(), false)
         var resultTime = hourString + ":" + minuteString
         if(chosenPicker == "min"){
             minimumBookingTimeInMillis = timeToMillis(hour, minute)
@@ -182,6 +182,20 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     private fun timeToMillis(hour: Int, minute: Int): Long{
         return (hour * 60 * 60 * 1000 + minute * 60 * 1000).toLong()
+    }
+
+    private fun addZeroToShortNumber(string: String, fromBehind:Boolean):String{
+        if(string.length < 2){
+            if (fromBehind){
+                return string + "0"
+            }
+            else {
+                return "0" + string
+            }
+        }
+        else{
+            return string
+        }
     }
 
 }

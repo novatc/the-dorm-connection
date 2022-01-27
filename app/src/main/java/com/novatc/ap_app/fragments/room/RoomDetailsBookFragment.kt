@@ -64,7 +64,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         selectedDate = calendar.firstSelectedDate
         startingTime = view.starting_time_text
         endTime = view.end_time_text
-        addDateListener(calendar)
+        addDateListener()
         addSaveDateButtonListener(view)
         addTimeOfDayTextViewListener()
         addBookDateButtonListener(view)
@@ -74,12 +74,14 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         return view
     }
 
-    fun addDateListener(calendar: com.applandeo.materialcalendarview.CalendarView){
+    fun addDateListener(){
         calendar.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
                 selectedDate = eventDay.calendar
-                print("test")
-                calendar.setDate(selectedDate)
+                if(calendar.selectedDates.isEmpty()){
+                   calendar.setDate(selectedDate)
+                }
+        calendar.setDate(selectedDate)
             }
         })
     }

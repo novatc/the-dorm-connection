@@ -91,6 +91,7 @@
     <string name="room_description">Description</string>
     <string name="room_address">Adresse</string>
     <string name="minimum_booking_time_pre">Min. Buchzeit:</string>
+    <string name="maximum_booking_time">Max. Buchzeit</string>
     <string name="btn_book_room">Buche diesen Raum</string>
     <string name="book_room_button">Buche diesen Raum</string>
     <string name="btn_delete_room">Lösche Raum</string>
@@ -176,5 +177,6 @@
     <string name="comment_on_post">Kommentieren</string>
     <string name="write_your_comment">Schreib deinen Kommentar</string>
     <string name="comment_send">Senden</string>
+    <string name="notification_new_post">Eine neue Nachricht ist auf deiner Pinnwand erschienen!</string>
 
 </resources>

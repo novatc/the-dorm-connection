@@ -78,21 +78,21 @@ class RoomDetailsViewModel @Inject constructor(
 
     @ExperimentalCoroutinesApi
     fun loadBookings() {
-        Log.e("POST", "Room is ${room.value}")
+        _bookings
+        Log.e("ROOM", "Room is ${room.value}")
         viewModelScope.launch(Dispatchers.IO) {
+            val bookingList = ArrayList<Booking>()
             roomRepository.getBookingsAsFlow(room.value?.id!!).collect { bookings ->
                 if (bookings.isEmpty()) {
-                    Log.e("BOOKINGS", "NO Bookings")
+                    Log.e("BOOKINGS", "NO BOOKINGS")
                 } else {
-                    val bookingList = ArrayList<Booking>()
                     bookings.forEach {
                         bookingList.add(it)
                     }
+                }
                     withContext(Dispatchers.Main) {
                         _bookings.value = bookingList
                     }
-                }
-
             }
         }
     }

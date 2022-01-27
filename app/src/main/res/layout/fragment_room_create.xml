@@ -19,60 +19,66 @@
 
         <EditText
             android:id="@+id/et_house_number"
-            android:layout_width="300dp"
-            android:layout_height="46dp"
-            android:ems="10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:ems="11"
             android:hint="@string/create_event_house_number"
             android:inputType="text"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="308dp" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="331dp"
-            android:layout_height="1dp"
-            android:text="Button"
-            tools:layout_editor_absoluteX="31dp"
-            tools:layout_editor_absoluteY="490dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_street_name" />
 
         <EditText
             android:id="@+id/et_created_room_description"
-            android:layout_width="304dp"
-            android:layout_height="43dp"
-            android:hint="@string/room_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="11"
+            android:gravity="start|top"
+            android:hint="@string/event_description"
+            android:importantForAutofill="no"
             android:inputType="textMultiLine"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="147dp" />
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/et_created_room_name"
+            app:layout_constraintStart_toStartOf="@+id/et_created_room_name"
+            app:layout_constraintTop_toBottomOf="@+id/et_created_room_name" />
 
         <EditText
             android:id="@+id/et_city"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:ems="10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:ems="11"
             android:hint="@string/create_event_city"
             android:inputType="text"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="372dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_house_number" />
 
         <EditText
             android:id="@+id/et_created_room_name"
-            android:layout_width="305dp"
-            android:layout_height="50dp"
-            android:ems="10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="11"
             android:hint="@string/room_hint"
             android:inputType="textPersonName"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="85dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rooms" />
 
         <EditText
             android:id="@+id/et_street_name"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:ems="10"
-            android:hint="Street name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:ems="11"
             android:inputType="text"
-            tools:layout_editor_absoluteX="76dp"
-            tools:layout_editor_absoluteY="240dp" />
+            android:hint="@string/create_event_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
         <TextView
             android:id="@+id/tv_create_room"
@@ -101,85 +107,99 @@
         <Button
             android:id="@+id/et_created_room_maximum_booking_time"
             style="?android:spinnerStyle"
-            android:layout_width="221dp"
-            android:layout_height="50dp"
-            android:text="Max. booking time"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="160dp"
-            tools:layout_editor_absoluteY="692dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:ems="11"
+            android:text="@string/maximum_booking_time"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_created_room_minimum_booking_time" />
 
         <Button
             android:id="@+id/et_created_room_minimum_booking_time"
             style="?android:spinnerStyle"
-            android:layout_width="221dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/minimum_booking_time"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="160dp"
-            tools:layout_editor_absoluteY="642dp" />
+            android:textSize="18sp"
+            android:ems="11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
         <Button
             android:id="@+id/btn_create_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:backgroundTint="@color/green"
             android:text="create room"
-            tools:layout_editor_absoluteX="160dp"
-            tools:layout_editor_absoluteY="950dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/textView28"
             android:layout_width="120dp"
             android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="75dp"
             android:text="@string/create_event_general_information"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="57dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView30"
             android:layout_width="120dp"
             android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
             android:text="@string/detail_event_location"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="205dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_created_room_description" />
 
         <TextView
             android:id="@+id/textView29"
             android:layout_width="130dp"
             android:layout_height="21dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="13dp"
             android:text="Profilbild auswählen:"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="630dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_created_room_maximum_booking_time" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="181dp"
             android:layout_height="181dp"
-            app:srcCompat="@drawable/add_screen_image_placeholder"
-            tools:layout_editor_absoluteX="57dp"
-            tools:layout_editor_absoluteY="746dp" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="331dp"
-            android:layout_height="1dp"
-            android:text="Button" />
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView29"
+            app:srcCompat="@drawable/add_screen_image_placeholder" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="84dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/upload_image"
-            tools:layout_editor_absoluteX="260dp"
-            tools:layout_editor_absoluteY="759dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
         <TextView
             android:id="@+id/textView25"
             android:layout_width="130dp"
             android:layout_height="21dp"
-            android:text="Maximale Buchzeit:"
-            tools:layout_editor_absoluteX="21dp"
-            tools:layout_editor_absoluteY="702dp" />
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="13dp"
+            android:text="Buchzeiten"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_city" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
