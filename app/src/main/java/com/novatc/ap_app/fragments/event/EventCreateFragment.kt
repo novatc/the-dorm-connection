@@ -11,11 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_event_create.view.createEvent
@@ -75,10 +76,15 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                     eventCity,
                     imageUri
                 )
-                Toast.makeText(requireActivity(), R.string.create_event_event_created_message, Toast.LENGTH_SHORT).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView, R.string.create_event_event_created_message, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
             } catch (e: Exception) {
-                Toast.makeText(requireActivity(), R.string.create_event_event_not_created_message, Toast.LENGTH_SHORT)
-                    .show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView, R.string.create_event_event_not_created_message, Snackbar.LENGTH_LONG).apply {
+                    anchorView = bottomNavView
+                }.show()
             }
             view.findNavController()
                 .navigate(EventCreateFragmentDirections.actionEventCreateFragmentToEventFragment())
@@ -126,11 +132,17 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             || eventHouseNumber.isBlank()
             || eventCity.isBlank()
         ) {
-            Toast.makeText(context!!, R.string.create_event_required_field, Toast.LENGTH_SHORT).show()
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView, R.string.create_event_required_field, Snackbar.LENGTH_LONG).apply {
+                anchorView = bottomNavView
+            }.show()
             return false
         }
         if (dateIsInPast(eventDate)) {
-            Toast.makeText(context!!, R.string.create_event_date_past, Toast.LENGTH_SHORT).show()
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView, R.string.create_event_date_past, Snackbar.LENGTH_LONG).apply {
+                anchorView = bottomNavView
+            }.show()
             return false
         }
         return true

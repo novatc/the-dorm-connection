@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
-        android:name="com.novatc.ap_app.fragments.post.AddPostFragment"
+        android:name="com.novatc.ap_app.fragments.pinboard.AddPostFragment"
         android:label="AddPostFragment"
         tools:layout="@layout/fragment_add_post">
         <action
@@ -98,7 +98,7 @@
     </fragment>
     <fragment
         android:id="@+id/myPostsFragment"
-        android:name="com.novatc.ap_app.fragments.post.MyPostsFragment"
+        android:name="com.novatc.ap_app.fragments.pinboard.MyPostsFragment"
         android:label="MyPostsFragment"
         tools:layout="@layout/fragment_my_posts">
         <action
@@ -140,7 +140,7 @@
     </fragment>
     <fragment
         android:id="@+id/postDetailsFragment"
-        android:name="com.novatc.ap_app.fragments.post.PostDetailsFragment"
+        android:name="com.novatc.ap_app.fragments.pinboard.PostDetailsFragment"
         android:label="PostDetailsFragment"
         tools:layout="@layout/fragment_post_details">
         <action
@@ -173,7 +173,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.novatc.ap_app.fragments.LoginFragment"
+        android:name="com.novatc.ap_app.fragments.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -188,7 +188,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.novatc.ap_app.fragments.SignUpFragment"
+        android:name="com.novatc.ap_app.fragments.login.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up">
         <action

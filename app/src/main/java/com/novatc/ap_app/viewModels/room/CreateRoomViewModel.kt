@@ -1,4 +1,4 @@
-package com.novatc.ap_app.viewModels
+package com.novatc.ap_app.viewModels.room
 
 import android.content.Context
 import android.net.Uri

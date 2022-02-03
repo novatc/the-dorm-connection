@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Post
-import kotlinx.coroutines.flow.Flow
 
 class PostAdapter(val postListItems: ArrayList<Post>, private val listener: OnItemClickListener) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
@@ -50,7 +49,7 @@ class PostAdapter(val postListItems: ArrayList<Post>, private val listener: OnIt
         holder.postText.text = postListItem.text
         holder.postKeywords.text = postListItem.keyword
         holder.date.text = postListItem.date
-        holder.key = postListItem.key.toString()
+        holder.key = postListItem.id.toString()
     }
 
     override fun getItemCount() = postListItems.size

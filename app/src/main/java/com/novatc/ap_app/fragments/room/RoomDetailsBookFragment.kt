@@ -6,18 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.novatc.ap_app.viewModels.RoomDetailsViewModel
+import com.novatc.ap_app.viewModels.room.RoomDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
 import com.applandeo.materialcalendarview.EventDay
-
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import java.util.*
 import android.app.TimePickerDialog
 import android.graphics.Color
 import android.util.Log
 import android.widget.*
-
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
+import com.novatc.ap_app.R
 import com.novatc.ap_app.model.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -116,10 +117,16 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                 var endingHour: Int = endTime.text.split(":")[0].toInt()
                 var endingMinute: Int = endTime.text.split(":")[1].toInt()
                 if(startingHour > endingHour){
-                    Toast.makeText(context!!, com.novatc.ap_app.R.string.booking_time_incorrect, Toast.LENGTH_SHORT).show()
+                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    Snackbar.make(bottomNavView,  R.string.booking_time_incorrect, Snackbar.LENGTH_SHORT).apply {
+                        anchorView = bottomNavView
+                    }.show()
                 }
                 else if(startingHour == endingHour && startingMinute < endingMinute){
-                    Toast.makeText(context!!, com.novatc.ap_app.R.string.booking_time_incorrect, Toast.LENGTH_SHORT).show()
+                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    Snackbar.make(bottomNavView,  R.string.booking_time_incorrect, Snackbar.LENGTH_SHORT).apply {
+                        anchorView = bottomNavView
+                    }.show()
                 }
                 else{
                     val startingDate = booked_date_1.text.toString() + " " + startingTime.text.toString()
@@ -130,10 +137,16 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                     val endingDateInMilliseconds: Long = LocalDateTime.parse(endingDate, formatter).atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
                     when {
                         endingDateInMilliseconds - startingDateInMilliseconds < selectedRoom.minimumBookingTime?.toLong()!! -> {
-                            Toast.makeText(context!!, com.novatc.ap_app.R.string.booking_time_falls_below_the_minimum_booking_time, Toast.LENGTH_SHORT).show()
+                            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                            Snackbar.make(bottomNavView,  R.string.booking_time_falls_below_the_minimum_booking_time, Snackbar.LENGTH_SHORT).apply {
+                                anchorView = bottomNavView
+                            }.show()
                         }
                         endingDateInMilliseconds - startingDateInMilliseconds > selectedRoom.maximumBookingTime?.toLong()!! -> {
-                            Toast.makeText(context!!, com.novatc.ap_app.R.string.booking_time_exceeds_maximum_booking_time, Toast.LENGTH_SHORT).show()
+                            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                            Snackbar.make(bottomNavView,  R.string.booking_time_exceeds_maximum_booking_time, Snackbar.LENGTH_SHORT).apply {
+                                anchorView = bottomNavView
+                            }.show()
                         }
                         else -> {
                             var c: Booking? = Booking(
@@ -149,7 +162,10 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                                     }
                                 }
                             }
-                            Toast.makeText(context!!, com.novatc.ap_app.R.string.successful_booking, Toast.LENGTH_SHORT).show()
+                            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                            Snackbar.make(bottomNavView,  R.string.successful_booking, Snackbar.LENGTH_SHORT).apply {
+                                anchorView = bottomNavView
+                            }.show()
                             val layout = view.tutView1
                             layout.visibility = View.VISIBLE
                             val layout2 = view.tutView2
@@ -159,7 +175,10 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                 }
             }
             else{
-                Toast.makeText(context!!, com.novatc.ap_app.R.string.empty_field_error, Toast.LENGTH_SHORT).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,  R.string.empty_field_error, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
             }
 
         }

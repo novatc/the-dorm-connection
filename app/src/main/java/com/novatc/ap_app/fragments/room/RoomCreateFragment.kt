@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TimePicker
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,7 +25,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_create.*
 import java.util.*
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.novatc.ap_app.viewModels.CreateRoomViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
+import com.novatc.ap_app.viewModels.room.CreateRoomViewModel
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
 
@@ -34,7 +35,7 @@ import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
 @AndroidEntryPoint
 class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
-    private val createRoomViewModel: CreateRoomViewModel  by viewModels()
+    private val createRoomViewModel: CreateRoomViewModel by viewModels()
     private var imageUri: Uri? = null
     private lateinit var imgProfile: ImageView
     lateinit var startForProfileImageResult: ActivityResultLauncher<Intent>
@@ -101,18 +102,15 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                     maximumBookingTime,
                     imageUri
                 )
-                Toast.makeText(
-                    requireActivity(),
-                    R.string.create_event_event_created_message,
-                    Toast.LENGTH_SHORT
-                ).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,  R.string.create_event_event_created_message, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
             } catch (e: Exception) {
-                Toast.makeText(
-                    requireActivity(),
-                    R.string.create_event_event_not_created_message,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,  R.string.create_event_event_not_created_message, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
             }
             val action = RoomCreateFragmentDirections.actionRoomCreateFragmentToRoomFragment()
             view.findNavController().navigate(action)
@@ -174,7 +172,10 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             || minimumBookingTime.isBlank()
             || maximumBookingTime.isBlank()
         ) {
-            Toast.makeText(context!!, R.string.create_event_required_field, Toast.LENGTH_SHORT).show()
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView,  R.string.empty_all_field_error, Snackbar.LENGTH_SHORT).apply {
+                anchorView = bottomNavView
+            }.show()
             return false
         }
         return true

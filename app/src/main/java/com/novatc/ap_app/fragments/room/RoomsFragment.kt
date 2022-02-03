@@ -14,7 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.RoomsAdapter
 import com.novatc.ap_app.model.Room
-import com.novatc.ap_app.viewModels.RoomViewModel
+import com.novatc.ap_app.viewModels.room.RoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_list.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi

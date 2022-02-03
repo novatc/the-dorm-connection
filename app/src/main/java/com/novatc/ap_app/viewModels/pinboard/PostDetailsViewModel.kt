@@ -1,4 +1,4 @@
-package com.novatc.ap_app.viewModels
+package com.novatc.ap_app.viewModels.pinboard
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.DocumentReference
-import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.model.User
@@ -15,7 +14,6 @@ import com.novatc.ap_app.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -70,7 +68,7 @@ class PostDetailsViewModel @Inject constructor(
     fun loadComments() {
         Log.e("POST", "Post is ${post.value}")
         viewModelScope.launch(Dispatchers.IO) {
-            postRepository.getCommentsAsFlow(post.value?.key!!).collect { comments ->
+            postRepository.getCommentsAsFlow(post.value?.id!!).collect { comments ->
                 if (comments.isEmpty()) {
                     Log.e("COMMENTS", "NO Comments")
                 } else {

@@ -16,7 +16,7 @@ import androidx.work.WorkRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.PostAdapter
-import com.novatc.ap_app.viewModels.PinboardViewModel
+import com.novatc.ap_app.viewModels.pinboard.PinboardViewModel
 import kotlinx.android.synthetic.main.fragment_pinboard.view.*
 import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.services.Notification

@@ -8,19 +8,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
 import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.viewModels.event.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /**
  * The event fragment displays a list of events
@@ -75,7 +78,10 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         try {
             startActivity(mapIntent)
         } catch (e: ActivityNotFoundException) {
-            Toast.makeText(activity, R.string.no_maps, Toast.LENGTH_SHORT).show()
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView,  R.string.no_maps, Snackbar.LENGTH_SHORT).apply {
+                anchorView = bottomNavView
+            }.show()
         }
 
     }
@@ -91,7 +97,11 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
 
         model.events.observe(this, { events ->
             view.eventsListSpinner.visibility = View.GONE
-            eventsAdapter.differ.submitList(events)
+            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val result = events.sortedByDescending {
+                LocalDate.parse(it.date, dateTimeFormatter)
+            }
+            eventsAdapter.differ.submitList(result)
             eventList = events
 
         })

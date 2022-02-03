@@ -1,16 +1,12 @@
 package com.novatc.ap_app.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
-import com.novatc.ap_app.fragments.post.PostDetailsFragment
 import com.novatc.ap_app.model.Comment
-import kotlinx.android.synthetic.main.fragment_comments.view.*
-import kotlinx.android.synthetic.main.fragment_post_details.view.*
 
 class CommentAdapter(val commentList: ArrayList<Comment>, userID: String, private val listener: OnItemClickListener) :
 

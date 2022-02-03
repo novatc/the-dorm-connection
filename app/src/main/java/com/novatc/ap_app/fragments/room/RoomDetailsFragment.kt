@@ -5,27 +5,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.RoomDetailsStateAdapter
-import com.novatc.ap_app.fragments.event.EventDetailsFragmentDirections
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.model.Room
 import com.novatc.ap_app.repository.UserRepository
-import com.novatc.ap_app.viewModels.RoomDetailsViewModel
+import com.novatc.ap_app.viewModels.room.RoomDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_details.view.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,6 +34,7 @@ class RoomDetailsFragment : Fragment() {
         R.string.detail_room_book
     )
     private val args by navArgs<RoomDetailsFragmentArgs>()
+
     @Inject
     lateinit var userRepository: UserRepository
     private val roomDetailsViewModel: RoomDetailsViewModel by activityViewModels()
@@ -47,7 +44,7 @@ class RoomDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_room_details, container, false)
+        val view = inflater.inflate(R.layout.fragment_room_details, container, false)
         val room: Room = args.clickedRoom
         Log.e("FIRE", "Post viewed: ${room}")
 
@@ -64,27 +61,40 @@ class RoomDetailsFragment : Fragment() {
                     .into(view.iv_room_image)
             }
         })
-        if (room.creatorID == userRepository.readCurrentId()){
+        if (room.creatorID == userRepository.readCurrentId()) {
             view.btn_delete_room.visibility = View.VISIBLE
             view.btn_delete_room.setOnClickListener {
                 roomDetailsViewModel.deleteRoom()
                 roomDetailsViewModel.deleteRoomRequest.observe(this, { request ->
                     when (request.status) {
                         Request.Status.SUCCESS -> {
-                            Toast.makeText(
-                                context,
+                            val bottomNavView: BottomNavigationView =
+                                activity?.findViewById(R.id.bottomNav)!!
+                            Snackbar.make(
+                                bottomNavView,
                                 R.string.details_event_delete_successfull,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            val action = RoomDetailsFragmentDirections.actionRoomDetailsFragmentToFragmentRooms()
-                            findNavController().navigate(action)                        }
+                                Snackbar.LENGTH_SHORT
+                            ).apply {
+                                anchorView = bottomNavView
+                            }.show()
+                            val action =
+                                RoomDetailsFragmentDirections.actionRoomDetailsFragmentToFragmentRooms()
+                            findNavController().navigate(action)
+                        }
 
-                        else -> Toast.makeText(context, request.message!!, Toast.LENGTH_LONG).show()
+                        else -> {
+                            val bottomNavView: BottomNavigationView =
+                                activity?.findViewById(R.id.bottomNav)!!
+                            Snackbar.make(bottomNavView, request.message!!, Snackbar.LENGTH_LONG)
+                                .apply {
+                                    anchorView = bottomNavView
+                                }.show()
+                        }
                     }
                 })
 
             }
-        }else{
+        } else {
             view.btn_delete_room.visibility = View.GONE
         }
 

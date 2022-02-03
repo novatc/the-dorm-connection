@@ -6,10 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.viewModels.wg.CreateWgViewModel
@@ -39,10 +39,16 @@ class WgCreateFragment : Fragment() {
             model.createWg(name, slogan)
             model.createEventRequest.observe(this, {request ->
                 if (request.status == Request.Status.SUCCESS) {
-                    Toast.makeText(context!!, R.string.wg_create_success, Toast.LENGTH_SHORT).show()
+                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    Snackbar.make(bottomNavView, R.string.wg_create_success, Snackbar.LENGTH_SHORT).apply {
+                        anchorView = bottomNavView
+                    }.show()
                     view.findNavController().navigate(WgCreateFragmentDirections.actionWgCreateFragmentToWgFragment())
                 } else {
-                    Toast.makeText(context!!, request.message!!, Toast.LENGTH_LONG).show()
+                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    Snackbar.make(bottomNavView, request.message!!, Snackbar.LENGTH_LONG).apply {
+                        anchorView = bottomNavView
+                    }.show()
                 }
             })
         }
@@ -50,7 +56,10 @@ class WgCreateFragment : Fragment() {
 
     private fun isFormValid(name: String, slogan: String): Boolean {
         if (name.isBlank() || slogan.isBlank()) {
-            Toast.makeText(context!!, R.string.empty_field_error, Toast.LENGTH_LONG).show()
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView, R.string.empty_field_error, Snackbar.LENGTH_LONG).apply {
+                anchorView = bottomNavView
+            }.show()
             return false
         }
         return true

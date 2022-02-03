@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments.post
+package com.novatc.ap_app.fragments.pinboard
 
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +17,7 @@ import com.novatc.ap_app.adapter.CommentAdapter
 import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.model.User
-import com.novatc.ap_app.viewModels.PostDetailsViewModel
+import com.novatc.ap_app.viewModels.pinboard.PostDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_post_details.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -57,7 +57,7 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
             view.btn_delete_post.visibility = View.VISIBLE
             view.btn_delete_post.setOnClickListener {
                 lifecycleScope.launch {
-                    post.key?.let { it1 -> postDetailsViewModel.deletePost(postID = it1) }
+                    post.id?.let { it1 -> postDetailsViewModel.deletePost(postID = it1) }
                 }
                 val action =
                     PostDetailsFragmentDirections.actionPostDetailsFragmentToFragmentPinboard()
@@ -79,9 +79,9 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
                 )
 
                 lifecycleScope.launch {
-                    post.key?.let { it1 ->
+                    post.id?.let { it1 ->
                         if (c != null) {
-                            postDetailsViewModel.addComment(post.key!!, c)
+                            postDetailsViewModel.addComment(post.id!!, c)
                         }
                     }
                 }
@@ -99,7 +99,7 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         val comment = commentListOnPost[position]
         Log.e("COMMENT", "Comment clicked with id: ${comment.id}")
         lifecycleScope.launch{
-            args.clickedPost.key?.let { postDetailsViewModel.deleteComment(commentID = comment.id, it) }
+            args.clickedPost.id?.let { postDetailsViewModel.deleteComment(commentID = comment.id, it) }
         }
 
 

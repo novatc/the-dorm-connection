@@ -5,9 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.viewModels.event.EventDetailsViewModel
@@ -36,15 +37,19 @@ class EventDetailsGeneralFragment : Fragment() {
             model.deleteEventRequest.observe(this, { request ->
                 when (request.status) {
                     Request.Status.SUCCESS -> {
-                        Toast.makeText(
-                            context,
-                            R.string.details_event_delete_successfull,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                        Snackbar.make(bottomNavView, R.string.details_event_delete_successfull, Snackbar.LENGTH_SHORT).apply {
+                            anchorView = bottomNavView
+                        }.show()
                         view.findNavController().navigate(EventDetailsFragmentDirections.actionEventDetailsFragmentToFragmentEvents())
                     }
 
-                    else -> Toast.makeText(context, request.message!!, Toast.LENGTH_LONG).show()
+                    else -> {
+                        val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                        Snackbar.make(bottomNavView,  request.message!!, Snackbar.LENGTH_LONG).apply {
+                            anchorView = bottomNavView
+                        }.show()
+                    }
                 }
             })
         }

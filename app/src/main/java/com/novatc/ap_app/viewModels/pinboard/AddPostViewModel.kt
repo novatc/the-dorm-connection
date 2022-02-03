@@ -1,4 +1,4 @@
-package com.novatc.ap_app.viewModels
+package com.novatc.ap_app.viewModels.pinboard
 
 import android.content.Context
 import android.widget.ImageView
