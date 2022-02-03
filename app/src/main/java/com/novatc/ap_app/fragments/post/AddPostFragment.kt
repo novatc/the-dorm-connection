@@ -34,14 +34,14 @@ class AddPostFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_add_post, container, false)
         view.btn_safe_new_post.setOnClickListener {
             if (view.et_post_headline.text.isEmpty()) {
-                Toast.makeText(requireContext(), "Pls set a post headline", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), R.string.new_post_missing_headline, Toast.LENGTH_SHORT)
                     .show()
             }
             if (view.et_created_dorm_description.text.isEmpty()) {
-                Toast.makeText(requireContext(), "Pls set a post text", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.new_post_missing_text, Toast.LENGTH_SHORT).show()
             }
             if (view.et_created_post_keywords.text.isEmpty()) {
-                Toast.makeText(requireContext(), "Pls set a post keyword", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), R.string.new_post_missing_keyword, Toast.LENGTH_SHORT)
                     .show()
             }
             if (view.et_post_headline.text.isNotEmpty() && view.et_created_dorm_description.text.isNotEmpty() && view.et_created_post_keywords.text.isNotEmpty()) {

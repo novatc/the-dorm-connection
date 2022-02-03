@@ -1,37 +1,28 @@
 package com.novatc.ap_app.fragments
 
-import android.annotation.SuppressLint
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationChannelCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
-import com.novatc.ap_app.activities.MainActivity
 import com.novatc.ap_app.adapter.PostAdapter
 import com.novatc.ap_app.viewModels.PinboardViewModel
 import kotlinx.android.synthetic.main.fragment_pinboard.view.*
 import com.novatc.ap_app.model.Post
+import com.novatc.ap_app.services.Notification
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
@@ -48,6 +39,8 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
         val view = inflater.inflate(R.layout.fragment_pinboard, container, false)
         populatePostList(view)
         setAddPostButtonListener(view)
+        val worker: WorkRequest = PeriodicWorkRequestBuilder<Notification>(1,TimeUnit.MINUTES).build()
+        WorkManager.getInstance(requireContext()).enqueue(worker)
         return view
     }
 

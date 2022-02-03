@@ -50,11 +50,11 @@ class CreateDormFragment : Fragment() {
         val dormDescription = view.et_created_dorm_description.text.toString().trim()
         val dormAddress = view.et_created_post_keywords.text.toString().trim()
         if (dormName.isBlank()|| dormDescription.isBlank()||dormAddress.isBlank()){
-            Toast.makeText(requireContext(),"All fields are required.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),R.string.new_dorm_fields_required, Toast.LENGTH_SHORT).show()
         }
         lifecycleScope.launch {
             dormRepository.add(dormName,dormDescription,dormAddress)
-            Toast.makeText(requireContext(), "Dorm created", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.new_dorm_added, Toast.LENGTH_SHORT).show()
         }
     }
 
