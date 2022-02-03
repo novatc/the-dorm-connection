@@ -60,10 +60,11 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
         val model: PinboardViewModel by viewModels()
         model.postsList.observe(this, { posts ->
             val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            postList = posts
-            postList.sortedByDescending {
+
+            posts.sortedByDescending {
                 LocalDate.parse(it.date, dateTimeFormatter)
             }
+            postList = posts
             view.pinboardListSpinner.visibility = View.GONE
             recyclerView.adapter = PostAdapter(postList, this)
         })
