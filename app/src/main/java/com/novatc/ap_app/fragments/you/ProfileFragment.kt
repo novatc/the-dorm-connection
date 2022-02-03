@@ -5,9 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.viewModels.you.UpdateProfileViewModel
@@ -40,7 +41,10 @@ class ProfileFragment : Fragment() {
                         profileNewPassword.isEmpty() ||
                         profilePasswordRepeat.isEmpty())
             ) {
-                Toast.makeText(context!!, R.string.empty_all_field_error, Toast.LENGTH_LONG).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView, R.string.empty_all_field_error, Snackbar.LENGTH_LONG).apply {
+                    anchorView = bottomNavView
+                }.show()
             } else if (profileName.isNotEmpty() && profileCurrentPassword.isEmpty() &&
                 profileNewPassword.isEmpty() &&
                 profilePasswordRepeat.isEmpty()
@@ -65,11 +69,16 @@ class ProfileFragment : Fragment() {
         model.updateName(userName)
         model.updateNameRequest.observe(this, { request ->
             if (request.status == Request.Status.SUCCESS) {
-                Toast.makeText(context!!, R.string.profile_update_name_success, Toast.LENGTH_SHORT)
-                    .show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,  R.string.profile_update_name_success, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToFragmentProfile())
             } else {
-                Toast.makeText(context!!, request.message!!, Toast.LENGTH_LONG).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,request.message!!, Snackbar.LENGTH_LONG).apply {
+                    anchorView = bottomNavView
+                }.show()
             }
         })
     }
@@ -80,23 +89,24 @@ class ProfileFragment : Fragment() {
         repeatPassword: String
     ) {
         if (newPassword != repeatPassword) {
-            return Toast.makeText(
-                context!!,
-                R.string.profile_update_password_match_error,
-                Toast.LENGTH_LONG
-            ).show()
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView, R.string.profile_update_password_match_error, Snackbar.LENGTH_LONG).apply {
+                anchorView = bottomNavView
+            }.show()
         }
         model.updatePassword(currentPassword, newPassword)
         model.updatePasswordRequest.observe(this, { request ->
             if (request.status == Request.Status.SUCCESS) {
-                Toast.makeText(
-                    context!!,
-                    R.string.profile_update_password_succeess,
-                    Toast.LENGTH_SHORT
-                ).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView, R.string.profile_update_password_succeess, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToFragmentProfile())
             } else {
-                Toast.makeText(context!!, request.message!!, Toast.LENGTH_LONG).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView, request.message!!, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
             }
         })
     }

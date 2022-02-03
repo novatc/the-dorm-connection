@@ -1,23 +1,17 @@
 package com.novatc.ap_app.fragments.event
 
-import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
-import com.novatc.ap_app.model.User
 import com.novatc.ap_app.viewModels.event.EventDetailsViewModel
-import kotlinx.android.synthetic.main.fragment_event_details_general.view.*
-import kotlinx.android.synthetic.main.fragment_event_details_join.*
 import kotlinx.android.synthetic.main.fragment_event_details_join.view.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-
 
 class EventDetailsJoinFragment : Fragment() {
     val model: EventDetailsViewModel by activityViewModels()
@@ -54,7 +48,10 @@ class EventDetailsJoinFragment : Fragment() {
             model.switchEventAttendance()
             model.switchAttendanceRequest.observe(this, { request ->
                 if (request.status == Request.Status.ERROR) {
-                    Toast.makeText(context, request.message!!, Toast.LENGTH_LONG).show()
+                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    Snackbar.make(bottomNavView, request.message!!, Snackbar.LENGTH_LONG).apply {
+                        anchorView = bottomNavView
+                    }.show()
                 }
             })
         }

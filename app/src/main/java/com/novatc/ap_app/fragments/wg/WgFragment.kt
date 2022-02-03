@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_wg.view.*
-import android.widget.Toast
-
 import com.journeyapps.barcodescanner.ScanContract
-
 import com.journeyapps.barcodescanner.ScanOptions
-
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.novatc.ap_app.activities.QrScannerActivity
 import com.novatc.ap_app.adapter.WgAdapter
@@ -80,10 +78,17 @@ class WgFragment : Fragment(), WgAdapter.OnWgClickListener {
         model.joinWg(wgId)
         model.joinWgRequest.observe(this, {request ->
             if (request.status == Request.Status.SUCCESS) {
-                Toast.makeText(context!!, R.string.wg_list_join_success, Toast.LENGTH_SHORT).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView, R.string.wg_list_join_success, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
                 findNavController().navigate(WgFragmentDirections.actionWgFragmentToWgDetailFragment(wgId))
+
             } else {
-                Toast.makeText(context!!, request.message!!, Toast.LENGTH_LONG).show()
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView, request.message!!, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
             }
         })
     }

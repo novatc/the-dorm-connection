@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.hilt.android.AndroidEntryPoint
 import com.google.zxing.BarcodeFormat
-
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.novatc.ap_app.model.Request
@@ -60,11 +60,16 @@ class WgDetailFragment : Fragment() {
             model.leaveWg()
             model.leaveWgRequest.observe(this, { request ->
                 if (request.status == Request.Status.SUCCESS) {
-                    Toast.makeText(context!!, R.string.wg_list_leave_success, Toast.LENGTH_SHORT)
-                        .show()
+                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    Snackbar.make(bottomNavView,  R.string.wg_list_leave_success, Snackbar.LENGTH_SHORT).apply {
+                        anchorView = bottomNavView
+                    }.show()
                     findNavController().navigate(WgDetailFragmentDirections.actionWgDetailFragmentToFragmentProfile())
                 } else {
-                    Toast.makeText(context!!, request.message!!, Toast.LENGTH_LONG).show()
+                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    Snackbar.make(bottomNavView,  request.message!!, Snackbar.LENGTH_LONG).apply {
+                        anchorView = bottomNavView
+                    }.show()
                 }
             })
         }

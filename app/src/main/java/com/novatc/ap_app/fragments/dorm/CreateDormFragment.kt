@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.repository.DormRepository
 import com.novatc.ap_app.repository.UserRepository
@@ -50,11 +51,17 @@ class CreateDormFragment : Fragment() {
         val dormDescription = view.et_created_dorm_description.text.toString().trim()
         val dormAddress = view.et_created_post_keywords.text.toString().trim()
         if (dormName.isBlank()|| dormDescription.isBlank()||dormAddress.isBlank()){
-            Toast.makeText(requireContext(),"All fields are required.", Toast.LENGTH_SHORT).show()
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView,"All fields are required.", Snackbar.LENGTH_LONG).apply {
+                anchorView = bottomNavView
+            }.show()
         }
         lifecycleScope.launch {
             dormRepository.add(dormName,dormDescription,dormAddress)
-            Toast.makeText(requireContext(), "Dorm created", Toast.LENGTH_SHORT).show()
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView,"Dorm created", Snackbar.LENGTH_SHORT).apply {
+                anchorView = bottomNavView
+            }.show()
         }
     }
 

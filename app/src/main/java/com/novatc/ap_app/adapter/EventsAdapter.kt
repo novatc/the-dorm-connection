@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -18,12 +17,14 @@ class EventsAdapter(
     private val onLocationClick: (Int) -> Unit
 ) : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
 
-    inner class EventsViewHolder(itemView: View, val onLocationClick: (Int) -> Unit) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class EventsViewHolder(itemView: View, val onLocationClick: (Int) -> Unit) :
+        RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val eventAuthor: TextView = itemView.findViewById(R.id.tv_dorm_name)
         val eventName: TextView = itemView.findViewById(R.id.eventName)
         val eventText: TextView = itemView.findViewById(R.id.tv_dorm_description)
         val eventDate: TextView = itemView.findViewById(R.id.eventDate)
-        val eventLocationButton: FloatingActionButton = itemView.findViewById(R.id.button_eventLocation)
+        val eventLocationButton: FloatingActionButton =
+            itemView.findViewById(R.id.button_eventLocation)
 
         init {
             itemView.setOnClickListener(this)
@@ -35,17 +36,14 @@ class EventsAdapter(
         override fun onClick(v: View?) {
             val position: Int = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
-                if (v?.id == eventLocationButton.id) {
-                    Toast.makeText(v.context, "Location pressed", Toast.LENGTH_SHORT).show()
-                } else {
-                    listener.onItemClick(position)
-                }
+                listener.onItemClick(position)
             }
 
         }
 
     }
-    private val differCallback = object: DiffUtil.ItemCallback<Event>() {
+
+    private val differCallback = object : DiffUtil.ItemCallback<Event>() {
         override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
             return oldItem.id == newItem.id
         }

@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.viewModels.you.ProfileViewModel
@@ -102,25 +103,32 @@ class ProfileOptionsFragment : Fragment() {
                 when (request.status) {
                     Request.Status.SUCCESS -> {
                         view.deleteUserProgress.visibility = View.GONE
-                        Toast.makeText(
-                            activity,
+                        val bottomNavView: BottomNavigationView =
+                            activity?.findViewById(R.id.bottomNav)!!
+                        Snackbar.make(
+                            bottomNavView,
                             R.string.delete_user_success,
-                            Toast.LENGTH_SHORT
+                            Snackbar.LENGTH_SHORT
+                        ).apply {
+                            anchorView = bottomNavView
+                        }.show()
+                        findNavController().navigate(
+                            ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpFragment()
                         )
-                            .show()
-                    findNavController().navigate(
-                        ProfileOptionsFragmentDirections.actionFragmentProfileToSignUpFragment()
-                    )
                     }
                     else -> {
                         view.deleteUserProgress.visibility = View.GONE
-                        Toast.makeText(activity, request.message!!, Toast.LENGTH_LONG)
-                            .show()
+                        val bottomNavView: BottomNavigationView =
+                            activity?.findViewById(R.id.bottomNav)!!
+                        Snackbar.make(bottomNavView, request.message!!, Snackbar.LENGTH_LONG)
+                            .apply {
+                                anchorView = bottomNavView
+                            }.show()
                     }
                 }
             }
-        }
 
+        }
     }
 
     private fun setLogOutUserButtonListener(view: View) {
@@ -128,7 +136,8 @@ class ProfileOptionsFragment : Fragment() {
         setLogOutUserButton.setOnClickListener {
             try {
                 model.logoutUser()
-                view.findNavController().navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToLoginFragment())
+                view.findNavController()
+                    .navigate(ProfileOptionsFragmentDirections.actionFragmentProfileToLoginFragment())
             } catch (e: Exception) {
                 Log.e("LogoutUser", e.toString())
             }
