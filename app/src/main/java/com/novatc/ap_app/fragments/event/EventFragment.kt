@@ -22,6 +22,8 @@ import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.viewModels.event.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /**
  * The event fragment displays a list of events
@@ -95,7 +97,11 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
 
         model.events.observe(this, { events ->
             view.eventsListSpinner.visibility = View.GONE
-            eventsAdapter.differ.submitList(events)
+            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val result = events.sortedByDescending {
+                LocalDate.parse(it.date, dateTimeFormatter)
+            }
+            eventsAdapter.differ.submitList(result)
             eventList = events
 
         })
