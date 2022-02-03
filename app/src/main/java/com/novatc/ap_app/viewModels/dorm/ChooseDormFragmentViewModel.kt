@@ -1,17 +1,13 @@
-package com.novatc.ap_app.viewModels
+package com.novatc.ap_app.viewModels.dorm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.novatc.ap_app.model.Dorm
-import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.repository.DormRepository
-import com.squareup.okhttp.Dispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

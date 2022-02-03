@@ -1,4 +1,4 @@
-package com.novatc.ap_app.viewModels;
+package com.novatc.ap_app.viewModels.login;
 
 import com.novatc.ap_app.model.Request
 import android.util.Log

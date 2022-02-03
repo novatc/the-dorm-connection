@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments
+package com.novatc.ap_app.fragments.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
-import com.novatc.ap_app.viewModels.SignUpViewModel
+import com.novatc.ap_app.viewModels.login.SignUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*

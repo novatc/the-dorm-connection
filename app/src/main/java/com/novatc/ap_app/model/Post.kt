@@ -2,6 +2,7 @@ package com.novatc.ap_app.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.firestore.Exclude
 
 
 data class Post(
@@ -12,9 +13,9 @@ data class Post(
     val date: String? = "",
     val creatorID: String? = "",
     val dormId: String? = "",
-    var key: String? = "",
+    @get: Exclude var id: String? = "",
 
-) : Parcelable {
+    ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
@@ -34,7 +35,7 @@ data class Post(
         parcel.writeString(creator)
         parcel.writeString(date)
         parcel.writeString(creatorID)
-        parcel.writeString(key)
+        parcel.writeString(id)
     }
 
     override fun describeContents(): Int {

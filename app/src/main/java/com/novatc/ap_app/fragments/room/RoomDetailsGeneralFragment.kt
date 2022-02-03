@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.novatc.ap_app.R
-import com.novatc.ap_app.viewModels.RoomDetailsViewModel
+import com.novatc.ap_app.viewModels.room.RoomDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_room_details_general.view.*
 
 

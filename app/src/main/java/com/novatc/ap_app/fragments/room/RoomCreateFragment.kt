@@ -27,7 +27,7 @@ import java.util.*
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.novatc.ap_app.viewModels.CreateRoomViewModel
+import com.novatc.ap_app.viewModels.room.CreateRoomViewModel
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
 
@@ -35,7 +35,7 @@ import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
 @AndroidEntryPoint
 class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
-    private val createRoomViewModel: CreateRoomViewModel  by viewModels()
+    private val createRoomViewModel: CreateRoomViewModel by viewModels()
     private var imageUri: Uri? = null
     private lateinit var imgProfile: ImageView
     lateinit var startForProfileImageResult: ActivityResultLauncher<Intent>

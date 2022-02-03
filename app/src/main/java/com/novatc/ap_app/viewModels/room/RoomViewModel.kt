@@ -1,4 +1,4 @@
-package com.novatc.ap_app.viewModels
+package com.novatc.ap_app.viewModels.room
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

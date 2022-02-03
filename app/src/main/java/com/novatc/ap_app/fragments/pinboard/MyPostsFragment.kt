@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments.post
+package com.novatc.ap_app.fragments.pinboard
 
 import android.content.Context
 import android.os.Bundle

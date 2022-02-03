@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
-import com.novatc.ap_app.viewModels.RoomDetailsViewModel
+import com.novatc.ap_app.viewModels.room.RoomDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_room_details_location.view.*
 
 class RoomDetailsLocationFragment: Fragment() {

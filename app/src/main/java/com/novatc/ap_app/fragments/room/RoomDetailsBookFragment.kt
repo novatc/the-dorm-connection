@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.novatc.ap_app.viewModels.RoomDetailsViewModel
+import com.novatc.ap_app.viewModels.room.RoomDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
 import com.applandeo.materialcalendarview.EventDay
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener

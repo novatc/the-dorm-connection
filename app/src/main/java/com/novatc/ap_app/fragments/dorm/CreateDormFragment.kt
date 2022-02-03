@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.repository.DormRepository
 import com.novatc.ap_app.repository.UserRepository
-import com.novatc.ap_app.viewModels.CreateDormViewModel
+import com.novatc.ap_app.viewModels.dorm.CreateDormViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_create_dorm.view.*
 import kotlinx.coroutines.launch

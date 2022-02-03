@@ -62,7 +62,7 @@ class PostFirestore @Inject constructor(
         val snapshot = mFirestore.collection(Constants.POST).get().await()
         for (post in snapshot) {
             post.toObject(Post::class.java).let {
-                it.key = post.id
+                it.id = post.id
                 posts.add(it)
             }
         }
@@ -76,7 +76,7 @@ class PostFirestore @Inject constructor(
             mFirestore.collection(Constants.POST).whereEqualTo("creatorID", userID).get().await()
         for (post in snapshot) {
             post.toObject(Post::class.java).let {
-                it.key = post.id
+                it.id = post.id
                 posts.add(it)
             }
         }
@@ -87,8 +87,8 @@ class PostFirestore @Inject constructor(
     suspend fun addPost(post: Post) {
         val ref = mFirestore.collection(Constants.POST).add(post).await()
         mFirestore.collection(Constants.POST).document().collection(Constants.COMMENTS)
-        post.key = ref.id
-        Log.e("FIRE", "Created local Post with id: ${post.key}")
+        post.id = ref.id
+        Log.e("FIRE", "Created local Post with id: ${post.id}")
     }
 
     suspend fun deletePost(postID: String) {
@@ -102,7 +102,7 @@ class PostFirestore @Inject constructor(
     // Parses the document snapshot to the desired object
     fun getPostFromSnapshot(documentSnapshot: DocumentSnapshot): Post {
         return documentSnapshot.toObject(Post::class.java)!!.let {
-            it.key = documentSnapshot.id
+            it.id = documentSnapshot.id
             return@let it
         }
 

@@ -1,4 +1,4 @@
-package com.novatc.ap_app.fragments.post
+package com.novatc.ap_app.fragments.pinboard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +15,7 @@ import com.novatc.ap_app.R
 import kotlinx.android.synthetic.main.fragment_add_post.view.*
 import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_post_keywords
 import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_description
-import com.novatc.ap_app.viewModels.AddPostViewModel
+import com.novatc.ap_app.viewModels.pinboard.AddPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime

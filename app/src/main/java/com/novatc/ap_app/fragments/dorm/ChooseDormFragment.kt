@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.DormAdapter
 import com.novatc.ap_app.model.Dorm
-import com.novatc.ap_app.viewModels.ChooseDormFragmentViewModel
+import com.novatc.ap_app.viewModels.dorm.ChooseDormFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_choose_dorm.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi

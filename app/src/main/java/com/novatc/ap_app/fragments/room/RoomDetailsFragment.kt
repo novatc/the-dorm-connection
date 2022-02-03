@@ -19,7 +19,7 @@ import com.novatc.ap_app.adapter.RoomDetailsStateAdapter
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.model.Room
 import com.novatc.ap_app.repository.UserRepository
-import com.novatc.ap_app.viewModels.RoomDetailsViewModel
+import com.novatc.ap_app.viewModels.room.RoomDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_details.view.*
 import javax.inject.Inject
