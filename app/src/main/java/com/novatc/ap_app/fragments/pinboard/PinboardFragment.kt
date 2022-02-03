@@ -22,6 +22,8 @@ import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.services.Notification
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
@@ -57,10 +59,11 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
         val recyclerView: RecyclerView = view.rv_posts
         val model: PinboardViewModel by viewModels()
         model.postsList.observe(this, { posts ->
-
-
+            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             postList = posts
-            postList.sortedByDescending { it.date }
+            postList.sortedByDescending {
+                LocalDate.parse(it.date, dateTimeFormatter)
+            }
             view.pinboardListSpinner.visibility = View.GONE
             recyclerView.adapter = PostAdapter(postList, this)
         })

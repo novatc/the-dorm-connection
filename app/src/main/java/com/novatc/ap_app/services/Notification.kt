@@ -24,11 +24,13 @@ import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.MainActivity
 import com.novatc.ap_app.firestore.PostFirestore
 import com.novatc.ap_app.repository.PostRepository
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class Notification @Inject constructor(
-    private val postRepository: PostRepository,
+class Notification constructor(
+
     appContext: Context,
     workerParams: WorkerParameters
 ) :
@@ -38,7 +40,7 @@ class Notification @Inject constructor(
 
         Log.e("SERVICE", "RUNNING...")
         sendNotification("Service", "Hello from the Background!")
-        val oldPosts = postRepository.getPosts().size
+
         return Result.success()
 
 
