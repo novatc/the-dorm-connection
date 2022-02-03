@@ -36,6 +36,10 @@ class RoomRepository @Inject constructor(
         roomFirestore.deleteRoom(roomID)
     }
 
+    suspend fun deleteRoomImage(roomID: String): Void? {
+        return storageFirestore.deleteImage(UploadDirectories.ROOMS, roomID)
+    }
+
     suspend fun loadRoomImage(roomId: String): String {
         return storageFirestore.loadImage(UploadDirectories.ROOMS, roomId)
     }
@@ -50,7 +54,7 @@ class RoomRepository @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    suspend fun getBookingsAsFlow(roomID: String): Flow<List<Booking>> {
+    fun getBookingsAsFlow(roomID: String): Flow<List<Booking>> {
         return roomFirestore.getBookingsFlow(roomID)
     }
 

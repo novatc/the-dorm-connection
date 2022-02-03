@@ -24,7 +24,8 @@ class ProfileViewModel @Inject constructor(
     val userProfile: LiveData<User> = _userProfile
     val deleteRequest = MutableLiveData<Request<*>>()
 
-    init {
+
+    fun loadUser(){
         viewModelScope.launch {
             _userProfile.value = userRepository.readCurrent()
         }

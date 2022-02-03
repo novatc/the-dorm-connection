@@ -56,7 +56,7 @@ class SignUpFragment : Fragment() {
             model.signupRequest.observe(this, { request ->
                 when (request.status) {
                     Request.Status.SUCCESS -> findNavController().navigate(
-                        SignUpFragmentDirections.actionSignUpFragmentToFragmentPinboard()
+                        SignUpFragmentDirections.actionSignUpFragmentToChooseDormFragment()
                     )
                     else -> Toast.makeText(activity, R.string.sign_up_error, Toast.LENGTH_LONG)
                         .show()

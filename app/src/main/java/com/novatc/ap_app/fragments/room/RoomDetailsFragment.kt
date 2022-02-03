@@ -5,10 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -16,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.RoomDetailsStateAdapter
+import com.novatc.ap_app.fragments.event.EventDetailsFragmentDirections
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.model.Room
 import com.novatc.ap_app.repository.UserRepository
@@ -64,13 +67,22 @@ class RoomDetailsFragment : Fragment() {
         if (room.creatorID == userRepository.readCurrentId()){
             view.btn_delete_room.visibility = View.VISIBLE
             view.btn_delete_room.setOnClickListener {
-                lifecycleScope.launch {
-                    room.id?.let { it1 ->
-                        roomDetailsViewModel.deleteRoom(roomID = it1)
-                        }
-                }
-                val action = RoomDetailsFragmentDirections.actionRoomDetailsFragmentToFragmentRooms()
-                findNavController().navigate(action)
+                roomDetailsViewModel.deleteRoom()
+                roomDetailsViewModel.deleteRoomRequest.observe(this, { request ->
+                    when (request.status) {
+                        Request.Status.SUCCESS -> {
+                            Toast.makeText(
+                                context,
+                                R.string.details_event_delete_successfull,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            val action = RoomDetailsFragmentDirections.actionRoomDetailsFragmentToFragmentRooms()
+                            findNavController().navigate(action)                        }
+
+                        else -> Toast.makeText(context, request.message!!, Toast.LENGTH_LONG).show()
+                    }
+                })
+
             }
         }else{
             view.btn_delete_room.visibility = View.GONE

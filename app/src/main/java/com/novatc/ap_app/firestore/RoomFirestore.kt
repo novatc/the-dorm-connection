@@ -22,7 +22,7 @@ import java.util.*
 import javax.inject.Inject
 
 class RoomFirestore @Inject constructor(
-    private val storageFirestore: StorageFirestore
+    private val helperFirestore: HelperFirestore
 ){
     private val mFirestore = Firebase.firestore
 
@@ -30,9 +30,10 @@ class RoomFirestore @Inject constructor(
         return mFirestore.collection(Constants.ROOMS).add(room).await().id
     }
 
-    suspend fun deleteRoom(roomID: String){
-        storageFirestore.deleteImage( UploadDirectories.ROOMS, roomID)
-        mFirestore.collection(Constants.ROOMS).document(roomID).delete().await()
+    suspend fun deleteRoom(roomID: String): Void? {
+        val bookings = mFirestore.collection(Constants.ROOMS).document(roomID).collection(Constants.BOOKINGS)
+        helperFirestore.deleteCollection(bookings, 5)
+        return mFirestore.collection(Constants.ROOMS).document(roomID).delete().await()
     }
 
     @ExperimentalCoroutinesApi

@@ -31,9 +31,6 @@
         <action
             android:id="@+id/action_fragment_pinboard_to_postDetailsFragment"
             app:destination="@id/postDetailsFragment" />
-        <action
-            android:id="@+id/action_fragment_pinboard_to_chooseDormFragment"
-            app:destination="@id/chooseDormFragment" />
     </fragment>
     <fragment
         android:id="@+id/eventCreateFragment"
@@ -185,6 +182,9 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_chooseDormFragment"
+            app:destination="@id/chooseDormFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -197,6 +197,9 @@
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_chooseDormFragment"
+            app:destination="@id/chooseDormFragment" />
     </fragment>
     <fragment
         android:id="@+id/roomDetailsFragment"
