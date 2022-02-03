@@ -1,16 +1,11 @@
 package com.novatc.ap_app.firestore
 
 import android.util.Log
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.novatc.ap_app.constants.Constants
-import com.novatc.ap_app.constants.UploadDirectories
 import com.novatc.ap_app.model.Booking
-import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Room
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -37,9 +32,9 @@ class RoomFirestore @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun getRoomsFlow(): Flow<List<Room>> {
+    fun getRoomsFlow(dormId: String): Flow<List<Room>> {
         return mFirestore
-            .collection(Constants.ROOMS)
+            .collection(Constants.ROOMS).whereEqualTo("dormId", dormId)
             .getDataFlow { querySnapshot ->
                 querySnapshot?.documents?.map {
                     getRoomFromSnapshot(it)
@@ -48,25 +43,25 @@ class RoomFirestore @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun CollectionReference.getQuerySnapshotFlow(): Flow<QuerySnapshot?> {
+    fun Query.getQuerySnapshotFlow(): Flow<QuerySnapshot?> {
         return callbackFlow {
             val listenerRegistration =
                 addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     if (firebaseFirestoreException != null) {
-                        Log.e("Snapshot Flow", "Error fetchting collect = $path")
+                        Log.e("Snapshot Flow", "Error fetchting collect")
                         return@addSnapshotListener
                     }
                     trySend(querySnapshot).isSuccess
                 }
             awaitClose {
-                Log.e("", "cancelling the listener on collection at path - $path")
+                Log.e("", "cancelling the listener on collection")
                 listenerRegistration.remove()
             }
         }
     }
 
     @ExperimentalCoroutinesApi
-    fun <T> CollectionReference.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
+    fun <T> Query.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
         return getQuerySnapshotFlow()
             .map { snapshot ->
                 return@map mapper(snapshot)

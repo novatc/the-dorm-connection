@@ -42,6 +42,8 @@ class WgViewModel @Inject constructor(
                 withContext(Dispatchers.Main) {
                     if (e.message == "Could not find any wg with the supplied id") {
                         _joinWgRequest.value = Request.error(R.string.wg_list_join_wg_error, null)
+                    } else if (e.message == "Wg is not part of users dorm.") {
+                        _joinWgRequest.value = Request.error(R.string.wg_list_join_id_dorm_mismatch_error, null)
                     } else {
                         _joinWgRequest.value = Request.error(R.string.wg_list_join_error, null)
                     }

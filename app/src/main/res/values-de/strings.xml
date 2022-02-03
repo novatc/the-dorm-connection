@@ -148,6 +148,7 @@
     <string name="wg_list_leave_success">WG verlassen</string>
     <string name="wg_list_leave_error">Die WG konnte nicht verlassen werden, bitte versuche es nochmal</string>
     <string name="wg_list_join_wg_error">Es konnte keine WG unter dem QR-Code gefunden werden</string>
+    <string name="wg_list_join_id_dorm_mismatch_error">Die gescannte WG ist nicht Teil deines Wohnheims</string>
     <string name="wg_detail_tagline">Lade Mitbewohner ein</string>
     <string name="wg_detail_invite_hint">Andere Mitbewohner können diesen QR-Code scannen, um der WG beizutreten</string>
     <string name="wg_detail_qr_code_description">QR-Code um einer WG beizutreten</string>

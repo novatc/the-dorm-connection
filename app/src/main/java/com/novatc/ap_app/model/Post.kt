@@ -11,6 +11,7 @@ data class Post(
     val creator: String? = "",
     val date: String? = "",
     val creatorID: String? = "",
+    val dormId: String? = "",
     var key: String? = "",
 
 ) : Parcelable {

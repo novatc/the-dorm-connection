@@ -39,6 +39,7 @@ class EventRepository
             eventDate,
             authorId = userId,
             authorName = user!!.username,
+            dormId = user.userDormID,
             text = eventText,
             streetName = eventStreet,
             houseNumber = eventHouseNumber,
@@ -50,8 +51,11 @@ class EventRepository
     }
 
     @ExperimentalCoroutinesApi
-    fun getEvents(): Flow<List<Event>> {
-        return eventFirestore.getEventsFlow()
+    suspend fun getEvents(): Flow<List<Event>> {
+        val userId = userFirestore.getCurrentUserID()
+            ?: throw Exception("No user id, when trying to fetch events.")
+        val user = userFirestore.getUserData(userId)
+        return eventFirestore.getEventsFlow(user!!.userDormID)
     }
 
     @ExperimentalCoroutinesApi

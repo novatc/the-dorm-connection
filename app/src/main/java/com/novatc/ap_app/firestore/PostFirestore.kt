@@ -6,11 +6,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.novatc.ap_app.constants.Constants
 import com.novatc.ap_app.model.Comment
-import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Post
-import com.novatc.ap_app.model.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -24,25 +21,25 @@ class PostFirestore @Inject constructor(
 
 
     @ExperimentalCoroutinesApi
-    fun CollectionReference.getQuerySnapshotFlow(): Flow<QuerySnapshot?> {
+    fun Query.getQuerySnapshotFlow(): Flow<QuerySnapshot?> {
         return callbackFlow {
             val listenerRegistration =
                 addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     if (firebaseFirestoreException != null) {
-                        Log.e("Snapshot Flow", "Error fetchting collect = $path")
+                        Log.e("Snapshot Flow", "Error fetchting collect")
                         return@addSnapshotListener
                     }
                     trySend(querySnapshot).isSuccess
                 }
             awaitClose {
-                Log.e("", "cancelling the listener on collection at path - $path")
+                Log.e("", "cancelling the listener on collection")
                 listenerRegistration.remove()
             }
         }
     }
 
     @ExperimentalCoroutinesApi
-    fun <T> CollectionReference.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
+    fun <T> Query.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
         return getQuerySnapshotFlow()
             .map { snapshot ->
                 return@map mapper(snapshot)
@@ -50,9 +47,9 @@ class PostFirestore @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun getPostsAsFlow(): Flow<List<Post>> {
+    fun getPostsAsFlow(dormId: String): Flow<List<Post>> {
         return mFirestore
-            .collection(Constants.POST)
+            .collection(Constants.POST).whereEqualTo("dormId", dormId)
             .getDataFlow { querySnapshot ->
                 querySnapshot?.documents?.map {
                     getPostFromSnapshot(it)

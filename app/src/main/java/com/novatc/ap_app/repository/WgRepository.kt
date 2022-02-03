@@ -16,14 +16,18 @@ class WgRepository @Inject constructor(
        return wgFirestore.getWg(wgId)
     }
     suspend fun createWg(name: String, slogan: String) {
-        wgFirestore.createWg(Wg(name = name, slogan = slogan))
+        val userDormId = userFirestore.getUserData(userFirestore.getCurrentUserID()!!)!!.userDormID
+        wgFirestore.createWg(Wg(name = name, slogan = slogan, dormId = userDormId))
     }
 
     suspend fun joinWg(wgId: String) {
         val wg = wgFirestore.getWg(wgId)
         val userId = userFirestore.getCurrentUserID()!!
-        userFirestore.updateUserWg(userId, wg.id, wg.name)
         val user = userFirestore.getUserData(userId)
+        if (wg.dormId != user!!.userDormID) {
+            throw Exception("Wg is not part of users dorm.")
+        }
+        userFirestore.updateUserWg(userId, wg.id, wg.name)
         wgFirestore.joinWg(wgId, user!!)
     }
 
@@ -37,7 +41,8 @@ class WgRepository @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun getWgs(): Flow<List<Wg>> {
-        return wgFirestore.getWgsFlow()
+    suspend fun getWgs(): Flow<List<Wg>> {
+        val userDormId = userFirestore.getUserData(userFirestore.getCurrentUserID()!!)!!.userDormID
+        return wgFirestore.getWgsFlow(userDormId)
     }
 }

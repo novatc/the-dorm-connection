@@ -14,6 +14,7 @@ data class Room(
     val minimumBookingTime: String? = "",
     val maximumBookingTime: String? = "",
     val creatorID: String? = "",
+    val dormId: String? = "",
     @get:Exclude var id: String? = "",
     ) : Parcelable {
     constructor(parcel: Parcel) : this(

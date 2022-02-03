@@ -19,14 +19,17 @@ class PostRepository
     suspend fun addPost(headline: String, text: String, keyword: String, date: String) {
         val userId = userFirestore.getCurrentUserID()
             ?: throw Exception("No user id, when trying to add a post.")
-        val userName = userFirestore.getUserData(userId)!!.username
-        val post = Post(headline, text, keyword, userName, date, userId)
+        val user = userFirestore.getUserData(userId)
+        val post = Post(headline, text, keyword, user!!.username, date, userId, user.userDormID)
         postFirestore.addPost(post)
     }
 
     @ExperimentalCoroutinesApi
-    fun getPostsAsFlow(): kotlinx.coroutines.flow.Flow<List<Post>> {
-        return postFirestore.getPostsAsFlow()
+    suspend fun getPostsAsFlow(): Flow<List<Post>> {
+        val userId = userFirestore.getCurrentUserID()
+            ?: throw Exception("No user id, when trying fetch posts")
+        val userDormId = userFirestore.getUserData(userId)!!.userDormID
+        return postFirestore.getPostsAsFlow(userDormId)
     }
 
     suspend fun getPosts(): ArrayList<Post> {

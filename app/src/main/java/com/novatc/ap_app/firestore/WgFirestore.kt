@@ -1,8 +1,8 @@
 package com.novatc.ap_app.firestore
 
 import android.util.Log
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -51,25 +51,25 @@ class WgFirestore @Inject constructor() {
     }
 
     @ExperimentalCoroutinesApi
-    fun CollectionReference.getQuerySnapshotFlow(): Flow<QuerySnapshot?> {
+    fun Query.getQuerySnapshotFlow(): Flow<QuerySnapshot?> {
         return callbackFlow {
             val listenerRegistration =
                 addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     if (firebaseFirestoreException != null) {
-                        Log.e("Snapshot Flow", "Error fetchting collect = $path")
+                        Log.e("Snapshot Flow", "Error fetchting collect")
                         return@addSnapshotListener
                     }
                     trySend(querySnapshot).isSuccess
                 }
             awaitClose {
-                Log.e("", "cancelling the listener on collection at path - $path")
+                Log.e("", "cancelling the listener on collection")
                 listenerRegistration.remove()
             }
         }
     }
 
     @ExperimentalCoroutinesApi
-    fun <T> CollectionReference.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
+    fun <T> Query.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
         return getQuerySnapshotFlow()
             .map { snapshot ->
                 return@map mapper(snapshot)
@@ -77,9 +77,9 @@ class WgFirestore @Inject constructor() {
     }
 
     @ExperimentalCoroutinesApi
-    fun getWgsFlow(): Flow<List<Wg>> {
+    fun getWgsFlow(dormId: String): Flow<List<Wg>> {
         return mFirestore
-            .collection(Constants.WG)
+            .collection(Constants.WG).whereEqualTo("dormId", dormId)
             .getDataFlow { querySnapshot ->
                 querySnapshot?.documents?.map {
                     getWgFromSnapshot(it)

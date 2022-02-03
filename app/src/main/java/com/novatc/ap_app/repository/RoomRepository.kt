@@ -21,8 +21,9 @@ class RoomRepository @Inject constructor(
     private val storageFirestore: StorageFirestore
 ) {
     suspend fun addRoom(roomName: String, streetName: String, houseNumber: String, city:String, roomDescription: String, minimumBookingTime: String, maximumBookingTime: String, imageUri: Uri?): UploadTask.TaskSnapshot? {
-        val creatorID = userFirestore.getCurrentUserID() ?: throw Exception("No user id found when trying to add a room.")
-        val room = Room(roomName, streetName, houseNumber, city, roomDescription, minimumBookingTime, maximumBookingTime, creatorID)
+        val userId = userFirestore.getCurrentUserID() ?: throw Exception("No user id found when trying to add a room.")
+        val user = userFirestore.getUserData(userId)
+        val room = Room(roomName, streetName, houseNumber, city, roomDescription, minimumBookingTime, maximumBookingTime, userId, user!!.userDormID)
         val roomId = roomFirestore.addRoom(room)
         return if(imageUri != null) imageUri?.let {
             storageFirestore.uploadImage(UploadDirectories.ROOMS, roomId,
@@ -45,8 +46,10 @@ class RoomRepository @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun getRooms(): Flow<List<Room>> {
-        return roomFirestore.getRoomsFlow()
+    suspend fun getRooms(): Flow<List<Room>> {
+        val userId = userFirestore.getCurrentUserID() ?: throw Exception("No user id found when fetch rooms.")
+        val user = userFirestore.getUserData(userId)
+        return roomFirestore.getRoomsFlow(user!!.userDormID)
     }
 
     suspend fun addBooking(roomID: String, booking: Booking ): DocumentReference? {

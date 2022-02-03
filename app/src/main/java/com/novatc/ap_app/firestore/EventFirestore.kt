@@ -19,25 +19,25 @@ class EventFirestore @Inject constructor(
     private val mFirestore = FirebaseFirestore.getInstance()
 
     @ExperimentalCoroutinesApi
-    fun CollectionReference.getQuerySnapshotFlow(): Flow<QuerySnapshot?> {
+    fun Query.getQuerySnapshotFlow(): Flow<QuerySnapshot?> {
         return callbackFlow {
             val listenerRegistration =
                 addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                     if (firebaseFirestoreException != null) {
-                        Log.e("Snapshot Flow", "Error fetchting collect = $path")
+                        Log.e("Snapshot Flow", "Error fetchting collect")
                         return@addSnapshotListener
                     }
                     trySend(querySnapshot).isSuccess
                 }
             awaitClose {
-                Log.e("", "cancelling the listener on collection at path - $path")
+                Log.e("", "cancelling the listener on collection")
                 listenerRegistration.remove()
             }
         }
     }
 
     @ExperimentalCoroutinesApi
-    fun <T> CollectionReference.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
+    fun <T> Query.getDataFlow(mapper: (QuerySnapshot?) -> T): Flow<T> {
         return getQuerySnapshotFlow()
             .map { snapshot ->
                 return@map mapper(snapshot)
@@ -45,9 +45,9 @@ class EventFirestore @Inject constructor(
     }
 
     @ExperimentalCoroutinesApi
-    fun getEventsFlow(): Flow<List<Event>> {
+    fun getEventsFlow(dormId: String): Flow<List<Event>> {
         return mFirestore
-            .collection(Constants.EVENTS)
+            .collection(Constants.EVENTS).whereEqualTo("dormId", dormId)
             .getDataFlow { querySnapshot ->
                 querySnapshot?.documents?.map {
                     getEventFromSnapshot(it)

@@ -150,6 +150,7 @@
     <string name="wg_list_leave_success">WG successfully left</string>
     <string name="wg_list_leave_error">Could not leave WG, please try again later</string>
     <string name="wg_list_join_wg_error">Could not find any WG with the supplied QR-Code</string>
+    <string name="wg_list_join_id_dorm_mismatch_error">The scanned WG is not part of your dorm</string>
     <string name="wg_detail_tagline">Invite others</string>
     <string name="wg_detail_invite_hint">Let other roommates scan this QR-Code to able to join</string>
     <string name="wg_detail_qr_code_description">QR-Code for joining a WG</string>

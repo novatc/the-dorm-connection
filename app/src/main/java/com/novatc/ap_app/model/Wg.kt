@@ -5,5 +5,6 @@ import com.google.firebase.firestore.Exclude
 data class Wg(
     @get:Exclude var id: String = "",
     val name: String = "",
-    val slogan: String = ""
+    val slogan: String = "",
+    val dormId: String? = "",
 )
