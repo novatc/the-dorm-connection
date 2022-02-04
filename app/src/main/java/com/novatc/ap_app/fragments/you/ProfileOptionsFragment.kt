@@ -15,12 +15,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
+import com.novatc.ap_app.services.SwipeGestureListener
+import com.novatc.ap_app.services.SwipeListener
 import com.novatc.ap_app.viewModels.you.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile_options.view.*
 
 @AndroidEntryPoint
-class ProfileOptionsFragment : Fragment() {
+class ProfileOptionsFragment : Fragment(), SwipeListener {
 
     val model: ProfileViewModel by activityViewModels()
     private var userWgId = "";
@@ -41,7 +43,7 @@ class ProfileOptionsFragment : Fragment() {
                 view.btn_select_dorm.alpha = 0.5F
             }
         })
-
+        view.scrollView2.setOnTouchListener(SwipeGestureListener(this))
         setMyPostButtonListener(view)
         setEditProfileButtonListener(view)
         setEditWGButtonListener(view)
@@ -143,6 +145,15 @@ class ProfileOptionsFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onSwipeLeft(view: View) {
+    }
+
+    override fun onSwipeRight(view: View) {
+        findNavController().navigate(
+            ProfileOptionsFragmentDirections.actionFragmentProfileToFragmentEvents()
+        )
     }
 
 }

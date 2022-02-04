@@ -6,17 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
+import com.novatc.ap_app.services.SwipeListener
 import com.novatc.ap_app.viewModels.you.UpdateProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), SwipeListener {
 
     private val model: UpdateProfileViewModel by viewModels()
 
@@ -27,7 +29,14 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         setupOnUpdateListener(view)
+
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var back1 = view.findNavController().backQueue
+        print("test")
     }
 
     private fun setupOnUpdateListener(view: View) {
@@ -109,5 +118,13 @@ class ProfileFragment : Fragment() {
                 }.show()
             }
         })
+    }
+
+    override fun onSwipeLeft(view: View) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onSwipeRight(view: View) {
+        TODO("Not yet implemented")
     }
 }

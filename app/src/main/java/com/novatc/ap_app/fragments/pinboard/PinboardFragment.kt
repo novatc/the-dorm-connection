@@ -1,5 +1,7 @@
 package com.novatc.ap_app.fragments
 
+import com.novatc.ap_app.services.SwipeGestureListener
+import com.novatc.ap_app.services.SwipeListener
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,9 +28,10 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
+
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
-class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
+class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListener {
     var postList: ArrayList<Post> = ArrayList()
     val model: PinboardViewModel by viewModels()
 
@@ -39,17 +42,25 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pinboard, container, false)
+        view.setOnTouchListener(SwipeGestureListener(this))
+        view.rv_posts.setOnTouchListener(SwipeGestureListener(this))
         populatePostList(view)
         setAddPostButtonListener(view)
         val worker: WorkRequest = PeriodicWorkRequestBuilder<Notification>(1,TimeUnit.MINUTES).build()
         WorkManager.getInstance(requireContext()).enqueue(worker)
         return view
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var back1 = view.findNavController().backQueue
+        print("test")
+    }
+
 
 
     override fun onItemClick(position: Int) {
         val post = postList[position]
-        val action = PinnboardFragmentDirections.actionFragmentPinboardToPostDetailsFragment(post)
+        val action = PinboardFragmentDirections.actionFragmentPinboardToPostDetailsFragment(post)
         findNavController().navigate(action)
     }
 
@@ -76,10 +87,18 @@ class PinnboardFragment : Fragment(), PostAdapter.OnItemClickListener {
     private fun setAddPostButtonListener(view: View) {
         val addPost: FloatingActionButton = view.btn_add_post
         addPost.setOnClickListener {
-            val action = PinnboardFragmentDirections.actionFragmentPinboardToAddPostFragment()
+            val action = PinboardFragmentDirections.actionFragmentPinboardToAddPostFragment()
             view.findNavController().navigate(action)
         }
+
     }
 
+    override fun onSwipeLeft(view: View) {
+        val action = PinboardFragmentDirections.actionFragmentPinboardToFragmentRooms()
+        view.findNavController().navigate(action)
+    }
+
+    override fun onSwipeRight(view: View) {
+    }
 
 }
