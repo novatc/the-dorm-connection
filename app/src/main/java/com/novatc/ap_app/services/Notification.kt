@@ -28,14 +28,9 @@ class Notification @AssistedInject constructor(
     override suspend fun doWork(): Result {
         val startSize = inputData.getInt("SIZE_OF_POSTLIST", 0)
         val newSize = postRepository.getPosts().size
-        sendNotification(
-            "THE DORM CONNECTION", "A new post is available! old :$startSize" +
-                    "new: $newSize"
-        )
         if (newSize > startSize) {
             sendNotification(
-                "THE DORM CONNECTION", "A new post is available! old :$startSize" +
-                        "new: $newSize"
+                "THE DORM CONNECTION", "A new post is available!"
             )
         }
         Log.e("SERVICE", "RUNNING...")
