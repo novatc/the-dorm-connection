@@ -27,21 +27,21 @@
         android:backgroundTint="@color/patriarch"
         android:text="@string/btn_safe"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_created_post_keywords"
+        app:layout_constraintStart_toStartOf="@+id/et_created_post_keywords"
         app:layout_constraintTop_toBottomOf="@+id/et_created_post_keywords" />
 
     <EditText
         android:id="@+id/et_post_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:autofillHints="Headline"
         android:ems="10"
         android:hint="@string/post_header"
         android:inputType="textCapSentences"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_rooms"
         tools:ignore="TextContrastCheck" />
@@ -50,15 +50,14 @@
         android:id="@+id/et_created_post_keywords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
         android:autofillHints="Keywords"
         android:ems="10"
         android:hint="@string/post_keywords"
         android:inputType="text"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_description"
+        app:layout_constraintTop_toTopOf="@+id/et_post_headline"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -74,16 +73,17 @@
 
     <EditText
         android:id="@+id/et_created_dorm_description"
-        android:layout_width="207dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autofillHints="Post"
         android:ems="10"
         android:hint="@string/post_text"
         android:inputType="textMultiLine"
+        android:maxLines="15"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_post_headline"
+        app:layout_constraintStart_toStartOf="@+id/et_post_headline"
         app:layout_constraintTop_toBottomOf="@+id/et_post_headline"
         tools:ignore="TextContrastCheck" />
 

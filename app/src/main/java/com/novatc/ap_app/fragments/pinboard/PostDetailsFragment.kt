@@ -42,11 +42,6 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         postDetailsViewModel.loadComments()
         populateCommentsList(view, post)
 
-
-        view.et_write_comment.visibility = View.GONE
-        view.btn_send_comment.visibility = View.GONE
-
-
         view.tv_detail_post_title.text = post.headline
         view.tv_detail_post_date.text = post.date
         view.tv_detail_post_author.text = post.creator
@@ -66,10 +61,7 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         } else {
             view.btn_delete_post.visibility = View.GONE
         }
-        view.btn_comment_on_post.setOnClickListener {
-            view.et_write_comment.visibility = View.VISIBLE
-            view.btn_send_comment.visibility = View.VISIBLE
-        }
+
         view.btn_send_comment.setOnClickListener {
             if (view.et_write_comment.text.isNotEmpty()) {
                 var c: Comment? = Comment(
@@ -87,9 +79,6 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
                 }
 
             }
-
-            view.et_write_comment.visibility = View.GONE
-            view.btn_send_comment.visibility = View.GONE
         }
 
         return view

@@ -4,18 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import androidx.appcompat.app.AppCompatActivity
 import com.novatc.ap_app.R
-import com.novatc.ap_app.model.BaseActivity
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        super.hideStatusBar()
-
         // Changes the activity to the intro activity after 2.5 seconds
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
