@@ -94,6 +94,11 @@ dependencies {
     implementation 'com.applandeo:material-calendar-view:1.9.0-rc03'
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
+    implementation("androidx.hilt:hilt-work:1.0.0")
+    // When using Kotlin.
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+
+
 
 }
 

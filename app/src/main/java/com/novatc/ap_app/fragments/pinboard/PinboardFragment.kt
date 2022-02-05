@@ -12,9 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
+import androidx.work.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.PostAdapter
@@ -46,16 +44,14 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
         view.rv_posts.setOnTouchListener(SwipeGestureListener(this))
         populatePostList(view)
         setAddPostButtonListener(view)
-        val worker: WorkRequest = PeriodicWorkRequestBuilder<Notification>(1,TimeUnit.MINUTES).build()
-        WorkManager.getInstance(requireContext()).enqueue(worker)
         return view
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var back1 = view.findNavController().backQueue
         print("test")
     }
-
 
 
     override fun onItemClick(position: Int) {
@@ -76,12 +72,16 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
 
         model.postList.observe(this, { posts ->
             view.pinboardListSpinner.visibility = View.GONE
-            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val result = posts.sortedByDescending {
-                LocalDate.parse(it.date, dateTimeFormatter)
-            }
-            postAdapter.differ.submitList(result)
+//            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//            val result = posts.sortedByDescending {
+//                LocalDate.parse(it.date, dateTimeFormatter)
+//            }
+            postAdapter.differ.submitList(posts)
             postList = posts
+            val data: Data = workDataOf("SIZE_OF_POSTLIST" to postList.size)
+            val backgroundService =
+                PeriodicWorkRequestBuilder<Notification>(1, TimeUnit.MINUTES).setInputData(data).build()
+            WorkManager.getInstance(requireContext()).enqueue(backgroundService)
 
         })
 

@@ -1,10 +1,20 @@
 package com.novatc.ap_app
 
 import android.app.Application
+import androidx.hilt.work.HiltWorkerFactory
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
+import androidx.work.Configuration
 
-// Seems neccessary when you want to use Hilt dependency injection
+// Seems necessary when you want to use Hilt dependency injection
 @HiltAndroidApp
-class DormConnectionApplication: Application() {
+class DormConnectionApplication : Application(), Configuration.Provider {
+    @Inject lateinit var workerFactory: HiltWorkerFactory
+
+    override fun getWorkManagerConfiguration(): Configuration{
+        return Configuration.Builder().setWorkerFactory(workerFactory).build()
+    }
+
+
 
 }
