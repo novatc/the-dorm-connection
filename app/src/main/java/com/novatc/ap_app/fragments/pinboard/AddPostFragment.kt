@@ -36,19 +36,20 @@ class AddPostFragment: Fragment() {
         view.btn_safe_new_post.setOnClickListener {
             if (view.et_post_headline.text.isEmpty()) {
                 val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, "Pls set a post headline", Snackbar.LENGTH_LONG).apply {
+                Snackbar.make(bottomNavView, R.string.new_post_missing_headline, Snackbar.LENGTH_LONG).apply {
                     anchorView = bottomNavView
                 }.show()
             }
             if (view.et_created_dorm_description.text.isEmpty()) {
+
                 val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, "Pls set a post text", Snackbar.LENGTH_LONG).apply {
+                Snackbar.make(bottomNavView, R.string.new_post_missing_text, Snackbar.LENGTH_LONG).apply {
                     anchorView = bottomNavView
                 }.show()
             }
             if (view.et_created_post_keywords.text.isEmpty()) {
                 val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, "Pls set a post keyword", Snackbar.LENGTH_LONG).apply {
+                Snackbar.make(bottomNavView, R.string.new_post_missing_keyword, Snackbar.LENGTH_LONG).apply {
                     anchorView = bottomNavView
                 }.show()
             }

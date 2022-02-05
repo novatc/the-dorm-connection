@@ -30,8 +30,6 @@ class PostDetailsViewModel @Inject constructor(
     private val _userProfile = MutableLiveData<User>()
     val userProfile: LiveData<User> = _userProfile
 
-    private val _comments = MutableLiveData<List<Comment>>()
-    val commentList: LiveData<List<Comment>> = _comments
 
     private val _post = MutableLiveData<Post>()
     val post: LiveData<Post> = _post
@@ -42,6 +40,9 @@ class PostDetailsViewModel @Inject constructor(
             _userProfile.value = userRepository.readCurrent()
         }
     }
+
+    private var _comments: MutableLiveData<List<Comment>> = MutableLiveData()
+    val comments: LiveData<List<Comment>> = _comments
 
     suspend fun deletePost(postID: String) {
         postRepository.deletePost(postID)
@@ -55,15 +56,16 @@ class PostDetailsViewModel @Inject constructor(
         return userRepository.readCurrentId()
     }
 
-
     @ExperimentalCoroutinesApi
     fun loadComments() {
         viewModelScope.launch(Dispatchers.IO) {
             postRepository.getCommentsAsFlow(post.value?.id!!).collect { comments ->
-                 withContext(Dispatchers.Main) {
+
+                withContext(Dispatchers.Main) {
                     _comments.value = comments
                 }
             }
+
         }
     }
 

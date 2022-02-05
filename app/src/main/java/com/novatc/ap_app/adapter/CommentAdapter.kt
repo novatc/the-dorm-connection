@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Comment
+import com.novatc.ap_app.model.Post
 
-class CommentAdapter(val commentList: List<Comment>, userID: String, private val listener: OnItemClickListener) :
+class CommentAdapter(userID: String, private val listener: OnItemClickListener) :
 
     RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
     var userID = userID
@@ -47,7 +50,7 @@ class CommentAdapter(val commentList: List<Comment>, userID: String, private val
     }
 
     override fun onBindViewHolder(holder: CommentAdapter.CommentViewHolder, position: Int) {
-        val comment = commentList[position]
+        val comment = differ.currentList[position]
         holder.author.text = comment.authorName
         holder.commentContent.text = comment.content
         holder.authorID = comment.authorID
@@ -57,11 +60,34 @@ class CommentAdapter(val commentList: List<Comment>, userID: String, private val
         } else {
             holder.deleteButton.visibility = View.GONE
         }
+    }
 
+    private val differCallback = object : DiffUtil.ItemCallback<Comment>() {
+        override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-
+        override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean {
+            return when {
+                oldItem.id != newItem.id -> {
+                    false
+                }
+                oldItem.authorID != newItem.authorID -> {
+                    false
+                }
+                oldItem.authorName != newItem.authorName -> {
+                    false
+                }
+                oldItem.content != newItem.content -> {
+                    false
+                }
+                else -> true
+            }
+        }
 
     }
 
-    override fun getItemCount() = commentList.size
+    val differ = AsyncListDiffer(this, differCallback)
+
+    override fun getItemCount() = differ.currentList.size
 }

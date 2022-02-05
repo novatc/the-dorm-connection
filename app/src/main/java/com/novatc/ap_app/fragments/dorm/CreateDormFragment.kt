@@ -52,14 +52,14 @@ class CreateDormFragment : Fragment() {
         val dormAddress = view.et_created_post_keywords.text.toString().trim()
         if (dormName.isBlank()|| dormDescription.isBlank()||dormAddress.isBlank()){
             val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-            Snackbar.make(bottomNavView,"All fields are required.", Snackbar.LENGTH_LONG).apply {
+            Snackbar.make(bottomNavView,R.string.new_dorm_fields_required, Snackbar.LENGTH_LONG).apply {
                 anchorView = bottomNavView
             }.show()
         }
         lifecycleScope.launch {
             dormRepository.add(dormName,dormDescription,dormAddress)
             val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-            Snackbar.make(bottomNavView,"Dorm created", Snackbar.LENGTH_SHORT).apply {
+            Snackbar.make(bottomNavView,R.string.new_dorm_added, Snackbar.LENGTH_SHORT).apply {
                 anchorView = bottomNavView
             }.show()
         }

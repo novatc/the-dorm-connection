@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,14 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.RoomsAdapter
+import com.novatc.ap_app.fragments.PinboardFragment
 import com.novatc.ap_app.model.Room
+import com.novatc.ap_app.services.SwipeGestureListener
+import com.novatc.ap_app.services.SwipeListener
 import com.novatc.ap_app.viewModels.room.RoomViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_room_list.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
-class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
+class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener, SwipeListener {
     var roomList:List<Room> = ArrayList()
 
     override fun onCreateView(
@@ -30,7 +34,15 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
         val view = inflater.inflate(R.layout.fragment_room_list, container, false)
         fillRoomsList(view)
         setAddRoomButtonListener(view)
+        view.setOnTouchListener(SwipeGestureListener(this))
+        view.available_rooms.setOnTouchListener(SwipeGestureListener(this))
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var back1 = view.findNavController().backQueue
+        print("test")
     }
 
     override fun onItemClick(position: Int) {
@@ -58,6 +70,20 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
             val action = RoomsFragmentDirections.actionFragmentRoomsToRoomCreateFragment()
             view.findNavController().navigate(action)
         }
+    }
+
+    override fun onSwipeLeft(view: View) {
+        val action = RoomsFragmentDirections.actionFragmentRoomsToFragmentEvents()
+        view.findNavController().navigate(action)
+    }
+
+    override fun onSwipeRight(view: View) {
+        var back1 = view.findNavController().backQueue
+        val action = RoomsFragmentDirections.actionFragmentRoomsToFragmentPinboard()
+        view.findNavController().navigate(action)
+        var back2 = view.findNavController().backQueue
+        //view.findNavController().backQueue.addLast()
+        print("test")
     }
 
 }

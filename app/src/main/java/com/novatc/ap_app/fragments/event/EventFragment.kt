@@ -19,9 +19,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.activities.adapter.EventsAdapter
 import com.novatc.ap_app.model.Event
+import com.novatc.ap_app.services.SwipeGestureListener
+import com.novatc.ap_app.services.SwipeListener
 import com.novatc.ap_app.viewModels.event.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -29,7 +32,7 @@ import java.time.format.DateTimeFormatter
  * The event fragment displays a list of events
  */
 @AndroidEntryPoint
-class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
+class EventFragment : Fragment(), EventsAdapter.OnItemClickListener, SwipeListener {
 
     var eventList:List<Event> = emptyList()
     val model: EventViewModel by viewModels()
@@ -42,6 +45,9 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         fillEventsList(view)
         setAddEventButtonListener(view)
         setMapOverviewButtonListener(view)
+        view.setOnTouchListener(SwipeGestureListener(this))
+        view.upcoming_events.setOnTouchListener(SwipeGestureListener(this))
+
         return view
     }
 
@@ -88,6 +94,7 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
 
 
     // Setup recyclerview with events
+    @ExperimentalCoroutinesApi
     private fun fillEventsList(view: View) {
         val recyclerView: RecyclerView = view.upcoming_events
         view.eventsListSpinner.visibility = View.VISIBLE
@@ -105,6 +112,16 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
             eventList = events
 
         })
+    }
+
+    override fun onSwipeLeft(view: View) {
+        val action = EventFragmentDirections.actionFragmentEventsToFragmentProfile()
+        findNavController().navigate(action)
+    }
+
+    override fun onSwipeRight(view: View) {
+        val action = EventFragmentDirections.actionFragmentEventsToFragmentRooms()
+        findNavController().navigate(action)
     }
 
 }

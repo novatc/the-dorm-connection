@@ -179,5 +179,15 @@
     <string name="write_your_comment">Schreib deinen Kommentar</string>
     <string name="comment_send">Senden</string>
     <string name="notification_new_post">Eine neue Nachricht ist auf deiner Pinnwand erschienen!</string>
+    <string name="new_post_missing_headline">Bitte füge eine Überschrift ein</string>
+    <string name="new_post_missing_text">Bitte füge einen Text ein</string>
+    <string name="new_post_missing_keyword">Bitte füge ein Keywort ein</string>
+
+    #dorm
+    <string name="new_dorm_fields_required">Bitte alle Felder ausfüllen</string>
+    <string name="new_dorm_added">Ein neues Wohnheim wurde erzeugt</string>
+
+
+
 
 </resources>

@@ -16,6 +16,8 @@ import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.viewModels.you.MyPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_posts.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class MyPostsFragment : Fragment(), PostAdapter.OnItemClickListener {
@@ -43,12 +45,19 @@ class MyPostsFragment : Fragment(), PostAdapter.OnItemClickListener {
     private fun populateUSerPostList(view: View){
         val recyclerView: RecyclerView = view.rv_my_posts
         val model = ViewModelProvider(this)[MyPostViewModel::class.java]
-        model.posts.observe(this, {posts ->
-            postList = posts
-            postList.sortedByDescending {  it.date }
-            recyclerView.adapter = PostAdapter(postList, this)
-        })
+        val postAdapter = PostAdapter(this)
+        recyclerView.adapter = postAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        model.posts.observe(this, { posts ->
+            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val result = posts.sortedByDescending {
+                LocalDate.parse(it.date, dateTimeFormatter)
+            }
+            postAdapter.differ.submitList(result)
+            postList = posts
+
+        })
     }
 
     override fun onItemClick(position: Int) {

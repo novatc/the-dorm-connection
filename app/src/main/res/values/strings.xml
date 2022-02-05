@@ -181,6 +181,11 @@
     <string name="comment_send">send</string>
     <string name="events_map_overview">Event Map Overview</string>
     <string name="notification_new_post">A new post appeard on your Pinnboard!</string>
+    <string name="new_post_missing_headline">Please add a headline to your post</string>
+    <string name="new_post_missing_text">Pleas add a text to your post</string>
+    <string name="new_post_missing_keyword">Please add a keyword to your post</string>
+    <string name="new_dorm_fields_required">All fields are required</string>
+    <string name="new_dorm_added">a new dorm was created</string>
 
 
 </resources>
