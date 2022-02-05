@@ -162,7 +162,7 @@
     <string name="pinboard_tagline">News from your dorm</string>
     <string name="create_a_post">Verfasse einen Eintrag</string>
     <string name="post">Eintrag</string>
-    <string name="post_header">Eintragsüberschrift</string>
+    <string name="post_header">Überschrift</string>
     <string name="post_text">Text</string>
     <string name="post_keywords">Schlagwörter</string>
     <string name="minimum_booking_time">Bestimme den Mindestbuchzeitraum</string>

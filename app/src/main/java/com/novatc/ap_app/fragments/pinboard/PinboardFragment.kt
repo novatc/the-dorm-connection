@@ -76,11 +76,11 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
 
         model.postList.observe(this, { posts ->
             view.pinboardListSpinner.visibility = View.GONE
-            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-            val result = posts.sortedByDescending {
-                LocalDate.parse(it.date, dateTimeFormatter)
-            }
-            postAdapter.differ.submitList(result)
+//            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//            val result = posts.sortedByDescending {
+//                LocalDate.parse(it.date, dateTimeFormatter)
+//            }
+            postAdapter.differ.submitList(posts)
             postList = posts
 
         })

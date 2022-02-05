@@ -163,7 +163,7 @@
     <string name="pinboard_tagline">News from your dorm</string>
     <string name="create_a_post">Create a post</string>
     <string name="post">Post</string>
-    <string name="post_header">Post headline</string>
+    <string name="post_header">Headline</string>
     <string name="post_text">Text</string>
     <string name="post_keywords">Keywords</string>
     <string name="delete_post">Delete post</string>
