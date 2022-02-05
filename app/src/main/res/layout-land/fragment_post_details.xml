@@ -34,20 +34,20 @@
 
     <EditText
         android:id="@+id/et_write_comment"
-        app:layout_constraintEnd_toStartOf="@+id/btn_send_comment"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_delete_post"
-        tools:ignore="TextContrastCheck"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/write_your_comment"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/btn_send_comment"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_text"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/tv_detail_post_date"
@@ -82,33 +82,33 @@
 
     <TextView
         android:id="@+id/tv_detail_post_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
         android:layout_gravity="center_vertical|right"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="@color/white"
         android:padding="10dp"
         android:text="POST TEXT"
         android:textColor="@android:color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_delete_post"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_keywords" />
 
     <Button
         android:id="@+id/btn_delete_post"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_text"
-        tools:ignore="TextContrastCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/radical_red"
+        android:insetTop="0dp"
         android:text="@string/delete_post"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_detail_post_text"
+        tools:ignore="TextContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_comments_on_post"
@@ -128,10 +128,8 @@
 
     <TextView
         android:id="@+id/tv_detail_post_keywords"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="POST KEYWORDS"
@@ -139,18 +137,7 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/tv_detail_post_author"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_author" />
-
-    <TextView
-        android:id="@+id/textView31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/post"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_keywords" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

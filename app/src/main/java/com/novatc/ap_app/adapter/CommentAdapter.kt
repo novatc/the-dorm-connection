@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Comment
 
-class CommentAdapter(val commentList: ArrayList<Comment>, userID: String, private val listener: OnItemClickListener) :
+class CommentAdapter(val commentList: List<Comment>, userID: String, private val listener: OnItemClickListener) :
 
     RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
     var userID = userID

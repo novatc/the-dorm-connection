@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
     private val args by navArgs<PostDetailsFragmentArgs>()
     private val postDetailsViewModel: PostDetailsViewModel by viewModels()
-    private var commentListOnPost: ArrayList<Comment> = ArrayList()
+    private var commentListOnPost: List<Comment> = emptyList()
     private var currentUser: User = User()
 
     override fun onCreateView(
@@ -41,11 +41,6 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         postDetailsViewModel.setPost(post)
         postDetailsViewModel.loadComments()
         populateCommentsList(view, post)
-
-
-        view.et_write_comment.visibility = View.GONE
-        view.btn_send_comment.visibility = View.GONE
-
 
         view.tv_detail_post_title.text = post.headline
         view.tv_detail_post_date.text = post.date
@@ -66,10 +61,7 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         } else {
             view.btn_delete_post.visibility = View.GONE
         }
-        view.btn_comment_on_post.setOnClickListener {
-            view.et_write_comment.visibility = View.VISIBLE
-            view.btn_send_comment.visibility = View.VISIBLE
-        }
+
         view.btn_send_comment.setOnClickListener {
             if (view.et_write_comment.text.isNotEmpty()) {
                 var c: Comment? = Comment(
@@ -87,9 +79,6 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
                 }
 
             }
-
-            view.et_write_comment.visibility = View.GONE
-            view.btn_send_comment.visibility = View.GONE
         }
 
         return view
@@ -97,7 +86,6 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val comment = commentListOnPost[position]
-        Log.e("COMMENT", "Comment clicked with id: ${comment.id}")
         lifecycleScope.launch{
             args.clickedPost.id?.let { postDetailsViewModel.deleteComment(commentID = comment.id, it) }
         }
