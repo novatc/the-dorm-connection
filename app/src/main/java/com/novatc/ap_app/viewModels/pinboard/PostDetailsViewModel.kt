@@ -26,8 +26,7 @@ class PostDetailsViewModel @Inject constructor(
     private val postRepository: PostRepository,
     private val userRepository: UserRepository
 ) : ViewModel() {
-    private var _comments: MutableLiveData<ArrayList<Comment>> =
-        MutableLiveData<ArrayList<Comment>>()
+    private var _comments: MutableLiveData<List<Comment>> = MutableLiveData()
     private val _userProfile = MutableLiveData<User>()
     val userProfile: LiveData<User> = _userProfile
 
@@ -43,19 +42,13 @@ class PostDetailsViewModel @Inject constructor(
     }
 
     // Variable for exposing livedata to other classes
-    internal var commentList: MutableLiveData<ArrayList<Comment>>
-        get() {
-            return _comments
-        }
-        set(value) {
-            _comments = value
-        }
+    val comments: LiveData<List<Comment>> = _comments
 
     suspend fun deletePost(postID: String) {
         postRepository.deletePost(postID)
     }
 
-    suspend fun deleteComment(commentID: String, postID: String){
+    suspend fun deleteComment(commentID: String, postID: String) {
         postRepository.deleteComment(commentID, postID)
     }
 
@@ -69,21 +62,15 @@ class PostDetailsViewModel @Inject constructor(
         Log.e("POST", "Post is ${post.value}")
         viewModelScope.launch(Dispatchers.IO) {
             postRepository.getCommentsAsFlow(post.value?.id!!).collect { comments ->
-                if (comments.isEmpty()) {
-                    Log.e("COMMENTS", "NO Comments")
-                } else {
-                    val commentList = ArrayList<Comment>()
-                    comments.forEach {
-                        commentList.add(it)
-                    }
-                    withContext(Dispatchers.Main) {
-                        _comments.value = commentList
-                    }
-                }
 
+                withContext(Dispatchers.Main) {
+                    _comments.value = comments
+                }
             }
+
         }
     }
+
 
     suspend fun addComment(postID: String, comment: Comment): DocumentReference? {
         return postRepository.addComment(postID, comment)

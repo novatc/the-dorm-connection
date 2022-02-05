@@ -28,7 +28,7 @@ import kotlinx.coroutines.launch
 class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
     private val args by navArgs<PostDetailsFragmentArgs>()
     private val postDetailsViewModel: PostDetailsViewModel by viewModels()
-    private var commentListOnPost: ArrayList<Comment> = ArrayList()
+    private var commentListOnPost: List<Comment> = emptyList()
     private var currentUser: User = User()
 
     override fun onCreateView(
@@ -98,8 +98,13 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
     override fun onItemClick(position: Int) {
         val comment = commentListOnPost[position]
         Log.e("COMMENT", "Comment clicked with id: ${comment.id}")
-        lifecycleScope.launch{
-            args.clickedPost.id?.let { postDetailsViewModel.deleteComment(commentID = comment.id, it) }
+        lifecycleScope.launch {
+            args.clickedPost.id?.let {
+                postDetailsViewModel.deleteComment(
+                    commentID = comment.id,
+                    it
+                )
+            }
         }
 
 
@@ -112,13 +117,15 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         postDetailsViewModel.setPost(post)
         postDetailsViewModel.userProfile.observe(viewLifecycleOwner, {
             currentUser = it
-            model.commentList.observe(this, { comment ->
+            val commentAdapter = CommentAdapter(currentUser.id, this)
+            recyclerView.adapter = commentAdapter
+            recyclerView.layoutManager = LinearLayoutManager(activity)
+            model.comments.observe(this, { comment ->
+                commentAdapter.differ.submitList(comment)
                 commentListOnPost = comment
-                recyclerView.adapter = CommentAdapter(commentListOnPost, currentUser.id, this)
             })
 
         })
-        recyclerView.layoutManager = LinearLayoutManager(activity)
     }
 
 

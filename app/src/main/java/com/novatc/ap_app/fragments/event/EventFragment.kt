@@ -24,6 +24,7 @@ import com.novatc.ap_app.services.SwipeListener
 import com.novatc.ap_app.viewModels.event.EventViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_event.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -93,6 +94,7 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener, SwipeListen
 
 
     // Setup recyclerview with events
+    @ExperimentalCoroutinesApi
     private fun fillEventsList(view: View) {
         val recyclerView: RecyclerView = view.upcoming_events
         view.eventsListSpinner.visibility = View.VISIBLE

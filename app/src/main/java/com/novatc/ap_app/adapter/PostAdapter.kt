@@ -12,7 +12,6 @@ import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Post
 
 class PostAdapter(
-    val postListItems: ArrayList<Post>,
     private val listener: OnItemClickListener) :
     RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
@@ -48,7 +47,7 @@ class PostAdapter(
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val postListItem = postListItems[position]
+        val postListItem = differ.currentList[position]
         holder.postHeadline.text = postListItem.headline
         holder.postAuthor.text = postListItem.creator
         holder.postText.text = postListItem.text
@@ -57,7 +56,7 @@ class PostAdapter(
         holder.key = postListItem.id.toString()
     }
 
-    override fun getItemCount() = postListItems.size
+    override fun getItemCount() = differ.currentList.size
 
     private val differCallback = object : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
@@ -79,6 +78,15 @@ class PostAdapter(
                     false
                 }
                 oldItem.date != newItem.date -> {
+                    false
+                }
+                oldItem.headline != newItem.headline -> {
+                    false
+                }
+                oldItem.keyword != newItem.keyword -> {
+                    false
+                }
+                oldItem.creator != newItem.creator -> {
                     false
                 }
                 else -> true

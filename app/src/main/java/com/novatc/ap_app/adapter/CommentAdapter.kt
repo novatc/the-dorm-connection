@@ -11,7 +11,7 @@ import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.Post
 
-class CommentAdapter(val commentList: ArrayList<Comment>, userID: String, private val listener: OnItemClickListener) :
+class CommentAdapter(userID: String, private val listener: OnItemClickListener) :
 
     RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
     var userID = userID
@@ -50,7 +50,7 @@ class CommentAdapter(val commentList: ArrayList<Comment>, userID: String, privat
     }
 
     override fun onBindViewHolder(holder: CommentAdapter.CommentViewHolder, position: Int) {
-        val comment = commentList[position]
+        val comment = differ.currentList[position]
         holder.author.text = comment.authorName
         holder.commentContent.text = comment.content
         holder.authorID = comment.authorID
@@ -60,10 +60,6 @@ class CommentAdapter(val commentList: ArrayList<Comment>, userID: String, privat
         } else {
             holder.deleteButton.visibility = View.GONE
         }
-
-
-
-
     }
 
     private val differCallback = object : DiffUtil.ItemCallback<Comment>() {
@@ -93,5 +89,5 @@ class CommentAdapter(val commentList: ArrayList<Comment>, userID: String, privat
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    override fun getItemCount() = commentList.size
+    override fun getItemCount() = differ.currentList.size
 }

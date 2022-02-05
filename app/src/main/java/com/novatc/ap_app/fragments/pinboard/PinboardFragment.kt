@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
 class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListener {
-    var postList: ArrayList<Post> = ArrayList()
+    var postList: List<Post> = emptyList()
     val model: PinboardViewModel by viewModels()
 
 
@@ -69,18 +69,21 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
         view.pinboardListSpinner.visibility = View.VISIBLE
         val recyclerView: RecyclerView = view.rv_posts
         val model: PinboardViewModel by viewModels()
-        model.postsList.observe(this, { posts ->
-            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
-            posts.sortedByDescending {
-                LocalDate.parse(it.date, dateTimeFormatter)
-            }
-            postList = posts
-            view.pinboardListSpinner.visibility = View.GONE
-            recyclerView.adapter = PostAdapter(postList, this)
-        })
+        val postAdapter = PostAdapter(this)
+        recyclerView.adapter = postAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
+        model.postList.observe(this, { posts ->
+            view.pinboardListSpinner.visibility = View.GONE
+            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val result = posts.sortedByDescending {
+                LocalDate.parse(it.date, dateTimeFormatter)
+            }
+            postAdapter.differ.submitList(result)
+            postList = posts
+
+        })
 
     }
 
