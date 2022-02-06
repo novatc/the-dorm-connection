@@ -1,6 +1,7 @@
 package com.novatc.ap_app.fragments.pinboard
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,12 +19,15 @@ import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_des
 import com.novatc.ap_app.viewModels.pinboard.AddPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.util.*
 
 @AndroidEntryPoint
-class AddPostFragment: Fragment() {
+class AddPostFragment : Fragment() {
 
     private val addPostViewModel: AddPostViewModel by viewModels()
 
@@ -36,20 +40,29 @@ class AddPostFragment: Fragment() {
         view.btn_safe_new_post.setOnClickListener {
             if (view.et_post_headline.text.isEmpty()) {
                 val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, R.string.new_post_missing_headline, Snackbar.LENGTH_LONG).apply {
+                Snackbar.make(
+                    bottomNavView,
+                    R.string.new_post_missing_headline,
+                    Snackbar.LENGTH_LONG
+                ).apply {
                     anchorView = bottomNavView
                 }.show()
             }
             if (view.et_created_dorm_description.text.isEmpty()) {
 
                 val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, R.string.new_post_missing_text, Snackbar.LENGTH_LONG).apply {
-                    anchorView = bottomNavView
-                }.show()
+                Snackbar.make(bottomNavView, R.string.new_post_missing_text, Snackbar.LENGTH_LONG)
+                    .apply {
+                        anchorView = bottomNavView
+                    }.show()
             }
             if (view.et_created_post_keywords.text.isEmpty()) {
                 val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, R.string.new_post_missing_keyword, Snackbar.LENGTH_LONG).apply {
+                Snackbar.make(
+                    bottomNavView,
+                    R.string.new_post_missing_keyword,
+                    Snackbar.LENGTH_LONG
+                ).apply {
                     anchorView = bottomNavView
                 }.show()
             }
@@ -60,7 +73,8 @@ class AddPostFragment: Fragment() {
                 val date = getCurrentDate()
                 lifecycleScope.launch {
                     addPostViewModel.addPost(headline, text, keyword, date)
-                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    val bottomNavView: BottomNavigationView =
+                        activity?.findViewById(R.id.bottomNav)!!
                     Snackbar.make(bottomNavView, "Post created", Snackbar.LENGTH_SHORT).apply {
                         anchorView = bottomNavView
                     }.show()
@@ -74,11 +88,13 @@ class AddPostFragment: Fragment() {
         return view
 
     }
-    fun getCurrentDate():String{
-        var current = LocalDateTime.now()
-        var fullLocaleFormat = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
-        var fullLocaleTime = current.format(fullLocaleFormat)
-        return fullLocaleTime
+
+    private fun getCurrentDate(): String {
+        val date: LocalDate = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")
+        val text: String = date.format(formatter)
+        val parsedDate: LocalDate = LocalDate.parse(text, formatter)
+        return parsedDate.toString()
     }
 
     private fun setSavePostButtonListener(view: View) {

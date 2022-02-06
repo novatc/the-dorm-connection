@@ -1,5 +1,6 @@
 package com.novatc.ap_app.fragments
 
+import android.icu.text.SimpleDateFormat
 import com.novatc.ap_app.services.SwipeGestureListener
 import com.novatc.ap_app.services.SwipeListener
 import android.os.Bundle
@@ -72,15 +73,16 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
 
         model.postList.observe(this, { posts ->
             view.pinboardListSpinner.visibility = View.GONE
-//            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-//            val result = posts.sortedByDescending {
-//                LocalDate.parse(it.date, dateTimeFormatter)
-//            }
+            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")
+            val result = posts.sortedByDescending {
+                LocalDate.parse(it.date, dateTimeFormatter)
+            }
             postAdapter.differ.submitList(posts)
-            postList = posts
+            postList = result
             val data: Data = workDataOf("SIZE_OF_POSTLIST" to postList.size)
             val backgroundService =
-                PeriodicWorkRequestBuilder<Notification>(1, TimeUnit.MINUTES).setInputData(data).build()
+                PeriodicWorkRequestBuilder<Notification>(1, TimeUnit.MINUTES).setInputData(data)
+                    .build()
             WorkManager.getInstance(requireContext()).enqueue(backgroundService)
 
         })
