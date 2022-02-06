@@ -104,7 +104,7 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         val recyclerView: RecyclerView = view.rv_comments_on_post
         val model: PostDetailsViewModel by viewModels()
         postDetailsViewModel.setPost(post)
-        postDetailsViewModel.userProfile.observe(viewLifecycleOwner, {
+        postDetailsViewModel.userProfile.observe(this, {
             currentUser = it
             val commentAdapter = CommentAdapter(currentUser.id, this)
             recyclerView.adapter = commentAdapter
