@@ -34,8 +34,7 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener, SwipeListene
         val view = inflater.inflate(R.layout.fragment_room_list, container, false)
         fillRoomsList(view)
         setAddRoomButtonListener(view)
-        view.setOnTouchListener(SwipeGestureListener(this))
-        view.available_rooms.setOnTouchListener(SwipeGestureListener(this))
+        view.rooms_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
         return view
     }
 

@@ -42,8 +42,7 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pinboard, container, false)
-        view.setOnTouchListener(SwipeGestureListener(this))
-        view.rv_posts.setOnTouchListener(SwipeGestureListener(this))
+        view.posts_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
         populatePostList(view)
         setAddPostButtonListener(view)
         return view

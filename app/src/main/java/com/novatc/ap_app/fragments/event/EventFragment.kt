@@ -45,8 +45,8 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener, SwipeListen
         fillEventsList(view)
         setAddEventButtonListener(view)
         setMapOverviewButtonListener(view)
+        view.events_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
         view.setOnTouchListener(SwipeGestureListener(this))
-        view.upcoming_events.setOnTouchListener(SwipeGestureListener(this))
 
         return view
     }
