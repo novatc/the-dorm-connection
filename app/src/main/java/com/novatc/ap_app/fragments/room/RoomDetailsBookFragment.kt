@@ -46,6 +46,8 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     private var selectedRoom: Room = Room()
     private var currentUser: User = User()
     private var bookingListOnRoom: List<Booking> = ArrayList<Booking>()
+    private var availableTimeslots: ArrayList<Long> = ArrayList()
+    private var bookedTimeslots: ArrayList<Long> = ArrayList()
     val disabledDaysList: ArrayList<Calendar> = ArrayList()
     private val aDayInMilliseconds: Long = 86400000L
 
@@ -57,7 +59,6 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         model.room.observe(this, { room ->
             selectedRoom = room
         })
-        bookingListOnRoom = ArrayList()
         model.room.observe(this, { room ->
             model.loadBookings(this)
         })
@@ -101,6 +102,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
             var bookedDateText: String = day + "." + month +"."+ selectedDate.get(Calendar.YEAR)
             booked_date_1.text = bookedDateText
             booked_date_2.text = bookedDateText
+            createAvailableTimeslots()
             val layout = view.tutView1
             layout.visibility = View.GONE
             val layout2 = view.tutView2
@@ -148,6 +150,13 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                                 anchorView = bottomNavView
                             }.show()
                         }
+                        !isInAvailableTimeslots(startingDateInMilliseconds) || !isInAvailableTimeslots(endingDateInMilliseconds)-> {
+                            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                            Snackbar.make(bottomNavView,  R.string.chosen_time_slot_has_already_been_booked, Snackbar.LENGTH_SHORT).apply {
+                                anchorView = bottomNavView
+                            }.show()
+                        }
+
                         else -> {
                             var c: Booking? = Booking(
                                 userID = currentUser.id,
@@ -275,6 +284,63 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         else{
             return string
         }
+    }
+
+    private fun createAvailableTimeslots(): ArrayList<Long>{
+        bookingListOnRoom.forEach{
+            booking ->
+            bookedTimeslots.add(booking.startingDate)
+            bookedTimeslots.add(booking.endDate)
+        }
+        var dayStart: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong()
+        var dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() + aDayInMilliseconds
+        bookedTimeslots.sortedWith(Comparator<Long>{ a,b ->
+            when {
+                a > b -> 1
+                a < b -> -1
+                else -> 0
+            }
+        })
+        var x = 0
+        while (x < bookedTimeslots.size){
+            if(x == 0){
+                if(bookedTimeslots.get(x) - dayStart > selectedRoom.minimumBookingTime?.toLong()!!){
+                    availableTimeslots.add(dayStart)
+                    availableTimeslots.add(bookedTimeslots.get(x))
+                }
+            }
+            else if(x == bookedTimeslots.size-1){
+                if (dayEnd - bookedTimeslots.get(x) > selectedRoom.minimumBookingTime?.toLong()!!){
+                    availableTimeslots.add(bookedTimeslots.get(x))
+                    availableTimeslots.add(dayEnd)
+                }
+            }
+            else if(x%2 == 1){
+                if (bookedTimeslots.get(x+1) - bookedTimeslots.get(x) > selectedRoom.minimumBookingTime?.toLong()!!){
+                    availableTimeslots.add(bookedTimeslots.get(x))
+                    availableTimeslots.add(bookedTimeslots.get(x+1))
+                }
+            }
+            x++
+        }
+        return availableTimeslots
+    }
+
+    private fun isInAvailableTimeslots(timeToBook: Long): Boolean{
+        if (bookedTimeslots.size < 1){
+            return true
+        }
+        else{
+            var x = 0
+            while (x < bookedTimeslots.size){
+                if(x%2 == 0){
+                    if(timeToBook >= bookedTimeslots.get(x) && timeToBook <= bookedTimeslots.get(x+1)){
+                    return false
+                    }}
+                x++
+            }
+        }
+        return true
     }
 
     private fun convertUnixToDate(unixDate: Long): String {

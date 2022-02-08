@@ -105,6 +105,7 @@
     <string name="successful_booking">Booking of time slot successful!</string>
     <string name="booking_time_exceeds_maximum_booking_time">The chosen booking time exceeds the maximum allowed booking time! Could not create the booking.</string>
     <string name="booking_time_falls_below_the_minimum_booking_time">The chosen booking time falls below the minimum allowed booking time! Could not create the booking.</string>
+    <string name="chosen_time_slot_has_already_been_booked">The chosen booking time has already been booked! Please refer to the listed available bookings times.</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>
