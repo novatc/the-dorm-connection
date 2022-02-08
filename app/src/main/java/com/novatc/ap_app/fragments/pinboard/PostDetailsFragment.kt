@@ -43,7 +43,7 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         populateCommentsList(view, post)
 
         view.tv_detail_post_title.text = post.headline
-        view.tv_detail_post_date.text = post.date
+        view.tv_detail_post_date.text = post.date?.let { convertTime(it) }
         view.tv_detail_post_author.text = post.creator
         view.tv_detail_post_text.text = post.text
         view.tv_detail_post_keywords.text = post.keyword
@@ -115,6 +115,12 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
             })
 
         })
+    }
+
+    private fun convertTime(unixTimestamp:Long): String {
+        val sdf = java.text.SimpleDateFormat("HH:mm")
+        val date = java.util.Date(unixTimestamp)
+        return sdf.format(date)
     }
 
 

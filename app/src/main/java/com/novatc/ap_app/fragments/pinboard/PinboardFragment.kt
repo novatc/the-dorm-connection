@@ -24,6 +24,7 @@ import com.novatc.ap_app.services.Notification
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
@@ -73,11 +74,10 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
 
         model.postList.observe(this, { posts ->
             view.pinboardListSpinner.visibility = View.GONE
-            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")
             val result = posts.sortedByDescending {
-                LocalDate.parse(it.date, dateTimeFormatter)
+                it.date
             }
-            postAdapter.differ.submitList(posts)
+            postAdapter.differ.submitList(result)
             postList = result
             val data: Data = workDataOf("SIZE_OF_POSTLIST" to postList.size)
             val backgroundService =
@@ -97,6 +97,7 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
         }
 
     }
+
 
     override fun onSwipeLeft(view: View) {
         val action = PinboardFragmentDirections.actionFragmentPinboardToFragmentRooms()

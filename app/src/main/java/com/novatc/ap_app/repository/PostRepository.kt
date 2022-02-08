@@ -16,7 +16,7 @@ class PostRepository
     private val userFirestore: UserFirestore
 ) {
 
-    suspend fun addPost(headline: String, text: String, keyword: String, date: String) {
+    suspend fun addPost(headline: String, text: String, keyword: String, date: Long) {
         val userId = userFirestore.getCurrentUserID()
             ?: throw Exception("No user id, when trying to add a post.")
         val user = userFirestore.getUserData(userId)

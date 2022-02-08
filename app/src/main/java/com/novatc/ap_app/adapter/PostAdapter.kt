@@ -52,7 +52,7 @@ class PostAdapter(
         holder.postAuthor.text = postListItem.creator
         holder.postText.text = postListItem.text
         holder.postKeywords.text = postListItem.keyword
-        holder.date.text = postListItem.date
+        holder.date.text = postListItem.date?.let { convertTime(it) }
         holder.key = postListItem.id.toString()
     }
 
@@ -77,9 +77,7 @@ class PostAdapter(
                 oldItem.creator != newItem.creator -> {
                     false
                 }
-                oldItem.date != newItem.date -> {
-                    false
-                }
+
                 oldItem.headline != newItem.headline -> {
                     false
                 }
@@ -96,4 +94,10 @@ class PostAdapter(
     }
 
     val differ = AsyncListDiffer(this, differCallback)
+
+    private fun convertTime(unixTimestamp:Long): String {
+        val sdf = java.text.SimpleDateFormat("HH:mm")
+        val date = java.util.Date(unixTimestamp)
+        return sdf.format(date)
+    }
 }

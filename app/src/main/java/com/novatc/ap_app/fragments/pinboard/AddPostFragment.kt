@@ -1,7 +1,6 @@
 package com.novatc.ap_app.fragments.pinboard
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,12 +18,6 @@ import kotlinx.android.synthetic.main.fragment_add_post.view.et_created_dorm_des
 import com.novatc.ap_app.viewModels.pinboard.AddPostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
-import java.util.*
 
 @AndroidEntryPoint
 class AddPostFragment : Fragment() {
@@ -89,12 +82,8 @@ class AddPostFragment : Fragment() {
 
     }
 
-    private fun getCurrentDate(): String {
-        val date: LocalDate = LocalDate.now()
-        val formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy")
-        val text: String = date.format(formatter)
-        val parsedDate: LocalDate = LocalDate.parse(text, formatter)
-        return parsedDate.toString()
+    private fun getCurrentDate(): Long {
+        return System.currentTimeMillis()
     }
 
     private fun setSavePostButtonListener(view: View) {

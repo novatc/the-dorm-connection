@@ -10,7 +10,7 @@ data class Post(
     val text: String? = "",
     val keyword: String? = "",
     val creator: String? = "",
-    val date: String? = "",
+    val date: Long? = 0,
     val creatorID: String? = "",
     val dormId: String? = "",
     @get: Exclude var id: String? = "",
@@ -21,7 +21,7 @@ data class Post(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
+        parcel.readLong(),
         parcel.readString(),
         parcel.readString()
     )
@@ -33,7 +33,9 @@ data class Post(
         parcel.writeString(text)
         parcel.writeString(keyword)
         parcel.writeString(creator)
-        parcel.writeString(date)
+        if (date != null) {
+            parcel.writeLong(date)
+        }
         parcel.writeString(creatorID)
         parcel.writeString(id)
     }

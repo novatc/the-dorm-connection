@@ -50,9 +50,8 @@ class MyPostsFragment : Fragment(), PostAdapter.OnItemClickListener {
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         model.posts.observe(this, { posts ->
-            val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val result = posts.sortedByDescending {
-                LocalDate.parse(it.date, dateTimeFormatter)
+                it.date
             }
             postAdapter.differ.submitList(result)
             postList = posts
