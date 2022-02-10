@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,7 +21,27 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         val bottomNav: BottomNavigationView = findViewById(R.id.bottomNav)
         NavigationUI.setupWithNavController(bottomNav, navController)
-
+        bottomNav.setOnItemSelectedListener{
+            when (it.itemId) {
+            R.id.fragment_pinboard -> {
+                navController.navigate(R.id.fragment_pinboard)
+                return@setOnItemSelectedListener true
+            }
+            R.id.fragment_rooms -> {
+                navController.navigate(R.id.fragment_rooms)
+                return@setOnItemSelectedListener true
+            }
+            R.id.fragment_events -> {
+                navController.navigate(R.id.fragment_events)
+                return@setOnItemSelectedListener true
+            }
+            R.id.fragment_profile -> {
+                navController.navigate(R.id.fragment_profile)
+                return@setOnItemSelectedListener true
+            }
+        }
+            false
+        }
         navController.addOnDestinationChangedListener{_, destination, _ ->
             if (destination.id == R.id.loginFragment || destination.id == R.id.signUpFragment) {
                 bottomNav.visibility = View.GONE

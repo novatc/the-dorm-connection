@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
-class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListener {
+class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener{
     var postList: List<Post> = emptyList()
     val model: PinboardViewModel by viewModels()
 
@@ -42,18 +42,10 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pinboard, container, false)
-        view.posts_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
         populatePostList(view)
         setAddPostButtonListener(view)
         return view
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var back1 = view.findNavController().backQueue
-        print("test")
-    }
-
 
     override fun onItemClick(position: Int) {
         val post = postList[position]
@@ -96,14 +88,4 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
         }
 
     }
-
-
-    override fun onSwipeLeft(view: View) {
-        val action = PinboardFragmentDirections.actionFragmentPinboardToFragmentRooms()
-        view.findNavController().navigate(action)
-    }
-
-    override fun onSwipeRight(view: View) {
-    }
-
 }
