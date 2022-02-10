@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Dorm
+import com.novatc.ap_app.model.Post
 
-class DormAdapter(val dormList: ArrayList<Dorm>, private val listener: OnItemClickListener) :
+class DormAdapter(private val listener: OnItemClickListener) :
     RecyclerView.Adapter<DormAdapter.DormsViewHolder>() {
 
     inner class DormsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
@@ -33,7 +36,7 @@ class DormAdapter(val dormList: ArrayList<Dorm>, private val listener: OnItemCli
         fun onItemClick(position: Int)
     }
 
-    override fun getItemCount() = dormList.size
+    override fun getItemCount() = differ.currentList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DormsViewHolder {
         val view =
@@ -42,9 +45,46 @@ class DormAdapter(val dormList: ArrayList<Dorm>, private val listener: OnItemCli
     }
 
     override fun onBindViewHolder(holder: DormsViewHolder, position: Int) {
-        val dormListItem = dormList[position]
+        val dormListItem = differ.currentList[position]
         holder.dormName.text = dormListItem.name
         holder.dormDescription.text = dormListItem.description
         holder.dormAddress.text = dormListItem.address
     }
+
+    private val differCallback = object : DiffUtil.ItemCallback<Dorm>() {
+        override fun areItemsTheSame(oldItem: Dorm, newItem: Dorm): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Dorm, newItem: Dorm): Boolean {
+            return when {
+                oldItem.id != newItem.id -> {
+                    false
+                }
+                oldItem.address != newItem.address -> {
+                    false
+                }
+                oldItem.description != newItem.description -> {
+                    false
+                }
+                oldItem.id != newItem.id -> {
+                    false
+                }
+
+                oldItem.name != newItem.name -> {
+                    false
+                }
+                oldItem.roomList != newItem.roomList -> {
+                    false
+                }
+                oldItem.userList != newItem.userList -> {
+                    false
+                }
+                else -> true
+            }
+        }
+
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
 }
