@@ -62,13 +62,12 @@
             android:stateNotNeeded="true"
             android:theme="@style/zxing_CaptureTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <service
-            android:name=".services.Notification"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
+        <provider
+            android:authorities="${applicationId}.androidx-startup"
+            android:name="androidx.startup.InitializationProvider"
+            tools:node="remove">
+        </provider>
+
 
         <meta-data
             android:name="preloaded_fonts"

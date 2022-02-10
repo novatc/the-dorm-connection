@@ -19,9 +19,9 @@ import dagger.assisted.AssistedInject
 
 @HiltWorker
 class Notification @AssistedInject constructor(
-    @Assisted appContext: Context,
+    @Assisted val appContext: Context,
     @Assisted workerParams: WorkerParameters,
-    private val postRepository: PostRepository
+    val postRepository: PostRepository
 ) :
     CoroutineWorker(appContext, workerParams) {
     @AssistedFactory
@@ -69,6 +69,7 @@ class Notification @AssistedInject constructor(
     }
 
 }
+
 
 
 
