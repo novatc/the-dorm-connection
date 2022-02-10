@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_room_list.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
-class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
+class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener, SwipeListener {
     var roomList:List<Room> = ArrayList()
 
     override fun onCreateView(
@@ -34,6 +34,7 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
         val view = inflater.inflate(R.layout.fragment_room_list, container, false)
         fillRoomsList(view)
         setAddRoomButtonListener(view)
+        view.rooms_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
         return view
     }
 
@@ -68,6 +69,20 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener {
             val action = RoomsFragmentDirections.actionFragmentRoomsToRoomCreateFragment()
             view.findNavController().navigate(action)
         }
+    }
+
+    override fun onSwipeLeft(view: View) {
+        val action = RoomsFragmentDirections.actionFragmentRoomsToFragmentEvents()
+        view.findNavController().navigate(action)
+    }
+
+    override fun onSwipeRight(view: View) {
+        var back1 = view.findNavController().backQueue
+        val action = RoomsFragmentDirections.actionFragmentRoomsToFragmentPinboard()
+        view.findNavController().navigate(action)
+        var back2 = view.findNavController().backQueue
+        //view.findNavController().backQueue.addLast()
+        print("test")
     }
 
 }

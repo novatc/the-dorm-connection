@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter
  * The event fragment displays a list of events
  */
 @AndroidEntryPoint
-class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
+class EventFragment : Fragment(), EventsAdapter.OnItemClickListener, SwipeListener {
 
     var eventList:List<Event> = emptyList()
     val model: EventViewModel by viewModels()
@@ -45,6 +45,9 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
         fillEventsList(view)
         setAddEventButtonListener(view)
         setMapOverviewButtonListener(view)
+        view.events_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
+        view.setOnTouchListener(SwipeGestureListener(this))
+
         return view
     }
 
@@ -109,6 +112,16 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener {
             eventList = events
 
         })
+    }
+
+    override fun onSwipeLeft(view: View) {
+        val action = EventFragmentDirections.actionFragmentEventsToFragmentProfile()
+        findNavController().navigate(action)
+    }
+
+    override fun onSwipeRight(view: View) {
+        val action = EventFragmentDirections.actionFragmentEventsToFragmentRooms()
+        findNavController().navigate(action)
     }
 
 }
