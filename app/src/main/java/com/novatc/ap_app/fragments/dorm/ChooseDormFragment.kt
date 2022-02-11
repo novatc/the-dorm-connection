@@ -43,11 +43,14 @@ class ChooseDormFragment : Fragment(), DormAdapter.OnItemClickListener {
     private fun populateDormList(view: View) {
         val recyclerView: RecyclerView = view.rv_dorm_list
         val model: ChooseDormFragmentViewModel by viewModels()
-        model.dormList.observe(this, { dorms ->
-            dormList = dorms
-            recyclerView.adapter = DormAdapter(dormList, this)
-        })
+        val dormAdapter = DormAdapter(this)
+        recyclerView.adapter = dormAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        model.dormList.observe(this, { dorms ->
+            dormAdapter.differ.submitList(dorms)
+            dormList = dorms
+        })
     }
 
     override fun onItemClick(position: Int) {

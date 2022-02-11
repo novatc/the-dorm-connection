@@ -4,22 +4,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
+import com.novatc.ap_app.activities.adapter.EventsAdapter
+import com.novatc.ap_app.fragments.room.RoomDateHelper
+import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Room
 
 class RoomsAdapter(
-    private val roomsListItem: List<Room>,
-    private val listener: OnItemClickListener
+    private val listener: OnItemClickListener,
+    private val onLocationClick: (Int) -> Unit
 ) : RecyclerView.Adapter<RoomsAdapter.RoomsViewHolder>() {
 
-    inner class RoomsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class RoomsViewHolder(itemView: View, val onLocationClick: (Int) -> Unit) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val roomName: TextView = itemView.findViewById(R.id.roomName)
         val roomDescription: TextView = itemView.findViewById(R.id.roomDescription)
         val minimumBookingTime: TextView = itemView.findViewById(R.id.roomBookingTimeField)
-
+        val roomLocationButton: FloatingActionButton =
+            itemView.findViewById(R.id.roomLocation)
         init {
             itemView.setOnClickListener(this)
+            roomLocationButton.setOnClickListener {
+                onLocationClick(layoutPosition)
+            }
         }
 
         override fun onClick(v: View?) {
@@ -37,16 +47,49 @@ class RoomsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomsViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.room_list_item, parent, false)
-        return RoomsViewHolder(view)
+        return RoomsViewHolder(view, onLocationClick)
     }
+
+    private val differCallback = object : DiffUtil.ItemCallback<Room>() {
+        override fun areItemsTheSame(oldItem: Room, newItem: Room): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Room, newItem: Room): Boolean {
+            return when {
+                oldItem.id != newItem.id -> {
+                    false
+                }
+                oldItem.name != newItem.name -> {
+                    false
+                }
+                oldItem.description != newItem.description -> {
+                    false
+                }
+                oldItem.streetName != newItem.streetName -> {
+                    false
+                }
+                oldItem.city != newItem.city -> {
+                    false
+                }
+                else -> true
+            }
+        }
+
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
 
     override fun onBindViewHolder(holder: RoomsViewHolder, position: Int) {
-        val roomsListItem = roomsListItem[position]
+        val roomsListItem = differ.currentList[position]
         holder.roomName.text = roomsListItem.name
         holder.roomDescription.text = roomsListItem.description
-        holder.minimumBookingTime.text = roomsListItem.minimumBookingTime.toString()
+        holder.minimumBookingTime.text = roomsListItem.minimumBookingTime?.let {
+            RoomDateHelper.convertMillisToHoursAndMinutes(
+                it.toLong())
+        }
     }
 
-    override fun getItemCount() = roomsListItem.size
+    override fun getItemCount() = differ.currentList.size
 
 }

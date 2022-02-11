@@ -153,7 +153,7 @@
             android:text="@string/create_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/room_create_image_view" />
 
         <TextView
             android:id="@+id/textView28"
@@ -189,7 +189,7 @@
             tools:ignore="TextContrastCheck" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/room_create_image_view"
             android:layout_width="181dp"
             android:layout_height="181dp"
             android:layout_marginStart="40dp"
@@ -201,7 +201,7 @@
             tools:ignore="ImageContrastCheck" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/upload_room_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="84dp"

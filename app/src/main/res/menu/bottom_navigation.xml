@@ -5,7 +5,8 @@
     <item
         android:id="@+id/fragment_pinboard"
         android:icon="@drawable/baseline_dashboard_24"
-        android:title="@string/pinboard" />
+        android:title="@string/pinboard"
+        />
 
     <item
         android:id="@+id/fragment_rooms"

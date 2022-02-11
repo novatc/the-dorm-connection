@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
+import com.novatc.ap_app.fragments.room.RoomDateHelper
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToDate
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToHoursAndMinutes
 import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.FreeTimeslot
 
@@ -34,8 +37,8 @@ class BookingListAdapter:
 
     override fun onBindViewHolder(holder: BookingListAdapter.BookingListViewHolder, position: Int) {
         val freeTimeslot = differ.currentList[position]
-        holder.startingTime.text = freeTimeslot.startingDate.toString()
-        holder.endTime.text = freeTimeslot.endDate.toString()
+        holder.startingTime.text = convertUnixToHoursAndMinutes(freeTimeslot.startingDate)
+        holder.endTime.text = convertUnixToHoursAndMinutes(freeTimeslot.endDate)
     }
 
     private val differCallback = object : DiffUtil.ItemCallback<FreeTimeslot>() {

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -40,18 +41,18 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//        val callback = object : OnBackPressedCallback(true /** true means that the callback is enabled */) {
+//            override fun handleOnBackPressed() {
+//                return
+//            }
+//        }
+//        callback.isEnabled = findNavController().backQueue.size<=2
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_pinboard, container, false)
         view.posts_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
         populatePostList(view)
         setAddPostButtonListener(view)
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var back1 = view.findNavController().backQueue
-        print("test")
     }
 
 

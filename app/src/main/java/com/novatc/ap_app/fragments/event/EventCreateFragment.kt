@@ -26,6 +26,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
+import android.graphics.drawable.BitmapDrawable
+
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
+
+import androidx.annotation.NonNull
+import androidx.core.graphics.drawable.toDrawable
+
 
 @AndroidEntryPoint
 class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
@@ -34,6 +42,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private var eventDate = "2022-01-01"
     private val createEventViewModel: CreateEventViewModel by viewModels()
     private var imageUri: Uri? = null
+    private var imageSelected: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -114,6 +123,7 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         if (uri != null) {
             view.eventCreateImage.setImageURI(uri)
             imageUri = uri
+            imageSelected = true
         }
     }
 
@@ -134,6 +144,13 @@ class EventCreateFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         ) {
             val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
             Snackbar.make(bottomNavView, R.string.create_event_required_field, Snackbar.LENGTH_LONG).apply {
+                anchorView = bottomNavView
+            }.show()
+            return false
+        }
+        if (!imageSelected){
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView, "Image required!", Snackbar.LENGTH_LONG).apply {
                 anchorView = bottomNavView
             }.show()
             return false

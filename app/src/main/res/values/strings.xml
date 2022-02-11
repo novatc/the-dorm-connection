@@ -114,6 +114,10 @@
     <string name="room_create_booking_times">Booking times</string>
     <string name="room_create_picture_description">Picture of the room</string>
     <string name="room_details_location_description">Place of a room</string>
+    <string name="back_to_date">&lt; back to date</string>
+    <string name="chosen_timeslot">Chosen Timeslot</string>
+    <string name="available_timeslots">Available Timeslots</string>
+    <string name="booking_for_the">Booking for the: </string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>
