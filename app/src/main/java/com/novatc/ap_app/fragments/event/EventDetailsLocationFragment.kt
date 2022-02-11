@@ -24,15 +24,25 @@ class EventDetailsLocationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_event_details_location, container, false)
+        observeEvent(view)
+        return view
+    }
+
+    private fun observeEvent(view: View) {
         model.event.observe(this, { event ->
             view.eventDetailsAddress.text = "${event.streetName} ${event.houseNumber}"
             view.eventDetailsCity.text = event.city
             setOnLocationListener(view, event.streetName!!, event.houseNumber!!, event.city!!)
         })
-        return view
     }
 
-    private fun setOnLocationListener(view: View, streetName: String, houseNumber: String, city: String ) {
+    // Opens google maps and displays the location when user has clicked location button
+    private fun setOnLocationListener(
+        view: View,
+        streetName: String,
+        houseNumber: String,
+        city: String
+    ) {
         view.eventDetailsMapsButton.setOnClickListener {
             val mapSearch = "$streetName ${houseNumber}, $city"
             val gmmIntentUri = Uri.parse("geo:0,0?q=" + Uri.encode(mapSearch))

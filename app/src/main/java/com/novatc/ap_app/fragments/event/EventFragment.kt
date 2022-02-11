@@ -47,7 +47,6 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener, SwipeListen
         setMapOverviewButtonListener(view)
         view.events_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
         view.setOnTouchListener(SwipeGestureListener(this))
-
         return view
     }
 
@@ -91,7 +90,6 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener, SwipeListen
         }
 
     }
-
 
     // Setup recyclerview with events
     @ExperimentalCoroutinesApi

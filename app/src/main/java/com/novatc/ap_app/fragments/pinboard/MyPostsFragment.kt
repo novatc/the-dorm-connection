@@ -37,8 +37,6 @@ class MyPostsFragment : Fragment(), PostAdapter.OnItemClickListener {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_my_posts, container, false)
         populateUSerPostList(view)
-
-
         return view
     }
 

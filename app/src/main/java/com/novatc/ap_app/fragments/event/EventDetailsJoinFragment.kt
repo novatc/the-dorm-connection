@@ -12,21 +12,30 @@ import com.novatc.ap_app.R
 import com.novatc.ap_app.model.Request
 import com.novatc.ap_app.viewModels.event.EventDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_event_details_join.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class EventDetailsJoinFragment : Fragment() {
     val model: EventDetailsViewModel by activityViewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_event_details_join, container, false)
-        model.event.observe(this, { event ->
+        observeEvent(view)
+        observeAttendees(view)
+        return view
+    }
+
+    private fun observeEvent(view: View) {
+        model.event.observe(this, { _ ->
             model.loadEventAttendees()
             setOnJoinListener(view)
         })
+    }
 
+    // Load event attendees and check whether user has already joined event
+    private fun observeAttendees(view: View) {
         model.attendees.observe(this, { attendees ->
             val numberOfAttendees = attendees.size
             view.numberOfAttendees.text = resources.getQuantityString(
@@ -40,7 +49,6 @@ class EventDetailsJoinFragment : Fragment() {
                 switchToJoinButton(view)
             }
         })
-        return view
     }
 
     private fun setOnJoinListener(view: View) {
@@ -48,7 +56,8 @@ class EventDetailsJoinFragment : Fragment() {
             model.switchEventAttendance()
             model.switchAttendanceRequest.observe(this, { request ->
                 if (request.status == Request.Status.ERROR) {
-                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                    val bottomNavView: BottomNavigationView =
+                        activity?.findViewById(R.id.bottomNav)!!
                     Snackbar.make(bottomNavView, request.message!!, Snackbar.LENGTH_LONG).apply {
                         anchorView = bottomNavView
                     }.show()
@@ -57,6 +66,7 @@ class EventDetailsJoinFragment : Fragment() {
         }
     }
 
+    // Switches join event button if the user had left the event
     private fun switchToJoinButton(view: View) {
         val button = view.eventDetailJoinButton
         button.setCompoundDrawablesWithIntrinsicBounds(
@@ -74,6 +84,7 @@ class EventDetailsJoinFragment : Fragment() {
         )
     }
 
+    // Switches join event button if the user had join the event
     private fun switchToLeaveButton(view: View) {
         val button = view.eventDetailJoinButton
         button.setCompoundDrawablesWithIntrinsicBounds(

@@ -59,10 +59,6 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                 imgProfile = view.room_create_image_view
                 imageUri = fileUri
                 imgProfile.setImageURI(fileUri)
-            } else if (resultCode == ImagePicker.RESULT_ERROR) {
-                Log.d("Error", "Error")
-            } else {
-                Log.d("Error", "Error")
             }
         }
         super.onCreate(savedInstanceState)

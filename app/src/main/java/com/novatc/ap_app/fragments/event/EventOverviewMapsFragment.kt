@@ -34,7 +34,6 @@ class EventOverviewMapsFragment : Fragment(), OnMapReadyCallback {
     @ExperimentalCoroutinesApi
     val model: EventMapViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -39,6 +39,12 @@ class EventDetailsFragment : Fragment() {
         model.setEvent(event)
         view.eventDetailsName.text = event.name
         view.eventDetailsDate.text = event.date
+        loadImage(view)
+        return view
+    }
+
+    // Load image for event detail
+    private fun loadImage(view: View) {
         model.loadEventImage()
         model.loadImageRequest.observe(this, { request ->
             if (request.status == Request.Status.SUCCESS) {
@@ -50,9 +56,9 @@ class EventDetailsFragment : Fragment() {
                     .into(view.eventDetailsImage)
             }
         })
-        return view
     }
 
+    // Setup tabs
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         eventDetailsAdapter = EventDetailsStateAdapter(this)

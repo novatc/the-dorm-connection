@@ -31,7 +31,7 @@ class EventDetailsGeneralFragment : Fragment() {
         if (model.isEventAuthor()) {
             view.eventDeleteButton.visibility = View.VISIBLE
         }
-        // Setup on delete click listener
+        // Setup on event delete click listener
         view.eventDeleteButton.setOnClickListener {
             model.deleteEvent()
             model.deleteEventRequest.observe(this, { request ->

@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
+    val model: SignUpViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,22 +57,25 @@ class SignUpFragment : Fragment() {
                 }.show()
                 return@setOnClickListener
             }
-            val model: SignUpViewModel by viewModels()
             model.signUpUser(name, email, password)
-            model.signupRequest.observe(this, { request ->
-                when (request.status) {
-                    Request.Status.SUCCESS -> findNavController().navigate(
-                        SignUpFragmentDirections.actionSignUpFragmentToChooseDormFragment()
-                    )
-                    else -> {
-                        val buttonSignup: Button = activity?.findViewById(R.id.button_sign_up)!!
-                        Snackbar.make(buttonSignup, R.string.sign_up_error, Snackbar.LENGTH_LONG).apply {
-                            anchorView = buttonSignup
-                        }.show()
-                    }
-                }
-            })
+            observeSignupRequest()
         }
+    }
+
+    private fun observeSignupRequest() {
+        model.signupRequest.observe(this, { request ->
+            when (request.status) {
+                Request.Status.SUCCESS -> findNavController().navigate(
+                    SignUpFragmentDirections.actionSignUpFragmentToChooseDormFragment()
+                )
+                else -> {
+                    val buttonSignup: Button = activity?.findViewById(R.id.button_sign_up)!!
+                    Snackbar.make(buttonSignup, R.string.sign_up_error, Snackbar.LENGTH_LONG).apply {
+                        anchorView = buttonSignup
+                    }.show()
+                }
+            }
+        })
     }
 
 }

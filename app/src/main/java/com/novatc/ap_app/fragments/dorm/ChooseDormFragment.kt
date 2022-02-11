@@ -30,7 +30,6 @@ class ChooseDormFragment : Fragment(), DormAdapter.OnItemClickListener {
         val view = inflater.inflate(R.layout.fragment_choose_dorm, container, false)
         populateDormList(view)
 
-
         view.tv_create_new_dorm.setOnClickListener {
             val action = ChooseDormFragmentDirections.actionChooseDormFragmentToCreateDormFragment()
             findNavController().navigate(action)
