@@ -36,9 +36,9 @@ class DormDetailFragment : Fragment() {
         val dorm = args.selectedDorm
         view.tv_dorm_name.text = dorm.name
         view.tv_dorm_description.text = dorm.description
-        view.tv_dorm_address.text = dorm.description
+        view.tv_dorm_address.text = dorm.address
         val users = dorm.userList
-        view.tv_dorm_users.text = "current members: ${users.size.toString()}"
+        view.tv_dorm_users.text = users.size.toString()
         if (me.userDorm!=""){
             view.btn_choose_dorm.visibility = View.GONE
         }
@@ -49,7 +49,7 @@ class DormDetailFragment : Fragment() {
                 userRepository.updateUserWithDorm(me)
 
             }
-            val action = DormDetailFragmentDirections.actionDormDetailFragmentToFragmentProfile()
+            val action = DormDetailFragmentDirections.actionDormDetailFragmentToFragmentPinboard()
             findNavController().navigate(action)
         }
 

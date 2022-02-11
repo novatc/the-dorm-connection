@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -69,9 +70,9 @@ class LoginFragment : Fragment() {
             val password: String = text_login_password.text.toString().replace(" ", "")
 
             if (email.isEmpty() || password.isEmpty()) {
-                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, R.string.empty_field_error, Snackbar.LENGTH_LONG).apply {
-                    anchorView = bottomNavView
+                val button_login: Button = activity?.findViewById(R.id.button_login)!!
+                Snackbar.make(button_login, R.string.empty_field_error, Snackbar.LENGTH_LONG).apply {
+                    anchorView = button_login
                 }.show()
                 return@setOnClickListener
             }
@@ -82,9 +83,9 @@ class LoginFragment : Fragment() {
                         LoginFragmentDirections.actionLoginFragmentToFragmentPinboard()
                     )
                     else -> {
-                        val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                        Snackbar.make(bottomNavView, R.string.login_error, Snackbar.LENGTH_LONG).apply {
-                            anchorView = bottomNavView
+                        val buttonLogin: Button = activity?.findViewById(R.id.button_login)!!
+                        Snackbar.make(buttonLogin, R.string.login_error, Snackbar.LENGTH_LONG).apply {
+                            anchorView = buttonLogin
                         }.show()
                     }
 

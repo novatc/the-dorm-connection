@@ -32,6 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/eventDetailsImage"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck"
             tools:text="Name" />
 
         <ImageView
@@ -40,9 +41,11 @@
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
+            android:contentDescription="@string/event_details_image_description"
             android:src="@drawable/add_screen_image_placeholder"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/eventDetailsTabs"
@@ -89,6 +92,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/eventDetailsImage"
             app:layout_constraintTop_toBottomOf="@+id/eventDetailsName"
+            tools:ignore="TextContrastCheck"
             tools:text="Date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

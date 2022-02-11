@@ -82,6 +82,9 @@
     <string name="create_event_date_past">Event dates cannot be in the past</string>
     <string name="create_event_event_created_message">Event created</string>
     <string name="create_event_event_not_created_message">Could not create event, please try again.</string>
+    <string name="event_details_image_description">Picture of an event</string>
+    <string name="event_details_location_button_description">Location of the event</string>
+
 
     #rooms
     <string name="rooms_add_tagline">Create a Room</string>
@@ -107,6 +110,10 @@
     <string name="booking_time_exceeds_maximum_booking_time">The chosen booking time exceeds the maximum allowed booking time! Could not create the booking.</string>
     <string name="booking_time_falls_below_the_minimum_booking_time">The chosen booking time falls below the minimum allowed booking time! Could not create the booking.</string>
     <string name="chosen_time_slot_has_already_been_booked">The chosen booking time has already been booked! Please refer to the listed available bookings times.</string>
+    <string name="room_create_choose_image">Choose a picture</string>
+    <string name="room_create_booking_times">Booking times</string>
+    <string name="room_create_picture_description">Picture of the room</string>
+    <string name="room_details_location_description">Place of a room</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>
@@ -186,8 +193,13 @@
     <string name="new_post_missing_headline">Please add a headline to your post</string>
     <string name="new_post_missing_text">Pleas add a text to your post</string>
     <string name="new_post_missing_keyword">Please add a keyword to your post</string>
+    <string name="add_post_button_description">Add new post</string>
+
+    #dorm
     <string name="new_dorm_fields_required">All fields are required</string>
     <string name="new_dorm_added">a new dorm was created</string>
+    <string name="got_to_location_of_dorm">Got to location of dorm</string>
+    <string name="dorm_detail_members">Dorm member: </string>
 
 
 </resources>

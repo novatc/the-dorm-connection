@@ -81,6 +81,8 @@
     <string name="create_event_event_created_message">Event erstellt</string>
     <string name="create_event_event_not_created_message">Das Event konnte nicht stellt werden, versuche es nochmal.</string>
     <string name="events_map_overview">Event-Karte</string>
+    <string name="event_details_image_description">Bild eines Events</string>
+    <string name="event_details_location_button_description">Ort eines Events</string>
 
     #rooms
     <string name="rooms_add_tagline">Lege ein Raum an</string>
@@ -105,6 +107,10 @@
     <string name="booking_time_exceeds_maximum_booking_time">Das gewählte Zeitfenster überschreitet die maximal erlaubte Buchzeit. Die Buchung konnte nicht angelegt werden.</string>
     <string name="booking_time_falls_below_the_minimum_booking_time">Das gewählte Zeitfenster unterschreitet die minimal erlaubte Buchzeit. Die Buchung konnte nicht angelegt werden.</string>
     <string name="chosen_time_slot_has_already_been_booked">Das gewählte Zeitfenster wurde schon gebucht! Bitte halten sie sich an die aufgelisteten, verfügbaren Buchzeiten.</string>
+    <string name="room_create_choose_image">Wähle ein Bild</string>
+    <string name="room_create_booking_times">Buchungszeiten</string>
+    <string name="room_create_picture_description">Bildes des Raumes</string>
+    <string name="room_details_location_description">Ort eines Raums</string>
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>
@@ -184,12 +190,13 @@
     <string name="new_post_missing_headline">Bitte füge eine Überschrift ein</string>
     <string name="new_post_missing_text">Bitte füge einen Text ein</string>
     <string name="new_post_missing_keyword">Bitte füge ein Keywort ein</string>
+    <string name="add_post_button_description">Füge einen neuen Post hinzu</string>
 
     #dorm
     <string name="new_dorm_fields_required">Bitte alle Felder ausfüllen</string>
     <string name="new_dorm_added">Ein neues Wohnheim wurde erzeugt</string>
-
-
+    <string name="got_to_location_of_dorm">Zeige den Standort auf Google Maps</string>
+    <string name="dorm_detail_members">Wohnheimsbewohner: </string>
 
 
 </resources>

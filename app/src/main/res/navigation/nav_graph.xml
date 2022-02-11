@@ -143,7 +143,8 @@
             app:destination="@id/createDormFragment" />
         <action
             android:id="@+id/action_chooseDormFragment_to_dormDetailFragment"
-            app:destination="@id/dormDetailFragment" />
+            app:destination="@id/dormDetailFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -210,8 +211,10 @@
             android:name="selectedDorm"
             app:argType="com.novatc.ap_app.model.Dorm" />
         <action
-            android:id="@+id/action_dormDetailFragment_to_fragment_profile"
-            app:destination="@id/fragment_profile" />
+            android:id="@+id/action_dormDetailFragment_to_fragment_pinboard"
+            app:destination="@id/fragment_pinboard"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

@@ -7,7 +7,7 @@
     android:background="@color/shadow_blue">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/posts_constraintLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/rounded_corners_background"
@@ -46,60 +46,60 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:autofillHints="Dorm name"
             android:ems="10"
             android:hint="@string/dorm_hint"
             android:inputType="textPersonName"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_create_dorm" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_create_dorm"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/et_created_dorm_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:autofillHints="Dorm description"
             android:ems="10"
             android:hint="@string/room_description"
             android:inputType="textMultiLine"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_name" />
+            app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_name"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/et_created_post_keywords"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:autofillHints="Dorm address"
             android:ems="10"
             android:hint="@string/room_address"
             android:inputType="text"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_description" />
+            app:layout_constraintTop_toBottomOf="@+id/et_created_dorm_description"
+            tools:ignore="TextContrastCheck" />
 
         <Button
             android:id="@+id/btn_save_dorm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@color/patriarch"
             android:text="@string/btn_safe"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_dorm"
-            android:layout_width="181dp"
-            android:layout_height="181dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_save_dorm"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_post_keywords"
-            app:srcCompat="@drawable/add_screen_image_placeholder" />
+            app:layout_constraintTop_toBottomOf="@+id/et_created_post_keywords" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

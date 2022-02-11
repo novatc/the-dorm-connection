@@ -43,7 +43,7 @@ class ProfileOptionsFragment : Fragment(), SwipeListener {
                 view.btn_select_dorm.alpha = 0.5F
             }
         })
-        view.scrollView2.setOnTouchListener(SwipeGestureListener(this))
+        view.profileOptionLayout.setOnTouchListener(SwipeGestureListener(this))
         setMyPostButtonListener(view)
         setEditProfileButtonListener(view)
         setEditWGButtonListener(view)

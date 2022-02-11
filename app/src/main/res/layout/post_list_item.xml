@@ -19,7 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="200dp"
-            android:text="POST TITEL"
             android:textSize="@dimen/et_text_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +31,6 @@
             android:layout_marginTop="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="POST TEXT"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_post_headline" />
@@ -41,7 +39,6 @@
             android:id="@+id/tv_post_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today 20:00"
             app:layout_constraintBottom_toTopOf="@+id/tv_post_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_post_headline" />
@@ -50,7 +47,6 @@
             android:id="@+id/tv_post_keyword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="POST KEYWORD"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_post_text" />
@@ -59,7 +55,6 @@
             android:id="@+id/tv_post_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="POST Author"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

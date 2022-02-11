@@ -7,7 +7,7 @@
     android:background="@color/eggshell">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/posts_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_background"
@@ -22,12 +22,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
+            android:autofillHints="house number"
             android:ems="11"
             android:hint="@string/create_event_house_number"
-            android:inputType="text"
+            android:inputType="number|text"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_street_name" />
+            app:layout_constraintTop_toBottomOf="@+id/et_street_name"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/et_created_room_description"
@@ -39,46 +42,57 @@
             android:hint="@string/event_description"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
+            android:minHeight="48dp"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/et_created_room_name"
             app:layout_constraintStart_toStartOf="@+id/et_created_room_name"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_room_name" />
+            app:layout_constraintTop_toBottomOf="@+id/et_created_room_name"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/et_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
+            android:autofillHints="city"
             android:ems="11"
             android:hint="@string/create_event_city"
             android:inputType="text"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_house_number" />
+            app:layout_constraintTop_toBottomOf="@+id/et_house_number"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/et_created_room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:autofillHints="room name"
             android:ems="11"
             android:hint="@string/room_hint"
             android:inputType="textPersonName"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_rooms" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_rooms"
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/et_street_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:autofillHints="street name"
             android:ems="11"
-            android:inputType="text"
             android:hint="@string/create_event_address"
+            android:inputType="text"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+            app:layout_constraintTop_toBottomOf="@+id/textView30"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/tv_create_room"
@@ -136,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:backgroundTint="@color/green"
-            android:text="create room"
+            android:text="@string/create_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -149,7 +163,8 @@
             android:layout_marginTop="75dp"
             android:text="@string/create_event_general_information"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/textView30"
@@ -159,7 +174,8 @@
             android:layout_marginTop="15dp"
             android:text="@string/detail_event_location"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_room_description" />
+            app:layout_constraintTop_toBottomOf="@+id/et_created_room_description"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/textView29"
@@ -167,9 +183,10 @@
             android:layout_height="21dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="13dp"
-            android:text="Profilbild auswählen:"
+            android:text="@string/room_create_choose_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_created_room_maximum_booking_time" />
+            app:layout_constraintTop_toBottomOf="@+id/et_created_room_maximum_booking_time"
+            tools:ignore="TextContrastCheck" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -177,9 +194,11 @@
             android:layout_height="181dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
+            android:contentDescription="@string/room_create_picture_description"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView29"
-            app:srcCompat="@drawable/add_screen_image_placeholder" />
+            app:srcCompat="@drawable/add_screen_image_placeholder"
+            tools:ignore="ImageContrastCheck" />
 
         <Button
             android:id="@+id/button"
@@ -197,9 +216,10 @@
             android:layout_height="21dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="13dp"
-            android:text="Buchzeiten"
+            android:text="@string/room_create_booking_times"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_city" />
+            app:layout_constraintTop_toBottomOf="@+id/et_city"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

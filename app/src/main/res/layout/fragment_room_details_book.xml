@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/eggshell">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".fragments.room.RoomDetailsBookFragment" >
+        android:layout_height="wrap_content"
+        tools:context=".fragments.room.RoomDetailsBookFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tutView1"
@@ -46,7 +47,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calendar"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="TextContrastCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

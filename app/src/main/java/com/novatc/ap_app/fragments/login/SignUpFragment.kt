@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -49,9 +50,9 @@ class SignUpFragment : Fragment() {
             val email: String = text_sign_up_email.text.toString().replace(" ", "")
             val password: String = text_sign_up_password.text.toString().replace(" ", "")
             if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, R.string.empty_field_error, Snackbar.LENGTH_SHORT).apply {
-                    anchorView = bottomNavView
+                val buttonSignup: Button = activity?.findViewById(R.id.button_sign_up)!!
+                Snackbar.make(buttonSignup, R.string.empty_field_error, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = buttonSignup
                 }.show()
                 return@setOnClickListener
             }
@@ -63,9 +64,9 @@ class SignUpFragment : Fragment() {
                         SignUpFragmentDirections.actionSignUpFragmentToChooseDormFragment()
                     )
                     else -> {
-                        val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                        Snackbar.make(bottomNavView, R.string.sign_up_error, Snackbar.LENGTH_LONG).apply {
-                            anchorView = bottomNavView
+                        val buttonSignup: Button = activity?.findViewById(R.id.button_sign_up)!!
+                        Snackbar.make(buttonSignup, R.string.sign_up_error, Snackbar.LENGTH_LONG).apply {
+                            anchorView = buttonSignup
                         }.show()
                     }
                 }

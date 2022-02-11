@@ -13,7 +13,7 @@
         android:background="@color/eggshell">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/posts_constraintLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +31,7 @@
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/logo_description"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintBottom_toTopOf="@+id/posts_constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/posts_constraintLayout"
             app:navGraph="@navigation/nav_graph" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -63,7 +63,7 @@
             app:itemIconSize="24dp"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/posts_constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_navigation" />

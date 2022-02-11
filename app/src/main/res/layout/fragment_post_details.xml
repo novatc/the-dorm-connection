@@ -10,14 +10,13 @@
 
     <TextView
         android:id="@+id/tv_detail_post_author"
-        app:layout_constraintEnd_toEndOf="@+id/tv_detail_post_date"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_date"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="POST AUTHOR"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_detail_post_date"
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_date" />
 
     <Button
         android:id="@+id/btn_send_comment"
@@ -34,63 +33,61 @@
 
     <EditText
         android:id="@+id/et_write_comment"
-        app:layout_constraintEnd_toStartOf="@+id/btn_send_comment"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_delete_post"
-        tools:ignore="TextContrastCheck"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:autofillHints="Comment text"
         android:hint="@string/write_your_comment"
         android:inputType="textMultiLine"
         android:minHeight="48dp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/btn_send_comment"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_delete_post"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/tv_detail_post_date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_detail_post_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="POST DATE"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_detail_post_title" />
 
     <TextView
         android:id="@+id/tv_detail_post_title"
-        app:layout_constraintEnd_toStartOf="@+id/tv_detail_post_author"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="POST TITEL"
         android:textAlignment="viewStart"
         android:textColor="@android:color/darker_gray"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_detail_post_author"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/tv_detail_post_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right"
+        android:layout_gravity="center_vertical|end"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:background="@color/white"
         android:padding="10dp"
-        android:text="POST TEXT"
         android:textColor="@android:color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +131,6 @@
         android:layout_marginEnd="16dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="POST KEYWORDS"
         android:textAlignment="viewStart"
         android:textColor="@android:color/black"
         android:textSize="14sp"
@@ -150,7 +146,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/post"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_keywords" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_post_keywords"
+        tools:ignore="TextContrastCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

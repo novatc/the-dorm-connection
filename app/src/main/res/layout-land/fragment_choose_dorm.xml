@@ -22,7 +22,7 @@
         android:id="@+id/textView36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto"
         android:text="@string/btn_select_dorm"
         android:textAlignment="center"
@@ -33,46 +33,53 @@
 
     <Button
         android:id="@+id/btn_safe_dorm"
-        android:layout_width="@dimen/btn_edit_profile_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
         android:backgroundTint="@color/patriarch"
         android:text="@string/btn_safe"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_dorm_list" />
+        app:layout_constraintBottom_toBottomOf="@+id/rv_dorm_list"
+        app:layout_constraintEnd_toEndOf="@+id/textView38"
+        app:layout_constraintStart_toStartOf="@+id/textView38"
+        app:layout_constraintTop_toTopOf="@+id/rv_dorm_list" />
 
     <TextView
         android:id="@+id/textView38"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/intro_button_padding"
         android:text="@string/new_dorm"
         android:textAlignment="center"
         android:textColor="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="@+id/tv_create_new_dorm"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_new_dorm"
         app:layout_constraintTop_toBottomOf="@+id/btn_safe_dorm"
         tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/tv_create_new_dorm"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
         android:paddingTop="@dimen/intro_button_padding"
         android:text="@string/create_new_dorm"
         android:textAlignment="center"
         android:textColor="@color/shadow_blue"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView38"
         tools:ignore="TextContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_dorm_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_create_new_dorm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
