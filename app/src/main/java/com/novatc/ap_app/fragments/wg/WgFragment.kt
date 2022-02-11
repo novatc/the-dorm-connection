@@ -58,7 +58,6 @@ class WgFragment : Fragment(), WgAdapter.OnWgClickListener {
             val options = ScanOptions()
             options.captureActivity = QrScannerActivity::class.java
             options.setDesiredBarcodeFormats(ScanOptions.QR_CODE)
-            options.setPrompt("Scan a barcode")
             options.setCameraId(0) // Use a specific camera of the device
             options.setBeepEnabled(false)
             options.setBarcodeImageEnabled(true)
@@ -74,6 +73,7 @@ class WgFragment : Fragment(), WgAdapter.OnWgClickListener {
         wgId = wg.id
     }
 
+    @ExperimentalCoroutinesApi
     private fun joinWg(wgId: String) {
         model.joinWg(wgId)
         model.joinWgRequest.observe(this, {request ->
@@ -93,6 +93,7 @@ class WgFragment : Fragment(), WgAdapter.OnWgClickListener {
         })
     }
 
+    @ExperimentalCoroutinesApi
     private fun setupOnJoinWgListener(view: View) {
         view.wgJoinButton.setOnClickListener {
             joinWg(wgId)
