@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TimePicker
 import androidx.activity.result.ActivityResult
@@ -42,6 +41,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     var minimumBookingTimeInMillis = 0L
     var maximumBookingTimeInMillis = 0L
     var chosenPicker = ""
+    private var imageSelected = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +56,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             if (resultCode == Activity.RESULT_OK) {
                 //Image Uri will not be null for RESULT_OK
                 val fileUri = data?.data!!
-                imgProfile = view.imageView2
+                imgProfile = view.room_create_image_view
                 imageUri = fileUri
                 imgProfile.setImageURI(fileUri)
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
@@ -67,7 +67,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         }
         super.onCreate(savedInstanceState)
         initTimePicker(view)
-        setPermissions(view)
+        setupOnSelectImageListener(view)
         setOnCreateRoom(view)
         return view
     }
@@ -117,17 +117,30 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         }
     }
 
-    private fun setPermissions(view: View) {
-        val permissionsButton: Button = view.button
-        permissionsButton.setOnClickListener {
-            Permissions().checkPermissions(this)
+    // Listener for when user has selected an image
+    private fun setupOnSelectImageListener(view: View) {
+        val imagePickerResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result ->
+            when (result.resultCode) {
+                Activity.RESULT_OK -> imageSelected(result.data?.data, view)
+                else -> Log.i("CreateEvent", "No image selected.")
+            }
+        }
+        view.upload_room_image_button.setOnClickListener {
             ImagePicker.with(this)
                 .compress(1024)
-                .cropSquare()//Final image size will be less than 1 MB(Optional)
-                .maxResultSize(400, 400)  //Final image resolution will be less than 1080 x 1080(Optional)
-                .createIntent { intent ->
-                    startForProfileImageResult.launch(intent)
-                }
+                .cropSquare()
+                .maxResultSize(400, 400)
+                .createIntent { intent -> imagePickerResult.launch(intent) }
+        }
+
+    }
+
+    private fun imageSelected(uri: Uri?, view: View) {
+        if (uri != null) {
+            view.room_create_image_view.setImageURI(uri)
+            imageUri = uri
+            imageSelected = true
         }
     }
 
@@ -174,6 +187,13 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         ) {
             val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
             Snackbar.make(bottomNavView,  R.string.empty_all_field_error, Snackbar.LENGTH_SHORT).apply {
+                anchorView = bottomNavView
+            }.show()
+            return false
+        }
+        if (!imageSelected){
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView, "Image required!", Snackbar.LENGTH_LONG).apply {
                 anchorView = bottomNavView
             }.show()
             return false
