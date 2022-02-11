@@ -58,22 +58,6 @@
             tools:layout_editor_absoluteY="38dp">
 
             <TextView
-                android:id="@+id/textView35"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:text="Buchung für den: "
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.088"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.042" />
-
-            <TextView
                 android:id="@+id/textView33"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +65,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="10dp"
-                android:text="Gewählter Zeitslot"
+                android:text="@string/chosen_timeslot"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.087"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +79,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="10dp"
-                android:text="Verfübare Zeitslots"
+                android:text="@string/available_timeslots"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.087"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,14 +92,28 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
                 android:text="Kein Datum gefunden"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintHorizontal_bias="0.58"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.042" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/booking_for_the"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.086"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/min_booking_time_text"
@@ -145,23 +143,23 @@
 
             <Button
                 android:id="@+id/book_timeslot_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_width="177dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Book Timeslot"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/free_timeslots" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="357dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="72dp"
+                android:layout_marginTop="10dp"
                 android:text="Button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/booked_date_1" />
+                app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
             <Button
                 android:id="@+id/button4"
@@ -230,6 +228,16 @@
                 app:layout_constraintHorizontal_bias="0.472"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+            <Button
+                android:id="@+id/back_to_date"
+                android:layout_width="170dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/back_to_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/free_timeslots" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

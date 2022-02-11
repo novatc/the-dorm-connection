@@ -23,6 +23,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
 import com.novatc.ap_app.adapter.BookingListAdapter
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.addZeroToShortNumber
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertDateToUnix
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertMillisToHoursAndMinutes
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToDate
 import com.novatc.ap_app.model.*
 import com.novatc.ap_app.viewModels.pinboard.PostDetailsViewModel
 import kotlinx.android.synthetic.main.fragment_post_details.view.*
@@ -41,8 +45,8 @@ import kotlin.collections.HashMap
 class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     val model: RoomDetailsViewModel by activityViewModels()
 
-    val bookedDays: ArrayList<EventDay> = ArrayList()
-    val fullyBookedDays: ArrayList<EventDay> = ArrayList()
+    private val bookedDays: ArrayList<EventDay> = ArrayList()
+    private val fullyBookedDays: ArrayList<EventDay> = ArrayList()
     var bookedDaysViaDate: HashMap<String, ArrayList<Long>> = HashMap()
     lateinit var calendar: com.applandeo.materialcalendarview.CalendarView
     lateinit var selectedDate :Calendar
@@ -54,7 +58,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     private var bookingListOnRoom: List<Booking> = ArrayList<Booking>()
     private var availableTimeslots: ArrayList<FreeTimeslot> = ArrayList()
     private var bookedTimeslots: ArrayList<Long> = ArrayList()
-    val disabledDaysList: ArrayList<Calendar> = ArrayList()
+    private val disabledDaysList: ArrayList<Calendar> = ArrayList()
     private val aDayInMilliseconds: Long = 86400000L
 
     override fun onCreateView(
@@ -69,7 +73,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
             model.loadBookings(this)
         })
         calendar = view.calendar
-        var instance: Calendar = Calendar.getInstance()
+        val instance: Calendar = Calendar.getInstance()
         instance.add(Calendar.DATE, -1)
         calendar.setMinimumDate(instance)
         selectedDate = calendar.firstSelectedDate
@@ -77,6 +81,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         endTime = view.end_time_text
         addDateListener()
         addSaveDateButtonListener(view)
+        addBackDateButtonListener(view)
         addTimeOfDayTextViewListener()
         addBookDateButtonListener(view)
         currentTimePicker = "start"
@@ -98,7 +103,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         })
     }
 
-    fun addSaveDateButtonListener(view: View){
+    private fun addSaveDateButtonListener(view: View){
         val setDateButton: Button = view.button2
         setDateButton.setOnClickListener {
             var day: String = selectedDate.get(Calendar.DAY_OF_MONTH).toString()
@@ -124,8 +129,24 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         }
     }
 
-    fun addBookDateButtonListener(view: View){
+    private fun addBackDateButtonListener(view: View){
+        val backButton: Button = view.back_to_date
+        backButton.setOnClickListener {
+            val layout = view.tutView1
+            layout.visibility = View.VISIBLE
+            val layout2 = view.tutView2
+            layout2.visibility = View.GONE
+        }
+    }
+
+    private fun addBookDateButtonListener(view: View){
         val setDateButton: Button = view.book_timeslot_button
+        setDateButton.setBackgroundColor(
+            resources.getColor(
+                R.color.green,
+                context!!.theme
+            )
+        )
         setDateButton.setOnClickListener {
             if(startingTime.text.contains(":") && endTime.text.contains(":")){
                 var startingHour: Int = startingTime.text.split(":")[0].toInt()
@@ -207,7 +228,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         }
     }
 
-    fun addTimeOfDayTextViewListener(){
+    private fun addTimeOfDayTextViewListener(){
         val cal = Calendar.getInstance()
         val hour = cal.get(Calendar.HOUR)
         val minute = cal.get(Calendar.MINUTE)
@@ -250,7 +271,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         })
     }
 
-    fun fillCalendar(){
+    private fun fillCalendar(){
         bookedDays.clear()
         fullyBookedDays.clear()
         disabledDaysList.clear()
@@ -275,55 +296,39 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
             }
             calendar.setTimeInMillis(convertDateToUnix(date).toLong())
             if(aDayInMilliseconds - bookedTime < selectedRoom.minimumBookingTime?.toLong()!!){
-                bookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_black, Color.parseColor("#228B22")))
+                bookedDays.add(EventDay(calendar, R.drawable.ic_dot_black, Color.parseColor("#228B22")))
                 disabledDaysList.add(calendar)
             }
             else{
-                bookedDays.add(EventDay(calendar, com.novatc.ap_app.R.drawable.ic_dot_yellow, Color.parseColor("#228B22")))
+                bookedDays.add(EventDay(calendar, R.drawable.ic_dot_yellow, Color.parseColor("#228B22")))
             }
         }
         calendar.setEvents(bookedDays)
         calendar.setDisabledDays(disabledDaysList)
     }
 
-    private fun addZeroToShortNumber(string: String, fromBehind:Boolean):String{
-        if(string.length < 2){
-            if (fromBehind){
-                return string + "0"
-            }
-            else {
-                return "0" + string
-            }
-        }
-        else{
-            return string
-        }
-    }
+
 
     private fun createAvailableTimeslots(): ArrayList<FreeTimeslot>{
+        availableTimeslots.clear()
         bookingListOnRoom.forEach{
             booking ->
             bookedTimeslots.add(booking.startingDate)
             bookedTimeslots.add(booking.endDate)
         }
-        var dayStart: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong()
-        var dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() + aDayInMilliseconds
-        bookedTimeslots.sortedWith(Comparator<Long>{ a,b ->
-            when {
-                a > b -> 1
-                a < b -> -1
-                else -> 0
-            }
-        })
+        val dayStart: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong()
+        val dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() + aDayInMilliseconds - 3600
+        bookedTimeslots.sortByDescending { it }
+        bookedTimeslots.reverse()
         var x = 0
         while (x < bookedTimeslots.size){
             if(x == 0){
-                if(bookedTimeslots.get(x) - dayStart > selectedRoom.minimumBookingTime?.toLong()!!){
+                if(bookedTimeslots.get(x) - dayStart >= selectedRoom.minimumBookingTime?.toLong()!!){
                     availableTimeslots.add(FreeTimeslot(dayStart, bookedTimeslots.get(x)))
                 }
             }
             else if(x == bookedTimeslots.size-1){
-                if (dayEnd - bookedTimeslots.get(x) > selectedRoom.minimumBookingTime?.toLong()!!){
+                if (dayEnd - bookedTimeslots.get(x) >= selectedRoom.minimumBookingTime?.toLong()!!){
                     availableTimeslots.add(FreeTimeslot(bookedTimeslots.get(x), dayEnd))
                 }
             }
@@ -333,6 +338,9 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                 }
             }
             x++
+        }
+        if(bookedTimeslots.size == 0){
+            availableTimeslots.add(FreeTimeslot(dayStart, dayEnd))
         }
         return availableTimeslots
     }
@@ -352,18 +360,6 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
             }
         }
         return true
-    }
-
-    private fun convertUnixToDate(unixDate: Long): String {
-        return DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.ofEpochSecond((unixDate/1000))).split("T")[0]
-    }
-
-    private fun convertDateToUnix(date: String): String {
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atStartOfDay(ZoneId.systemDefault()).toInstant().epochSecond.toString() + "000"
-    }
-
-    private fun millisToHours(millis: Long): Long {
-        return millis/3600000L
     }
 
     private fun findNextPossibleDate(){
@@ -406,11 +402,6 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         bookingListAdapter.differ.submitList(availableTimeslots)
         }
 
-    private fun convertMillisToHoursAndMinutes(millis: Long):String{
-        var hours = millisToHours(millis).toInt()
-        var minutes = ((millis - (hours * 3600000))/60000).toInt()
-        var hoursAndMillis = addZeroToShortNumber(hours.toString(),false) + ":" + addZeroToShortNumber(minutes.toString(),false)
-        return hoursAndMillis
-    }
+
 
 }

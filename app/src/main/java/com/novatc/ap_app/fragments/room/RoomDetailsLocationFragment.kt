@@ -24,8 +24,9 @@ class RoomDetailsLocationFragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_room_details_location, container, false)
         model.room.observe(this, { room ->
-            //view.eventDetailsAddress.text = "${room.address}"
-            //setOnLocationListener(view, room.address!!, room.address!!, room.address!!)
+            view.roomDetailsCity.text = "${room.city}"
+            view.roomDetailsStreet.text = "${room.streetName}" + "${room.houseNumber}"
+            setOnLocationListener(view, room.streetName!!, room.houseNumber!!, room.city!!)
         })
         return view
     }

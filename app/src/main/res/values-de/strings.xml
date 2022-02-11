@@ -105,6 +105,10 @@
     <string name="booking_time_exceeds_maximum_booking_time">Das gewählte Zeitfenster überschreitet die maximal erlaubte Buchzeit. Die Buchung konnte nicht angelegt werden.</string>
     <string name="booking_time_falls_below_the_minimum_booking_time">Das gewählte Zeitfenster unterschreitet die minimal erlaubte Buchzeit. Die Buchung konnte nicht angelegt werden.</string>
     <string name="chosen_time_slot_has_already_been_booked">Das gewählte Zeitfenster wurde schon gebucht! Bitte halten sie sich an die aufgelisteten, verfügbaren Buchzeiten.</string>
+    <string name="back_to_date">&lt; zu datum</string>
+    <string name="chosen_timeslot">Gewählter Zeitraum</string>
+    <string name="available_timeslots">Verfügbare Zeiträume</string>
+    <string name="booking_for_the">Buchung für den: </string>
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>

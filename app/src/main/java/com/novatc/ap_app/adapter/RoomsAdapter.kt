@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
+import com.novatc.ap_app.fragments.room.RoomDateHelper
 import com.novatc.ap_app.model.Room
 
 class RoomsAdapter(
@@ -44,7 +45,10 @@ class RoomsAdapter(
         val roomsListItem = roomsListItem[position]
         holder.roomName.text = roomsListItem.name
         holder.roomDescription.text = roomsListItem.description
-        holder.minimumBookingTime.text = roomsListItem.minimumBookingTime.toString()
+        holder.minimumBookingTime.text = roomsListItem.minimumBookingTime?.let {
+            RoomDateHelper.convertMillisToHoursAndMinutes(
+                it.toLong())
+        }
     }
 
     override fun getItemCount() = roomsListItem.size
