@@ -20,6 +20,7 @@ class CommentAdapter(userID: String, private val listener: OnItemClickListener) 
         var author: TextView = itemView.findViewById(R.id.tv_comment_author)
         var commentContent: TextView = itemView.findViewById(R.id.tv_comment_content)
         var authorID: String = ""
+        var date: TextView = itemView.findViewById(R.id.tv_comment_date)
         var deleteButton: com.google.android.material.button.MaterialButton = itemView.findViewById(R.id.btn_delete_comment)
 
         init {
@@ -54,6 +55,8 @@ class CommentAdapter(userID: String, private val listener: OnItemClickListener) 
         holder.author.text = comment.authorName
         holder.commentContent.text = comment.content
         holder.authorID = comment.authorID
+        holder.date.text = comment.date?.let { convertTime(it) }
+
 
         if (userID == holder.authorID) {
             holder.deleteButton.visibility = View.VISIBLE
@@ -81,6 +84,9 @@ class CommentAdapter(userID: String, private val listener: OnItemClickListener) 
                 oldItem.content != newItem.content -> {
                     false
                 }
+                oldItem.date != newItem.date -> {
+                    false
+                }
                 else -> true
             }
         }
@@ -90,4 +96,10 @@ class CommentAdapter(userID: String, private val listener: OnItemClickListener) 
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun getItemCount() = differ.currentList.size
+
+    private fun convertTime(unixTimestamp:Long): String {
+        val sdf = java.text.SimpleDateFormat("HH:mm")
+        val date = java.util.Date(unixTimestamp)
+        return sdf.format(date)
+    }
 }

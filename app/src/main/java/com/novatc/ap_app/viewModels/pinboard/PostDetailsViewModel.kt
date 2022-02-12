@@ -60,7 +60,7 @@ class PostDetailsViewModel @Inject constructor(
     fun loadComments() {
         viewModelScope.launch(Dispatchers.IO) {
             postRepository.getCommentsAsFlow(post.value?.id!!).collect { comments ->
-
+                Log.e("COMMENT", comments.toString())
                 withContext(Dispatchers.Main) {
                     _comments.value = comments
                 }
