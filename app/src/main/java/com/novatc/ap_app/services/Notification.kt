@@ -7,7 +7,6 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
 import androidx.work.*
@@ -48,7 +47,7 @@ class Notification @AssistedInject constructor(
     }
 
     private fun sendNotification(title: String, message: String) {
-        var resultIntent = Intent(applicationContext, MainActivity::class.java)
+        val resultIntent = Intent(applicationContext, MainActivity::class.java)
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(applicationContext).run {
             // Add the intent, which inflates the back stack
             addNextIntentWithParentStack(resultIntent)
