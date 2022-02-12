@@ -31,11 +31,14 @@ import com.novatc.ap_app.model.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.properties.Delegates
 
 
 class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
@@ -56,6 +59,9 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     private var bookedTimeslots: ArrayList<Long> = ArrayList()
     private val disabledDaysList: ArrayList<Calendar> = ArrayList()
     private val aDayInMilliseconds: Long = 86400000L
+    private val anHourInMilliseconds: Long = 3600000L
+    private val aMinuteInMilliseconds: Long = 60000
+    var timezoneOffset by Delegates.notNull<Long>()
     private val today:Calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -75,6 +81,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         addBackDateButtonListener(view)
         addTimeOfDayTextViewListener()
         addBookDateButtonListener(view)
+        timezoneOffset = getTimezone()
         getUserName()
         return view
     }
@@ -87,6 +94,27 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         model.room.observe(this, {
             model.loadBookings(this)
         })
+    }
+
+    private fun getTimezone(): Long{
+        val calendar = Calendar.getInstance(
+            TimeZone.getTimeZone("GMT"),
+            Locale.getDefault()
+        )
+        val currentLocalTime = calendar.time
+        val date: DateFormat = SimpleDateFormat("z")
+        val localTime: String = date.format(currentLocalTime)
+        if(localTime.length > 3){
+            val prefix = localTime[3].toString()
+            val hours = (localTime[4].toString() + localTime[5].toString()).toInt()
+            val minutes = (localTime[7].toString() + localTime[8].toString()).toInt()
+            var offsetInMillis = hours * anHourInMilliseconds + minutes * aMinuteInMilliseconds
+            if(prefix == "-"){
+                offsetInMillis *= -1
+            }
+            return offsetInMillis
+        }
+        return 0L
     }
 
     //saves the date that is selected in the displayed calendar
@@ -180,8 +208,8 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     private fun uploadBooking(startingDateInMilliseconds: Long, endingDateInMilliseconds: Long){
         val c = Booking(
             userID = currentUser.id,
-            startingDate = startingDateInMilliseconds,
-            endDate = endingDateInMilliseconds
+            startingDate = startingDateInMilliseconds - timezoneOffset,
+            endDate = endingDateInMilliseconds - timezoneOffset
         )
         lifecycleScope.launch {
             selectedRoom.id?.let { it1 ->
@@ -247,11 +275,10 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     }
 
     override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
-        Log.d("Datepicker", "Stunde: $hour Minute: $minute")
         val hourString = addZeroToShortNumber(hour.toString(), false)
         val minuteString = addZeroToShortNumber(minute.toString(), false)
-        val resultTime = hourString + ":" + minuteString
-        if(currentTimePicker.equals("start")){
+        val resultTime = "$hourString:$minuteString"
+        if(currentTimePicker == "start"){
             startingTime.text = resultTime
         }
         else{
@@ -284,7 +311,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         val dateList = ArrayList<String>()
         bookingListOnRoom.forEach {booking ->
             if(date != convertUnixToDate(booking.startingDate)){
-                date = convertUnixToDate(booking.startingDate)
+                date = convertUnixToDate(booking.startingDate + timezoneOffset)
                 dateList.add(date)
                 bookedDaysViaDate.put(date, ArrayList())
             }
@@ -318,11 +345,11 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         bookedTimeslots.clear()
         bookingListOnRoom.forEach{
             booking ->
-            bookedTimeslots.add(booking.startingDate)
-            bookedTimeslots.add(booking.endDate)
+            bookedTimeslots.add(booking.startingDate + timezoneOffset)
+            bookedTimeslots.add(booking.endDate + timezoneOffset)
         }
-        val dayStart: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong()
-        val dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() + aDayInMilliseconds - 3600
+        val dayStart: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() +timezoneOffset
+        val dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() + aDayInMilliseconds - 3600 + timezoneOffset
         bookedTimeslots.sortByDescending { it }
         bookedTimeslots.reverse()
         var test = ArrayList<String>()
