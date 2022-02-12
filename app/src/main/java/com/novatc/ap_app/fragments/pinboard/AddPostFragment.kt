@@ -30,47 +30,11 @@ class AddPostFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_add_post, container, false)
         view.btn_safe_new_post.setOnClickListener {
-            if (view.et_post_headline.text.isEmpty()) {
-                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(
-                    bottomNavView,
-                    R.string.new_post_missing_headline,
-                    Snackbar.LENGTH_LONG
-                ).apply {
-                    anchorView = bottomNavView
-                }.show()
-            }
-            if (view.et_created_dorm_description.text.isEmpty()) {
+            checkForEmptyFields()
 
-                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(bottomNavView, R.string.new_post_missing_text, Snackbar.LENGTH_LONG)
-                    .apply {
-                        anchorView = bottomNavView
-                    }.show()
-            }
-            if (view.et_created_post_keywords.text.isEmpty()) {
-                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                Snackbar.make(
-                    bottomNavView,
-                    R.string.new_post_missing_keyword,
-                    Snackbar.LENGTH_LONG
-                ).apply {
-                    anchorView = bottomNavView
-                }.show()
-            }
             if (view.et_post_headline.text.isNotEmpty() && view.et_created_dorm_description.text.isNotEmpty() && view.et_created_post_keywords.text.isNotEmpty()) {
-                val headline = view.et_post_headline.text.toString()
-                val text = view.et_created_dorm_description.text.toString()
-                val keyword = view.et_created_post_keywords.text.toString()
-                val date = getCurrentDate()
-                lifecycleScope.launch {
-                    addPostViewModel.addPost(headline, text, keyword, date)
-                    val bottomNavView: BottomNavigationView =
-                        activity?.findViewById(R.id.bottomNav)!!
-                    Snackbar.make(bottomNavView, "Post created", Snackbar.LENGTH_SHORT).apply {
-                        anchorView = bottomNavView
-                    }.show()
-                }
+                createNewPost()
+
                 val action = AddPostFragmentDirections.actionAddPostFragmentToFragmentPinboard()
                 view.findNavController().navigate(action)
 
@@ -85,11 +49,51 @@ class AddPostFragment : Fragment() {
         return System.currentTimeMillis()
     }
 
-    private fun setSavePostButtonListener(view: View) {
-        val savePostButton: Button = view.btn_safe_new_post
-        savePostButton.setOnClickListener {
-
+    private fun createNewPost() {
+        val headline = requireView().et_post_headline.text.toString()
+        val text = requireView().et_created_dorm_description.text.toString()
+        val keyword = requireView().et_created_post_keywords.text.toString()
+        val date = getCurrentDate()
+        lifecycleScope.launch {
+            addPostViewModel.addPost(headline, text, keyword, date)
+            val bottomNavView: BottomNavigationView =
+                activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView, "Post created", Snackbar.LENGTH_SHORT).apply {
+                anchorView = bottomNavView
+            }.show()
         }
     }
+
+    private fun checkForEmptyFields() {
+        if (requireView().et_post_headline.text.isEmpty()) {
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(
+                bottomNavView,
+                R.string.new_post_missing_headline,
+                Snackbar.LENGTH_LONG
+            ).apply {
+                anchorView = bottomNavView
+            }.show()
+        }
+        if (requireView().et_created_dorm_description.text.isEmpty()) {
+
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView, R.string.new_post_missing_text, Snackbar.LENGTH_LONG)
+                .apply {
+                    anchorView = bottomNavView
+                }.show()
+        }
+        if (requireView().et_created_post_keywords.text.isEmpty()) {
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(
+                bottomNavView,
+                R.string.new_post_missing_keyword,
+                Snackbar.LENGTH_LONG
+            ).apply {
+                anchorView = bottomNavView
+            }.show()
+        }
+    }
+
 
 }
