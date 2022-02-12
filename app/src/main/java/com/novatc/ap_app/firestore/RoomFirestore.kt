@@ -6,12 +6,11 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.novatc.ap_app.constants.Constants
 import com.novatc.ap_app.model.Booking
+import com.novatc.ap_app.model.Post
 import com.novatc.ap_app.model.Room
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.tasks.await
 import java.util.*
 import javax.inject.Inject
@@ -91,10 +90,28 @@ class RoomFirestore @Inject constructor(
 
     }
 
-    fun getBookingsFromSnapshot(documentSnapshot: DocumentSnapshot): Booking {
+    private fun getBookingsFromSnapshot(documentSnapshot: DocumentSnapshot): Booking {
         return documentSnapshot.toObject(Booking::class.java)!!.let {
             it.id = documentSnapshot.id
             return@let it
         }
+    }
+
+    suspend fun getUserBookings(userID: String): ArrayList<Booking> {
+        val bookings = ArrayList<Booking>()
+        val snapshot1 =  mFirestore.collection(Constants.ROOMS).get().await()
+        for (room in snapshot1){
+            var bookingsInRoom = getBookingsFlow(room.id)
+            bookingsInRoom.collect {
+                booking ->
+                booking.forEach {
+                    b ->
+                    if(b.userID == userID){
+                        bookings.add(b)
+                    }
+                }
+            }
+        }
+        return bookings
     }
 }

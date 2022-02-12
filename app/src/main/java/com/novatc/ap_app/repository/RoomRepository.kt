@@ -1,5 +1,6 @@
 package com.novatc.ap_app.repository
 
+import android.content.ClipDescription
 import android.content.Context
 import android.net.Uri
 import android.widget.ImageView
@@ -20,10 +21,10 @@ class RoomRepository @Inject constructor(
     private val userFirestore: UserFirestore,
     private val storageFirestore: StorageFirestore
 ) {
-    suspend fun addRoom(roomName: String, streetName: String, houseNumber: String, city:String, roomDescription: String, minimumBookingTime: String, maximumBookingTime: String, imageUri: Uri?): UploadTask.TaskSnapshot? {
+    suspend fun addRoom(roomName: String, streetName: String, houseNumber: String, city:String, roomShortDescription: String, roomDescription: String, minimumBookingTime: String, maximumBookingTime: String, imageUri: Uri?): UploadTask.TaskSnapshot? {
         val userId = userFirestore.getCurrentUserID() ?: throw Exception("No user id found when trying to add a room.")
         val user = userFirestore.getUserData(userId)
-        val room = Room(roomName, streetName, houseNumber, city, roomDescription, minimumBookingTime, maximumBookingTime, userId, user!!.userDormID)
+        val room = Room(roomName, streetName, houseNumber, city, roomShortDescription, roomDescription, minimumBookingTime, maximumBookingTime, userId, user!!.userDormID)
         val roomId = roomFirestore.addRoom(room)
         return if(imageUri != null) imageUri?.let {
             storageFirestore.uploadImage(UploadDirectories.ROOMS, roomId,
@@ -54,6 +55,12 @@ class RoomRepository @Inject constructor(
 
     suspend fun addBooking(roomID: String, booking: Booking ): DocumentReference? {
         return roomFirestore.addBooking(roomID, booking = booking)
+    }
+
+    suspend fun getUserBookings(): ArrayList<Booking> {
+        val userId = userFirestore.getCurrentUserID()
+            ?: throw Exception("No user id, when trying to get user posts.")
+        return roomFirestore.getUserBookings(userId)
     }
 
     @ExperimentalCoroutinesApi

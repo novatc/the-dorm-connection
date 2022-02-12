@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.novatc.ap_app.R
-import com.novatc.ap_app.activities.adapter.EventsAdapter
 import com.novatc.ap_app.fragments.room.RoomDateHelper
-import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.model.Room
 
 class RoomsAdapter(
@@ -21,8 +19,9 @@ class RoomsAdapter(
 
     inner class RoomsViewHolder(itemView: View, val onLocationClick: (Int) -> Unit) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val roomName: TextView = itemView.findViewById(R.id.roomName)
-        val roomDescription: TextView = itemView.findViewById(R.id.roomDescription)
-        val minimumBookingTime: TextView = itemView.findViewById(R.id.roomBookingTimeField)
+        val roomDescription: TextView = itemView.findViewById(R.id.roomShortDescription)
+        val minimumBookingTime: TextView = itemView.findViewById(R.id.roomMinBookingTime)
+        val maximumBookingTime: TextView = itemView.findViewById(R.id.roomMaxBookingTime)
         val roomLocationButton: FloatingActionButton =
             itemView.findViewById(R.id.roomLocation)
         init {
@@ -83,8 +82,12 @@ class RoomsAdapter(
     override fun onBindViewHolder(holder: RoomsViewHolder, position: Int) {
         val roomsListItem = differ.currentList[position]
         holder.roomName.text = roomsListItem.name
-        holder.roomDescription.text = roomsListItem.description
+        holder.roomDescription.text = roomsListItem.shortDescription
         holder.minimumBookingTime.text = roomsListItem.minimumBookingTime?.let {
+            RoomDateHelper.convertMillisToHoursAndMinutes(
+                it.toLong())
+        }
+        holder.maximumBookingTime.text = roomsListItem.maximumBookingTime?.let {
             RoomDateHelper.convertMillisToHoursAndMinutes(
                 it.toLong())
         }

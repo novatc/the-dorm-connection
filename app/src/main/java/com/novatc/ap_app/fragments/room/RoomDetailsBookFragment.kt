@@ -15,27 +15,23 @@ import android.app.TimePickerDialog
 import android.graphics.Color
 import android.util.Log
 import android.widget.*
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
-import com.novatc.ap_app.adapter.BookingListAdapter
+import com.novatc.ap_app.adapter.FreeTimeslotAdapter
 import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.addZeroToShortNumber
 import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertDateToUnix
 import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertMillisToHoursAndMinutes
 import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToDate
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToHoursAndMinutes
 import com.novatc.ap_app.model.*
-import com.novatc.ap_app.viewModels.pinboard.PostDetailsViewModel
-import kotlinx.android.synthetic.main.fragment_post_details.view.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
@@ -50,32 +46,27 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     var bookedDaysViaDate: HashMap<String, ArrayList<Long>> = HashMap()
     lateinit var calendar: com.applandeo.materialcalendarview.CalendarView
     lateinit var selectedDate :Calendar
-    lateinit var currentTimePicker :String
+    private var currentTimePicker: String = "start"
     lateinit var startingTime: TextView
     lateinit var endTime: TextView
     private var selectedRoom: Room = Room()
     private var currentUser: User = User()
-    private var bookingListOnRoom: List<Booking> = ArrayList<Booking>()
+    private var bookingListOnRoom: List<Booking> = ArrayList()
     private var availableTimeslots: ArrayList<FreeTimeslot> = ArrayList()
     private var bookedTimeslots: ArrayList<Long> = ArrayList()
     private val disabledDaysList: ArrayList<Calendar> = ArrayList()
     private val aDayInMilliseconds: Long = 86400000L
+    private val today:Calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(com.novatc.ap_app.R.layout.fragment_room_details_book, container, false)
-        model.room.observe(this, { room ->
-            selectedRoom = room
-        })
-        model.room.observe(this, { room ->
-            model.loadBookings(this)
-        })
+        val view = inflater.inflate(R.layout.fragment_room_details_book, container, false)
+        startObservers()
         calendar = view.calendar
-        val instance: Calendar = Calendar.getInstance()
-        instance.add(Calendar.DATE, -1)
-        calendar.setMinimumDate(instance)
+        today.add(Calendar.DATE, -1)
+        calendar.setMinimumDate(today)
         selectedDate = calendar.firstSelectedDate
         startingTime = view.starting_time_text
         endTime = view.end_time_text
@@ -84,16 +75,26 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         addBackDateButtonListener(view)
         addTimeOfDayTextViewListener()
         addBookDateButtonListener(view)
-        currentTimePicker = "start"
         getUserName()
         return view
     }
 
-    fun addDateListener(){
+    //starts the observers to access live data of the bookings of this particular room
+    private fun startObservers(){
+        model.room.observe(this, { room ->
+            selectedRoom = room
+        })
+        model.room.observe(this, {
+            model.loadBookings(this)
+        })
+    }
+
+    //saves the date that is selected in the displayed calendar
+    private fun addDateListener(){
         calendar.setOnDayClickListener(object : OnDayClickListener {
             override fun onDayClick(eventDay: EventDay) {
                 selectedDate = eventDay.calendar
-                if(isDisabled(selectedDate)){
+                if(isDisabled(selectedDate) || selectedDate.timeInMillis < today.timeInMillis){
                    findNextPossibleDate()
                 }
                 else{
@@ -103,6 +104,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         })
     }
 
+    //transfers the picked date to the bookings page and changes the layout to confirm the booking
     private fun addSaveDateButtonListener(view: View){
         val setDateButton: Button = view.button2
         setDateButton.setOnClickListener {
@@ -122,100 +124,32 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
             }
             createAvailableTimeslots()
             populateFreeTimeslotList(view)
-            val layout = view.tutView1
-            layout.visibility = View.GONE
-            val layout2 = view.tutView2
-            layout2.visibility = View.VISIBLE
+            switchView("view2", view)
         }
     }
 
+    //lets the user navigate back to the calendar
     private fun addBackDateButtonListener(view: View){
         val backButton: Button = view.back_to_date
         backButton.setOnClickListener {
-            val layout = view.tutView1
-            layout.visibility = View.VISIBLE
-            val layout2 = view.tutView2
-            layout2.visibility = View.GONE
+            switchView("view1", view)
         }
     }
 
+    //checks if the booking is valid and saves it to the connected firebase databse
     private fun addBookDateButtonListener(view: View){
         val setDateButton: Button = view.book_timeslot_button
-        setDateButton.setBackgroundColor(
-            resources.getColor(
-                R.color.green,
-                context!!.theme
-            )
-        )
         setDateButton.setOnClickListener {
             if(startingTime.text.contains(":") && endTime.text.contains(":")){
-                var startingHour: Int = startingTime.text.split(":")[0].toInt()
-                var startingMinute: Int = startingTime.text.split(":")[1].toInt()
-                var endingHour: Int = endTime.text.split(":")[0].toInt()
-                var endingMinute: Int = endTime.text.split(":")[1].toInt()
-                if(startingHour > endingHour){
-                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                    Snackbar.make(bottomNavView,  R.string.booking_time_incorrect, Snackbar.LENGTH_SHORT).apply {
-                        anchorView = bottomNavView
-                    }.show()
-                }
-                else if(startingHour == endingHour && startingMinute < endingMinute){
-                    val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                    Snackbar.make(bottomNavView,  R.string.booking_time_incorrect, Snackbar.LENGTH_SHORT).apply {
-                        anchorView = bottomNavView
-                    }.show()
-                }
-                else{
-                    val startingDate = booked_date_1.text.toString() + " " + startingTime.text.toString()
-                    val endingDate = booked_date_1.text.toString() + " " + endTime.text.toString()
-                    val formatter: DateTimeFormatter =
-                        DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", Locale.GERMAN)
-                    val startingDateInMilliseconds: Long = LocalDateTime.parse(startingDate, formatter).atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
-                    val endingDateInMilliseconds: Long = LocalDateTime.parse(endingDate, formatter).atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
-                    when {
-                        endingDateInMilliseconds - startingDateInMilliseconds < selectedRoom.minimumBookingTime?.toLong()!! -> {
-                            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                            Snackbar.make(bottomNavView,  R.string.booking_time_falls_below_the_minimum_booking_time, Snackbar.LENGTH_SHORT).apply {
-                                anchorView = bottomNavView
-                            }.show()
-                        }
-                        endingDateInMilliseconds - startingDateInMilliseconds > selectedRoom.maximumBookingTime?.toLong()!! -> {
-                            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                            Snackbar.make(bottomNavView,  R.string.booking_time_exceeds_maximum_booking_time, Snackbar.LENGTH_SHORT).apply {
-                                anchorView = bottomNavView
-                            }.show()
-                        }
-                        !isInAvailableTimeslots(startingDateInMilliseconds) || !isInAvailableTimeslots(endingDateInMilliseconds)-> {
-                            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                            Snackbar.make(bottomNavView,  R.string.chosen_time_slot_has_already_been_booked, Snackbar.LENGTH_SHORT).apply {
-                                anchorView = bottomNavView
-                            }.show()
-                        }
-
-                        else -> {
-                            var c: Booking? = Booking(
-                                userID = currentUser.id,
-                                startingDate = startingDateInMilliseconds,
-                                endDate = endingDateInMilliseconds
-                            )
-
-                            lifecycleScope.launch {
-                                selectedRoom.id?.let { it1 ->
-                                    if (c != null) {
-                                        model.addBooking(selectedRoom.id!!, c)
-                                    }
-                                }
-                            }
-                            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-                            Snackbar.make(bottomNavView,  R.string.successful_booking, Snackbar.LENGTH_SHORT).apply {
-                                anchorView = bottomNavView
-                            }.show()
-                            val layout = view.tutView1
-                            layout.visibility = View.VISIBLE
-                            val layout2 = view.tutView2
-                            layout2.visibility = View.GONE
-                        }
-                    }
+                val startingDate = booked_date_1.text.toString() + " " + startingTime.text.toString()
+                val endingDate = booked_date_1.text.toString() + " " + endTime.text.toString()
+                val formatter: DateTimeFormatter =
+                    DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", Locale.GERMAN)
+                val startingDateInMilliseconds: Long = LocalDateTime.parse(startingDate, formatter).atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+                val endingDateInMilliseconds: Long = LocalDateTime.parse(endingDate, formatter).atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+                if(validateChosenBookingTime(startingDateInMilliseconds, endingDateInMilliseconds)) {
+                    uploadBooking(startingDateInMilliseconds, endingDateInMilliseconds)
+                    switchView("view1",view)
                 }
             }
             else{
@@ -226,6 +160,76 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
             }
 
         }
+    }
+    //switches between calendar view and booking view
+    private fun switchView(viewName: String, view: View){
+        if(viewName == "view2"){
+            val layout = view.tutView1
+            layout.visibility = View.GONE
+            val layout2 = view.tutView2
+            layout2.visibility = View.VISIBLE
+        }
+        else if(viewName == "view1"){
+            val layout = view.tutView1
+            layout.visibility = View.VISIBLE
+            val layout2 = view.tutView2
+            layout2.visibility = View.GONE
+        }
+    }
+
+    private fun uploadBooking(startingDateInMilliseconds: Long, endingDateInMilliseconds: Long){
+        val c = Booking(
+            userID = currentUser.id,
+            startingDate = startingDateInMilliseconds,
+            endDate = endingDateInMilliseconds
+        )
+        lifecycleScope.launch {
+            selectedRoom.id?.let { it1 ->
+                model.addBooking(selectedRoom.id!!, c)
+            }
+        }
+        val bottomNavView: BottomNavigationView =
+            activity?.findViewById(R.id.bottomNav)!!
+        Snackbar.make(bottomNavView, R.string.successful_booking, Snackbar.LENGTH_SHORT)
+            .apply {
+                anchorView = bottomNavView
+            }.show()
+    }
+
+    //checks whether the chosen booking time is available and obeys the rules of the room
+    // (e.g. within minimumBookingTime and maximumBookingTime)
+    private fun validateChosenBookingTime(startingDateInMilliseconds:Long, endingDateInMilliseconds: Long): Boolean{
+        when{
+            endingDateInMilliseconds < startingDateInMilliseconds -> {
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,  R.string.booking_time_incorrect, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
+                return false
+            }
+            endingDateInMilliseconds - startingDateInMilliseconds < selectedRoom.minimumBookingTime?.toLong()!! -> {
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,  R.string.booking_time_falls_below_the_minimum_booking_time, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
+                return false
+            }
+            endingDateInMilliseconds - startingDateInMilliseconds > selectedRoom.maximumBookingTime?.toLong()!! -> {
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,  R.string.booking_time_exceeds_maximum_booking_time, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
+                return false
+            }
+            !isInAvailableTimeslots(startingDateInMilliseconds) || !isInAvailableTimeslots(endingDateInMilliseconds)-> {
+                val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+                Snackbar.make(bottomNavView,  R.string.chosen_time_slot_has_already_been_booked, Snackbar.LENGTH_SHORT).apply {
+                    anchorView = bottomNavView
+                }.show()
+                return false
+            }
+        }
+        return true
     }
 
     private fun addTimeOfDayTextViewListener(){
@@ -244,9 +248,9 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
 
     override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
         Log.d("Datepicker", "Stunde: $hour Minute: $minute")
-        var hourString = addZeroToShortNumber(hour.toString(), false)
-        var minuteString = addZeroToShortNumber(minute.toString(), false)
-        var resultTime = hourString + ":" + minuteString
+        val hourString = addZeroToShortNumber(hour.toString(), false)
+        val minuteString = addZeroToShortNumber(minute.toString(), false)
+        val resultTime = hourString + ":" + minuteString
         if(currentTimePicker.equals("start")){
             startingTime.text = resultTime
         }
@@ -265,7 +269,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     fun populateCalendar() {
         model.bookings.observe(this, { booking ->
             bookingListOnRoom = booking
-            if(bookingListOnRoom.size > 0){
+            if(bookingListOnRoom.isNotEmpty()){
                 fillCalendar()
             }
         })
@@ -277,7 +281,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         disabledDaysList.clear()
         bookedDaysViaDate.clear()
         var date = ""
-        var dateList = ArrayList<String>()
+        val dateList = ArrayList<String>()
         bookingListOnRoom.forEach {booking ->
             if(date != convertUnixToDate(booking.startingDate)){
                 date = convertUnixToDate(booking.startingDate)
@@ -287,14 +291,14 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
             bookedDaysViaDate[date]?.add(booking.endDate - booking.startingDate)
         }
         dateList.forEach{
-            date ->
+            currentDate ->
             val calendar = Calendar.getInstance()
             var bookedTime = 0L
             bookedDaysViaDate[date]?.forEach{
                 time ->
                 bookedTime = (bookedTime + time)
             }
-            calendar.setTimeInMillis(convertDateToUnix(date).toLong())
+            calendar.setTimeInMillis(convertDateToUnix(currentDate).toLong())
             if(aDayInMilliseconds - bookedTime < selectedRoom.minimumBookingTime?.toLong()!!){
                 bookedDays.add(EventDay(calendar, R.drawable.ic_dot_black, Color.parseColor("#228B22")))
                 disabledDaysList.add(calendar)
@@ -311,6 +315,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
 
     private fun createAvailableTimeslots(): ArrayList<FreeTimeslot>{
         availableTimeslots.clear()
+        bookedTimeslots.clear()
         bookingListOnRoom.forEach{
             booking ->
             bookedTimeslots.add(booking.startingDate)
@@ -320,6 +325,11 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         val dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() + aDayInMilliseconds - 3600
         bookedTimeslots.sortByDescending { it }
         bookedTimeslots.reverse()
+        var test = ArrayList<String>()
+        bookedTimeslots.forEach{
+            slot ->
+            test.add(convertUnixToHoursAndMinutes(slot))
+        }
         var x = 0
         while (x < bookedTimeslots.size){
             if(x == 0){
@@ -396,7 +406,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
 
     private fun populateFreeTimeslotList(view: View) {
         val recyclerView: RecyclerView = view.free_timeslots
-        val bookingListAdapter = BookingListAdapter()
+        val bookingListAdapter = FreeTimeslotAdapter()
         recyclerView.adapter = bookingListAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         bookingListAdapter.differ.submitList(availableTimeslots)

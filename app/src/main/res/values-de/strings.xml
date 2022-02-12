@@ -115,6 +115,12 @@
     <string name="room_create_booking_times">Buchungszeiten</string>
     <string name="room_create_picture_description">Bildes des Raumes</string>
     <string name="room_details_location_description">Ort eines Raums</string>
+    <string name="image_required">Bild benötigt!</string>
+    <string name="btn_my_bookings">Meine Buchungen</string>
+    <string name="short_description">Short Description (max. 40 Zeichen)</string>
+    <string name="short_description_error">Bitte lasse deine Kurzbeschreibung bei 40 Zeichen oder weniger.</string>
+    <string name="extensive_description">Ausführliche Description</string>
+
 
     #you
     <string name="btn_edit_profile">Profil bearbeiten</string>

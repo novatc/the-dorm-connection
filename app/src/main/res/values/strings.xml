@@ -118,6 +118,11 @@
     <string name="chosen_timeslot">Chosen Timeslot</string>
     <string name="available_timeslots">Available Timeslots</string>
     <string name="booking_for_the">Booking for the: </string>
+    <string name="image_required">Image required!</string>
+    <string name="btn_my_bookings">My Bookings</string>
+    <string name="short_description">Short Descr. (max. 40 char.)</string>
+    <string name="short_description_error">Please keep your short description to 40 characters or less.</string>
+    <string name="extensive_description">Extensive Description</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>

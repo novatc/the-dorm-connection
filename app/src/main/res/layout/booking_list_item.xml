@@ -10,49 +10,67 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="2dp"
         android:background="@color/white"
-        android:padding="5dp">
+        android:padding="1dp">
 
         <TextView
-            android:id="@+id/free_timeslot_start"
+            android:id="@+id/tv_room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="5dp"
-            android:maxWidth="200dp"
-            android:text="STARTING TIME"
-            android:textSize="@dimen/et_text_size"
-            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="room name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_room_starting_time"
+            android:layout_width="142dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:text="starting time "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
+
+        <TextView
+            android:id="@+id/tv_room_end_time"
+            android:layout_width="129dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="18dp"
+            android:text="end time"
+            app:layout_constraintEnd_toStartOf="@+id/btn_delete_comment"
+            app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_delete_comment"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/radical_red"
+            android:text="x"
+            android:textColor="@color/white"
+            app:cornerRadius="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/free_timeslot_end"
+            android:id="@+id/textView38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="45dp"
-            android:maxWidth="200dp"
-            android:text="END TIME"
-            android:textSize="@dimen/et_text_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_post_headline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:maxWidth="200dp"
+            android:layout_marginTop="10dp"
             android:text="---"
-            android:textSize="@dimen/et_text_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/free_timeslot_end"
-            app:layout_constraintStart_toEndOf="@+id/free_timeslot_start"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintEnd_toStartOf="@+id/tv_room_end_time"
+            app:layout_constraintStart_toEndOf="@+id/tv_room_starting_time"
+            app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
