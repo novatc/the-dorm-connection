@@ -48,6 +48,49 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         view.tv_detail_post_text.text = post.text
         view.tv_detail_post_keywords.text = post.keyword
 
+        checkOwnership(view, post)
+
+
+
+        view.btn_send_comment.setOnClickListener {
+            sendComment(view, post)
+
+        }
+
+        return view
+    }
+
+    override fun onItemClick(position: Int) {
+        val comment = commentListOnPost[position]
+        lifecycleScope.launch {
+            args.clickedPost.id?.let {
+                postDetailsViewModel.deleteComment(
+                    commentID = comment.id,
+                    it
+                )
+            }
+        }
+    }
+
+    private fun sendComment(view: View, post: Post) {
+        if (view.et_write_comment.text.isNotEmpty()) {
+            val c = Comment(
+                authorID = currentUser.id,
+                content = view.et_write_comment.text.toString(),
+                authorName = currentUser.username,
+                date = getCurrentDate()
+            )
+
+            lifecycleScope.launch {
+                post.id?.let { it1 ->
+                    postDetailsViewModel.addComment(post.id!!, c)
+                }
+            }
+
+        }
+    }
+
+    private fun checkOwnership(view: View, post: Post) {
         if (post.creatorID == postDetailsViewModel.readCurrentID()) {
             view.btn_delete_post.visibility = View.VISIBLE
             view.btn_delete_post.setOnClickListener {
@@ -61,66 +104,39 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
         } else {
             view.btn_delete_post.visibility = View.GONE
         }
-
-        view.btn_send_comment.setOnClickListener {
-            if (view.et_write_comment.text.isNotEmpty()) {
-                var c: Comment? = Comment(
-                    authorID = currentUser.id,
-                    content = view.et_write_comment.text.toString(),
-                    authorName = currentUser.username
-                )
-
-                lifecycleScope.launch {
-                    post.id?.let { it1 ->
-                        if (c != null) {
-                            postDetailsViewModel.addComment(post.id!!, c)
-                        }
-                    }
-                }
-
-            }
-        }
-
-        return view
-    }
-
-    override fun onItemClick(position: Int) {
-        val comment = commentListOnPost[position]
-        Log.e("COMMENT", "Comment clicked with id: ${comment.id}")
-        lifecycleScope.launch {
-            args.clickedPost.id?.let {
-                postDetailsViewModel.deleteComment(
-                    commentID = comment.id,
-                    it
-                )
-            }
-        }
-
-
     }
 
     @ExperimentalCoroutinesApi
     private fun populateCommentsList(view: View, post: Post) {
         val recyclerView: RecyclerView = view.rv_comments_on_post
         val model: PostDetailsViewModel by viewModels()
+
         postDetailsViewModel.setPost(post)
-        postDetailsViewModel.userProfile.observe(this, {
+
+        postDetailsViewModel.userProfile.observe(viewLifecycleOwner) {
             currentUser = it
+
             val commentAdapter = CommentAdapter(currentUser.id, this)
             recyclerView.adapter = commentAdapter
             recyclerView.layoutManager = LinearLayoutManager(activity)
-            model.comments.observe(this, { comment ->
-                commentAdapter.differ.submitList(comment)
-                commentListOnPost = comment
-            })
 
-        })
+            model.comments.observe(viewLifecycleOwner) { comment ->
+                val result = comment.sortedByDescending { it.date }
+                commentAdapter.differ.submitList(result)
+                commentListOnPost = result
+            }
+
+        }
     }
 
-    private fun convertTime(unixTimestamp:Long): String {
+    private fun convertTime(unixTimestamp: Long): String {
         val sdf = java.text.SimpleDateFormat("HH:mm")
         val date = java.util.Date(unixTimestamp)
         return sdf.format(date)
+    }
+
+    private fun getCurrentDate(): Long {
+        return System.currentTimeMillis()
     }
 
 

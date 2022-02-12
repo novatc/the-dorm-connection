@@ -1,4 +1,5 @@
 package com.novatc.ap_app.services
+
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -6,7 +7,6 @@ import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
 import androidx.work.*
@@ -30,9 +30,15 @@ class Notification @AssistedInject constructor(
     }
 
     override suspend fun doWork(): Result {
-        val startSize = inputData.getInt("SIZE_OF_POSTLIST", 0)
+
+        var currentSize = inputData.getInt("SIZE_OF_POSTLIST", 0)
         val newSize = postRepository.getPosts().size
-        if (newSize > startSize) {
+        if (currentSize == newSize) {
+            return Result.retry()
+        }
+
+        if (newSize > currentSize) {
+            currentSize = newSize
             sendNotification(
                 "THE DORM CONNECTION", "A new post is available!"
             )
@@ -41,7 +47,7 @@ class Notification @AssistedInject constructor(
     }
 
     private fun sendNotification(title: String, message: String) {
-        var resultIntent = Intent(applicationContext, MainActivity::class.java)
+        val resultIntent = Intent(applicationContext, MainActivity::class.java)
         val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(applicationContext).run {
             // Add the intent, which inflates the back stack
             addNextIntentWithParentStack(resultIntent)
