@@ -90,13 +90,6 @@ class EventOverviewMapsFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
-    private fun setMapLongClick(map: GoogleMap) {
-        map.setOnMapLongClickListener { latLng ->
-            map.addMarker(MarkerOptions().position(latLng))
-        }
-    }
-
     private fun setPoiClick(map: GoogleMap) {
         map.setOnPoiClickListener { poi ->
             val poiMarker = map.addMarker(
@@ -115,11 +108,13 @@ class EventOverviewMapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun getAddress(map: GoogleMap) {
+        /*
+        This methode will query every event in the database and uses the google maps address lookup
+        function to get the coordinates which are needed if you want to place a pin on the map
+        */
         val geo = Geocoder(requireContext())
         for (event in eventList) {
-            Log.e("MAP", "Address for Event: $event")
             val address = returnAddressFromEvent(event)
-            Log.e("MAP", "Address for Event: $address")
             val location = geo.getFromLocationName(address, 1)
             val lat = location.get(0).latitude
             val long = location.get(0).longitude
@@ -132,10 +127,10 @@ class EventOverviewMapsFragment : Fragment(), OnMapReadyCallback {
 
     @ExperimentalCoroutinesApi
     private fun getEvents() {
-        model.events.observe(this, { events ->
+        model.events.observe(this) { events ->
             eventList = events
             getAddress(map)
-        })
+        }
     }
 
 
