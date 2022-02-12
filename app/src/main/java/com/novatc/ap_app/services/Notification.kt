@@ -1,4 +1,5 @@
 package com.novatc.ap_app.services
+
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -30,9 +31,15 @@ class Notification @AssistedInject constructor(
     }
 
     override suspend fun doWork(): Result {
-        val startSize = inputData.getInt("SIZE_OF_POSTLIST", 0)
+
+        var currentSize = inputData.getInt("SIZE_OF_POSTLIST", 0)
         val newSize = postRepository.getPosts().size
-        if (newSize > startSize) {
+        if (currentSize == newSize) {
+            return Result.retry()
+        }
+
+        if (newSize > currentSize) {
+            currentSize = newSize
             sendNotification(
                 "THE DORM CONNECTION", "A new post is available!"
             )
