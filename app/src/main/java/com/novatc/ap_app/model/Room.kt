@@ -10,6 +10,7 @@ data class Room(
     val streetName: String? = "",
     val houseNumber: String? = "",
     val city: String? = "",
+    val shortDescription: String? = "",
     val description: String? = "",
     val minimumBookingTime: String? = "",
     val maximumBookingTime: String? = "",
@@ -18,6 +19,7 @@ data class Room(
     @get:Exclude var id: String? = "",
     ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -36,6 +38,7 @@ data class Room(
         parcel.writeString(houseNumber)
         parcel.writeString(city)
         parcel.writeString(description)
+        parcel.writeString(shortDescription)
         parcel.writeString(minimumBookingTime)
         parcel.writeString(maximumBookingTime)
         parcel.writeString(creatorID)

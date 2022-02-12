@@ -26,6 +26,7 @@ import java.util.*
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.addZeroToShortNumber
 import com.novatc.ap_app.viewModels.room.CreateRoomViewModel
 import kotlinx.android.synthetic.main.fragment_event_create.view.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.view.*
@@ -74,13 +75,14 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
             val streetName = view.et_street_name.text.toString().trim()
             val houseNumber = view.et_house_number.text.toString().trim()
             val city = view.et_city.text.toString().trim()
+            val roomShortDescription = view.et_created_room_short_description.text.toString().trim()
             val roomDescription = view.et_created_room_description.text.toString().trim()
             val minimumBookingTime = minimumBookingTimeInMillis.toString()
             val maximumBookingTime = maximumBookingTimeInMillis.toString()
 
-
             if (!isFormValid(
                     roomName,
+                    roomShortDescription,
                     roomDescription,
                     minimumBookingTime,
                     maximumBookingTime
@@ -93,6 +95,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
                     streetName,
                     houseNumber,
                     city,
+                    roomShortDescription,
                     roomDescription,
                     minimumBookingTime,
                     maximumBookingTime,
@@ -156,10 +159,9 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
     }
 
     override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
-        Log.d("Datepicker", "Stunde: $hour Minute: $minute")
-        var hourString = addZeroToShortNumber(hour.toString(), false)
-        var minuteString = addZeroToShortNumber(minute.toString(), false)
-        var resultTime = hourString + ":" + minuteString
+        val hourString = addZeroToShortNumber(hour.toString(), false)
+        val minuteString = addZeroToShortNumber(minute.toString(), false)
+        val resultTime = "$hourString:$minuteString"
         if(chosenPicker == "min"){
             minimumBookingTimeInMillis = timeToMillis(hour, minute)
             et_created_room_minimum_booking_time.text = resultTime
@@ -172,12 +174,14 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     private fun isFormValid(
         roomName: String,
+        roomShortDescription: String,
         roomDescription: String,
         minimumBookingTime: String,
         maximumBookingTime: String
     ): Boolean {
         if (roomName.isBlank()
             || roomDescription.isBlank()
+            || roomShortDescription.isBlank()
             || minimumBookingTime.isBlank()
             || maximumBookingTime.isBlank()
         ) {
@@ -189,7 +193,14 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         }
         if (!imageSelected){
             val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
-            Snackbar.make(bottomNavView, "Image required!", Snackbar.LENGTH_LONG).apply {
+            Snackbar.make(bottomNavView,R.string.image_required , Snackbar.LENGTH_LONG).apply {
+                anchorView = bottomNavView
+            }.show()
+            return false
+        }
+        if(roomShortDescription.length > 40){
+            val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
+            Snackbar.make(bottomNavView,R.string.short_description_error , Snackbar.LENGTH_LONG).apply {
                 anchorView = bottomNavView
             }.show()
             return false
@@ -199,20 +210,6 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
 
     private fun timeToMillis(hour: Int, minute: Int): Long{
         return (hour * 60 * 60 * 1000 + minute * 60 * 1000).toLong()
-    }
-
-    private fun addZeroToShortNumber(string: String, fromBehind:Boolean):String{
-        if(string.length < 2){
-            if (fromBehind){
-                return string + "0"
-            }
-            else {
-                return "0" + string
-            }
-        }
-        else{
-            return string
-        }
     }
 
 }

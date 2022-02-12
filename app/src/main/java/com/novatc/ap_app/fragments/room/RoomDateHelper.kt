@@ -11,7 +11,7 @@ class RoomDateHelper {
         }
 
         fun convertUnixToHoursAndMinutes(unixDate: Long): String {
-            var time = DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.ofEpochSecond((unixDate/1000))).split("T")[1]
+            val time = DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.ofEpochSecond((unixDate/1000))).split("T")[1]
             return time.split(":")[0] + ":" + time.split(":")[1]
         }
 
@@ -20,14 +20,16 @@ class RoomDateHelper {
                 ZoneId.systemDefault()).toInstant().epochSecond.toString() + "000"
         }
 
-        fun millisToHours(millis: Long): Long {
+        private fun millisToHours(millis: Long): Long {
             return millis/3600000L
         }
-        fun convertMillisToHoursAndMinutes(millis: Long):String{
-            var hours = millisToHours(millis).toInt()
-            var minutes = ((millis - (hours * 3600000))/60000).toInt()
-            var hoursAndMillis = addZeroToShortNumber(hours.toString(),false) + ":" + addZeroToShortNumber(minutes.toString(),false)
-            return hoursAndMillis
+        fun convertMillisToHoursAndMinutes(millis: Long): String {
+            val hours = millisToHours(millis).toInt()
+            val minutes = ((millis - (hours * 3600000)) / 60000).toInt()
+            return addZeroToShortNumber(hours.toString(), false) + ":" + addZeroToShortNumber(
+                minutes.toString(),
+                false
+            )
         }
 
         fun addZeroToShortNumber(string: String, fromBehind:Boolean):String{
@@ -43,7 +45,4 @@ class RoomDateHelper {
         }
     }
 
-    fun millisToHours(millis: Long): Long {
-        return millis/3600000L
-    }
 }

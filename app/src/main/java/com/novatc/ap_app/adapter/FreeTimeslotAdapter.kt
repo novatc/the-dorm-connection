@@ -8,16 +8,13 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.novatc.ap_app.R
-import com.novatc.ap_app.fragments.room.RoomDateHelper
-import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToDate
 import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToHoursAndMinutes
-import com.novatc.ap_app.model.Comment
 import com.novatc.ap_app.model.FreeTimeslot
 
-class BookingListAdapter:
-    RecyclerView.Adapter<BookingListAdapter.BookingListViewHolder>() {
+class FreeTimeslotAdapter:
+    RecyclerView.Adapter<FreeTimeslotAdapter.FreeTimeslotViewHolder>() {
 
-    inner class BookingListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class FreeTimeslotViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         var startingTime: TextView = itemView.findViewById(R.id.free_timeslot_start)
         var endTime: TextView = itemView.findViewById(R.id.free_timeslot_end)
     }
@@ -29,13 +26,13 @@ class BookingListAdapter:
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): BookingListAdapter.BookingListViewHolder {
+    ): FreeTimeslotAdapter.FreeTimeslotViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.booking_list_item, parent, false)
-        return BookingListViewHolder(view)
+            LayoutInflater.from(parent.context).inflate(R.layout.timeslot_list_item, parent, false)
+        return FreeTimeslotViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: BookingListAdapter.BookingListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FreeTimeslotAdapter.FreeTimeslotViewHolder, position: Int) {
         val freeTimeslot = differ.currentList[position]
         holder.startingTime.text = convertUnixToHoursAndMinutes(freeTimeslot.startingDate)
         holder.endTime.text = convertUnixToHoursAndMinutes(freeTimeslot.endDate)

@@ -18,6 +18,7 @@
             android:id="@+id/roomName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/room_hint"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/roomLocation"
@@ -38,32 +39,38 @@
             android:id="@+id/minBookingTimeStatement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:text="@string/minimum_booking_time_pre"
-            app:layout_constraintEnd_toStartOf="@+id/roomLocation"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/roomUsage" />
+            app:layout_constraintTop_toBottomOf="@+id/roomShortDescription" />
 
         <TextView
-            android:id="@+id/roomBookingTimeField"
+            android:id="@+id/roomMinBookingTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            app:layout_constraintEnd_toStartOf="@+id/roomLocation"
-            app:layout_constraintHorizontal_bias="0.06"
-            app:layout_constraintStart_toEndOf="@+id/minBookingTimeStatement"
-            app:layout_constraintTop_toBottomOf="@+id/roomUsage" />
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roomShortDescription" />
 
         <TextView
-            android:id="@+id/roomDescription"
+            android:id="@+id/roomMaxBookingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roomMinBookingTime" />
+
+        <TextView
+            android:id="@+id/roomShortDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/roomLocation"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginTop="6dp"
+            android:text="@string/room_description"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/minBookingTimeStatement" />
+            app:layout_constraintTop_toBottomOf="@+id/roomName" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/roomLocation"
@@ -79,16 +86,15 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/minBookingTimeStatement2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#4CAF50"
+            android:layout_marginTop="2dp"
+            android:text="@string/maximum_booking_time_pre"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/roomLocation"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/roomDescription"
-            app:layout_constraintTop_toBottomOf="@+id/roomDescription"
-            tools:ignore="TextContrastCheck" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/minBookingTimeStatement" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </com.google.android.material.card.MaterialCardView>
