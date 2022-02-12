@@ -58,7 +58,7 @@ class AddPostFragment : Fragment() {
             addPostViewModel.addPost(headline, text, keyword, date)
             val bottomNavView: BottomNavigationView =
                 activity?.findViewById(R.id.bottomNav)!!
-            Snackbar.make(bottomNavView, "Post created", Snackbar.LENGTH_SHORT).apply {
+            Snackbar.make(bottomNavView, R.string.create_post_create_post_message, Snackbar.LENGTH_SHORT).apply {
                 anchorView = bottomNavView
             }.show()
         }

@@ -195,6 +195,8 @@
     <string name="new_post_missing_text">Bitte füge einen Text ein</string>
     <string name="new_post_missing_keyword">Bitte füge ein Keywort ein</string>
     <string name="add_post_button_description">Füge einen neuen Post hinzu</string>
+    <string name="create_post_create_post_message">Post erstellt!!</string>
+
 
     #dorm
     <string name="new_dorm_fields_required">Bitte alle Felder ausfüllen</string>

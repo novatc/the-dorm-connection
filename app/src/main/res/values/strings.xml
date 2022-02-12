@@ -204,6 +204,7 @@
     <string name="new_dorm_added">a new dorm was created</string>
     <string name="got_to_location_of_dorm">Got to location of dorm</string>
     <string name="dorm_detail_members">Dorm member: </string>
+    <string name="create_post_create_post_message">Post created!</string>
 
 
 </resources>
