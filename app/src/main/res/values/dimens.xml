@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="intro_button_margin">50px</dimen>
-    <dimen name="intro_button_padding">30px</dimen>
+    <dimen name="intro_button_margin">50dp</dimen>
+    <dimen name="intro_button_padding">30dp</dimen>
     <dimen name="sign_up_screen_btn_marginTop">30dp</dimen>
     <dimen name="toolbar_title_text_size">18sp</dimen>
     <dimen name="authentication_screen_content_marginTop">40dp</dimen>
