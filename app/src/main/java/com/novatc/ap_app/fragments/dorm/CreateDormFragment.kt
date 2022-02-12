@@ -57,7 +57,7 @@ class CreateDormFragment : Fragment() {
             }.show()
         }
         lifecycleScope.launch {
-            dormRepository.add(dormName,dormDescription,dormAddress)
+            viewModel.addDorm(dormName,dormDescription,dormAddress)
             val bottomNavView: BottomNavigationView = activity?.findViewById(R.id.bottomNav)!!
             Snackbar.make(bottomNavView,R.string.new_dorm_added, Snackbar.LENGTH_SHORT).apply {
                 anchorView = bottomNavView

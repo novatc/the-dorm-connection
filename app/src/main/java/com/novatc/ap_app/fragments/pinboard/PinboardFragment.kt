@@ -72,7 +72,7 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
         recyclerView.adapter = postAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        model.postList.observe(this, { posts ->
+        model.postList.observe(viewLifecycleOwner) { posts ->
             view.pinboardListSpinner.visibility = View.GONE
             val result = posts.sortedByDescending {
                 it.date
@@ -85,7 +85,7 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
                     .build()
             WorkManager.getInstance(requireContext()).enqueue(backgroundService)
 
-        })
+        }
 
     }
 
