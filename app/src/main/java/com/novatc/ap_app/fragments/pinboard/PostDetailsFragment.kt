@@ -62,7 +62,6 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
 
     override fun onItemClick(position: Int) {
         val comment = commentListOnPost[position]
-        Log.e("COMMENT", "Comment clicked with id: ${comment.id}")
         lifecycleScope.launch {
             args.clickedPost.id?.let {
                 postDetailsViewModel.deleteComment(
