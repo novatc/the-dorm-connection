@@ -41,13 +41,7 @@ class PinboardFragment : Fragment(), PostAdapter.OnItemClickListener, SwipeListe
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        val callback = object : OnBackPressedCallback(true /** true means that the callback is enabled */) {
-//            override fun handleOnBackPressed() {
-//                return
-//            }
-//        }
-//        callback.isEnabled = findNavController().backQueue.size<=2
-        // Inflate the layout for this fragment
+
         val view = inflater.inflate(R.layout.fragment_pinboard, container, false)
         view.posts_constraintLayout.setOnTouchListener(SwipeGestureListener(this))
         populatePostList(view)
