@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment(), SwipeListener {
+class ProfileFragment : Fragment(){
 
     private val model: UpdateProfileViewModel by viewModels()
 
@@ -31,12 +31,6 @@ class ProfileFragment : Fragment(), SwipeListener {
         setupOnUpdateListener(view)
 
         return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        var back1 = view.findNavController().backQueue
-        print("test")
     }
 
     private fun setupOnUpdateListener(view: View) {
@@ -118,13 +112,5 @@ class ProfileFragment : Fragment(), SwipeListener {
                 }.show()
             }
         })
-    }
-
-    override fun onSwipeLeft(view: View) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onSwipeRight(view: View) {
-        TODO("Not yet implemented")
     }
 }

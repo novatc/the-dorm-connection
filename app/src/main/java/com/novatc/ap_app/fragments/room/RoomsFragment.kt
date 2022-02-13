@@ -100,12 +100,8 @@ class RoomsFragment : Fragment(), RoomsAdapter.OnItemClickListener, SwipeListene
     }
 
     override fun onSwipeRight(view: View) {
-        var back1 = view.findNavController().backQueue
         val action = RoomsFragmentDirections.actionFragmentRoomsToFragmentPinboard()
         view.findNavController().navigate(action)
-        var back2 = view.findNavController().backQueue
-        //view.findNavController().backQueue.addLast()
-        print("test")
     }
 
 }

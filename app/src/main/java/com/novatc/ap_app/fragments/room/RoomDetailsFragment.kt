@@ -47,20 +47,16 @@ class RoomDetailsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_room_details, container, false)
         val room: Room = args.clickedRoom
         Log.e("FIRE", "Post viewed: ${room}")
-
         view.et_room_name.text = room.name
         roomDetailsViewModel.setRoom(room)
-        roomDetailsViewModel.loadRoomImage()
-        roomDetailsViewModel.loadImageRequest.observe(this, { request ->
-            if (request.status == Request.Status.SUCCESS) {
-                val imageUri = request.data
-                Glide.with(this)
-                    .load(imageUri)
-                    .fitCenter()
-                    .placeholder(R.drawable.circular_progress_bar)
-                    .into(view.iv_room_image)
-            }
-        })
+        loadRoomImage(view)
+        setDeleteButton(room,view)
+        return view
+    }
+
+    //finds out whether to set the delete button by comparing the current user with the creator
+    // and sets it if need be
+    private fun setDeleteButton(room: Room, view: View){
         if (room.creatorID == userRepository.readCurrentId()) {
             view.btn_delete_room.visibility = View.VISIBLE
             view.btn_delete_room.setOnClickListener {
@@ -97,8 +93,20 @@ class RoomDetailsFragment : Fragment() {
         } else {
             view.btn_delete_room.visibility = View.GONE
         }
+    }
 
-        return view
+    private fun loadRoomImage(view: View){
+        roomDetailsViewModel.loadRoomImage()
+        roomDetailsViewModel.loadImageRequest.observe(this, { request ->
+            if (request.status == Request.Status.SUCCESS) {
+                val imageUri = request.data
+                Glide.with(this)
+                    .load(imageUri)
+                    .fitCenter()
+                    .placeholder(R.drawable.circular_progress_bar)
+                    .into(view.iv_room_image)
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

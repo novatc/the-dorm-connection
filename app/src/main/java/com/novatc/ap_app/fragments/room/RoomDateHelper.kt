@@ -4,6 +4,7 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
+//class that handles generic conversion from and to milliseconds and returns readable dates
 class RoomDateHelper {
     companion object {
         fun convertUnixToDate(unixDate: Long): String {

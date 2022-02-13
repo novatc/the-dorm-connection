@@ -23,16 +23,12 @@
             android:id="@+id/action_fragment_events_to_fragment_rooms"
             app:destination="@id/fragment_rooms"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/fragment_events"
-            app:popUpToInclusive="true" />
+            app:exitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fragment_events_to_fragment_profile"
             app:destination="@id/fragment_profile"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/fragment_events"
-            app:popUpToInclusive="true" />
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/fragment_pinboard"
@@ -49,9 +45,7 @@
             android:id="@+id/action_fragment_pinboard_to_fragment_rooms"
             app:destination="@id/fragment_rooms"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/fragment_pinboard"
-            app:popUpToInclusive="true" />
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/eventCreateFragment"
@@ -102,9 +96,7 @@
             android:id="@+id/action_fragment_profile_to_fragment_events"
             app:destination="@id/fragment_events"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/fragment_profile"
-            app:popUpToInclusive="true" />
+            app:exitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
@@ -170,16 +162,12 @@
             android:id="@+id/action_fragment_rooms_to_fragment_pinboard"
             app:destination="@id/fragment_pinboard"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/fragment_rooms"
-            app:popUpToInclusive="true" />
+            app:exitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_fragment_rooms_to_fragment_events"
             app:destination="@id/fragment_events"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/fragment_rooms"
-            app:popUpToInclusive="true" />
+            app:exitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/postDetailsFragment"

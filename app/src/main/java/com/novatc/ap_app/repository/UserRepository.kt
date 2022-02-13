@@ -13,10 +13,6 @@ class UserRepository @Inject constructor(
         return userFirestore.getCurrentUserID()
     }
 
-    fun readCurrentFirebaseUser(): String? {
-        return userFirestore.getCurrentUserMail()
-    }
-
     suspend fun signUp(name: String, email: String, password: String) {
         return userFirestore.signUp(name, email, password)
     }
@@ -38,9 +34,6 @@ class UserRepository @Inject constructor(
         return userFirestore.getUserData(currentUserId)
     }
 
-    suspend fun read(uid: String): User? {
-        return userFirestore.getUserData(uid)
-    }
     fun updateUserWithDorm(user: User){
         return userFirestore.updateUserDorm(user)
     }
