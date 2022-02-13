@@ -17,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
-import com.novatc.ap_app.activities.adapter.EventsAdapter
+import com.novatc.ap_app.adapter.EventsAdapter
 import com.novatc.ap_app.model.Event
 import com.novatc.ap_app.services.SwipeGestureListener
 import com.novatc.ap_app.services.SwipeListener
@@ -107,7 +107,7 @@ class EventFragment : Fragment(), EventsAdapter.OnItemClickListener, SwipeListen
                 LocalDate.parse(it.date, dateTimeFormatter)
             }
             eventsAdapter.differ.submitList(result)
-            eventList = events
+            eventList = result
 
         })
     }

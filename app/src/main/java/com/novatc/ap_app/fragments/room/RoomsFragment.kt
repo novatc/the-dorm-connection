@@ -18,7 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.novatc.ap_app.R
-import com.novatc.ap_app.activities.adapter.EventsAdapter
 import com.novatc.ap_app.adapter.RoomsAdapter
 import com.novatc.ap_app.fragments.PinboardFragment
 import com.novatc.ap_app.model.Room

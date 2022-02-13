@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/shadow_blue">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_corners_background"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-85dp">
+
+
+                <TextView
+                    android:id="@+id/et_room_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingTop="10dp"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_room_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextContrastCheck"
+                    tools:text="Name" />
+
+                <ImageView
+                    android:id="@+id/iv_room_image"
+                    android:layout_width="45dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/room_create_picture_description"
+                    android:src="@drawable/add_screen_image_placeholder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ImageContrastCheck" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/room_details_tabs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_room_and_dorm_name"
+                    app:tabIndicatorColor="@color/patriarch"
+                    app:tabMode="fixed">
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_room_general" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_room_location" />
+
+                        <com.google.android.material.tabs.TabItem
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/detail_room_book" />
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/room_details_pager"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/room_details_tabs" />
+
+                <TextView
+                    android:id="@+id/et_room_and_dorm_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_room_image"
+                    app:layout_constraintTop_toBottomOf="@+id/et_room_name"
+                    tools:ignore="TextContrastCheck"
+                    tools:text="Room and dorm name" />
+
+                <Button
+                    android:id="@+id/btn_delete_room"
+                    android:layout_width="176dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="35dp"
+                    android:backgroundTint="@color/radical_red"
+                    android:text="@string/btn_delete_room"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/room_details_tabs"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.93"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.49"
+                    tools:ignore="TextContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
