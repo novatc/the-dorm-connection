@@ -16,7 +16,7 @@
             android:id="@+id/tutView1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
+            android:visibility="gone"
             tools:layout_editor_absoluteX="-51dp"
             tools:layout_editor_absoluteY="93dp">
 
@@ -55,7 +55,7 @@
             android:id="@+id/tutView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             tools:layout_editor_absoluteX="176dp"
             tools:layout_editor_absoluteY="38dp">
 
@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:ems="11"
-                android:text="@string/maximum_booking_time"
+                android:text="@string/choose_ending_booking_time"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -216,7 +216,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:ems="11"
-                android:text="@string/minimum_booking_time"
+                android:text="@string/choose_starting_booking_time"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

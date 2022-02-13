@@ -123,6 +123,8 @@
     <string name="short_description">Short Descr. (max. 40 char.)</string>
     <string name="short_description_error">Please keep your short description to 40 characters or less.</string>
     <string name="extensive_description">Extensive Description</string>
+    <string name="choose_starting_booking_time">Choose starting time</string>
+    <string name="choose_ending_booking_time">Choose ending time</string>
 
     #you
     <string name="btn_edit_profile">EDIT PROFILE</string>

@@ -120,6 +120,8 @@
     <string name="short_description">Short Description (max. 40 Zeichen)</string>
     <string name="short_description_error">Bitte lasse deine Kurzbeschreibung bei 40 Zeichen oder weniger.</string>
     <string name="extensive_description">Ausführliche Description</string>
+    <string name="choose_starting_booking_time">Wähle Startzeit</string>
+    <string name="choose_ending_booking_time">Wähle Ende</string>
 
 
     #you

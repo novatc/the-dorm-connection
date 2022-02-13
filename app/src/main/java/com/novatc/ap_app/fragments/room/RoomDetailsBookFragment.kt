@@ -61,7 +61,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     private val aDayInMilliseconds: Long = 86400000L
     private val anHourInMilliseconds: Long = 3600000L
     private val aMinuteInMilliseconds: Long = 60000
-    var timezoneOffset by Delegates.notNull<Long>()
+    private var timezoneOffset = 0L
     private val today:Calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -81,7 +81,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         addBackDateButtonListener(view)
         addTimeOfDayTextViewListener()
         addBookDateButtonListener(view)
-        timezoneOffset = getTimezone(view)
+        timezoneOffset = getTimezone()
         getUserName()
         return view
     }
@@ -97,7 +97,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     }
 
     //gets the current timezone of the smartphone
-    private fun getTimezone(view: View): Long{
+    private fun getTimezone(): Long{
         val calendar = Calendar.getInstance(
             TimeZone.getTimeZone("GMT"),
             Locale.getDefault()
@@ -154,7 +154,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                 convertMillisToHoursAndMinutes(
                     it1.toLong())
             }
-            createAvailableTimeslots()
+            createAvailableTimeslots(selectedDate)
             populateFreeTimeslotList(view)
             switchView("view2", view)
         }
@@ -301,7 +301,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
 
     fun populateCalendar() {
         model.bookings.observe(this, { booking ->
-            bookingListOnRoom = booking
+            bookingListOnRoom = booking.distinct()
             if(bookingListOnRoom.isNotEmpty()){
                 fillCalendar()
             }
@@ -313,27 +313,19 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         bookedDays.clear()
         fullyBookedDays.clear()
         disabledDaysList.clear()
-        bookedDaysViaDate.clear()
         var date = ""
         val dateList = ArrayList<String>()
         bookingListOnRoom.forEach {booking ->
-            if(date != convertUnixToDate(booking.startingDate)){
+            if(date != convertUnixToDate(booking.startingDate + timezoneOffset)){
                 date = convertUnixToDate(booking.startingDate + timezoneOffset)
                 dateList.add(date)
-                bookedDaysViaDate.put(date, ArrayList())
             }
-            bookedDaysViaDate[date]?.add(booking.endDate - booking.startingDate)
         }
         dateList.forEach{
             currentDate ->
             val calendar = Calendar.getInstance()
-            var bookedTime = 0L
-            bookedDaysViaDate[date]?.forEach{
-                time ->
-                bookedTime = (bookedTime + time)
-            }
-            calendar.setTimeInMillis(convertDateToUnix(currentDate).toLong())
-            if(aDayInMilliseconds - bookedTime < selectedRoom.minimumBookingTime?.toLong()!!){
+            calendar.setTimeInMillis(convertDateToUnix(currentDate).toLong() + timezoneOffset)
+            if(createAvailableTimeslots(calendar).size == 0){
                 bookedDays.add(EventDay(calendar, R.drawable.ic_dot_black, Color.parseColor("#228B22")))
                 disabledDaysList.add(calendar)
             }
@@ -346,16 +338,19 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
     }
 
     //calculates all available timeslots for this room for the chosen day
-    private fun createAvailableTimeslots(): ArrayList<FreeTimeslot>{
+    private fun createAvailableTimeslots(selectedDate: Calendar): ArrayList<FreeTimeslot>{
         availableTimeslots.clear()
         bookedTimeslots.clear()
         bookingListOnRoom.forEach{
             booking ->
-            bookedTimeslots.add(booking.startingDate + timezoneOffset)
-            bookedTimeslots.add(booking.endDate + timezoneOffset)
+            if(convertUnixToDate(booking.startingDate + timezoneOffset) == convertUnixToDate(selectedDate.timeInMillis + timezoneOffset))
+            {
+                bookedTimeslots.add(booking.startingDate + timezoneOffset)
+                bookedTimeslots.add(booking.endDate + timezoneOffset)
+            }
         }
-        val dayStart: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() +timezoneOffset
-        val dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() + aDayInMilliseconds - 3600 + timezoneOffset
+        val dayStart: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis + timezoneOffset)).toLong() +timezoneOffset
+        val dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis+ timezoneOffset)).toLong() + aDayInMilliseconds - 3600 + timezoneOffset
         bookedTimeslots.sortByDescending { it }
         bookedTimeslots.reverse()
         var x = 0
@@ -441,6 +436,22 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         recyclerView.layoutManager = LinearLayoutManager(activity)
         bookingListAdapter.differ.submitList(availableTimeslots)
         }
+
+//    private fun removeDuplicateObjects(bookings: ArrayList<Booking>){
+//        val ids = ArrayList<String>()
+//        val entriesToDelete =  ArrayList<Booking>()
+//        var x = 0
+//        while(bookings.size < x){
+//            if(!ids.contains(bookings[x].id)){
+//                ids.add(bookings[x].id)
+//            }
+//            else{
+//                entriesToDelete.add(x)
+//            }
+//        }
+//        entriesToDelete.forEach{
+//        }
+//    }
 
 
 

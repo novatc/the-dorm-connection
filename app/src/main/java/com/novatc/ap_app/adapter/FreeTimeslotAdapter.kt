@@ -40,11 +40,17 @@ class FreeTimeslotAdapter:
 
     private val differCallback = object : DiffUtil.ItemCallback<FreeTimeslot>() {
         override fun areItemsTheSame(oldItem: FreeTimeslot, newItem: FreeTimeslot): Boolean {
-            TODO("Not yet implemented")
+            if(oldItem.startingDate == newItem.startingDate && oldItem.endDate == newItem.endDate){
+                return true
+            }
+            return false
         }
 
         override fun areContentsTheSame(oldItem: FreeTimeslot, newItem: FreeTimeslot): Boolean {
-            TODO("Not yet implemented")
+            if(oldItem.startingDate == newItem.startingDate && oldItem.endDate == newItem.endDate){
+                return true
+            }
+            return false
         }
 
     }
