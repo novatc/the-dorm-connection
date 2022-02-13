@@ -81,7 +81,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         addBackDateButtonListener(view)
         addTimeOfDayTextViewListener()
         addBookDateButtonListener(view)
-        timezoneOffset = getTimezone()
+        timezoneOffset = getTimezone(view)
         getUserName()
         return view
     }
@@ -96,7 +96,8 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         })
     }
 
-    private fun getTimezone(): Long{
+    //gets the current timezone of the smartphone
+    private fun getTimezone(view: View): Long{
         val calendar = Calendar.getInstance(
             TimeZone.getTimeZone("GMT"),
             Locale.getDefault()
@@ -113,6 +114,9 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
                 offsetInMillis *= -1
             }
             return offsetInMillis
+        }
+        else if(localTime == "MEZ"){
+            return anHourInMilliseconds
         }
         return 0L
     }
@@ -205,6 +209,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         }
     }
 
+    //uploads a valid booking to the firebase database
     private fun uploadBooking(startingDateInMilliseconds: Long, endingDateInMilliseconds: Long){
         val c = Booking(
             userID = currentUser.id,
@@ -260,10 +265,10 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         return true
     }
 
+    //enables the time pickers
     private fun addTimeOfDayTextViewListener(){
-        val cal = Calendar.getInstance()
-        val hour = cal.get(Calendar.HOUR)
-        val minute = cal.get(Calendar.MINUTE)
+        val hour = 0
+        val minute = 0
         startingTime.setOnClickListener {
             currentTimePicker = "start"
             TimePickerDialog(context!!, this, hour, minute, true).show()
@@ -293,6 +298,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         })
     }
 
+
     fun populateCalendar() {
         model.bookings.observe(this, { booking ->
             bookingListOnRoom = booking
@@ -302,6 +308,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         })
     }
 
+    //fills the calendar with all available bookings for this particular room
     private fun fillCalendar(){
         bookedDays.clear()
         fullyBookedDays.clear()
@@ -338,8 +345,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         calendar.setDisabledDays(disabledDaysList)
     }
 
-
-
+    //calculates all available timeslots for this room for the chosen day
     private fun createAvailableTimeslots(): ArrayList<FreeTimeslot>{
         availableTimeslots.clear()
         bookedTimeslots.clear()
@@ -352,11 +358,6 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         val dayEnd: Long = convertDateToUnix(convertUnixToDate(selectedDate.timeInMillis)).toLong() + aDayInMilliseconds - 3600 + timezoneOffset
         bookedTimeslots.sortByDescending { it }
         bookedTimeslots.reverse()
-        var test = ArrayList<String>()
-        bookedTimeslots.forEach{
-            slot ->
-            test.add(convertUnixToHoursAndMinutes(slot))
-        }
         var x = 0
         while (x < bookedTimeslots.size){
             if(x == 0){
@@ -382,6 +383,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         return availableTimeslots
     }
 
+    //checks if the chosen timeslot is within the available timeslots
     private fun isInAvailableTimeslots(timeToBook: Long): Boolean{
         if (bookedTimeslots.size < 1){
             return true
@@ -399,6 +401,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         return true
     }
 
+    //whenever a disabled day is chosen by the user, this method redirects the click to a valid, bookable date
     private fun findNextPossibleDate(){
         var dateSearcher: Calendar = Calendar.getInstance()
         dateSearcher.add(Calendar.DATE, 0)
@@ -406,7 +409,6 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         if(disabledDaysList.size > 0){
             while (x <= disabledDaysList.size){
                 if(dateSearcher.time < disabledDaysList.get(x).time){
-                    print("test")
                     selectedDate = dateSearcher
                     calendar.setDate(selectedDate)
                     break
@@ -421,6 +423,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         }
     }
 
+    //checks if the chosen day is disabled for booking
     private fun isDisabled(date: Calendar): Boolean{
         disabledDaysList.forEach{
             day ->

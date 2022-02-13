@@ -69,6 +69,7 @@ class RoomCreateFragment : Fragment(), TimePickerDialog.OnTimeSetListener {
         return view
     }
 
+    // Checks form on submit and creates a new room
     private fun setOnCreateRoom(view: View) {
         view.btn_create_room.setOnClickListener {
             val roomName = view.et_created_room_name.text.toString().trim()

@@ -183,7 +183,7 @@
     <string name="post_header">Überschrift</string>
     <string name="post_text">Text</string>
     <string name="post_keywords">Schlagwörter</string>
-    <string name="minimum_booking_time">Bestimme den Mindestbuchzeitraum</string>
+    <string name="minimum_booking_time">Min. Buchzeit</string>
     <string name="delete_post">Post löschen</string>
     <string name="new_dorm">Du konntest dein Wohnheim nicht finden?</string>
     <string name="create_new_dorm">Hier klicken, um dein eigenes Wohnheim zu erstellen</string>
