@@ -1,6 +1,7 @@
 package com.novatc.ap_app.repository
 
 import com.novatc.ap_app.firestore.UserFirestore
+import com.novatc.ap_app.model.Dorm
 import com.novatc.ap_app.model.User
 import java.lang.Exception
 import javax.inject.Inject
@@ -55,5 +56,10 @@ class UserRepository @Inject constructor(
         val user = userFirestore.getCurrentUser()
             ?: throw Exception("No user, when trying to update user password")
         userFirestore.updateUserPassword(user, currentPassword, newPassword)
+    }
+
+    fun updateDormUserList(me: User, dorm: Dorm) {
+        return userFirestore.updateDormUserList(me, dorm)
+
     }
 }

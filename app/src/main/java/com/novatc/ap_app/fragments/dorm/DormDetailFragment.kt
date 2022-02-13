@@ -47,6 +47,7 @@ class DormDetailFragment : Fragment() {
                 me.userDorm = dorm.name.toString()
                 me.userDormID = dorm.id.toString()
                 userRepository.updateUserWithDorm(me)
+                userRepository.updateDormUserList(me, dorm)
 
             }
             val action = DormDetailFragmentDirections.actionDormDetailFragmentToFragmentPinboard()

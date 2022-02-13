@@ -105,6 +105,14 @@ class UserFirestore @Inject constructor(
 
     }
 
+    fun updateDormUserList(me: User, dorm: Dorm) {
+        val dbUser = mFirestore.collection(Constants.USER).document(me.id)
+        val dbDorm = dorm.id?.let { mFirestore.collection(Constants.DORMS).document(it) }
+        if (dbDorm != null) {
+            dbDorm.update("userList", FieldValue.arrayUnion(me))
+        }
+    }
+
     suspend fun updateUserWg(userId: String, wgId: String, wgName: String) {
         mFirestore.collection(Constants.USER).document(userId)
             .update("userWgId", wgId, "userWgName", wgName).await()
@@ -151,5 +159,7 @@ class UserFirestore @Inject constructor(
             }
         }
     }
+
+
 
 }

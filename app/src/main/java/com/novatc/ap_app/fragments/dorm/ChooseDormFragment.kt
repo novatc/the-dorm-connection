@@ -46,10 +46,10 @@ class ChooseDormFragment : Fragment(), DormAdapter.OnItemClickListener {
         recyclerView.adapter = dormAdapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        model.dormList.observe(this, { dorms ->
+        model.dormList.observe(viewLifecycleOwner) { dorms ->
             dormAdapter.differ.submitList(dorms)
             dormList = dorms
-        })
+        }
     }
 
     override fun onItemClick(position: Int) {
