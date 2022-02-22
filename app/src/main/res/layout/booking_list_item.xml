@@ -14,36 +14,26 @@
         android:background="@color/white"
         android:padding="1dp">
 
-        <TextView
-            android:id="@+id/tv_room_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="room name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/tv_room_starting_time"
-            android:layout_width="142dp"
+            android:layout_width="96dp"
             android:layout_height="20dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:text="starting time "
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/choose_starting_booking_time"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_room_end_time"
             android:layout_width="129dp"
             android:layout_height="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="18dp"
-            android:text="end time"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/choose_ending_booking_time"
             app:layout_constraintEnd_toStartOf="@+id/btn_delete_comment"
-            app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_delete_comment"
@@ -66,11 +56,23 @@
             android:id="@+id/textView38"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="36dp"
             android:text="---"
             app:layout_constraintEnd_toStartOf="@+id/tv_room_end_time"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toEndOf="@+id/tv_room_starting_time"
-            app:layout_constraintTop_toBottomOf="@+id/tv_room_name" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="14dp"
+            android:text="TextView"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_room_starting_time"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

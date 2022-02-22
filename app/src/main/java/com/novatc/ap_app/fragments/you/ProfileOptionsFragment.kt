@@ -50,7 +50,6 @@ class ProfileOptionsFragment : Fragment(), SwipeListener {
         setDeleteUserButtonListener(view)
         setLogOutUserButtonListener(view)
         setEditDormButtonListener(view)
-
         return view
     }
 

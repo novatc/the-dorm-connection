@@ -57,15 +57,18 @@ class RoomRepository @Inject constructor(
         return roomFirestore.addBooking(roomID, booking = booking)
     }
 
-    suspend fun getUserBookings(): ArrayList<Booking> {
-        val userId = userFirestore.getCurrentUserID()
-            ?: throw Exception("No user id, when trying to get user posts.")
-        return roomFirestore.getUserBookings(userId)
-    }
+//    suspend fun getUserBookings(): ArrayList<Booking> {
+//        val userId = userFirestore.getCurrentUserID()
+//            ?: throw Exception("No user id, when trying to get user posts.")
+//        return roomFirestore.getUserBookings(userId)
+//    }
 
     @ExperimentalCoroutinesApi
     fun getBookingsAsFlow(roomID: String): Flow<List<Booking>> {
         return roomFirestore.getBookingsFlow(roomID)
     }
 
+    suspend fun deleteBooking(bookingID: String, roomID: String) {
+        roomFirestore.deleteBooking(bookingID, roomID)
+    }
 }

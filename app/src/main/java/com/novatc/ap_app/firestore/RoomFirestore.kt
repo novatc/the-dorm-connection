@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class RoomFirestore @Inject constructor(
     private val helperFirestore: HelperFirestore
-){
+) {
     private val mFirestore = Firebase.firestore
 
     suspend fun addRoom(room: Room): String {
@@ -25,7 +25,8 @@ class RoomFirestore @Inject constructor(
     }
 
     suspend fun deleteRoom(roomID: String): Void? {
-        val bookings = mFirestore.collection(Constants.ROOMS).document(roomID).collection(Constants.BOOKINGS)
+        val bookings =
+            mFirestore.collection(Constants.ROOMS).document(roomID).collection(Constants.BOOKINGS)
         helperFirestore.deleteCollection(bookings, 5)
         return mFirestore.collection(Constants.ROOMS).document(roomID).delete().await()
     }
@@ -76,12 +77,14 @@ class RoomFirestore @Inject constructor(
     }
 
     suspend fun addBooking(roomID: String, booking: Booking): DocumentReference? {
-        return mFirestore.collection(Constants.ROOMS).document(roomID).collection(Constants.BOOKINGS)
+        return mFirestore.collection(Constants.ROOMS).document(roomID)
+            .collection(Constants.BOOKINGS)
             .add(booking).await()
     }
 
     fun getBookingsFlow(roomID: String): Flow<List<Booking>> {
-        return mFirestore.collection(Constants.ROOMS).document(roomID).collection(Constants.BOOKINGS)
+        return mFirestore.collection(Constants.ROOMS).document(roomID)
+            .collection(Constants.BOOKINGS)
             .getDataFlow { querySnapshot ->
                 querySnapshot?.documents?.map {
                     getBookingsFromSnapshot(it)
@@ -97,21 +100,8 @@ class RoomFirestore @Inject constructor(
         }
     }
 
-    suspend fun getUserBookings(userID: String): ArrayList<Booking> {
-        val bookings = ArrayList<Booking>()
-        val snapshot1 =  mFirestore.collection(Constants.ROOMS).get().await()
-        for (room in snapshot1){
-            var bookingsInRoom = getBookingsFlow(room.id)
-            bookingsInRoom.collect {
-                booking ->
-                booking.forEach {
-                    b ->
-                    if(b.userID == userID){
-                        bookings.add(b)
-                    }
-                }
-            }
-        }
-        return bookings
+    suspend fun deleteBooking(bookingID: String, roomID: String) {
+        mFirestore.collection(Constants.ROOMS).document(roomID).collection(Constants.BOOKINGS)
+            .document(bookingID).delete().await()
     }
 }

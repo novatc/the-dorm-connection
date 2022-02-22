@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.DocumentReference
 import com.novatc.ap_app.R
 import com.novatc.ap_app.fragments.room.RoomDetailsBookFragment
+import com.novatc.ap_app.fragments.room.RoomDetailsGeneralFragment
 import com.novatc.ap_app.model.*
 import com.novatc.ap_app.repository.RoomRepository
 import com.novatc.ap_app.repository.UserRepository
@@ -86,7 +87,7 @@ class RoomDetailsViewModel @Inject constructor(
         }
     }
 
-    fun loadBookings(roomDetailsBookFragment: RoomDetailsBookFragment) {
+    fun loadBookings(roomDetailsBookFragment: RoomDetailsBookFragment?) {
         Log.e("ROOM", "Room is ${room.value}")
         viewModelScope.launch(Dispatchers.IO) {
             val bookingList = ArrayList<Booking>()
@@ -100,7 +101,7 @@ class RoomDetailsViewModel @Inject constructor(
                 }
                     withContext(Dispatchers.Main) {
                         _bookings.value = bookingList
-                        roomDetailsBookFragment.populateCalendar()
+                        roomDetailsBookFragment?.populateCalendar()
                     }
             }
         }
@@ -108,6 +109,10 @@ class RoomDetailsViewModel @Inject constructor(
 
     suspend fun addBooking(roomID: String, booking: Booking): DocumentReference? {
         return roomRepository.addBooking(roomID, booking)
+    }
+
+    suspend fun deleteBooking(bookingID: String, roomID: String) {
+        roomRepository.deleteBooking(bookingID, roomID)
     }
 
 }

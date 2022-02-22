@@ -13,7 +13,6 @@ import com.applandeo.materialcalendarview.listeners.OnDayClickListener
 import java.util.*
 import android.app.TimePickerDialog
 import android.graphics.Color
-import android.util.Log
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +25,7 @@ import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.addZeroToShortN
 import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertDateToUnix
 import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertMillisToHoursAndMinutes
 import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToDate
-import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.convertUnixToHoursAndMinutes
+import com.novatc.ap_app.fragments.room.RoomDateHelper.Companion.getTimezone
 import com.novatc.ap_app.model.*
 import kotlinx.android.synthetic.main.fragment_room_details_book.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,7 +37,6 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-import kotlin.properties.Delegates
 
 
 class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
@@ -46,7 +44,6 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
 
     private val bookedDays: ArrayList<EventDay> = ArrayList()
     private val fullyBookedDays: ArrayList<EventDay> = ArrayList()
-    var bookedDaysViaDate: HashMap<String, ArrayList<Long>> = HashMap()
     lateinit var calendar: com.applandeo.materialcalendarview.CalendarView
     lateinit var selectedDate :Calendar
     private var currentTimePicker: String = "start"
@@ -69,6 +66,7 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_room_details_book, container, false)
+        model.loadBookings(this)
         startObservers()
         calendar = view.calendar
         today.add(Calendar.DATE, -1)
@@ -94,31 +92,6 @@ class RoomDetailsBookFragment : Fragment(), TimePickerDialog.OnTimeSetListener{
         model.room.observe(this, {
             model.loadBookings(this)
         })
-    }
-
-    //gets the current timezone of the smartphone
-    private fun getTimezone(): Long{
-        val calendar = Calendar.getInstance(
-            TimeZone.getTimeZone("GMT"),
-            Locale.getDefault()
-        )
-        val currentLocalTime = calendar.time
-        val date: DateFormat = SimpleDateFormat("z")
-        val localTime: String = date.format(currentLocalTime)
-        if(localTime.length > 3){
-            val prefix = localTime[3].toString()
-            val hours = (localTime[4].toString() + localTime[5].toString()).toInt()
-            val minutes = (localTime[7].toString() + localTime[8].toString()).toInt()
-            var offsetInMillis = hours * anHourInMilliseconds + minutes * aMinuteInMilliseconds
-            if(prefix == "-"){
-                offsetInMillis *= -1
-            }
-            return offsetInMillis
-        }
-        else if(localTime == "MEZ"){
-            return anHourInMilliseconds
-        }
-        return 0L
     }
 
     //saves the date that is selected in the displayed calendar

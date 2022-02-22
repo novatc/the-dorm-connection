@@ -125,7 +125,6 @@ class PostDetailsFragment : Fragment(), CommentAdapter.OnItemClickListener {
                 commentAdapter.differ.submitList(result)
                 commentListOnPost = result
             }
-
         }
     }
 

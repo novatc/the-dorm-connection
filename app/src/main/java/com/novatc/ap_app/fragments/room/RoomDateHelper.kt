@@ -1,11 +1,15 @@
 package com.novatc.ap_app.fragments.room
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 //class that handles generic conversion from and to milliseconds and returns readable dates
 class RoomDateHelper {
+
     companion object {
         fun convertUnixToDate(unixDate: Long): String {
             return DateTimeFormatter.ISO_INSTANT.format(java.time.Instant.ofEpochSecond((unixDate/1000))).split("T")[0]
@@ -43,6 +47,32 @@ class RoomDateHelper {
             } else{
                 string
             }
+        }
+
+        fun getTimezone(): Long{
+            val anHourInMilliseconds = 3600000L
+            val aMinuteInMilliseconds = 60000L
+            val calendar = Calendar.getInstance(
+                TimeZone.getTimeZone("GMT"),
+                Locale.getDefault()
+            )
+            val currentLocalTime = calendar.time
+            val date: DateFormat = SimpleDateFormat("z")
+            val localTime: String = date.format(currentLocalTime)
+            if(localTime.length > 3){
+                val prefix = localTime[3].toString()
+                val hours = (localTime[4].toString() + localTime[5].toString()).toInt()
+                val minutes = (localTime[7].toString() + localTime[8].toString()).toInt()
+                var offsetInMillis = hours * anHourInMilliseconds + minutes * aMinuteInMilliseconds
+                if(prefix == "-"){
+                    offsetInMillis *= -1
+                }
+                return offsetInMillis
+            }
+            else if(localTime == "MEZ"){
+                return anHourInMilliseconds
+            }
+            return 0L
         }
     }
 
